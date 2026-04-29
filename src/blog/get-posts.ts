@@ -15,7 +15,15 @@ export const getPosts = (): Post[] => {
   return files.map((filename) => {
     const slug = filename.replace(/\.md$/, "");
     const raw = fs.readFileSync(path.join(POSTS_DIR, filename), "utf8");
-    const { content } = matter(raw);
-    return { slug, content };
+    const { content, data } = matter(raw);
+    return {
+      slug,
+      content,
+      title: data.title ?? null,
+      date: data.date ? new Date(data.date).toISOString() : null,
+      updated: data.updated ? new Date(data.updated).toISOString() : null,
+      author: data.author ?? null,
+      tags: Array.isArray(data.tags) ? data.tags : [],
+    };
   });
 };

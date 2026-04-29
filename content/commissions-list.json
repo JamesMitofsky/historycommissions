@@ -1,0 +1,840 @@
+[
+  {
+    "name": {
+      "primary": "Deutsch-Polnische Schulbuchkommission",
+      "translations": [
+        { "language": "de", "name": "Deutsch-Polnische Schulbuchkommission" },
+        { "language": "pl", "name": "Polsko-Niemiecka Komisja Podręcznikowa" }
+      ]
+    },
+    "foundingYear": null,
+    "memberCountries": ["Germany", "Poland"],
+    "sponsoringInstitutions": [],
+    "type": "textbook",
+    "keyTopics": [
+      "German-Polish history in educational media",
+      "Bilateral history textbook 'Europa – Unsere Geschichte / Europa. Nasza historia'",
+      "Transnational history education: Germany – Poland – Ukraine",
+      "Representation of 1939–1949 German-Polish relations in textbooks",
+      "Teacher professional development workshops"
+    ],
+    "publications": [
+      {
+        "title": "Europa – Unsere Geschichte / Europa. Nasza historia",
+        "year": null,
+        "url": null,
+        "format": "teaching_material"
+      },
+      {
+        "title": "Leben von Tag zu Tag – Studie zur deutsch-polnischen Geschichte in Bildungsmedien",
+        "year": null,
+        "url": null,
+        "format": "monograph"
+      }
+    ],
+    "workingGroups": [
+      "Lehrkräfte Arbeitskreis (Teachers' Working Group)",
+      "Transnational History Teaching: Germany – Poland – Ukraine"
+    ],
+    "status": "active",
+    "chairs": [
+      {
+        "name": "Marcin Wiatr",
+        "country": "Poland",
+        "affiliation": "Co-Secretary, Deutsch-Polnische Schulbuchkommission"
+      }
+    ],
+    "url": "https://schulbuchkommission.eu/",
+    "linkStatus": "working",
+    "siteLanguages": ["de", "pl"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20260312003536/https://schulbuchkommission.eu/",
+    "archivableDocuments": []
+  },
+  {
+    "name": {
+      "primary": "Stálá konference českých a rakouských historiků ke společnému kulturnímu dědictví",
+      "translations": [
+        { "language": "cs", "name": "Stálá konference českých a rakouských historiků ke společnému kulturnímu dědictví" },
+        { "language": "de", "name": "Ständige Konferenz tschechischer und österreichischer Historiker zum gemeinsamen kulturellen Erbe" },
+        { "language": "en", "name": "Standing Conference of Czech and Austrian Historians on the Common Cultural Heritage" }
+      ]
+    },
+    "foundingYear": 2009,
+    "memberCountries": ["Czech Republic", "Austria"],
+    "sponsoringInstitutions": [
+      "Masarykův ústav a Archiv AV ČR (Masaryk Institute and Archives of the Czech Academy of Sciences)",
+      "Ministry of Foreign Affairs of the Czech Republic",
+      "Ministry of Education, Youth and Sports of the Czech Republic",
+      "South Moravian Region",
+      "Vysočina Region"
+    ],
+    "type": "historical_research",
+    "keyTopics": [
+      "Common cultural heritage of Czech and Austrian lands",
+      "Intertwined historical and social events of the 20th century",
+      "Key years 1968 and 1989",
+      "Post-war history",
+      "Czech-Austrian relations and national stereotypes",
+      "Life in the Czech-Austrian border region"
+    ],
+    "publications": [
+      {
+        "title": "Sousedé. Česko-rakouské dějiny (Neighbours. Czech-Austrian History)",
+        "year": 2019,
+        "url": null,
+        "format": "monograph"
+      },
+      {
+        "title": "Nachbarn. Ein österreichisch-tschechisches Geschichtsbuch",
+        "year": 2019,
+        "url": null,
+        "format": "monograph"
+      }
+    ],
+    "workingGroups": [],
+    "status": "active",
+    "chairs": [
+      {
+        "name": "Luboš Velek",
+        "country": "Czech Republic",
+        "affiliation": "Masarykův ústav a Archiv AV ČR (project coordinator, Czech side)"
+      }
+    ],
+    "url": "https://www.mua.cas.cz/cs/skcrh",
+    "linkStatus": "working",
+    "siteLanguages": ["cs", "en"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20251118200112/https://www.mua.cas.cz/cs/skcrh",
+    "archivableDocuments": []
+  },
+  {
+    "name": {
+      "primary": "Slovene-Italian Historical and Cultural Commission",
+      "translations": [
+        { "language": "sl", "name": "Slovensko-italijanska zgodovinsko-kulturna komisija" },
+        { "language": "en", "name": "Slovene-Italian Historical and Cultural Commission" }
+      ]
+    },
+    "foundingYear": null,
+    "memberCountries": ["Slovenia", "Italy"],
+    "sponsoringInstitutions": [
+      "Government of Slovenia (Ministry of Foreign Affairs)"
+    ],
+    "type": "difficult_matters",
+    "keyTopics": [
+      "Slovene-Italian relations",
+      "Shared history in the 20th century",
+      "Post-World War II border issues",
+      "Treatment of Slovene minority in Italy",
+      "Foibe massacres",
+      "Exodus of Italians from Istria and Dalmatia"
+    ],
+    "publications": [
+      {
+        "title": "Poročilo slovensko-italijanske zgodovinsko-kulturne komisije / Report of the Slovene-Italian Historical and Cultural Commission (English edition)",
+        "year": null,
+        "url": "https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf",
+        "format": "report"
+      }
+    ],
+    "workingGroups": [],
+    "status": "unknown",
+    "chairs": [],
+    "url": "https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf",
+    "linkStatus": "working",
+    "siteLanguages": ["en"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20260418225709/https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf",
+    "archivableDocuments": [
+      {
+        "title": "Report of the Slovene-Italian Historical and Cultural Commission (English)",
+        "url": "https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf"
+      }
+    ]
+  },
+  {
+    "name": {
+      "primary": "Deutsch-Tschechische und Deutsch-Slowakische Historische Kommission",
+      "translations": [
+        { "language": "de", "name": "Deutsch-Tschechische und Deutsch-Slowakische Historische Kommission" },
+        { "language": "cs", "name": "Německo-česká a německo-slovenská historická komise" },
+        { "language": "sk", "name": "Nemecko-česká a nemecko-slovenská historická komisia" }
+      ]
+    },
+    "foundingYear": 1990,
+    "memberCountries": ["Germany", "Czech Republic", "Slovakia"],
+    "sponsoringInstitutions": [
+      "Deutscher Akademischer Austauschdienst (DAAD)",
+      "Auswärtiges Amt (German Federal Foreign Office)"
+    ],
+    "type": "historical_research",
+    "keyTopics": [
+      "20th century history of Germans, Czechs and Slovaks",
+      "National Socialism and German occupation",
+      "World Wars I and II",
+      "Forced migrations and expulsions",
+      "Cold War",
+      "End of Communist systems and 1989 transformation",
+      "Environmental history in Central European contexts",
+      "Jewish emancipation, antisemitism, and persecution",
+      "Property regimes and property conflicts",
+      "Refugees and asylum"
+    ],
+    "publications": [
+      {
+        "title": "Umweltgeschichte in mitteleuropäischen Kontexten (Environmental History in Central European Contexts)",
+        "year": 2024,
+        "url": "https://www.dt-ds-historikerkommission.de/de/publikationen/",
+        "format": "proceedings"
+      },
+      {
+        "title": "Kulturelle Langzeitfolgen industriellen Strukturwandels. Ruhrgebiet – Tschechien – Slowakei",
+        "year": 2022,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Stadt und Krieg im 20. Jahrhundert. Neue Perspektiven auf Deutschland und Ostmitteleuropa",
+        "year": 2019,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Eigentumsregime und Eigentumskonflikte im 20. Jahrhundert: Deutschland und die Tschechoslowakei im internationalen Kontext",
+        "year": 2018,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Flüchtlinge und Asyl im Nachbarland. Die Tschechoslowakei und Deutschland 1933 bis 1989",
+        "year": 2018,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Erinnern – Ausstellen – Speichern: Deutsch-tschechische und deutsch-slowakische Beziehungsgeschichte im Museum",
+        "year": 2017,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Religion und Nation: Tschechen, Deutsche und Slowaken im 20. Jahrhundert",
+        "year": 2015,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Das Jahr 1989 im deutsch-tschechisch-slowakischen Kontext",
+        "year": 2013,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Mythen und Politik im 20. Jahrhundert. Deutsche – Slowaken – Tschechen",
+        "year": 2013,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Begegnung und Konflikt. Schlaglichter auf das Verhältnis von Tschechen, Slowaken und Deutschen 1815–1989",
+        "year": null,
+        "url": null,
+        "format": "monograph"
+      }
+    ],
+    "workingGroups": [],
+    "status": "active",
+    "chairs": [],
+    "url": "http://www.dt-ds-historikerkommission.de/",
+    "linkStatus": "working",
+    "siteLanguages": ["de", "cs", "sk"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20251112191359/http://www.dt-ds-historikerkommission.de/",
+    "archivableDocuments": [
+      {
+        "title": "Inhaltsverzeichnis: Umweltgeschichte in mitteleuropäischen Kontexten",
+        "url": "https://www.dt-ds-historikerkommission.de/wp-content/uploads/Umweltgeschichte_in_mitteleuropäischen_Kontexten_-_Inhaltsverzeichnis"
+      }
+    ]
+  },
+  {
+    "name": {
+      "primary": "Gemeinsame Kommission für die Erforschung der jüngeren Geschichte der deutsch-russischen Beziehungen",
+      "translations": [
+        { "language": "de", "name": "Gemeinsame Kommission für die Erforschung der jüngeren Geschichte der deutsch-russischen Beziehungen" },
+        { "language": "ru", "name": "Совместная комиссия по изучению новейшей истории российско-германских отношений" },
+        { "language": "en", "name": "Joint Commission for the Study of the Recent History of German-Russian Relations" }
+      ]
+    },
+    "foundingYear": 1997,
+    "memberCountries": ["Germany", "Russia"],
+    "sponsoringInstitutions": [
+      "Beauftragter der Bundesregierung für Kultur und Medien (Federal Government Commissioner for Culture and the Media, Germany)"
+    ],
+    "type": "historical_research",
+    "keyTopics": [
+      "German-Russian history in the 20th century",
+      "Trust-building through scholarly cooperation",
+      "Difficult topics in shared history",
+      "Deconstruction of Russian historical narratives",
+      "Teaching materials on German-Russian history",
+      "Eastern European research during wartime"
+    ],
+    "publications": [
+      {
+        "title": "Mitteilungen (Commission newsletter/bulletins)",
+        "year": null,
+        "url": "https://www.deutsch-russische-geschichtskommission.de/publikationen/mitteilungen/",
+        "format": "report"
+      },
+      {
+        "title": "Publications from funded projects",
+        "year": null,
+        "url": "https://www.deutsch-russische-geschichtskommission.de/publikationen/aus-gefoerderten-projekten-hervorgegangene-publikationen/",
+        "format": "other"
+      }
+    ],
+    "workingGroups": [
+      "Unterrichtsmaterialien zur deutsch-russischen Geschichte (Teaching materials on German-Russian history)",
+      "Dekonstruktion russischer Geschichtsnarrative (Deconstruction of Russian Historical Narratives – pilot project)"
+    ],
+    "status": "dormant",
+    "chairs": [
+      {
+        "name": "Jörg Baberowski",
+        "country": "Germany",
+        "affiliation": "Chair for History of Eastern Europe, Institute for Historical Sciences, Humboldt-Universität zu Berlin"
+      }
+    ],
+    "url": "https://www.deutsch-russische-geschichtskommission.de/",
+    "linkStatus": "working",
+    "siteLanguages": ["de"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20260310065434/https://www.deutsch-russische-geschichtskommission.de/",
+    "archivableDocuments": []
+  },
+  {
+    "name": {
+      "primary": "日韓歴史共同研究委員会（第2期）",
+      "translations": [
+        { "language": "ja", "name": "日韓歴史共同研究委員会（第2期）" },
+        { "language": "ko", "name": "한일역사공동연구위원회 (제2기)" },
+        { "language": "en", "name": "Japan-Korea Joint History Research Committee (2nd Term)" }
+      ]
+    },
+    "foundingYear": 2007,
+    "memberCountries": ["Japan", "South Korea"],
+    "sponsoringInstitutions": [
+      "公益財団法人日韓文化交流基金 (Japan-Korea Cultural Foundation)"
+    ],
+    "type": "historical_research",
+    "keyTopics": [
+      "Ancient history of Japan-Korea relations",
+      "Medieval and early modern Japan-Korea relations (Wokou piracy, Imjin War / Bunroku-Keichō campaign)",
+      "17th–18th century East Asian order and Japan-Korea relations",
+      "Modern history: Japanese colonialism, sovereignty and independence",
+      "Colonial-era social transformation and modernisation",
+      "Post-WWII Japan-Korea diplomatic relations",
+      "Textbook representations of Japan-Korea history",
+      "Popular culture and memory"
+    ],
+    "publications": [
+      {
+        "title": "第2期 日韓歴史共同研究報告書 全体会議篇（日本語）(2nd-Term Japan-Korea Joint History Research Report: Plenary Session Volume, Japanese)",
+        "year": 2010,
+        "url": "https://jkcf.or.jp/projects/2010/17283/",
+        "format": "report"
+      },
+      {
+        "title": "第2期 日韓歴史共同研究報告書 第1分科会（古代史）篇 (Ancient History Subcommittee Volume)",
+        "year": 2010,
+        "url": "https://jkcf.or.jp/projects/2010/17283/",
+        "format": "report"
+      },
+      {
+        "title": "第2期 日韓歴史共同研究報告書 第2分科会（中近世史）篇 (Medieval and Early Modern History Subcommittee Volume)",
+        "year": 2010,
+        "url": "https://jkcf.or.jp/projects/2010/17283/",
+        "format": "report"
+      },
+      {
+        "title": "第2期 日韓歴史共同研究報告書 第3分科会（近現代史）篇 (Modern and Contemporary History Subcommittee Volume)",
+        "year": 2010,
+        "url": "https://jkcf.or.jp/projects/2010/17283/",
+        "format": "report"
+      },
+      {
+        "title": "第2期 日韓歴史共同研究報告書 教科書小グループ篇 (Textbook Sub-Group Volume)",
+        "year": 2010,
+        "url": "https://jkcf.or.jp/projects/2010/17283/",
+        "format": "textbook_review"
+      }
+    ],
+    "workingGroups": [
+      "第1分科会：古代史 (Subcommittee 1: Ancient History)",
+      "第2分科会：中近世史 (Subcommittee 2: Medieval and Early Modern History)",
+      "第3分科会：近現代史 (Subcommittee 3: Modern and Contemporary History)",
+      "教科書小グループ (Textbook Sub-Group)"
+    ],
+    "status": "concluded",
+    "chairs": [],
+    "url": "https://jkcf.or.jp/projects/2010/17283/",
+    "linkStatus": "working",
+    "siteLanguages": ["ja", "ko"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20260214045157/https://www.jkcf.or.jp/projects/2010/17283/",
+    "archivableDocuments": []
+  },
+  {
+    "name": {
+      "primary": "Polish-Russian Group on Difficult Matters",
+      "translations": [
+        { "language": "en", "name": "Polish-Russian Group on Difficult Matters" },
+        { "language": "pl", "name": "Polsko-Rosyjska Grupa ds. Trudnych" }
+      ]
+    },
+    "foundingYear": null,
+    "memberCountries": ["Poland", "Russia"],
+    "sponsoringInstitutions": [],
+    "type": "difficult_matters",
+    "keyTopics": [
+      "Polish-Soviet War of 1920",
+      "Origins of World War II and the Molotov-Ribbentrop Pact",
+      "Katyn massacre",
+      "Communisation of Poland",
+      "Cold War Polish-Soviet/Russian relations",
+      "Solidarity movement and martial law",
+      "Contemporary Poland-Russia relations (1918–2008)"
+    ],
+    "publications": [
+      {
+        "title": "White Spots—Black Spots: Difficult Matters in Polish-Russian Relations, 1918–2008",
+        "year": 2015,
+        "url": "https://upittpress.org/books/9780822944409/",
+        "format": "monograph"
+      }
+    ],
+    "workingGroups": [],
+    "status": "unknown",
+    "chairs": [
+      {
+        "name": "Adam Daniel Rotfeld",
+        "country": "Poland",
+        "affiliation": "Former Minister of Foreign Affairs of Poland; former director of SIPRI"
+      },
+      {
+        "name": "Anatoly V. Torkunov",
+        "country": "Russia",
+        "affiliation": null
+      }
+    ],
+    "url": "https://upittpress.org/books/9780822944409/",
+    "linkStatus": "working",
+    "siteLanguages": ["en"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20260208102257/https://upittpress.org/books/9780822944409/",
+    "archivableDocuments": []
+  },
+  {
+    "name": {
+      "primary": "Bulgarian-Hungarian Joint History Commission",
+      "translations": [
+        { "language": "bg", "name": "Българо-унгарска историческа комисия" },
+        { "language": "hu", "name": "Bolgár-Magyar Történész Vegyes Bizottság" },
+        { "language": "en", "name": "Bulgarian-Hungarian Joint History Commission" }
+      ]
+    },
+    "foundingYear": null,
+    "memberCountries": ["Bulgaria", "Hungary"],
+    "sponsoringInstitutions": [
+      "Institute for Historical Studies – Bulgarian Academy of Sciences (IHS–BAS)",
+      "HUN-REN Research Centre for the Humanities, Institute of History (TTI–BTK), Hungary"
+    ],
+    "type": "historical_research",
+    "keyTopics": [
+      "Austro-Hungarian influences on Bulgarian education",
+      "Balkan chronology (18th–20th centuries)",
+      "Bulgarian-Hungarian historical connections",
+      "Migration, refugees and urbanisation in Bulgaria (1910s–1930s)",
+      "Cold War in Eastern Europe",
+      "Post-WWII political transformations"
+    ],
+    "publications": [
+      {
+        "title": "Vol. 14 – Penka Peykovska: Austro-Hungarian Influences on Bulgarian Education: The Case of Teacher Kálmán Cirill Rongé",
+        "year": 2025,
+        "url": "https://www.academia.edu/144661290/",
+        "format": "monograph"
+      },
+      {
+        "title": "Vol. 13 – Horbulák Zsolt: Reform and Restoration. The Czechoslovak State Party on the Hungarian Economic Reforms from 1968 until the Regime Change",
+        "year": 2025,
+        "url": "https://www.academia.edu/144337514/",
+        "format": "monograph"
+      },
+      {
+        "title": "Vol. 12 – Balkán kronológia IV. Két szövetségi rendszerben, 1946–1989 (Balkan Chronology IV)",
+        "year": 2023,
+        "url": "https://real.mtak.hu/172876/1/VEGLEGES_BALKAN-KRONOLOGIA1946-1989.pdf",
+        "format": "monograph"
+      },
+      {
+        "title": "Vol. 11 – Penka Peykovska: Bulgaria on the Move. Migration, Refugees, Integration, and Urbanisation in the 1910s–1930s",
+        "year": 2022,
+        "url": null,
+        "format": "monograph"
+      },
+      {
+        "title": "Vol. 8 – Anniversary Collection of the Bulgarian-Hungarian History Commission",
+        "year": 2024,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Vol. 7 – Balkán-kronológia II. A nemzeti ál(la)mok bűvöletében, 1879–1918 (Balkan Chronology II)",
+        "year": 2021,
+        "url": null,
+        "format": "monograph"
+      },
+      {
+        "title": "Vol. 6 – Balkán-kronológia I. Birodalmak szorításában, 1700–1878 (Balkan Chronology I)",
+        "year": 2020,
+        "url": null,
+        "format": "monograph"
+      }
+    ],
+    "workingGroups": [],
+    "status": "active",
+    "chairs": [
+      {
+        "name": "Penka Peykovska",
+        "country": "Bulgaria",
+        "affiliation": "Institute for Historical Studies, Bulgarian Academy of Sciences"
+      },
+      {
+        "name": "Gábor Demeter",
+        "country": "Hungary",
+        "affiliation": "HUN-REN Research Centre for the Humanities, Institute of History"
+      }
+    ],
+    "url": "http://penkapeykovska.blogspot.com/p/blog-page_22.html",
+    "linkStatus": "working",
+    "siteLanguages": ["bg", "hu", "en"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20241216124257/http://penkapeykovska.blogspot.com/p/blog-page_22.html",
+    "archivableDocuments": [
+      {
+        "title": "Balkán kronológia IV. 1946–1989 (PDF)",
+        "url": "https://real.mtak.hu/172876/1/VEGLEGES_BALKAN-KRONOLOGIA1946-1989.pdf"
+      }
+    ]
+  },
+  {
+    "name": {
+      "primary": "Japan-China Joint History Research Committee",
+      "translations": [
+        { "language": "ja", "name": "日中歴史共同研究委員会" },
+        { "language": "zh", "name": "中日历史共同研究委员会" },
+        { "language": "en", "name": "Japan-China Joint History Research Committee" }
+      ]
+    },
+    "foundingYear": 2006,
+    "memberCountries": ["Japan", "China"],
+    "sponsoringInstitutions": [
+      "Ministry of Foreign Affairs of Japan",
+      "Japan Institute of International Affairs (日本国際問題研究所) – Japanese secretariat",
+      "Institute of Modern History, Chinese Academy of Social Sciences (中国社会科学院近代史研究所) – Chinese secretariat"
+    ],
+    "type": "historical_research",
+    "keyTopics": [
+      "Ancient and medieval history of Japan-China relations",
+      "Modern and contemporary history of Japan-China relations",
+      "Origins of World War II in Asia",
+      "Japanese colonialism and occupation"
+    ],
+    "publications": [
+      {
+        "title": "日中歴史共同研究報告書 目次・序（日本語）(Japan-China Joint History Research Report: Table of Contents and Preface, Japanese)",
+        "year": 2010,
+        "url": "https://www.mofa.go.jp/mofaj/files/100512961.pdf",
+        "format": "report"
+      },
+      {
+        "title": "日本語論文 (Japanese-language papers)",
+        "year": 2010,
+        "url": "https://www.mofa.go.jp/mofaj/files/100512962.pdf",
+        "format": "report"
+      },
+      {
+        "title": "中国語論文 (Chinese-language papers)",
+        "year": 2010,
+        "url": "https://www.mofa.go.jp/mofaj/files/100512963.pdf",
+        "format": "report"
+      },
+      {
+        "title": "Report: Table of Contents and Preface (Translation Volume)",
+        "year": 2010,
+        "url": "https://www.mofa.go.jp/mofaj/files/100512964.pdf",
+        "format": "report"
+      },
+      {
+        "title": "日本語論文翻訳版 (Japanese-language papers, translated)",
+        "year": 2010,
+        "url": "https://www.mofa.go.jp/mofaj/files/100512966.pdf",
+        "format": "report"
+      },
+      {
+        "title": "中国語論文翻訳版 (Chinese-language papers, translated)",
+        "year": 2010,
+        "url": "https://www.mofa.go.jp/mofaj/files/100512968.pdf",
+        "format": "report"
+      },
+      {
+        "title": "English Translation (Japanese side modern/contemporary history section)",
+        "year": 2010,
+        "url": "https://www.mofa.go.jp/mofaj/files/100512970.pdf",
+        "format": "report"
+      }
+    ],
+    "workingGroups": [
+      "古代・中近世史分科会 (Subcommittee on Ancient and Medieval/Early Modern History)",
+      "近現代史分科会 (Subcommittee on Modern and Contemporary History)"
+    ],
+    "status": "concluded",
+    "chairs": [
+      {
+        "name": "Kitaoka Shin'ichi (北岡伸一)",
+        "country": "Japan",
+        "affiliation": "Professor, Faculty of Law, University of Tokyo"
+      },
+      {
+        "name": "Bu Ping (步平)",
+        "country": "China",
+        "affiliation": "Director, Institute of Modern History, Chinese Academy of Social Sciences"
+      }
+    ],
+    "url": "https://www.mofa.go.jp/mofaj/area/china/rekishi_kk.html",
+    "linkStatus": "working",
+    "siteLanguages": ["ja"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20260217/https://www.mofa.go.jp/mofaj/area/china/rekishi_kk.html",
+    "archivableDocuments": [
+      {
+        "title": "Report Table of Contents & Preface (Japanese, PDF)",
+        "url": "https://www.mofa.go.jp/mofaj/files/100512961.pdf"
+      },
+      {
+        "title": "Japanese-language papers (PDF)",
+        "url": "https://www.mofa.go.jp/mofaj/files/100512962.pdf"
+      },
+      {
+        "title": "Chinese-language papers (PDF)",
+        "url": "https://www.mofa.go.jp/mofaj/files/100512963.pdf"
+      },
+      {
+        "title": "Report Table of Contents & Preface – Translation volume (PDF)",
+        "url": "https://www.mofa.go.jp/mofaj/files/100512964.pdf"
+      },
+      {
+        "title": "Japanese-language papers – translated (PDF)",
+        "url": "https://www.mofa.go.jp/mofaj/files/100512966.pdf"
+      },
+      {
+        "title": "Chinese-language papers – translated (PDF)",
+        "url": "https://www.mofa.go.jp/mofaj/files/100512968.pdf"
+      },
+      {
+        "title": "English translation – Japanese side modern/contemporary history (PDF)",
+        "url": "https://www.mofa.go.jp/mofaj/files/100512970.pdf"
+      }
+    ]
+  },
+  {
+    "name": {
+      "primary": "A History of Russo-Japanese Relations – Over Two Centuries of Cooperation and Competition",
+      "translations": [
+        { "language": "en", "name": "A History of Russo-Japanese Relations – Over Two Centuries of Cooperation and Competition" }
+      ]
+    },
+    "foundingYear": null,
+    "memberCountries": ["Russia", "Japan"],
+    "sponsoringInstitutions": [],
+    "type": "historical_research",
+    "keyTopics": [
+      "History of Russian-Japanese relations from the 18th century to the present",
+      "Cooperation and competition between Russia and Japan",
+      "Territorial disputes",
+      "World War II in the Pacific"
+    ],
+    "publications": [
+      {
+        "title": "A History of Russo-Japanese Relations – Over Two Centuries of Cooperation and Competition",
+        "year": 2019,
+        "url": "https://brill.com/display/title/36335?language=en",
+        "format": "monograph"
+      }
+    ],
+    "workingGroups": [],
+    "status": "concluded",
+    "chairs": [
+      {
+        "name": "Dmitry Streltsov",
+        "country": "Russia",
+        "affiliation": null
+      },
+      {
+        "name": "Nobuo Shimotomai",
+        "country": "Japan",
+        "affiliation": null
+      }
+    ],
+    "url": "https://brill.com/view/title/36335?language=en",
+    "linkStatus": "working",
+    "siteLanguages": ["en"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20250218073901/https://brill.com/view/title/36335",
+    "archivableDocuments": []
+  },
+  {
+    "name": {
+      "primary": "Deutsch-Ukrainische Historikerkommission (DUHK)",
+      "translations": [
+        { "language": "de", "name": "Deutsch-Ukrainische Historikerkommission" },
+        { "language": "uk", "name": "Німецько-українська комісія істориків" },
+        { "language": "en", "name": "German-Ukrainian Historical Commission" }
+      ]
+    },
+    "foundingYear": 2015,
+    "memberCountries": ["Germany", "Ukraine"],
+    "sponsoringInstitutions": [
+      "Deutscher Akademischer Austauschdienst (DAAD)",
+      "Auswärtiges Amt (German Federal Foreign Office) – formerly co-funder",
+      "Robert Bosch Stiftung – formerly co-funder"
+    ],
+    "type": "historical_research",
+    "keyTopics": [
+      "World War I and World War II in Germany and Ukraine",
+      "German occupation policy and the Holocaust in Ukraine",
+      "History of Ukraine under state socialism",
+      "Holodomor as genocide and European site of memory",
+      "Ukraine and the Great Transformation of Modern Europe",
+      "Support for Ukrainian historians at risk"
+    ],
+    "publications": [
+      {
+        "title": "Hunger als Waffe. Der Holodomor in der Ukraine als Völkermord und europäischer Erinnerungsort (Hunger as a Weapon: The Holodomor in Ukraine as Genocide and European Site of Memory)",
+        "year": 2024,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Revolution and War. Ukraine and the Great Transformation of Modern Europe",
+        "year": 2024,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Deutsch-Ukrainische Geschichten. Bruchstücke aus einer gemeinsamen Vergangenheit (German-Ukrainian Histories: Fragments of a Common Past)",
+        "year": 2024,
+        "url": null,
+        "format": "monograph"
+      }
+    ],
+    "workingGroups": [
+      "Historians and the War: Rethinking the Future (international seminar series)",
+      "Online portal: 'Die Ukraine und Deutschland im 20. Jahrhundert' (Ukraine and Germany in the 20th Century)"
+    ],
+    "status": "active",
+    "chairs": [
+      {
+        "name": "Yaroslav Hrytsak",
+        "country": "Ukraine",
+        "affiliation": null
+      },
+      {
+        "name": "Martin Schulze Wessel",
+        "country": "Germany",
+        "affiliation": null
+      }
+    ],
+    "url": "http://www.duhk.org/",
+    "linkStatus": "working",
+    "siteLanguages": ["de", "uk"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20260212123623/http://www.duhk.org/",
+    "archivableDocuments": []
+  },
+  {
+    "name": {
+      "primary": "Belarusisch-Deutsche Geschichtskommission",
+      "translations": [
+        { "language": "de", "name": "Belarusisch-Deutsche Geschichtskommission" },
+        { "language": "be", "name": "Беларуска-Нямецкая гістарычная камісія" },
+        { "language": "en", "name": "Belarusian-German History Commission" }
+      ]
+    },
+    "foundingYear": null,
+    "memberCountries": ["Belarus", "Germany"],
+    "sponsoringInstitutions": [
+      "Deutsche Gesellschaft für Osteuropakunde e. V. (German Association for East European Studies)"
+    ],
+    "type": "historical_research",
+    "keyTopics": [],
+    "publications": [],
+    "workingGroups": [],
+    "status": "concluded",
+    "chairs": [],
+    "url": "https://geschichte-historyja.org/",
+    "linkStatus": "broken",
+    "siteLanguages": ["de", "be"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20260311185036/https://geschichte-historyja.org/",
+    "archivableDocuments": []
+  },
+  {
+    "name": {
+      "primary": "Česko-lichtenštejnská komise historiků",
+      "translations": [
+        { "language": "cs", "name": "Česko-lichtenštejnská komise historiků" },
+        { "language": "de", "name": "Tschechisch-liechtensteinische Historikerkommission" },
+        { "language": "en", "name": "Czech-Liechtenstein Historical Commission" }
+      ]
+    },
+    "foundingYear": 2009,
+    "memberCountries": ["Czech Republic", "Liechtenstein"],
+    "sponsoringInstitutions": [
+      "Matice moravská (Moravia Foundation), Brno",
+      "Ministry of Foreign Affairs of the Czech Republic"
+    ],
+    "type": "historical_research",
+    "keyTopics": [
+      "Historical relations between Czech lands (Kingdom of Bohemia, Margraviate of Moravia, Duchy of Silesia, Austro-Hungarian Empire, Czechoslovakia) and the Liechtenstein princely house and principality",
+      "Liechtenstein memory sites in the Bohemian lands",
+      "Continuity and discontinuity in Liechtenstein history (religious conversions, landed estates, post-WWI land reform, post-WWII confiscations)",
+      "Cultural and economic influence of Liechtenstein princes in Moravia",
+      "Diplomatic relations between Czech Republic and Liechtenstein (established 2009)"
+    ],
+    "publications": [
+      {
+        "title": "Místa Lichtenštejnské paměti / Liechtensteinische Erinnerungsorte in den böhmischen Ländern (Liechtenstein Memory Sites in the Bohemian Lands)",
+        "year": 2012,
+        "url": null,
+        "format": "proceedings"
+      },
+      {
+        "title": "Lichtenštejnové: kontinuity – diskontinuity (Liechtensteiners: Continuities – Discontinuities), Časopis Matice moravské",
+        "year": 2013,
+        "url": null,
+        "format": "proceedings"
+      }
+    ],
+    "workingGroups": [],
+    "status": "unknown",
+    "chairs": [
+      {
+        "name": "Peter Geiger",
+        "country": "Liechtenstein",
+        "affiliation": "Co-chair, Czech-Liechtenstein Historical Commission"
+      },
+      {
+        "name": "Tomáš Knoz",
+        "country": "Czech Republic",
+        "affiliation": "Co-chair, Czech-Liechtenstein Historical Commission"
+      }
+    ],
+    "url": "http://www.flcz-historikerkommission.li/",
+    "linkStatus": "broken",
+    "siteLanguages": ["de", "cs"],
+    "lastArchivedSnapshot": "https://web.archive.org/web/20240801/http://www.flcz-historikerkommission.li/",
+    "archivableDocuments": []
+  }
+]

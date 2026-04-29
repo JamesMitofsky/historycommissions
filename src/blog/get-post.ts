@@ -8,8 +8,16 @@ const POSTS_DIR = path.join(process.cwd(), "content/posts");
 export const getPost = (slug: string): Post => {
   const filePath = path.join(POSTS_DIR, `${slug}.md`);
   const raw = fs.readFileSync(filePath, "utf8");
-  const { content } = matter(raw);
-  return { slug, content };
+  const { content, data } = matter(raw);
+  return {
+    slug,
+    content,
+    title: data.title ?? null,
+    date: data.date ? new Date(data.date).toISOString() : null,
+    updated: data.updated ? new Date(data.updated).toISOString() : null,
+    author: data.author ?? null,
+    tags: Array.isArray(data.tags) ? data.tags : [],
+  };
 };
 
 export const getPostSlugs = (): string[] => {
