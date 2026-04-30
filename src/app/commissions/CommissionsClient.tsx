@@ -143,7 +143,7 @@ function CommissionCard({ c }: { c: Commission }) {
         {c.publications.length > 0 && (
           <div>
             <SectionLabel>Publications</SectionLabel>
-            <ul className="space-y-1">
+            <ul className="list-disc list-outside pl-4 space-y-2.5">
               {c.publications.map((pub, i) => (
                 <li key={i} className="text-sm text-[var(--foreground)]">
                   {pub.url ? (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { getBlurDataURL } from "@/blog/get-blur-data-url";
 import "./globals.css";
@@ -77,12 +78,14 @@ export default async function RootLayout({
           {/* Site title — bottom of image */}
           <div className="absolute bottom-0 left-0 right-0">
             <div className="max-w-2xl mx-auto px-6 pb-5">
-              <p className="text-[0.65rem] font-medium tracking-[0.18em] uppercase text-white/60 mb-1">
-                A digital archive
-              </p>
-              <h1 className="text-3xl font-semibold text-white leading-tight">
-                History Commissions
-              </h1>
+              <Link href="/" className="inline-block">
+                <p className="text-[0.65rem] font-medium tracking-[0.18em] uppercase text-white/60 mb-1">
+                  A digital archive
+                </p>
+                <h1 className="text-3xl font-semibold text-white leading-tight">
+                  History Commissions
+                </h1>
+              </Link>
             </div>
           </div>
         </header>

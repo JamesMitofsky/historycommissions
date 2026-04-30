@@ -1,28 +1,35 @@
 import { ImageResponse } from "next/og";
 import fs from "fs";
 import path from "path";
+import sharp from "sharp";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "History Commissions — A digital archive of joint historians' commissions";
 
-// Force dynamic so fs.readFileSync can access public/ at request time
-export const dynamic = "force-dynamic";
-
-export default function Image() {
-  const heroData = fs.readFileSync(
-    path.join(process.cwd(), "public/hero.webp")
-  );
-  const heroBg = `data:image/webp;base64,${heroData.toString("base64")}`;
+export default async function Image() {
+  const heroJpeg = await sharp(path.join(process.cwd(), "public/hero.webp"))
+    .jpeg({ quality: 85 })
+    .toBuffer();
+  const heroBg = `data:image/jpeg;base64,${heroJpeg.toString("base64")}`;
 
   return new ImageResponse(
     (
-      <div style={{ width: 1200, height: 630, display: "flex", position: "relative" }}>
+      <div
+        style={{
+          width: 1200,
+          height: 630,
+          display: "flex",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
         <img
           src={heroBg}
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
             width: "100%",
             height: "100%",
             objectFit: "cover",
@@ -31,7 +38,10 @@ export default function Image() {
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             background:
               "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%)",
           }}
