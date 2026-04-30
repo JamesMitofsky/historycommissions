@@ -1,0 +1,120 @@
+{
+  "name": {
+    "primary": "Deutsch-Tschechische und Deutsch-Slowakische Historische Kommission",
+    "translations": [
+      {
+        "language": "de",
+        "name": "Deutsch-Tschechische und Deutsch-Slowakische Historische Kommission"
+      },
+      {
+        "language": "cs",
+        "name": "Německo-česká a německo-slovenská historická komise"
+      },
+      {
+        "language": "sk",
+        "name": "Nemecko-česká a nemecko-slovenská historická komisia"
+      }
+    ]
+  },
+  "foundingYear": 1990,
+  "memberCountries": [
+    "Germany",
+    "Czech Republic",
+    "Slovakia"
+  ],
+  "sponsoringInstitutions": [
+    "Deutscher Akademischer Austauschdienst (DAAD)",
+    "Auswärtiges Amt (German Federal Foreign Office)"
+  ],
+  "keyTopics": [
+    "20th century history of Germans, Czechs and Slovaks",
+    "National Socialism and German occupation",
+    "World Wars I and II",
+    "Forced migrations and expulsions",
+    "Cold War",
+    "End of Communist systems and 1989 transformation",
+    "Environmental history in Central European contexts",
+    "Jewish emancipation, antisemitism, and persecution",
+    "Property regimes and property conflicts",
+    "Refugees and asylum"
+  ],
+  "publications": [
+    {
+      "title": "Umweltgeschichte in mitteleuropäischen Kontexten (Environmental History in Central European Contexts)",
+      "year": 2024,
+      "url": "https://www.dt-ds-historikerkommission.de/de/publikationen/",
+      "format": "proceedings"
+    },
+    {
+      "title": "Kulturelle Langzeitfolgen industriellen Strukturwandels. Ruhrgebiet – Tschechien – Slowakei",
+      "year": 2022,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Stadt und Krieg im 20. Jahrhundert. Neue Perspektiven auf Deutschland und Ostmitteleuropa",
+      "year": 2019,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Eigentumsregime und Eigentumskonflikte im 20. Jahrhundert: Deutschland und die Tschechoslowakei im internationalen Kontext",
+      "year": 2018,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Flüchtlinge und Asyl im Nachbarland. Die Tschechoslowakei und Deutschland 1933 bis 1989",
+      "year": 2018,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Erinnern – Ausstellen – Speichern: Deutsch-tschechische und deutsch-slowakische Beziehungsgeschichte im Museum",
+      "year": 2017,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Religion und Nation: Tschechen, Deutsche und Slowaken im 20. Jahrhundert",
+      "year": 2015,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Das Jahr 1989 im deutsch-tschechisch-slowakischen Kontext",
+      "year": 2013,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Mythen und Politik im 20. Jahrhundert. Deutsche – Slowaken – Tschechen",
+      "year": 2013,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Begegnung und Konflikt. Schlaglichter auf das Verhältnis von Tschechen, Slowaken und Deutschen 1815–1989",
+      "year": null,
+      "url": null,
+      "format": "monograph"
+    }
+  ],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [],
+  "url": "http://www.dt-ds-historikerkommission.de/",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "de",
+    "cs",
+    "sk"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20251112191359/http://www.dt-ds-historikerkommission.de/",
+  "archivableDocuments": [
+    {
+      "title": "Inhaltsverzeichnis: Umweltgeschichte in mitteleuropäischen Kontexten",
+      "url": "https://www.dt-ds-historikerkommission.de/wp-content/uploads/Umweltgeschichte_in_mitteleuropäischen_Kontexten_-_Inhaltsverzeichnis"
+    }
+  ]
+}

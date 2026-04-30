@@ -1,0 +1,85 @@
+{
+  "name": {
+    "primary": "日韓歴史共同研究委員会（第2期）",
+    "translations": [
+      {
+        "language": "ja",
+        "name": "日韓歴史共同研究委員会（第2期）"
+      },
+      {
+        "language": "ko",
+        "name": "한일역사공동연구위원회 (제2기)"
+      },
+      {
+        "language": "en",
+        "name": "Japan-Korea Joint History Research Committee (2nd Term)"
+      }
+    ]
+  },
+  "foundingYear": 2007,
+  "memberCountries": [
+    "Japan",
+    "South Korea"
+  ],
+  "sponsoringInstitutions": [
+    "公益財団法人日韓文化交流基金 (Japan-Korea Cultural Foundation)"
+  ],
+  "keyTopics": [
+    "Ancient history of Japan-Korea relations",
+    "Medieval and early modern Japan-Korea relations (Wokou piracy, Imjin War / Bunroku-Keichō campaign)",
+    "17th–18th century East Asian order and Japan-Korea relations",
+    "Modern history: Japanese colonialism, sovereignty and independence",
+    "Colonial-era social transformation and modernisation",
+    "Post-WWII Japan-Korea diplomatic relations",
+    "Textbook representations of Japan-Korea history",
+    "Popular culture and memory"
+  ],
+  "publications": [
+    {
+      "title": "第2期 日韓歴史共同研究報告書 全体会議篇（日本語）(2nd-Term Japan-Korea Joint History Research Report: Plenary Session Volume, Japanese)",
+      "year": 2010,
+      "url": "https://jkcf.or.jp/projects/2010/17283/",
+      "format": "report"
+    },
+    {
+      "title": "第2期 日韓歴史共同研究報告書 第1分科会（古代史）篇 (Ancient History Subcommittee Volume)",
+      "year": 2010,
+      "url": "https://jkcf.or.jp/projects/2010/17283/",
+      "format": "report"
+    },
+    {
+      "title": "第2期 日韓歴史共同研究報告書 第2分科会（中近世史）篇 (Medieval and Early Modern History Subcommittee Volume)",
+      "year": 2010,
+      "url": "https://jkcf.or.jp/projects/2010/17283/",
+      "format": "report"
+    },
+    {
+      "title": "第2期 日韓歴史共同研究報告書 第3分科会（近現代史）篇 (Modern and Contemporary History Subcommittee Volume)",
+      "year": 2010,
+      "url": "https://jkcf.or.jp/projects/2010/17283/",
+      "format": "report"
+    },
+    {
+      "title": "第2期 日韓歴史共同研究報告書 教科書小グループ篇 (Textbook Sub-Group Volume)",
+      "year": 2010,
+      "url": "https://jkcf.or.jp/projects/2010/17283/",
+      "format": "textbook_review"
+    }
+  ],
+  "workingGroups": [
+    "第1分科会：古代史 (Subcommittee 1: Ancient History)",
+    "第2分科会：中近世史 (Subcommittee 2: Medieval and Early Modern History)",
+    "第3分科会：近現代史 (Subcommittee 3: Modern and Contemporary History)",
+    "教科書小グループ (Textbook Sub-Group)"
+  ],
+  "status": "concluded",
+  "chairs": [],
+  "url": "https://jkcf.or.jp/projects/2010/17283/",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "ja",
+    "ko"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260214045157/https://www.jkcf.or.jp/projects/2010/17283/",
+  "archivableDocuments": []
+}

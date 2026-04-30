@@ -1,0 +1,70 @@
+{
+  "name": {
+    "primary": "Stálá konference českých a rakouských historiků ke společnému kulturnímu dědictví",
+    "translations": [
+      {
+        "language": "cs",
+        "name": "Stálá konference českých a rakouských historiků ke společnému kulturnímu dědictví"
+      },
+      {
+        "language": "de",
+        "name": "Ständige Konferenz tschechischer und österreichischer Historiker zum gemeinsamen kulturellen Erbe"
+      },
+      {
+        "language": "en",
+        "name": "Standing Conference of Czech and Austrian Historians on the Common Cultural Heritage"
+      }
+    ]
+  },
+  "foundingYear": 2009,
+  "memberCountries": [
+    "Czech Republic",
+    "Austria"
+  ],
+  "sponsoringInstitutions": [
+    "Masarykův ústav a Archiv AV ČR (Masaryk Institute and Archives of the Czech Academy of Sciences)",
+    "Ministry of Foreign Affairs of the Czech Republic",
+    "Ministry of Education, Youth and Sports of the Czech Republic",
+    "South Moravian Region",
+    "Vysočina Region"
+  ],
+  "keyTopics": [
+    "Common cultural heritage of Czech and Austrian lands",
+    "Intertwined historical and social events of the 20th century",
+    "Key years 1968 and 1989",
+    "Post-war history",
+    "Czech-Austrian relations and national stereotypes",
+    "Life in the Czech-Austrian border region"
+  ],
+  "publications": [
+    {
+      "title": "Sousedé. Česko-rakouské dějiny (Neighbours. Czech-Austrian History)",
+      "year": 2019,
+      "url": null,
+      "format": "monograph"
+    },
+    {
+      "title": "Nachbarn. Ein österreichisch-tschechisches Geschichtsbuch",
+      "year": 2019,
+      "url": null,
+      "format": "monograph"
+    }
+  ],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [
+    {
+      "name": "Luboš Velek",
+      "country": "Czech Republic",
+      "affiliation": "Masarykův ústav a Archiv AV ČR (project coordinator, Czech side)"
+    }
+  ],
+  "url": "https://www.mua.cas.cz/cs/skcrh",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "cs",
+    "en"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20251118200112/https://www.mua.cas.cz/cs/skcrh",
+  "archivableDocuments": []
+}

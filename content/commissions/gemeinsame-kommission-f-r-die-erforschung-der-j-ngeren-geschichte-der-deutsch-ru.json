@@ -1,0 +1,69 @@
+{
+  "name": {
+    "primary": "Gemeinsame Kommission für die Erforschung der jüngeren Geschichte der deutsch-russischen Beziehungen",
+    "translations": [
+      {
+        "language": "de",
+        "name": "Gemeinsame Kommission für die Erforschung der jüngeren Geschichte der deutsch-russischen Beziehungen"
+      },
+      {
+        "language": "ru",
+        "name": "Совместная комиссия по изучению новейшей истории российско-германских отношений"
+      },
+      {
+        "language": "en",
+        "name": "Joint Commission for the Study of the Recent History of German-Russian Relations"
+      }
+    ]
+  },
+  "foundingYear": 1997,
+  "memberCountries": [
+    "Germany",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [
+    "Beauftragter der Bundesregierung für Kultur und Medien (Federal Government Commissioner for Culture and the Media, Germany)"
+  ],
+  "keyTopics": [
+    "German-Russian history in the 20th century",
+    "Trust-building through scholarly cooperation",
+    "Difficult topics in shared history",
+    "Deconstruction of Russian historical narratives",
+    "Teaching materials on German-Russian history",
+    "Eastern European research during wartime"
+  ],
+  "publications": [
+    {
+      "title": "Mitteilungen (Commission newsletter/bulletins)",
+      "year": null,
+      "url": "https://www.deutsch-russische-geschichtskommission.de/publikationen/mitteilungen/",
+      "format": "report"
+    },
+    {
+      "title": "Publications from funded projects",
+      "year": null,
+      "url": "https://www.deutsch-russische-geschichtskommission.de/publikationen/aus-gefoerderten-projekten-hervorgegangene-publikationen/",
+      "format": "other"
+    }
+  ],
+  "workingGroups": [
+    "Unterrichtsmaterialien zur deutsch-russischen Geschichte (Teaching materials on German-Russian history)",
+    "Dekonstruktion russischer Geschichtsnarrative (Deconstruction of Russian Historical Narratives – pilot project)"
+  ],
+  "status": "dormant",
+  "chairs": [
+    {
+      "name": "Jörg Baberowski",
+      "country": "Germany",
+      "affiliation": "Chair for History of Eastern Europe, Institute for Historical Sciences, Humboldt-Universität zu Berlin"
+    }
+  ],
+  "url": "https://www.deutsch-russische-geschichtskommission.de/",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "de",
+    "ru"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260310065434/https://www.deutsch-russische-geschichtskommission.de/",
+  "archivableDocuments": []
+}

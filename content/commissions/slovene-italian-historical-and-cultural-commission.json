@@ -1,0 +1,54 @@
+{
+  "name": {
+    "primary": "Slovene-Italian Historical and Cultural Commission",
+    "translations": [
+      {
+        "language": "sl",
+        "name": "Slovensko-italijanska zgodovinsko-kulturna komisija"
+      },
+      {
+        "language": "en",
+        "name": "Slovene-Italian Historical and Cultural Commission"
+      }
+    ]
+  },
+  "foundingYear": null,
+  "memberCountries": [
+    "Slovenia",
+    "Italy"
+  ],
+  "sponsoringInstitutions": [
+    "Government of Slovenia (Ministry of Foreign Affairs)"
+  ],
+  "keyTopics": [
+    "Slovene-Italian relations",
+    "Shared history in the 20th century",
+    "Post-World War II border issues",
+    "Treatment of Slovene minority in Italy",
+    "Foibe massacres",
+    "Exodus of Italians from Istria and Dalmatia"
+  ],
+  "publications": [
+    {
+      "title": "Poročilo slovensko-italijanske zgodovinsko-kulturne komisije / Report of the Slovene-Italian Historical and Cultural Commission (English edition)",
+      "year": null,
+      "url": "https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf",
+      "format": "report"
+    }
+  ],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "en"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260418225709/https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf",
+  "archivableDocuments": [
+    {
+      "title": "Report of the Slovene-Italian Historical and Cultural Commission (English)",
+      "url": "https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf"
+    }
+  ]
+}

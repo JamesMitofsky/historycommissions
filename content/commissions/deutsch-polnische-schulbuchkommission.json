@@ -1,0 +1,62 @@
+{
+  "name": {
+    "primary": "Deutsch-Polnische Schulbuchkommission",
+    "translations": [
+      {
+        "language": "de",
+        "name": "Deutsch-Polnische Schulbuchkommission"
+      },
+      {
+        "language": "pl",
+        "name": "Polsko-Niemiecka Komisja Podręcznikowa"
+      }
+    ]
+  },
+  "foundingYear": null,
+  "memberCountries": [
+    "Germany",
+    "Poland"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [
+    "German-Polish history in educational media",
+    "Bilateral history textbook 'Europa – Unsere Geschichte / Europa. Nasza historia'",
+    "Transnational history education: Germany – Poland – Ukraine",
+    "Representation of 1939–1949 German-Polish relations in textbooks",
+    "Teacher professional development workshops"
+  ],
+  "publications": [
+    {
+      "title": "Europa – Unsere Geschichte / Europa. Nasza historia",
+      "year": null,
+      "url": null,
+      "format": "teaching_material"
+    },
+    {
+      "title": "Leben von Tag zu Tag – Studie zur deutsch-polnischen Geschichte in Bildungsmedien",
+      "year": null,
+      "url": null,
+      "format": "monograph"
+    }
+  ],
+  "workingGroups": [
+    "Lehrkräfte Arbeitskreis (Teachers' Working Group)",
+    "Transnational History Teaching: Germany – Poland – Ukraine"
+  ],
+  "status": "active",
+  "chairs": [
+    {
+      "name": "Marcin Wiatr",
+      "country": "Poland",
+      "affiliation": "Co-Secretary, Deutsch-Polnische Schulbuchkommission"
+    }
+  ],
+  "url": "https://schulbuchkommission.eu/",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "de",
+    "pl"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260312003536/https://schulbuchkommission.eu/",
+  "archivableDocuments": []
+}

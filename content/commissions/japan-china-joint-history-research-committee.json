@@ -1,0 +1,132 @@
+{
+  "name": {
+    "primary": "Japan-China Joint History Research Committee",
+    "translations": [
+      {
+        "language": "ja",
+        "name": "日中歴史共同研究委員会"
+      },
+      {
+        "language": "zh",
+        "name": "中日历史共同研究委员会"
+      },
+      {
+        "language": "en",
+        "name": "Japan-China Joint History Research Committee"
+      }
+    ]
+  },
+  "foundingYear": 2006,
+  "memberCountries": [
+    "Japan",
+    "China"
+  ],
+  "sponsoringInstitutions": [
+    "Ministry of Foreign Affairs of Japan",
+    "Japan Institute of International Affairs (日本国際問題研究所) – Japanese secretariat",
+    "Institute of Modern History, Chinese Academy of Social Sciences (中国社会科学院近代史研究所) – Chinese secretariat"
+  ],
+  "keyTopics": [
+    "Ancient and medieval history of Japan-China relations",
+    "Modern and contemporary history of Japan-China relations",
+    "Origins of World War II in Asia",
+    "Japanese colonialism and occupation"
+  ],
+  "publications": [
+    {
+      "title": "日中歴史共同研究報告書 目次・序（日本語）(Japan-China Joint History Research Report: Table of Contents and Preface, Japanese)",
+      "year": 2010,
+      "url": "https://www.mofa.go.jp/mofaj/files/100512961.pdf",
+      "format": "report"
+    },
+    {
+      "title": "日本語論文 (Japanese-language papers)",
+      "year": 2010,
+      "url": "https://www.mofa.go.jp/mofaj/files/100512962.pdf",
+      "format": "report"
+    },
+    {
+      "title": "中国語論文 (Chinese-language papers)",
+      "year": 2010,
+      "url": "https://www.mofa.go.jp/mofaj/files/100512963.pdf",
+      "format": "report"
+    },
+    {
+      "title": "Report: Table of Contents and Preface (Translation Volume)",
+      "year": 2010,
+      "url": "https://www.mofa.go.jp/mofaj/files/100512964.pdf",
+      "format": "report"
+    },
+    {
+      "title": "日本語論文翻訳版 (Japanese-language papers, translated)",
+      "year": 2010,
+      "url": "https://www.mofa.go.jp/mofaj/files/100512966.pdf",
+      "format": "report"
+    },
+    {
+      "title": "中国語論文翻訳版 (Chinese-language papers, translated)",
+      "year": 2010,
+      "url": "https://www.mofa.go.jp/mofaj/files/100512968.pdf",
+      "format": "report"
+    },
+    {
+      "title": "English Translation (Japanese side modern/contemporary history section)",
+      "year": 2010,
+      "url": "https://www.mofa.go.jp/mofaj/files/100512970.pdf",
+      "format": "report"
+    }
+  ],
+  "workingGroups": [
+    "古代・中近世史分科会 (Subcommittee on Ancient and Medieval/Early Modern History)",
+    "近現代史分科会 (Subcommittee on Modern and Contemporary History)"
+  ],
+  "status": "concluded",
+  "chairs": [
+    {
+      "name": "Kitaoka Shin'ichi (北岡伸一)",
+      "country": "Japan",
+      "affiliation": "Professor, Faculty of Law, University of Tokyo"
+    },
+    {
+      "name": "Bu Ping (步平)",
+      "country": "China",
+      "affiliation": "Director, Institute of Modern History, Chinese Academy of Social Sciences"
+    }
+  ],
+  "url": "https://www.mofa.go.jp/mofaj/area/china/rekishi_kk.html",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "ja"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260217/https://www.mofa.go.jp/mofaj/area/china/rekishi_kk.html",
+  "archivableDocuments": [
+    {
+      "title": "Report Table of Contents & Preface (Japanese, PDF)",
+      "url": "https://www.mofa.go.jp/mofaj/files/100512961.pdf"
+    },
+    {
+      "title": "Japanese-language papers (PDF)",
+      "url": "https://www.mofa.go.jp/mofaj/files/100512962.pdf"
+    },
+    {
+      "title": "Chinese-language papers (PDF)",
+      "url": "https://www.mofa.go.jp/mofaj/files/100512963.pdf"
+    },
+    {
+      "title": "Report Table of Contents & Preface – Translation volume (PDF)",
+      "url": "https://www.mofa.go.jp/mofaj/files/100512964.pdf"
+    },
+    {
+      "title": "Japanese-language papers – translated (PDF)",
+      "url": "https://www.mofa.go.jp/mofaj/files/100512966.pdf"
+    },
+    {
+      "title": "Chinese-language papers – translated (PDF)",
+      "url": "https://www.mofa.go.jp/mofaj/files/100512968.pdf"
+    },
+    {
+      "title": "English translation – Japanese side modern/contemporary history (PDF)",
+      "url": "https://www.mofa.go.jp/mofaj/files/100512970.pdf"
+    }
+  ]
+}

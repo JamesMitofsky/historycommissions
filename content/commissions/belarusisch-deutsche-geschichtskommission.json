@@ -1,0 +1,40 @@
+{
+  "name": {
+    "primary": "Belarusisch-Deutsche Geschichtskommission",
+    "translations": [
+      {
+        "language": "de",
+        "name": "Belarusisch-Deutsche Geschichtskommission"
+      },
+      {
+        "language": "be",
+        "name": "Беларуска-Нямецкая гістарычная камісія"
+      },
+      {
+        "language": "en",
+        "name": "Belarusian-German History Commission"
+      }
+    ]
+  },
+  "foundingYear": null,
+  "memberCountries": [
+    "Belarus",
+    "Germany"
+  ],
+  "sponsoringInstitutions": [
+    "Deutsche Gesellschaft für Osteuropakunde e. V. (German Association for East European Studies)"
+  ],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "concluded",
+  "chairs": [],
+  "url": "https://geschichte-historyja.org/",
+  "linkStatus": "broken",
+  "siteLanguages": [
+    "de",
+    "be"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260311185036/https://geschichte-historyja.org/",
+  "archivableDocuments": []
+}

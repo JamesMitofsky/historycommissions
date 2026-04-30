@@ -1,0 +1,71 @@
+{
+  "name": {
+    "primary": "Česko-lichtenštejnská komise historiků",
+    "translations": [
+      {
+        "language": "cs",
+        "name": "Česko-lichtenštejnská komise historiků"
+      },
+      {
+        "language": "de",
+        "name": "Tschechisch-liechtensteinische Historikerkommission"
+      },
+      {
+        "language": "en",
+        "name": "Czech-Liechtenstein Historical Commission"
+      }
+    ]
+  },
+  "foundingYear": 2009,
+  "memberCountries": [
+    "Czech Republic",
+    "Liechtenstein"
+  ],
+  "sponsoringInstitutions": [
+    "Matice moravská (Moravia Foundation), Brno",
+    "Ministry of Foreign Affairs of the Czech Republic"
+  ],
+  "keyTopics": [
+    "Historical relations between Czech lands (Kingdom of Bohemia, Margraviate of Moravia, Duchy of Silesia, Austro-Hungarian Empire, Czechoslovakia) and the Liechtenstein princely house and principality",
+    "Liechtenstein memory sites in the Bohemian lands",
+    "Continuity and discontinuity in Liechtenstein history (religious conversions, landed estates, post-WWI land reform, post-WWII confiscations)",
+    "Cultural and economic influence of Liechtenstein princes in Moravia",
+    "Diplomatic relations between Czech Republic and Liechtenstein (established 2009)"
+  ],
+  "publications": [
+    {
+      "title": "Místa Lichtenštejnské paměti / Liechtensteinische Erinnerungsorte in den böhmischen Ländern (Liechtenstein Memory Sites in the Bohemian Lands)",
+      "year": 2012,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Lichtenštejnové: kontinuity – diskontinuity (Liechtensteiners: Continuities – Discontinuities), Časopis Matice moravské",
+      "year": 2013,
+      "url": null,
+      "format": "proceedings"
+    }
+  ],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [
+    {
+      "name": "Peter Geiger",
+      "country": "Liechtenstein",
+      "affiliation": "Co-chair, Czech-Liechtenstein Historical Commission"
+    },
+    {
+      "name": "Tomáš Knoz",
+      "country": "Czech Republic",
+      "affiliation": "Co-chair, Czech-Liechtenstein Historical Commission"
+    }
+  ],
+  "url": "http://www.flcz-historikerkommission.li/",
+  "linkStatus": "broken",
+  "siteLanguages": [
+    "de",
+    "cs"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20240801/http://www.flcz-historikerkommission.li/",
+  "archivableDocuments": []
+}

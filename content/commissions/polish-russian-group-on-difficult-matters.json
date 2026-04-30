@@ -1,0 +1,59 @@
+{
+  "name": {
+    "primary": "Polish-Russian Group on Difficult Matters",
+    "translations": [
+      {
+        "language": "en",
+        "name": "Polish-Russian Group on Difficult Matters"
+      },
+      {
+        "language": "pl",
+        "name": "Polsko-Rosyjska Grupa ds. Trudnych"
+      }
+    ]
+  },
+  "foundingYear": null,
+  "memberCountries": [
+    "Poland",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [
+    "Polish-Soviet War of 1920",
+    "Origins of World War II and the Molotov-Ribbentrop Pact",
+    "Katyn massacre",
+    "Communisation of Poland",
+    "Cold War Polish-Soviet/Russian relations",
+    "Solidarity movement and martial law",
+    "Contemporary Poland-Russia relations (1918–2008)"
+  ],
+  "publications": [
+    {
+      "title": "White Spots—Black Spots: Difficult Matters in Polish-Russian Relations, 1918–2008",
+      "year": 2015,
+      "url": "https://upittpress.org/books/9780822944409/",
+      "format": "monograph"
+    }
+  ],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [
+    {
+      "name": "Adam Daniel Rotfeld",
+      "country": "Poland",
+      "affiliation": "Former Minister of Foreign Affairs of Poland; former director of SIPRI"
+    },
+    {
+      "name": "Anatoly V. Torkunov",
+      "country": "Russia",
+      "affiliation": null
+    }
+  ],
+  "url": "https://upittpress.org/books/9780822944409/",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "en"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260208102257/https://upittpress.org/books/9780822944409/",
+  "archivableDocuments": []
+}

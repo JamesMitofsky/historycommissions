@@ -1,0 +1,82 @@
+{
+  "name": {
+    "primary": "Deutsch-Ukrainische Historikerkommission (DUHK)",
+    "translations": [
+      {
+        "language": "de",
+        "name": "Deutsch-Ukrainische Historikerkommission"
+      },
+      {
+        "language": "uk",
+        "name": "Німецько-українська комісія істориків"
+      },
+      {
+        "language": "en",
+        "name": "German-Ukrainian Historical Commission"
+      }
+    ]
+  },
+  "foundingYear": 2015,
+  "memberCountries": [
+    "Germany",
+    "Ukraine"
+  ],
+  "sponsoringInstitutions": [
+    "Deutscher Akademischer Austauschdienst (DAAD)",
+    "Auswärtiges Amt (German Federal Foreign Office) – formerly co-funder",
+    "Robert Bosch Stiftung – formerly co-funder"
+  ],
+  "keyTopics": [
+    "World War I and World War II in Germany and Ukraine",
+    "German occupation policy and the Holocaust in Ukraine",
+    "History of Ukraine under state socialism",
+    "Holodomor as genocide and European site of memory",
+    "Ukraine and the Great Transformation of Modern Europe",
+    "Support for Ukrainian historians at risk"
+  ],
+  "publications": [
+    {
+      "title": "Hunger als Waffe. Der Holodomor in der Ukraine als Völkermord und europäischer Erinnerungsort (Hunger as a Weapon: The Holodomor in Ukraine as Genocide and European Site of Memory)",
+      "year": 2024,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Revolution and War. Ukraine and the Great Transformation of Modern Europe",
+      "year": 2024,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Deutsch-Ukrainische Geschichten. Bruchstücke aus einer gemeinsamen Vergangenheit (German-Ukrainian Histories: Fragments of a Common Past)",
+      "year": 2024,
+      "url": null,
+      "format": "monograph"
+    }
+  ],
+  "workingGroups": [
+    "Historians and the War: Rethinking the Future (international seminar series)",
+    "Online portal: 'Die Ukraine und Deutschland im 20. Jahrhundert' (Ukraine and Germany in the 20th Century)"
+  ],
+  "status": "active",
+  "chairs": [
+    {
+      "name": "Yaroslav Hrytsak",
+      "country": "Ukraine",
+      "affiliation": null
+    },
+    {
+      "name": "Martin Schulze Wessel",
+      "country": "Germany",
+      "affiliation": null
+    }
+  ],
+  "url": "http://www.duhk.org/",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "de",
+    "uk"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260212123623/http://www.duhk.org/",
+  "archivableDocuments": []
+}

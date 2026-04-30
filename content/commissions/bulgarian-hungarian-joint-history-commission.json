@@ -1,0 +1,108 @@
+{
+  "name": {
+    "primary": "Bulgarian-Hungarian Joint History Commission",
+    "translations": [
+      {
+        "language": "bg",
+        "name": "Българо-унгарска историческа комисия"
+      },
+      {
+        "language": "hu",
+        "name": "Bolgár-Magyar Történész Vegyes Bizottság"
+      },
+      {
+        "language": "en",
+        "name": "Bulgarian-Hungarian Joint History Commission"
+      }
+    ]
+  },
+  "foundingYear": null,
+  "memberCountries": [
+    "Bulgaria",
+    "Hungary"
+  ],
+  "sponsoringInstitutions": [
+    "Institute for Historical Studies – Bulgarian Academy of Sciences (IHS–BAS)",
+    "HUN-REN Research Centre for the Humanities, Institute of History (TTI–BTK), Hungary"
+  ],
+  "keyTopics": [
+    "Austro-Hungarian influences on Bulgarian education",
+    "Balkan chronology (18th–20th centuries)",
+    "Bulgarian-Hungarian historical connections",
+    "Migration, refugees and urbanisation in Bulgaria (1910s–1930s)",
+    "Cold War in Eastern Europe",
+    "Post-WWII political transformations"
+  ],
+  "publications": [
+    {
+      "title": "Vol. 14 – Penka Peykovska: Austro-Hungarian Influences on Bulgarian Education: The Case of Teacher Kálmán Cirill Rongé",
+      "year": 2025,
+      "url": "https://www.academia.edu/144661290/",
+      "format": "monograph"
+    },
+    {
+      "title": "Vol. 13 – Horbulák Zsolt: Reform and Restoration. The Czechoslovak State Party on the Hungarian Economic Reforms from 1968 until the Regime Change",
+      "year": 2025,
+      "url": "https://www.academia.edu/144337514/",
+      "format": "monograph"
+    },
+    {
+      "title": "Vol. 12 – Balkán kronológia IV. Két szövetségi rendszerben, 1946–1989 (Balkan Chronology IV)",
+      "year": 2023,
+      "url": "https://real.mtak.hu/172876/1/VEGLEGES_BALKAN-KRONOLOGIA1946-1989.pdf",
+      "format": "monograph"
+    },
+    {
+      "title": "Vol. 11 – Penka Peykovska: Bulgaria on the Move. Migration, Refugees, Integration, and Urbanisation in the 1910s–1930s",
+      "year": 2022,
+      "url": null,
+      "format": "monograph"
+    },
+    {
+      "title": "Vol. 8 – Anniversary Collection of the Bulgarian-Hungarian History Commission",
+      "year": 2024,
+      "url": null,
+      "format": "proceedings"
+    },
+    {
+      "title": "Vol. 7 – Balkán-kronológia II. A nemzeti ál(la)mok bűvöletében, 1879–1918 (Balkan Chronology II)",
+      "year": 2021,
+      "url": null,
+      "format": "monograph"
+    },
+    {
+      "title": "Vol. 6 – Balkán-kronológia I. Birodalmak szorításában, 1700–1878 (Balkan Chronology I)",
+      "year": 2020,
+      "url": null,
+      "format": "monograph"
+    }
+  ],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [
+    {
+      "name": "Penka Peykovska",
+      "country": "Bulgaria",
+      "affiliation": "Institute for Historical Studies, Bulgarian Academy of Sciences"
+    },
+    {
+      "name": "Gábor Demeter",
+      "country": "Hungary",
+      "affiliation": "HUN-REN Research Centre for the Humanities, Institute of History"
+    }
+  ],
+  "url": "http://penkapeykovska.blogspot.com/p/blog-page_22.html",
+  "linkStatus": "working",
+  "siteLanguages": [
+    "bg",
+    "hu",
+    "en"
+  ],
+  "lastArchivedSnapshot": "https://web.archive.org/web/20241216124257/http://penkapeykovska.blogspot.com/p/blog-page_22.html",
+  "archivableDocuments": [
+    {
+      "title": "Balkán kronológia IV. 1946–1989 (PDF)",
+      "url": "https://real.mtak.hu/172876/1/VEGLEGES_BALKAN-KRONOLOGIA1946-1989.pdf"
+    }
+  ]
+}
