@@ -1,23 +1,16 @@
 import { ImageResponse } from "next/og";
-import fs from "fs";
 import path from "path";
+import sharp from "sharp";
 import { getPost } from "@/blog";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-function loadImageAsDataUrl(relativePath: string): string | null {
+async function loadImageAsJpegDataUrl(relativePath: string): Promise<string | null> {
   try {
     const abs = path.join(process.cwd(), "public", relativePath);
-    const data = fs.readFileSync(abs);
-    const ext = path.extname(relativePath).slice(1).toLowerCase();
-    const mime =
-      ext === "jpg" || ext === "jpeg"
-        ? "image/jpeg"
-        : ext === "png"
-          ? "image/png"
-          : "image/webp";
-    return `data:${mime};base64,${data.toString("base64")}`;
+    const jpeg = await sharp(abs).jpeg({ quality: 85 }).toBuffer();
+    return `data:image/jpeg;base64,${jpeg.toString("base64")}`;
   } catch {
     return null;
   }
@@ -38,24 +31,29 @@ export default async function Image({
   }
 
   const bgSrc =
-    (post?.image ? loadImageAsDataUrl(post.image) : null) ??
-    (() => {
-      const heroData = fs.readFileSync(
-        path.join(process.cwd(), "public/hero.webp")
-      );
-      return `data:image/webp;base64,${heroData.toString("base64")}`;
-    })();
+    (post?.image ? await loadImageAsJpegDataUrl(post.image) : null) ??
+    (await loadImageAsJpegDataUrl("/hero.webp")) ??
+    "";
 
   const title = post?.title ?? "History Commissions";
 
   return new ImageResponse(
     (
-      <div style={{ width: 1200, height: 630, display: "flex", position: "relative" }}>
+      <div
+        style={{
+          width: 1200,
+          height: 630,
+          display: "flex",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
         <img
           src={bgSrc}
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
             width: "100%",
             height: "100%",
             objectFit: "cover",
@@ -64,7 +62,10 @@ export default async function Image({
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             background:
               "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.2) 35%, rgba(0,0,0,0.85) 100%)",
           }}
@@ -122,7 +123,6 @@ export default async function Image({
           )}
         </div>
       </div>
-    ),
-    { width: 1200, height: 630 }
+    )
   );
 }
