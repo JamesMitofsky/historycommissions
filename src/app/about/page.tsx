@@ -23,6 +23,28 @@ export default function AboutPage() {
           their role in international society today.
         </p>
       </div>
+
+      <div className="mt-12 pt-8 border-t border-[var(--border)] text-sm text-[var(--secondary)] leading-relaxed">
+        <p>
+          This project is maintained by{" "}
+          <a
+            href="https://elliott.gwu.edu/daqing-yang"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sky-600 hover:text-sky-700 transition-colors underline underline-offset-4 decoration-sky-300"
+          >
+            Professor Daqing Yang
+          </a>
+          . For questions or other inquiries, please feel free to reach him at{" "}
+          <a
+            href="mailto:yanghist@gwu.edu"
+            className="text-sky-600 hover:text-sky-700 transition-colors underline underline-offset-4 decoration-sky-300"
+          >
+            yanghist@gwu.edu
+          </a>
+          .
+        </p>
+      </div>
     </main>
   );
 }
