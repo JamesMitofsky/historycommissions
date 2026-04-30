@@ -13,11 +13,7 @@ collections:
     folder: content/posts
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    sortable_fields:
-      fields: [date, title]
-      default:
-        field: date
-        direction: Descending
+    sortable_fields: [date, title]
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Publish Date, name: date, widget: datetime }
@@ -26,5 +22,11 @@ collections:
       - { label: Image, name: image, widget: image, required: false }
       - { label: Image Attribution, name: imageAttribution, widget: string, required: false }
       - { label: Image Attribution URL, name: imageAttributionUrl, widget: string, required: false }
-      - { label: Body, name: body, widget: markdown }
+      - label: Body
+        name: body
+        widget: richtext
+        modes: [rich_text]
+        editor_components: [image]
+        buttons: ["bold", "italic", "strikethrough", "link", "heading-one", "heading-two", "heading-three", "heading-four", "quote", "bulleted-list", "numbered-list"]
+
 
