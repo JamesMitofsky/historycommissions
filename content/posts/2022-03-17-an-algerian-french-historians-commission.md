@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - Algier
   - France
-image: /images/france-algeria-flags.png
+image: /images/france-algeria-flags.webp
 imageAttribution: Wikimedia Commons
 imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Flag_of_France_and_Algeria.png
 ---

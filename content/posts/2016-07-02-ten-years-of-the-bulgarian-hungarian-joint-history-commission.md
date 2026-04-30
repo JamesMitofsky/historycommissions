@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - Hungary
   - Bulgaria
-image: /images/bulgarian-embassy-budapest.jpg
+image: /images/bulgarian-embassy-budapest.webp
 imageAttribution: Wikimedia Commons
 imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Bulgarian_embassy_in_Budapest.jpg
 ---

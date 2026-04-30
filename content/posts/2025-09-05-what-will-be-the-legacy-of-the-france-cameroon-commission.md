@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - France
   - Cameron
-image: /images/ancienne-residence-chef-circonscription.jpg
+image: /images/ancienne-residence-chef-circonscription.webp
 imageAttribution: Wikimedia Commons
 imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Ancienne_r%C3%A9sidence_du_chef_de_circonscription.jpg
 ---

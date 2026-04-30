@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - Finland
   - Estonia
-image: /images/fm-meeting-helsinki.jpg
+image: /images/fm-meeting-helsinki.webp
 imageAttribution: Wikimedia Commons
 imageAttributionUrl: https://commons.wikimedia.org/wiki/File:FM_Keit_Pentus-Rosimannus_met_with_Foreign_Minister_of_Finland_Erkki_Tuomioja_in_Helsinki_%2810.04.2015%29_%2816911894529%29.jpg
 ---

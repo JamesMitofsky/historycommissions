@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - Poland
   - Ukraine
-image: /images/volhynia-massacre-monument.jpg
+image: /images/volhynia-massacre-monument.webp
 imageAttribution: Wikimedia Commons
 imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Monument_to_vitims_of_Volhynia_massacre_1940-1945_at_cemetery_in_Liszna_plaque.jpg
 ---
