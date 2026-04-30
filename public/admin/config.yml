@@ -1,9 +1,6 @@
 backend:
-  name: github
-  repo: JamesMitofsky/historycommissions
+  name: git-gateway
   branch: main
-  base_url: https://historycommissions.vercel.app
-  auth_endpoint: api/auth
 
 local_backend: true
 
