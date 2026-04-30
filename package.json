@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["sharp"]
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
@@ -24,6 +26,7 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.10",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

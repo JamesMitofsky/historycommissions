@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import { Nav } from "@/components/Nav";
 import { getBlurDataURL } from "@/blog/get-blur-data-url";
 import "./globals.css";
@@ -24,9 +25,8 @@ const sourceSerif4 = Source_Serif_4({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "http://localhost:3000");
+  process.env.URL ??
+  "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -91,6 +91,18 @@ export default async function RootLayout({
         </header>
 
         {children}
+        <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" strategy="afterInteractive" />
+        <Script id="netlify-identity-redirect" strategy="afterInteractive">{`
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", function(user) {
+              if (!user) {
+                window.netlifyIdentity.on("login", function() {
+                  document.location.href = "/admin/";
+                });
+              }
+            });
+          }
+        `}</Script>
       </body>
     </html>
   );
