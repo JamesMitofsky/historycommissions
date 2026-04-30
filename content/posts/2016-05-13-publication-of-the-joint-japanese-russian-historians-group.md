@@ -1,11 +1,12 @@
 ---
-title: "Publication of the Joint Japanese-Russian Historians' Group"
+title: Publication of the Joint Japanese-Russian Historians' Group
 date: 2016-05-13T14:33:00.003Z
 updated: 2016-06-29T13:34:37.678Z
-author: DQY
+author: Daqing Yang
 tags:
   - Japan
   - Russia
+image: /images/Japanese-Russian-Historians-Publication.jpg
 ---
 
 In September 2015, the bilateral Japanese-Russian historians' commission published a collective work--a parallel history of the Japanese-Russian relations since the 18th century--in both Japanese and Russian. The bilateral group, also known in Russian as Russian-Japanese Commission on Complex Problems of Russian-Japanese Relations (российско-японской Комиссии по сложным вопросам истории российско-японских отношений), was launched in late 2011. Headed respectively by Iokibe Makoto (former president, Japanese Defense Academy) and A.V.Torkunov (Rector, Moscow Institute of International Relations, MGIMO), it held annual meetings between 2011 and 2014.  

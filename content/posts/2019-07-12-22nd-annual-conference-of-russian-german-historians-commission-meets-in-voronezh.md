@@ -1,11 +1,14 @@
 ---
-title: "22nd annual conference of Russian-German Historians' Commission meets in Voronezh, Russia"
+title: >-
+  22nd annual conference of Russian-German Historians' Commission meets in
+  Voronezh, Russia
 date: 2019-07-12T06:35:00.002Z
 updated: 2020-09-21T22:49:21.769Z
-author: DQY
+author: Daqing Yang
 tags:
   - Germany
   - Russia
+image: /images/Russian-German-22nd-Conference-Voronezh.jpg
 ---
 
 [![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNWir5JTEKwfHKBviFJtwnvsvLutEe2Dv1tuOeW5ufU9LOk_ZRFyDpzjzWyKh-_6KYO6UbpoUhihuuR0oRv4oFmyjpWwFBD01MOOJcpP-nFBEC76_hYPRLTDGNv_pjFmMW6T2yGOFE_FY/w536-h327/WechatIMG82.jpeg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNWir5JTEKwfHKBviFJtwnvsvLutEe2Dv1tuOeW5ufU9LOk_ZRFyDpzjzWyKh-_6KYO6UbpoUhihuuR0oRv4oFmyjpWwFBD01MOOJcpP-nFBEC76_hYPRLTDGNv_pjFmMW6T2yGOFE_FY/s1600/WechatIMG82.jpeg)

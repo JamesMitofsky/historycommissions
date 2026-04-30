@@ -6,4 +6,5 @@ export type Post = {
   updated: string | null;
   author: string | null;
   tags: string[];
+  image: string | null;
 };

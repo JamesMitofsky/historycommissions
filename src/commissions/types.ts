@@ -1,10 +1,4 @@
 export type CommissionStatus = "active" | "dormant" | "concluded" | "unknown";
-export type CommissionType =
-  | "textbook"
-  | "historical_research"
-  | "difficult_matters"
-  | "diplomatic"
-  | "unknown";
 export type LinkStatus = "working" | "broken" | "to_be_located";
 
 export interface Commission {
@@ -15,7 +9,6 @@ export interface Commission {
   foundingYear: number | null;
   memberCountries: string[];
   sponsoringInstitutions: string[];
-  type: CommissionType;
   keyTopics: string[];
   publications: {
     title: string;

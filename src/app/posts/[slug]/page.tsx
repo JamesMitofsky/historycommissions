@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { getPost, getPostSlugs } from "@/blog";
 import { Prose } from "@/ui";
+import { FlagTag } from "@/ui/FlagTag";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -40,28 +42,38 @@ export default async function PostPage({ params }: Props) {
         ← All posts
       </Link>
 
-      <header className="mb-10 pb-8 border-b border-[var(--border)]">
+      <header className="mb-10">
+        {post.image && (
+          <div className="mb-6 rounded-lg overflow-hidden bg-[var(--border)] aspect-[16/7]">
+            <Image
+              src={post.image}
+              alt={post.title ?? ""}
+              width={672}
+              height={294}
+              className="w-full h-full object-cover"
+              priority
+            />
+          </div>
+        )}
+
         {post.title && (
           <h1 className="text-2xl font-semibold leading-tight text-[var(--foreground)] mb-4">
             {post.title}
           </h1>
         )}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[var(--secondary)]">
+        <div className="flex items-center justify-between text-sm text-[var(--secondary)]">
           {formattedDate && <time>{formattedDate}</time>}
-          {post.author && <span>By {post.author}</span>}
+          {post.author && <span>{post.author}</span>}
         </div>
         {post.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
             {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2 py-0.5 rounded-full bg-[var(--border)] text-[var(--secondary)]"
-              >
-                {tag}
-              </span>
+              <FlagTag key={tag} tag={tag} />
             ))}
           </div>
         )}
+
+        <div className="mt-8 border-b border-[var(--border)]" />
       </header>
 
       <Prose>

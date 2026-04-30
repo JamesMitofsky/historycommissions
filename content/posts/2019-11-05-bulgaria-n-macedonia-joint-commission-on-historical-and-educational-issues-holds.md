@@ -1,11 +1,14 @@
 ---
-title: "Bulgaria – N. Macedonia joint commission on historical and educational issues holds first meeting"
+title: >-
+  Bulgaria – N. Macedonia joint commission on historical and educational issues
+  holds first meeting
 date: 2019-11-05T16:20:00.004Z
 updated: 2020-09-21T21:39:46.502Z
-author: DQY
+author: Daqing Yang
 tags:
   - N. Macedonia
   - Bulgaria
+image: /images/Bulgaria-Macedonia-Joint-Commission.jpg
 ---
 
 ![](https://sofiaglobe.com/wp-content/uploads/2018/07/bulgaria-macedonia-commission-zaharieva-604x272.jpeg)

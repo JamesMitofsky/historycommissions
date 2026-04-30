@@ -1,11 +1,12 @@
 ---
-title: "German-Ukrainian Historians' Commission Held 3rd Annual Conference"
+title: German-Ukrainian Historians' Commission Held 3rd Annual Conference
 date: 2017-12-21T04:05:00.003Z
 updated: 2018-04-20T15:22:56.783Z
-author: DQY
+author: Daqing Yang
 tags:
   - Ukraine
   - Germany
+image: /images/German-Ukrainian-3rd-Annual-Conference.jpg
 ---
 
 [![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirVVY4uAcFkGKOfWI7oKm02JfYRMhrEctn726AC3vMtp0lmYMFdj0uw_OLRuQGt_H8_GBq3gMmKJkqovZyGWAAtBF7x7mk43n9gaU6Zzj9sJsHg4j34FtF9UvFq63nUsxArncuIM1k7P8/s320/csm_Podium_1cfe29d3c0.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirVVY4uAcFkGKOfWI7oKm02JfYRMhrEctn726AC3vMtp0lmYMFdj0uw_OLRuQGt_H8_GBq3gMmKJkqovZyGWAAtBF7x7mk43n9gaU6Zzj9sJsHg4j34FtF9UvFq63nUsxArncuIM1k7P8/s1600/csm_Podium_1cfe29d3c0.jpg)

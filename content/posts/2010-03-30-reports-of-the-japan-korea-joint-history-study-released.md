@@ -1,11 +1,12 @@
 ---
-title: "Reports of the Japan-Korea Joint History Study released"
-date: 2010-03-30T22:46:00Z
+title: Reports of the Japan-Korea Joint History Study released
+date: 2010-03-30T22:46:00.000Z
 updated: 2016-06-23T14:23:07.369Z
-author: DQY
+author: Daqing Yang
 tags:
   - Japan
   - Korea
+image: /images/Japan-Korea-Joint-History-Study.jpg
 ---
 
 [![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFWPxrRkK5lsuyYSWMNEqohMYzXhgniqu6idXZjAIuQI37ShoI_UPipuCYxMFurBTBBF9pp38BaeuUo4pJ5kedKfvREP7bjLg33bXk75826iHJ5x-_3W9IxkkxVeD53ylU6vZEiSG_3VA/s320/i_100324_l.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFWPxrRkK5lsuyYSWMNEqohMYzXhgniqu6idXZjAIuQI37ShoI_UPipuCYxMFurBTBBF9pp38BaeuUo4pJ5kedKfvREP7bjLg33bXk75826iHJ5x-_3W9IxkkxVeD53ylU6vZEiSG_3VA/s1600/i_100324_l.jpg)

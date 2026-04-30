@@ -1,11 +1,12 @@
 ---
-title: "German-Ukrainian Historians' Commission held workshop in Odessa, October 2016"
+title: 'German-Ukrainian Historians'' Commission held workshop in Odessa, October 2016'
 date: 2017-07-10T12:12:00.005Z
 updated: 2017-07-10T12:25:58.485Z
-author: DQY
+author: Daqing Yang
 tags:
   - Germany
   - Ukraine
+image: null
 ---
 
 From October 27 to 31, 2016, in Odessa, the German-Ukrainian Historical Commission, in cooperation with the National I.I. Mečnykov-University of Odesa organized a junior workshop for graduate students and advanced students. The

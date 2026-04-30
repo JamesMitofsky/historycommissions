@@ -17,6 +17,7 @@ export const getPost = (slug: string): Post => {
     updated: data.updated ? new Date(data.updated).toISOString() : null,
     author: data.author ?? null,
     tags: Array.isArray(data.tags) ? data.tags : [],
+    image: data.image ?? null,
   };
 };
 

@@ -1,11 +1,14 @@
 ---
-title: "A German-Israeli Historians' Commission examines attack during 1972 Olympics in Munich' "
+title: >-
+  A German-Israeli Historians' Commission examines attack during 1972 Olympics
+  in Munich' 
 date: 2022-12-02T21:55:00.003Z
 updated: 2022-12-03T01:37:31.543Z
-author: DQY
+author: Daqing Yang
 tags:
   - Israel
   - Germany
+image: /images/munich-1972-olympics-historians-commission.jpg
 ---
 
 [![](https://blogger.googleusercontent.com/img/a/AVvXsEjWlLEW0pWe_AtIKy8QE7o0_f4QLT_GDa90OoaRIuGT0n5sE76f5jfIfhPc9At7If2CvZts3kgz6iylsU6VUEWXWMEanqOXpIa2GopAuVDF2fovbHJAs4irbnOpM72lC0RgjUwiHh5G9b2XMmyRT8yLU9pDi6fSBaO_t5o7qN4mIpNU2_xS7G5QXANE)](https://blogger.googleusercontent.com/img/a/AVvXsEjWlLEW0pWe_AtIKy8QE7o0_f4QLT_GDa90OoaRIuGT0n5sE76f5jfIfhPc9At7If2CvZts3kgz6iylsU6VUEWXWMEanqOXpIa2GopAuVDF2fovbHJAs4irbnOpM72lC0RgjUwiHh5G9b2XMmyRT8yLU9pDi6fSBaO_t5o7qN4mIpNU2_xS7G5QXANE)

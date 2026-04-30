@@ -1,11 +1,12 @@
 ---
-title: "France-Algeria: First Meeting of the Commission of Historians"
-date: 2024-01-11T08:28:00Z
+title: 'France-Algeria: First Meeting of the Commission of Historians'
+date: 2024-01-11T08:28:00.000Z
 updated: 2025-10-23T18:34:39.136Z
-author: DQY
+author: Daqing Yang
 tags:
   - Algier
   - France
+image: /images/france-algeria-commission-first-meeting.jpg
 ---
 
 Five French historians must begin work alongside five Algerian peers on the colonial period, this Wednesday, November 22, 2023. The recommendation of the (Benjamin) Stora report taken up by Emmanuel Macron is taking shape, but the relationship between the two countries remains extremely sensitive.

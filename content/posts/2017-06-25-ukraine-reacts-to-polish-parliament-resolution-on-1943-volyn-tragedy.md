@@ -1,11 +1,12 @@
 ---
-title: "Ukraine Reacts to Polish Parliament Resolution on 1943 Volyn Tragedy"
+title: Ukraine Reacts to Polish Parliament Resolution on 1943 Volyn Tragedy
 date: 2017-06-25T03:12:00.001Z
 updated: 2017-07-10T12:24:57.472Z
-author: DQY
+author: Daqing Yang
 tags:
   - Poland
   - Ukraine
+image: null
 ---
 
 .. Mr. Viatrovych, head of the Ukrainian Institute of National

@@ -1,11 +1,12 @@
 ---
-title: "German-Ukrainian Joint Historians' Commission Met"
+title: German-Ukrainian Joint Historians' Commission Met
 date: 2016-05-03T14:31:00.002Z
 updated: 2016-08-04T20:47:03.186Z
-author: DQY
+author: Daqing Yang
 tags:
   - Germany
   - Ukraine
+image: /images/German-Ukrainian-Joint-Commission-Meeting.jpg
 ---
 
 On January 15, 2016 Ukrainian Catholic University hosted the session of German-Ukrainian Commission of Historians. During

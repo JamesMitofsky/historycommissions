@@ -1,0 +1,37 @@
+export const TAG_TO_COUNTRY_CODE: Record<string, string> = {
+  Algeria: "dz",
+  Algier: "dz",
+  Austria: "at",
+  Bulgaria: "bg",
+  Cameron: "cm",
+  Cameroon: "cm",
+  China: "cn",
+  Estonia: "ee",
+  Europe: "eu",
+  Finland: "fi",
+  France: "fr",
+  Georgia: "ge",
+  Germany: "de",
+  Haiti: "ht",
+  Hungary: "hu",
+  Israel: "il",
+  Italy: "it",
+  Japan: "jp",
+  Korea: "kr",
+  "South Korea": "kr",
+  Lithuania: "lt",
+  "N. Macedonia": "mk",
+  "North Macedonia": "mk",
+  Poland: "pl",
+  Russia: "ru",
+  Slovakia: "sk",
+  Slovenia: "si",
+  Ukraine: "ua",
+  "Czech Republic": "cz",
+  Liechtenstein: "li",
+  Belarus: "by",
+};
+
+export function countryCodeForTag(tag: string): string | null {
+  return TAG_TO_COUNTRY_CODE[tag] ?? null;
+}

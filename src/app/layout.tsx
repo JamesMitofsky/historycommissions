@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
+import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import Image from "next/image";
+import { Nav } from "@/components/Nav";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,9 +14,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const sourceSerif4 = Source_Serif_4({
+  variable: "--font-source-serif-4",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "A minimalist blog",
+  title: "Historians & Reconciliation",
+  description:
+    "A digital archive of joint historians' commissions and dialogues over history.",
+  icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({
@@ -26,31 +35,37 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif4.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <header className="border-b border-[var(--border)]">
-          <nav className="max-w-2xl mx-auto px-6 h-14 flex items-center gap-7">
-            <Link
-              href="/"
-              className="text-sm font-medium text-[var(--foreground)] hover:opacity-70 transition-opacity"
-            >
-              Posts
-            </Link>
-            <Link
-              href="/commissions"
-              className="text-sm font-medium text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors"
-            >
-              Commissions
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm font-medium text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors"
-            >
-              About
-            </Link>
-          </nav>
+        {/* Masthead — image + nav + site title in one unit */}
+        <header className="relative w-full h-56 overflow-hidden">
+          <Image
+            src="/hero.jpg"
+            alt=""
+            fill
+            priority
+            className="object-cover object-right-bottom"
+          />
+          {/* Gradient: dark at top for nav legibility, dark at bottom for title legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60" />
+
+          {/* Nav — top of image */}
+          <Nav />
+
+          {/* Site title — bottom of image */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <div className="max-w-2xl mx-auto px-6 pb-5">
+              <p className="text-[0.65rem] font-medium tracking-[0.18em] uppercase text-white/60 mb-1">
+                A digital archive
+              </p>
+              <h1 className="text-3xl font-semibold text-white leading-tight">
+                Historians &amp; Reconciliation
+              </h1>
+            </div>
+          </div>
         </header>
+
         {children}
       </body>
     </html>

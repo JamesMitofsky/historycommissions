@@ -1,11 +1,12 @@
 ---
-title: "The Eighth Annual Meeting of the Russian-Austrian Historians' Commission"
+title: The Eighth Annual Meeting of the Russian-Austrian Historians' Commission
 date: 2016-06-23T14:41:00.005Z
 updated: 2016-10-21T01:08:35.212Z
-author: DQY
+author: Daqing Yang
 tags:
   - Austria
   - Russia
+image: /images/Russian-Austrian-Eighth-Meeting.jpg
 ---
 
 From 5 to 7 June 2016 the eighth

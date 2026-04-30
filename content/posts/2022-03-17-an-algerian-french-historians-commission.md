@@ -1,11 +1,12 @@
 ---
-title: "An Algerian-French Historians' Commission?"
+title: An Algerian-French Historians' Commission?
 date: 2022-03-17T09:04:00.012Z
 updated: 2022-09-30T20:56:54.611Z
-author: DQY
+author: Daqing Yang
 tags:
   - Algier
   - France
+image: null
 ---
 
 Benjamin Stora, a leading French authority on Algerian history, was commissioned by President Emmanuel Macron in 2020 to write a “report on the memory of the colonisation of Algeria and the Algerian War”.  The report was submitted in early 2021 and puts forward a series of new initiatives that France could implement to pave the way for a “reconciliation of memories”.  

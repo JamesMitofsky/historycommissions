@@ -1,11 +1,14 @@
 ---
-title: "Report of the China-Japan Joint Historical Study finally published in China and Japan"
-date: 2016-01-25T05:52:00Z
+title: >-
+  Report of the China-Japan Joint Historical Study finally published in China
+  and Japan
+date: 2016-01-25T05:52:00.000Z
 updated: 2016-06-29T13:35:23.870Z
-author: DQY
+author: Daqing Yang
 tags:
   - China
   - Japan
+image: /images/China-Japan-Joint-History-Study.jpg
 ---
 
 Nearly four years after its completion, the reports produced by Chinese and Japanese historians as part of the four-year China-Japan Joint Historical Study (中日共同歴史研究) have been published in book form simultaneously in China and Japan. Until now, the report is only accessible online through the Japanese Foreign Ministry website.  

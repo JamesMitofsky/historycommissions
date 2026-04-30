@@ -1,11 +1,12 @@
 ---
-title: "France-Cameroon Memorial Committee Present Report to President Paul BIYA"
-date: 2025-11-06T02:34:00Z
+title: France-Cameroon Memorial Committee Present Report to President Paul BIYA
+date: 2025-11-06T02:34:00.000Z
 updated: 2026-03-25T02:21:14.992Z
-author: DQY
+author: Daqing Yang
 tags:
   - Cameron
   - France
+image: /images/france-cameroon-memorial-committee-report.jpg
 ---
 
 January 2025

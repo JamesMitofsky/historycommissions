@@ -1,11 +1,14 @@
 ---
-title: "Annual Conference of the German-Ukrainian Historical Commission to be held in Warsaw ( 10.09.2023)"
+title: >-
+  Annual Conference of the German-Ukrainian Historical Commission to be held in
+  Warsaw ( 10.09.2023)
 date: 2023-07-28T07:33:00.001Z
 updated: 2025-09-05T15:47:08.982Z
-author: DQY
+author: Daqing Yang
 tags:
   - Ukraine
   - Germany
+image: null
 ---
 
 Early Modern Statehood and Society in the Ukrainian Lands: Forms and Concepts

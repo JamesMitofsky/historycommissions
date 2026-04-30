@@ -1,11 +1,12 @@
 ---
-title: "Ten Years of the Bulgarian-Hungarian Joint History Commission"
+title: Ten Years of the Bulgarian-Hungarian Joint History Commission
 date: 2016-07-02T17:59:00.001Z
 updated: 2016-10-22T17:51:25.915Z
-author: DQY
+author: Daqing Yang
 tags:
   - Hungary
   - Bulgaria
+image: null
 ---
 
 An international conference marking the 10th anniversary of the Bulgarian-Hungarian Joint History Commission was held at the Hungarian Cultural Institute in Sofia, Bulgaria on May 31, 2016. The theme was Hungary and Bulgaria –

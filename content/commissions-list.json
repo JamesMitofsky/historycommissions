@@ -3,14 +3,22 @@
     "name": {
       "primary": "Deutsch-Polnische Schulbuchkommission",
       "translations": [
-        { "language": "de", "name": "Deutsch-Polnische Schulbuchkommission" },
-        { "language": "pl", "name": "Polsko-Niemiecka Komisja Podręcznikowa" }
+        {
+          "language": "de",
+          "name": "Deutsch-Polnische Schulbuchkommission"
+        },
+        {
+          "language": "pl",
+          "name": "Polsko-Niemiecka Komisja Podręcznikowa"
+        }
       ]
     },
     "foundingYear": null,
-    "memberCountries": ["Germany", "Poland"],
+    "memberCountries": [
+      "Germany",
+      "Poland"
+    ],
     "sponsoringInstitutions": [],
-    "type": "textbook",
     "keyTopics": [
       "German-Polish history in educational media",
       "Bilateral history textbook 'Europa – Unsere Geschichte / Europa. Nasza historia'",
@@ -46,7 +54,10 @@
     ],
     "url": "https://schulbuchkommission.eu/",
     "linkStatus": "working",
-    "siteLanguages": ["de", "pl"],
+    "siteLanguages": [
+      "de",
+      "pl"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20260312003536/https://schulbuchkommission.eu/",
     "archivableDocuments": []
   },
@@ -54,13 +65,25 @@
     "name": {
       "primary": "Stálá konference českých a rakouských historiků ke společnému kulturnímu dědictví",
       "translations": [
-        { "language": "cs", "name": "Stálá konference českých a rakouských historiků ke společnému kulturnímu dědictví" },
-        { "language": "de", "name": "Ständige Konferenz tschechischer und österreichischer Historiker zum gemeinsamen kulturellen Erbe" },
-        { "language": "en", "name": "Standing Conference of Czech and Austrian Historians on the Common Cultural Heritage" }
+        {
+          "language": "cs",
+          "name": "Stálá konference českých a rakouských historiků ke společnému kulturnímu dědictví"
+        },
+        {
+          "language": "de",
+          "name": "Ständige Konferenz tschechischer und österreichischer Historiker zum gemeinsamen kulturellen Erbe"
+        },
+        {
+          "language": "en",
+          "name": "Standing Conference of Czech and Austrian Historians on the Common Cultural Heritage"
+        }
       ]
     },
     "foundingYear": 2009,
-    "memberCountries": ["Czech Republic", "Austria"],
+    "memberCountries": [
+      "Czech Republic",
+      "Austria"
+    ],
     "sponsoringInstitutions": [
       "Masarykův ústav a Archiv AV ČR (Masaryk Institute and Archives of the Czech Academy of Sciences)",
       "Ministry of Foreign Affairs of the Czech Republic",
@@ -68,7 +91,6 @@
       "South Moravian Region",
       "Vysočina Region"
     ],
-    "type": "historical_research",
     "keyTopics": [
       "Common cultural heritage of Czech and Austrian lands",
       "Intertwined historical and social events of the 20th century",
@@ -102,7 +124,10 @@
     ],
     "url": "https://www.mua.cas.cz/cs/skcrh",
     "linkStatus": "working",
-    "siteLanguages": ["cs", "en"],
+    "siteLanguages": [
+      "cs",
+      "en"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20251118200112/https://www.mua.cas.cz/cs/skcrh",
     "archivableDocuments": []
   },
@@ -110,16 +135,24 @@
     "name": {
       "primary": "Slovene-Italian Historical and Cultural Commission",
       "translations": [
-        { "language": "sl", "name": "Slovensko-italijanska zgodovinsko-kulturna komisija" },
-        { "language": "en", "name": "Slovene-Italian Historical and Cultural Commission" }
+        {
+          "language": "sl",
+          "name": "Slovensko-italijanska zgodovinsko-kulturna komisija"
+        },
+        {
+          "language": "en",
+          "name": "Slovene-Italian Historical and Cultural Commission"
+        }
       ]
     },
     "foundingYear": null,
-    "memberCountries": ["Slovenia", "Italy"],
+    "memberCountries": [
+      "Slovenia",
+      "Italy"
+    ],
     "sponsoringInstitutions": [
       "Government of Slovenia (Ministry of Foreign Affairs)"
     ],
-    "type": "difficult_matters",
     "keyTopics": [
       "Slovene-Italian relations",
       "Shared history in the 20th century",
@@ -141,7 +174,9 @@
     "chairs": [],
     "url": "https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf",
     "linkStatus": "working",
-    "siteLanguages": ["en"],
+    "siteLanguages": [
+      "en"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20260418225709/https://www.gov.si/assets/drzave/italija/Porocilo-SI-ITA-zgodovinsko-kulturne-komisije-anglesko.pdf",
     "archivableDocuments": [
       {
@@ -154,18 +189,30 @@
     "name": {
       "primary": "Deutsch-Tschechische und Deutsch-Slowakische Historische Kommission",
       "translations": [
-        { "language": "de", "name": "Deutsch-Tschechische und Deutsch-Slowakische Historische Kommission" },
-        { "language": "cs", "name": "Německo-česká a německo-slovenská historická komise" },
-        { "language": "sk", "name": "Nemecko-česká a nemecko-slovenská historická komisia" }
+        {
+          "language": "de",
+          "name": "Deutsch-Tschechische und Deutsch-Slowakische Historische Kommission"
+        },
+        {
+          "language": "cs",
+          "name": "Německo-česká a německo-slovenská historická komise"
+        },
+        {
+          "language": "sk",
+          "name": "Nemecko-česká a nemecko-slovenská historická komisia"
+        }
       ]
     },
     "foundingYear": 1990,
-    "memberCountries": ["Germany", "Czech Republic", "Slovakia"],
+    "memberCountries": [
+      "Germany",
+      "Czech Republic",
+      "Slovakia"
+    ],
     "sponsoringInstitutions": [
       "Deutscher Akademischer Austauschdienst (DAAD)",
       "Auswärtiges Amt (German Federal Foreign Office)"
     ],
-    "type": "historical_research",
     "keyTopics": [
       "20th century history of Germans, Czechs and Slovaks",
       "National Socialism and German occupation",
@@ -245,7 +292,11 @@
     "chairs": [],
     "url": "http://www.dt-ds-historikerkommission.de/",
     "linkStatus": "working",
-    "siteLanguages": ["de", "cs", "sk"],
+    "siteLanguages": [
+      "de",
+      "cs",
+      "sk"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20251112191359/http://www.dt-ds-historikerkommission.de/",
     "archivableDocuments": [
       {
@@ -258,17 +309,28 @@
     "name": {
       "primary": "Gemeinsame Kommission für die Erforschung der jüngeren Geschichte der deutsch-russischen Beziehungen",
       "translations": [
-        { "language": "de", "name": "Gemeinsame Kommission für die Erforschung der jüngeren Geschichte der deutsch-russischen Beziehungen" },
-        { "language": "ru", "name": "Совместная комиссия по изучению новейшей истории российско-германских отношений" },
-        { "language": "en", "name": "Joint Commission for the Study of the Recent History of German-Russian Relations" }
+        {
+          "language": "de",
+          "name": "Gemeinsame Kommission für die Erforschung der jüngeren Geschichte der deutsch-russischen Beziehungen"
+        },
+        {
+          "language": "ru",
+          "name": "Совместная комиссия по изучению новейшей истории российско-германских отношений"
+        },
+        {
+          "language": "en",
+          "name": "Joint Commission for the Study of the Recent History of German-Russian Relations"
+        }
       ]
     },
     "foundingYear": 1997,
-    "memberCountries": ["Germany", "Russia"],
+    "memberCountries": [
+      "Germany",
+      "Russia"
+    ],
     "sponsoringInstitutions": [
       "Beauftragter der Bundesregierung für Kultur und Medien (Federal Government Commissioner for Culture and the Media, Germany)"
     ],
-    "type": "historical_research",
     "keyTopics": [
       "German-Russian history in the 20th century",
       "Trust-building through scholarly cooperation",
@@ -305,7 +367,10 @@
     ],
     "url": "https://www.deutsch-russische-geschichtskommission.de/",
     "linkStatus": "working",
-    "siteLanguages": ["de"],
+    "siteLanguages": [
+      "de",
+      "ru"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20260310065434/https://www.deutsch-russische-geschichtskommission.de/",
     "archivableDocuments": []
   },
@@ -313,17 +378,28 @@
     "name": {
       "primary": "日韓歴史共同研究委員会（第2期）",
       "translations": [
-        { "language": "ja", "name": "日韓歴史共同研究委員会（第2期）" },
-        { "language": "ko", "name": "한일역사공동연구위원회 (제2기)" },
-        { "language": "en", "name": "Japan-Korea Joint History Research Committee (2nd Term)" }
+        {
+          "language": "ja",
+          "name": "日韓歴史共同研究委員会（第2期）"
+        },
+        {
+          "language": "ko",
+          "name": "한일역사공동연구위원회 (제2기)"
+        },
+        {
+          "language": "en",
+          "name": "Japan-Korea Joint History Research Committee (2nd Term)"
+        }
       ]
     },
     "foundingYear": 2007,
-    "memberCountries": ["Japan", "South Korea"],
+    "memberCountries": [
+      "Japan",
+      "South Korea"
+    ],
     "sponsoringInstitutions": [
       "公益財団法人日韓文化交流基金 (Japan-Korea Cultural Foundation)"
     ],
-    "type": "historical_research",
     "keyTopics": [
       "Ancient history of Japan-Korea relations",
       "Medieval and early modern Japan-Korea relations (Wokou piracy, Imjin War / Bunroku-Keichō campaign)",
@@ -376,7 +452,10 @@
     "chairs": [],
     "url": "https://jkcf.or.jp/projects/2010/17283/",
     "linkStatus": "working",
-    "siteLanguages": ["ja", "ko"],
+    "siteLanguages": [
+      "ja",
+      "ko"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20260214045157/https://www.jkcf.or.jp/projects/2010/17283/",
     "archivableDocuments": []
   },
@@ -384,14 +463,22 @@
     "name": {
       "primary": "Polish-Russian Group on Difficult Matters",
       "translations": [
-        { "language": "en", "name": "Polish-Russian Group on Difficult Matters" },
-        { "language": "pl", "name": "Polsko-Rosyjska Grupa ds. Trudnych" }
+        {
+          "language": "en",
+          "name": "Polish-Russian Group on Difficult Matters"
+        },
+        {
+          "language": "pl",
+          "name": "Polsko-Rosyjska Grupa ds. Trudnych"
+        }
       ]
     },
     "foundingYear": null,
-    "memberCountries": ["Poland", "Russia"],
+    "memberCountries": [
+      "Poland",
+      "Russia"
+    ],
     "sponsoringInstitutions": [],
-    "type": "difficult_matters",
     "keyTopics": [
       "Polish-Soviet War of 1920",
       "Origins of World War II and the Molotov-Ribbentrop Pact",
@@ -425,7 +512,9 @@
     ],
     "url": "https://upittpress.org/books/9780822944409/",
     "linkStatus": "working",
-    "siteLanguages": ["en"],
+    "siteLanguages": [
+      "en"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20260208102257/https://upittpress.org/books/9780822944409/",
     "archivableDocuments": []
   },
@@ -433,18 +522,29 @@
     "name": {
       "primary": "Bulgarian-Hungarian Joint History Commission",
       "translations": [
-        { "language": "bg", "name": "Българо-унгарска историческа комисия" },
-        { "language": "hu", "name": "Bolgár-Magyar Történész Vegyes Bizottság" },
-        { "language": "en", "name": "Bulgarian-Hungarian Joint History Commission" }
+        {
+          "language": "bg",
+          "name": "Българо-унгарска историческа комисия"
+        },
+        {
+          "language": "hu",
+          "name": "Bolgár-Magyar Történész Vegyes Bizottság"
+        },
+        {
+          "language": "en",
+          "name": "Bulgarian-Hungarian Joint History Commission"
+        }
       ]
     },
     "foundingYear": null,
-    "memberCountries": ["Bulgaria", "Hungary"],
+    "memberCountries": [
+      "Bulgaria",
+      "Hungary"
+    ],
     "sponsoringInstitutions": [
       "Institute for Historical Studies – Bulgarian Academy of Sciences (IHS–BAS)",
       "HUN-REN Research Centre for the Humanities, Institute of History (TTI–BTK), Hungary"
     ],
-    "type": "historical_research",
     "keyTopics": [
       "Austro-Hungarian influences on Bulgarian education",
       "Balkan chronology (18th–20th centuries)",
@@ -513,7 +613,11 @@
     ],
     "url": "http://penkapeykovska.blogspot.com/p/blog-page_22.html",
     "linkStatus": "working",
-    "siteLanguages": ["bg", "hu", "en"],
+    "siteLanguages": [
+      "bg",
+      "hu",
+      "en"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20241216124257/http://penkapeykovska.blogspot.com/p/blog-page_22.html",
     "archivableDocuments": [
       {
@@ -526,19 +630,30 @@
     "name": {
       "primary": "Japan-China Joint History Research Committee",
       "translations": [
-        { "language": "ja", "name": "日中歴史共同研究委員会" },
-        { "language": "zh", "name": "中日历史共同研究委员会" },
-        { "language": "en", "name": "Japan-China Joint History Research Committee" }
+        {
+          "language": "ja",
+          "name": "日中歴史共同研究委員会"
+        },
+        {
+          "language": "zh",
+          "name": "中日历史共同研究委员会"
+        },
+        {
+          "language": "en",
+          "name": "Japan-China Joint History Research Committee"
+        }
       ]
     },
     "foundingYear": 2006,
-    "memberCountries": ["Japan", "China"],
+    "memberCountries": [
+      "Japan",
+      "China"
+    ],
     "sponsoringInstitutions": [
       "Ministry of Foreign Affairs of Japan",
       "Japan Institute of International Affairs (日本国際問題研究所) – Japanese secretariat",
       "Institute of Modern History, Chinese Academy of Social Sciences (中国社会科学院近代史研究所) – Chinese secretariat"
     ],
-    "type": "historical_research",
     "keyTopics": [
       "Ancient and medieval history of Japan-China relations",
       "Modern and contemporary history of Japan-China relations",
@@ -608,7 +723,9 @@
     ],
     "url": "https://www.mofa.go.jp/mofaj/area/china/rekishi_kk.html",
     "linkStatus": "working",
-    "siteLanguages": ["ja"],
+    "siteLanguages": [
+      "ja"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20260217/https://www.mofa.go.jp/mofaj/area/china/rekishi_kk.html",
     "archivableDocuments": [
       {
@@ -645,13 +762,18 @@
     "name": {
       "primary": "A History of Russo-Japanese Relations – Over Two Centuries of Cooperation and Competition",
       "translations": [
-        { "language": "en", "name": "A History of Russo-Japanese Relations – Over Two Centuries of Cooperation and Competition" }
+        {
+          "language": "en",
+          "name": "A History of Russo-Japanese Relations – Over Two Centuries of Cooperation and Competition"
+        }
       ]
     },
     "foundingYear": null,
-    "memberCountries": ["Russia", "Japan"],
+    "memberCountries": [
+      "Russia",
+      "Japan"
+    ],
     "sponsoringInstitutions": [],
-    "type": "historical_research",
     "keyTopics": [
       "History of Russian-Japanese relations from the 18th century to the present",
       "Cooperation and competition between Russia and Japan",
@@ -682,7 +804,9 @@
     ],
     "url": "https://brill.com/view/title/36335?language=en",
     "linkStatus": "working",
-    "siteLanguages": ["en"],
+    "siteLanguages": [
+      "en"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20250218073901/https://brill.com/view/title/36335",
     "archivableDocuments": []
   },
@@ -690,19 +814,30 @@
     "name": {
       "primary": "Deutsch-Ukrainische Historikerkommission (DUHK)",
       "translations": [
-        { "language": "de", "name": "Deutsch-Ukrainische Historikerkommission" },
-        { "language": "uk", "name": "Німецько-українська комісія істориків" },
-        { "language": "en", "name": "German-Ukrainian Historical Commission" }
+        {
+          "language": "de",
+          "name": "Deutsch-Ukrainische Historikerkommission"
+        },
+        {
+          "language": "uk",
+          "name": "Німецько-українська комісія істориків"
+        },
+        {
+          "language": "en",
+          "name": "German-Ukrainian Historical Commission"
+        }
       ]
     },
     "foundingYear": 2015,
-    "memberCountries": ["Germany", "Ukraine"],
+    "memberCountries": [
+      "Germany",
+      "Ukraine"
+    ],
     "sponsoringInstitutions": [
       "Deutscher Akademischer Austauschdienst (DAAD)",
       "Auswärtiges Amt (German Federal Foreign Office) – formerly co-funder",
       "Robert Bosch Stiftung – formerly co-funder"
     ],
-    "type": "historical_research",
     "keyTopics": [
       "World War I and World War II in Germany and Ukraine",
       "German occupation policy and the Holocaust in Ukraine",
@@ -750,7 +885,10 @@
     ],
     "url": "http://www.duhk.org/",
     "linkStatus": "working",
-    "siteLanguages": ["de", "uk"],
+    "siteLanguages": [
+      "de",
+      "uk"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20260212123623/http://www.duhk.org/",
     "archivableDocuments": []
   },
@@ -758,17 +896,28 @@
     "name": {
       "primary": "Belarusisch-Deutsche Geschichtskommission",
       "translations": [
-        { "language": "de", "name": "Belarusisch-Deutsche Geschichtskommission" },
-        { "language": "be", "name": "Беларуска-Нямецкая гістарычная камісія" },
-        { "language": "en", "name": "Belarusian-German History Commission" }
+        {
+          "language": "de",
+          "name": "Belarusisch-Deutsche Geschichtskommission"
+        },
+        {
+          "language": "be",
+          "name": "Беларуска-Нямецкая гістарычная камісія"
+        },
+        {
+          "language": "en",
+          "name": "Belarusian-German History Commission"
+        }
       ]
     },
     "foundingYear": null,
-    "memberCountries": ["Belarus", "Germany"],
+    "memberCountries": [
+      "Belarus",
+      "Germany"
+    ],
     "sponsoringInstitutions": [
       "Deutsche Gesellschaft für Osteuropakunde e. V. (German Association for East European Studies)"
     ],
-    "type": "historical_research",
     "keyTopics": [],
     "publications": [],
     "workingGroups": [],
@@ -776,7 +925,10 @@
     "chairs": [],
     "url": "https://geschichte-historyja.org/",
     "linkStatus": "broken",
-    "siteLanguages": ["de", "be"],
+    "siteLanguages": [
+      "de",
+      "be"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20260311185036/https://geschichte-historyja.org/",
     "archivableDocuments": []
   },
@@ -784,18 +936,29 @@
     "name": {
       "primary": "Česko-lichtenštejnská komise historiků",
       "translations": [
-        { "language": "cs", "name": "Česko-lichtenštejnská komise historiků" },
-        { "language": "de", "name": "Tschechisch-liechtensteinische Historikerkommission" },
-        { "language": "en", "name": "Czech-Liechtenstein Historical Commission" }
+        {
+          "language": "cs",
+          "name": "Česko-lichtenštejnská komise historiků"
+        },
+        {
+          "language": "de",
+          "name": "Tschechisch-liechtensteinische Historikerkommission"
+        },
+        {
+          "language": "en",
+          "name": "Czech-Liechtenstein Historical Commission"
+        }
       ]
     },
     "foundingYear": 2009,
-    "memberCountries": ["Czech Republic", "Liechtenstein"],
+    "memberCountries": [
+      "Czech Republic",
+      "Liechtenstein"
+    ],
     "sponsoringInstitutions": [
       "Matice moravská (Moravia Foundation), Brno",
       "Ministry of Foreign Affairs of the Czech Republic"
     ],
-    "type": "historical_research",
     "keyTopics": [
       "Historical relations between Czech lands (Kingdom of Bohemia, Margraviate of Moravia, Duchy of Silesia, Austro-Hungarian Empire, Czechoslovakia) and the Liechtenstein princely house and principality",
       "Liechtenstein memory sites in the Bohemian lands",
@@ -833,7 +996,10 @@
     ],
     "url": "http://www.flcz-historikerkommission.li/",
     "linkStatus": "broken",
-    "siteLanguages": ["de", "cs"],
+    "siteLanguages": [
+      "de",
+      "cs"
+    ],
     "lastArchivedSnapshot": "https://web.archive.org/web/20240801/http://www.flcz-historikerkommission.li/",
     "archivableDocuments": []
   }
