@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   let post;
   try {
-    post = getPost(slug);
+    post = await getPost(slug);
   } catch {
     return {};
   }
@@ -55,7 +55,7 @@ export default async function PostPage({ params }: Props) {
 
   let post;
   try {
-    post = getPost(slug);
+    post = await getPost(slug);
   } catch {
     notFound();
   }
@@ -88,6 +88,8 @@ export default async function PostPage({ params }: Props) {
                 height={294}
                 className="w-full h-full object-cover"
                 priority
+                placeholder={post.blurDataURL ? "blur" : "empty"}
+                blurDataURL={post.blurDataURL ?? undefined}
               />
             </div>
             {post.imageAttribution && (
