@@ -13,6 +13,11 @@ collections:
     folder: content/posts
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields:
+      fields: [date, title]
+      default:
+        field: date
+        direction: Descending
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Publish Date, name: date, widget: datetime }
