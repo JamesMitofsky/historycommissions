@@ -7,4 +7,7 @@ export type Post = {
   author: string | null;
   tags: string[];
   image: string | null;
+  imageAttribution: string | null;
+  imageAttributionUrl: string | null;
+  blurDataURL: string | null;
 };

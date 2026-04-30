@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { getPost, getPostSlugs } from "@/blog";
@@ -13,6 +14,40 @@ type Props = {
 
 export async function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  let post;
+  try {
+    post = getPost(slug);
+  } catch {
+    return {};
+  }
+
+  const description = post.content
+    .replace(/^#+\s.+$/gm, "")
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/[*_`~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 200);
+
+  return {
+    title: post.title ?? undefined,
+    description: description || undefined,
+    openGraph: {
+      title: post.title ?? undefined,
+      description: description || undefined,
+      type: "article",
+      ...(post.date && { publishedTime: post.date }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title ?? undefined,
+      description: description || undefined,
+    },
+  };
 }
 
 export default async function PostPage({ params }: Props) {
@@ -44,16 +79,35 @@ export default async function PostPage({ params }: Props) {
 
       <header className="mb-10">
         {post.image && (
-          <div className="mb-6 rounded-lg overflow-hidden bg-[var(--border)] aspect-[16/7]">
-            <Image
-              src={post.image}
-              alt={post.title ?? ""}
-              width={672}
-              height={294}
-              className="w-full h-full object-cover"
-              priority
-            />
-          </div>
+          <figure className="mb-6">
+            <div className="rounded-lg overflow-hidden bg-[var(--border)] aspect-[16/7]">
+              <Image
+                src={post.image}
+                alt={post.title ?? ""}
+                width={672}
+                height={294}
+                className="w-full h-full object-cover"
+                priority
+              />
+            </div>
+            {post.imageAttribution && (
+              <figcaption className="mt-1.5 text-xs text-[var(--secondary)] text-right">
+                {post.imageAttributionUrl ? (
+                  <a
+                    href={post.imageAttributionUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    {post.imageAttribution}
+                  </a>
+                ) : (
+                  post.imageAttribution
+                )}{" "}
+                (CC BY-SA 3.0)
+              </figcaption>
+            )}
+          </figure>
         )}
 
         {post.title && (

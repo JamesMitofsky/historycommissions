@@ -6,7 +6,9 @@ author: Daqing Yang
 tags:
   - Germany
   - Ukraine
-image: null
+image: /images/Odessa_Opera_House.webp
+imageAttribution: Wikimedia Commons
+imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Odessa-opera-and-ballet-theater-edit.jpg
 ---
 
 From October 27 to 31, 2016, in Odessa, the German-Ukrainian Historical Commission, in cooperation with the National I.I. Mečnykov-University of Odesa organized a junior workshop for graduate students and advanced students. The

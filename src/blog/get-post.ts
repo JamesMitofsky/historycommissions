@@ -2,13 +2,15 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { Post } from "./types";
+import { getBlurDataURL } from "./get-blur-data-url";
 
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
 
-export const getPost = (slug: string): Post => {
+export const getPost = async (slug: string): Promise<Post> => {
   const filePath = path.join(POSTS_DIR, `${slug}.md`);
   const raw = fs.readFileSync(filePath, "utf8");
   const { content, data } = matter(raw);
+  const image: string | null = data.image ?? null;
   return {
     slug,
     content,
@@ -17,7 +19,10 @@ export const getPost = (slug: string): Post => {
     updated: data.updated ? new Date(data.updated).toISOString() : null,
     author: data.author ?? null,
     tags: Array.isArray(data.tags) ? data.tags : [],
-    image: data.image ?? null,
+    image,
+    imageAttribution: data.imageAttribution ?? null,
+    imageAttributionUrl: data.imageAttributionUrl ?? null,
+    blurDataURL: await getBlurDataURL(image),
   };
 };
 

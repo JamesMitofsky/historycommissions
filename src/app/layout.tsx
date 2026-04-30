@@ -20,11 +20,28 @@ const sourceSerif4 = Source_Serif_4({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  title: "History Commissions",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "History Commissions",
+    template: "%s | History Commissions",
+  },
   description:
     "A digital archive of joint historians' commissions and dialogues over history.",
   icons: { icon: "/favicon.ico" },
+  openGraph: {
+    siteName: "History Commissions",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
