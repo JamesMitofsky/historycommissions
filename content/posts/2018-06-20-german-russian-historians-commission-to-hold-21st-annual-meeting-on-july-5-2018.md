@@ -8,7 +8,7 @@ author: Daqing Yang
 tags:
   - Germany
   - Russia
-image: /images/putin-steinmeier.jpg
+image: /images/putin-steinmeier.webp
 imageAttribution: Wikimedia Commons
 imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Frank-Walter_Steinmeier_%282017-10-25%29_02.jpg
 ---
