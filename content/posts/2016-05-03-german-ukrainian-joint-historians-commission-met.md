@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - Germany
   - Ukraine
-image: /images/German-Ukrainian-Joint-Commission-Meeting.jpg
+image: /images/German-Ukrainian-Joint-Commission-Meeting.webp
 ---
 
 On January 15, 2016 Ukrainian Catholic University hosted the session of German-Ukrainian Commission of Historians. During
@@ -21,4 +21,3 @@ universities and scholarly institutions of the two countries. For further inform
 
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjY_dRNo8x4ZXq2J1ulx5V2THjpJFZqxn8YkxdqDlwQX1D3xQP6VTLiHsaM19GsvCr_7wHkBBxWyhLU3q09PasEDOcH_IhmNkwUua_EZTSJfNjc1MtDR7OQnJrRoEwtjt5DAl1IrjNbz5c/s400/2015_01_14-15_Ukr-Nem_com1.JPG)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjY_dRNo8x4ZXq2J1ulx5V2THjpJFZqxn8YkxdqDlwQX1D3xQP6VTLiHsaM19GsvCr_7wHkBBxWyhLU3q09PasEDOcH_IhmNkwUua_EZTSJfNjc1MtDR7OQnJrRoEwtjt5DAl1IrjNbz5c/s1600/2015_01_14-15_Ukr-Nem_com1.JPG)

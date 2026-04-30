@@ -8,9 +8,8 @@ author: Daqing Yang
 tags:
   - Germany
   - Russia
-image: /images/2021-German-Russian-Historians-Commission.jpg
+image: /images/2021-German-Russian-Historians-Commission.webp
 ---
 
 For further information as well as video recordings, see [here](https://www.rossijsko-germanskaja-komissija-istorikov.ru/ru/kollokvium-2021-s-videomat/)
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2ouqhtgnRLoarnLz50FU-2s7oMGg0yAkx1WtjTEC60iiqLoSZvOylyiDJ3hzEo2gKCyQ7XtKtVLt-Ay3PGTAZJO3PEzLVxIT7udeMEdtV40c_9xVInpwDADMBxXQbxRJNSP8juQGnZPY/w543-h258/image.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2ouqhtgnRLoarnLz50FU-2s7oMGg0yAkx1WtjTEC60iiqLoSZvOylyiDJ3hzEo2gKCyQ7XtKtVLt-Ay3PGTAZJO3PEzLVxIT7udeMEdtV40c_9xVInpwDADMBxXQbxRJNSP8juQGnZPY/)

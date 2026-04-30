@@ -6,7 +6,9 @@ author: Daqing Yang
 tags:
   - Algier
   - France
-image: null
+image: /images/france-algeria-flags.png
+imageAttribution: Wikimedia Commons
+imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Flag_of_France_and_Algeria.png
 ---
 
 Benjamin Stora, a leading French authority on Algerian history, was commissioned by President Emmanuel Macron in 2020 to write a “report on the memory of the colonisation of Algeria and the Algerian War”.  The report was submitted in early 2021 and puts forward a series of new initiatives that France could implement to pave the way for a “reconciliation of memories”.  

@@ -8,7 +8,9 @@ author: Daqing Yang
 tags:
   - Ukraine
   - Germany
-image: null
+image: /images/germany-ukraine-locator.svg
+imageAttribution: Wikimedia Commons
+imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Germany_Ukraine_Locator.svg
 ---
 
 Early Modern Statehood and Society in the Ukrainian Lands: Forms and Concepts

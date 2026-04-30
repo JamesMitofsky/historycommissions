@@ -6,10 +6,8 @@ author: Daqing Yang
 tags:
   - Ukraine
   - Germany
-image: /images/German-Ukrainian-3rd-Annual-Conference.jpg
+image: /images/German-Ukrainian-3rd-Annual-Conference.webp
 ---
-
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirVVY4uAcFkGKOfWI7oKm02JfYRMhrEctn726AC3vMtp0lmYMFdj0uw_OLRuQGt_H8_GBq3gMmKJkqovZyGWAAtBF7x7mk43n9gaU6Zzj9sJsHg4j34FtF9UvFq63nUsxArncuIM1k7P8/s320/csm_Podium_1cfe29d3c0.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirVVY4uAcFkGKOfWI7oKm02JfYRMhrEctn726AC3vMtp0lmYMFdj0uw_OLRuQGt_H8_GBq3gMmKJkqovZyGWAAtBF7x7mk43n9gaU6Zzj9sJsHg4j34FtF9UvFq63nUsxArncuIM1k7P8/s1600/csm_Podium_1cfe29d3c0.jpg)
 
 The annual conference of the German-Ukrainian Historians' Commission took place on 29 and 30
 September in Kyiv, in cooperation with the Institute of

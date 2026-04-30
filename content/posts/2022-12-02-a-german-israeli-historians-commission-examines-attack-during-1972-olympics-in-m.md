@@ -8,10 +8,8 @@ author: Daqing Yang
 tags:
   - Israel
   - Germany
-image: /images/munich-1972-olympics-historians-commission.jpg
+image: /images/munich-1972-olympics-historians-commission.webp
 ---
-
-[![](https://blogger.googleusercontent.com/img/a/AVvXsEjWlLEW0pWe_AtIKy8QE7o0_f4QLT_GDa90OoaRIuGT0n5sE76f5jfIfhPc9At7If2CvZts3kgz6iylsU6VUEWXWMEanqOXpIa2GopAuVDF2fovbHJAs4irbnOpM72lC0RgjUwiHh5G9b2XMmyRT8yLU9pDi6fSBaO_t5o7qN4mIpNU2_xS7G5QXANE)](https://blogger.googleusercontent.com/img/a/AVvXsEjWlLEW0pWe_AtIKy8QE7o0_f4QLT_GDa90OoaRIuGT0n5sE76f5jfIfhPc9At7If2CvZts3kgz6iylsU6VUEWXWMEanqOXpIa2GopAuVDF2fovbHJAs4irbnOpM72lC0RgjUwiHh5G9b2XMmyRT8yLU9pDi6fSBaO_t5o7qN4mIpNU2_xS7G5QXANE)
 
   
 (09/05/2022) At the memorial ceremony in Fürstenfeldbruck, Bavaria, for the victims of the Munich Olympics massacre, Interior Minister Nancy Faeser spoke of deep wounds and agonising questions. ""It’s shameful that it took so long before there was any understanding or reappraisal of the events, transparency about them, or acceptance of responsibility for them,"" Minister Faeser said to the victims’ families, who had travelled to Munich for the 50th anniversary of the attack.

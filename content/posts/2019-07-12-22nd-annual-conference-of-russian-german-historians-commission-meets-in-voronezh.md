@@ -8,10 +8,8 @@ author: Daqing Yang
 tags:
   - Germany
   - Russia
-image: /images/Russian-German-22nd-Conference-Voronezh.jpg
+image: /images/Russian-German-22nd-Conference-Voronezh.webp
 ---
-
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNWir5JTEKwfHKBviFJtwnvsvLutEe2Dv1tuOeW5ufU9LOk_ZRFyDpzjzWyKh-_6KYO6UbpoUhihuuR0oRv4oFmyjpWwFBD01MOOJcpP-nFBEC76_hYPRLTDGNv_pjFmMW6T2yGOFE_FY/w536-h327/WechatIMG82.jpeg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNWir5JTEKwfHKBviFJtwnvsvLutEe2Dv1tuOeW5ufU9LOk_ZRFyDpzjzWyKh-_6KYO6UbpoUhihuuR0oRv4oFmyjpWwFBD01MOOJcpP-nFBEC76_hYPRLTDGNv_pjFmMW6T2yGOFE_FY/s1600/WechatIMG82.jpeg)
 
   
 The theme of this year's conference is economic relations between Germany and Soviet Union, 1917-1991. Over a day and a half, fourteen presentations are made by Commission members as well as by those who answered a Call-for-Papers. One session is devoted to "Nazi's Forced Labor and Germany's Historical Responsibility." For detailed program, see [here](https://www.rossijsko-germanskaja-komissija-istorikov.ru/fileadmin/user_upload/PROGRAMM_KOLLOQUIUM-RUSSISCH-END-WJ-2.pdf).  

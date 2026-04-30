@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - Poland
   - Russia
-image: /images/Polish-Russian-Group-Difficult-Matters.jpg
+image: /images/Polish-Russian-Group-Difficult-Matters.webp
 ---
 
 “We
@@ -28,4 +28,3 @@ Russia and Eastern affairs. 
 For a full announcement by the Polish Ministry of Foreign Affairs, see [here](http://www.mfa.gov.pl/en/news/polish_russian_group_for_difficult_matters_resumes_its_activities).  
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPK_YRhiRJc6zVJsqgYmnGIacPda2ieTCzwSSFSxUh7iZNq78TZsLgXxGPbvWDuoJCkLO0lhH_KJ_tKVJfonZUn2oa4bTYTbOZyF89-ZnIv26tIw77SnXdoHNLrjqDLvA-lZkHhml0YuE/s320/IMG_8678rotator2.jpg)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPK_YRhiRJc6zVJsqgYmnGIacPda2ieTCzwSSFSxUh7iZNq78TZsLgXxGPbvWDuoJCkLO0lhH_KJ_tKVJfonZUn2oa4bTYTbOZyF89-ZnIv26tIw77SnXdoHNLrjqDLvA-lZkHhml0YuE/s1600/IMG_8678rotator2.jpg)

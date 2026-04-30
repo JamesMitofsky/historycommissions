@@ -8,10 +8,8 @@ author: Daqing Yang
 tags:
   - N. Macedonia
   - Bulgaria
-image: /images/Bulgaria-Macedonia-Joint-Commission.jpg
+image: /images/Bulgaria-Macedonia-Joint-Commission.webp
 ---
-
-![](https://sofiaglobe.com/wp-content/uploads/2018/07/bulgaria-macedonia-commission-zaharieva-604x272.jpeg)
 
 On November 5, 2019, the joint commission of scholars from Bulgaria and the Republic of N. Macedonia has held its first meeting, with Bulgarian Foreign Minister Ekaterina Zaharieva calling on participants to establish a spirit of trust “and even have arguments”.
 

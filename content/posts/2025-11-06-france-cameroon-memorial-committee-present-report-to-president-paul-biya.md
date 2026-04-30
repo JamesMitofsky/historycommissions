@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - Cameron
   - France
-image: /images/france-cameroon-memorial-committee-report.jpg
+image: /images/france-cameroon-memorial-committee-report.webp
 ---
 
 January 2025

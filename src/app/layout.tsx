@@ -41,7 +41,7 @@ export default function RootLayout({
         {/* Masthead — image + nav + site title in one unit */}
         <header className="relative w-full h-56 overflow-hidden">
           <Image
-            src="/hero.jpg"
+            src="/hero.webp"
             alt=""
             fill
             priority

@@ -6,7 +6,9 @@ author: Daqing Yang
 tags:
   - France
   - Haiti
-image: null
+image: /images/traite-france-haiti-1825.jpg
+imageAttribution: Wikimedia Commons
+imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Trait%C3%A9_France_Ha%C3%AFti_1825.jpg
 ---
 
 April 17, 2025 

@@ -8,7 +8,9 @@ author: Daqing Yang
 tags:
   - Germany
   - Russia
-image: null
+image: /images/putin-steinmeier.jpg
+imageAttribution: Wikimedia Commons
+imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Vladimir_Putin_and_Frank-Walter_Steinmeier_%282017-10-25%29_02.jpg
 ---
 
 The German-Russian Historians' Commission will hold its annual plenary session in Munich. There will be a colloquium, a panel discussion, as well as a book presentation of the latest volume of a joint schoolbook. For details, check the Commission's website under Useful Links

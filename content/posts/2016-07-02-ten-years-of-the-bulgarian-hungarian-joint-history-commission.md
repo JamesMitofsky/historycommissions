@@ -6,7 +6,9 @@ author: Daqing Yang
 tags:
   - Hungary
   - Bulgaria
-image: null
+image: /images/bulgarian-embassy-budapest.jpg
+imageAttribution: Wikimedia Commons
+imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Bulgarian_embassy_in_Budapest.jpg
 ---
 
 An international conference marking the 10th anniversary of the Bulgarian-Hungarian Joint History Commission was held at the Hungarian Cultural Institute in Sofia, Bulgaria on May 31, 2016. The theme was Hungary and Bulgaria –

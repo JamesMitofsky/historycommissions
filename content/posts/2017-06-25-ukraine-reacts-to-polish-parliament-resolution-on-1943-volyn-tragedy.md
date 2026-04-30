@@ -6,7 +6,9 @@ author: Daqing Yang
 tags:
   - Poland
   - Ukraine
-image: null
+image: /images/volhynia-massacre-monument.jpg
+imageAttribution: Wikimedia Commons
+imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Monument_to_vitims_of_Volhynia_massacre_1940-1945_at_cemetery_in_Liszna_plaque.jpg
 ---
 
 .. Mr. Viatrovych, head of the Ukrainian Institute of National

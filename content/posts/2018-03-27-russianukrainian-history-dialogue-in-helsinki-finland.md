@@ -7,7 +7,9 @@ tags:
   - Europe
   - Ukraine
   - Russia
-image: null
+image: /images/russia-location-map.svg
+imageAttribution: Wikimedia Commons
+imageAttributionUrl: https://commons.wikimedia.org/wiki/File:Russia_location_map.svg
 ---
 
 On September 4 and 5, 2017, Historians Without Borders based in Helsinki, Finland, hosted a meeting of Russian and Ukrainian historians. Click [here](https://www.historianswithoutborders.fi/en/uaruprogramme/) for the program and participants.

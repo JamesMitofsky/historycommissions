@@ -6,7 +6,7 @@ author: Daqing Yang
 tags:
   - Austria
   - Russia
-image: /images/Russian-Austrian-Eighth-Meeting.jpg
+image: /images/Russian-Austrian-Eighth-Meeting.webp
 ---
 
 From 5 to 7 June 2016 the eighth
@@ -23,4 +23,3 @@ Russian counterpart Sergey Lavrov.
   
   
 
-[![](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiV6s5k3wq7TN_uJ3SajeCmtBoDS1iWFNApNLIN-oWfWa_5Rmfp-vLMhp3bYgBW0LERAntQtf_BsH80oQ3I6fBvCW1cp47nIhCCQhv1y1SEWO0jzGmNpfhwojET7MnlQwQftKnOLTY9f-A/s400/20160506_austria.png)](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiV6s5k3wq7TN_uJ3SajeCmtBoDS1iWFNApNLIN-oWfWa_5Rmfp-vLMhp3bYgBW0LERAntQtf_BsH80oQ3I6fBvCW1cp47nIhCCQhv1y1SEWO0jzGmNpfhwojET7MnlQwQftKnOLTY9f-A/s1600/20160506_austria.png)
