@@ -70,6 +70,8 @@ export function PostsList({ posts }: { posts: Post[] }) {
                         width={192}
                         height={128}
                         className="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
+                        placeholder={post.blurDataURL ? "blur" : "empty"}
+                        blurDataURL={post.blurDataURL ?? undefined}
                       />
                     </div>
                   )}

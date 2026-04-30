@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import Image from "next/image";
 import { Nav } from "@/components/Nav";
+import { getBlurDataURL } from "@/blog/get-blur-data-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -44,11 +45,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const heroBlurDataURL = await getBlurDataURL("/hero.webp");
   return (
     <html
       lang="en"
@@ -63,6 +65,8 @@ export default function RootLayout({
             fill
             priority
             className="object-cover object-right-bottom"
+            placeholder={heroBlurDataURL ? "blur" : "empty"}
+            blurDataURL={heroBlurDataURL ?? undefined}
           />
           {/* Gradient: dark at top for nav legibility, dark at bottom for title legibility */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60" />

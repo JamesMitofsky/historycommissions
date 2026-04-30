@@ -32,7 +32,7 @@ export default async function Image({
 
   let post;
   try {
-    post = getPost(slug);
+    post = await getPost(slug);
   } catch {
     post = null;
   }
