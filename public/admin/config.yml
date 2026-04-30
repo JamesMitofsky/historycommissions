@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: JamesMitofsky/minimalist-blog
+  repo: JamesMitofsky/historycommissions
   branch: main
   base_url: https://historycommissions.vercel.app
   auth_endpoint: api/auth
