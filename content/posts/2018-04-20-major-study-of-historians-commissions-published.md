@@ -4,7 +4,6 @@ date: 2018-04-20T14:56:00.007Z
 updated: 2020-08-10T20:41:10.230Z
 author: Daqing Yang
 tags:
-  - general
   - Italy
   - Germany
 image: /images/Historians-Commissions-Study.webp
