@@ -21,7 +21,7 @@ const sourceSerif4 = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "Historians & Reconciliation",
+  title: "History Commissions",
   description:
     "A digital archive of joint historians' commissions and dialogues over history.",
   icons: { icon: "/favicon.ico" },
@@ -60,7 +60,7 @@ export default function RootLayout({
                 A digital archive
               </p>
               <h1 className="text-3xl font-semibold text-white leading-tight">
-                Historians &amp; Reconciliation
+                History Commissions
               </h1>
             </div>
           </div>
