@@ -29,4 +29,78 @@ collections:
         editor_components: [image]
         buttons: ["bold", "italic", "strikethrough", "link", "heading-one", "heading-two", "heading-three", "heading-four", "quote", "bulleted-list", "numbered-list"]
 
+  - name: commissions
+    editor:
+      preview: false
+    label: Commissions
+    folder: content/commissions
+    create: true
+    format: json
+    extension: json
+    slug: "{{slug}}"
+    summary: "{{name.englishName}}"
+    fields:
+      - label: Name
+        name: name
+        widget: object
+        fields:
+          - { label: Primary Name, name: englishName, widget: string }
+          - label: Translations
+            name: translations
+            widget: list
+            fields:
+              - { label: Language Code, name: language, widget: string, hint: "e.g. en, de, fr" }
+              - { label: Name, name: name, widget: string }
+      - { label: Proposed Date, name: proposedDate, widget: string, required: false }
+      - { label: Start Date, name: startDate, widget: string, required: false }
+      - { label: Last Active Status Date, name: lastActiveStatusDate, widget: string, required: false }
+      - label: Last Active Status
+        name: lastActiveStatus
+        widget: select
+        options: [ongoing, concluded, dormant, unknown]
+        required: false
+      - { label: Member Countries, name: memberCountries, widget: list }
+      - { label: Sponsoring Institutions, name: sponsoringInstitutions, widget: list, required: false }
+      - { label: Key Topics, name: keyTopics, widget: list, required: false }
+      - label: Publications
+        name: publications
+        widget: list
+        required: false
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Year, name: year, widget: string, required: false }
+          - { label: URL, name: url, widget: string, required: false }
+          - label: Format
+            name: format
+            widget: select
+            options: [monograph, proceedings, report, textbook_review, teaching_material, other]
+            required: false
+      - { label: Working Groups, name: workingGroups, widget: list, required: false }
+      - label: Status
+        name: status
+        widget: select
+        options: [active, dormant, concluded, unknown]
+      - label: Chairs
+        name: chairs
+        widget: list
+        required: false
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Country, name: country, widget: string }
+          - { label: Affiliation, name: affiliation, widget: string, required: false }
+      - { label: Commission URL, name: url, widget: string, required: false }
+      - label: Link Status
+        name: linkStatus
+        widget: select
+        options: [working, broken, to_be_located]
+      - { label: Site Languages, name: siteLanguages, widget: list, required: false, hint: "e.g. en, de, fr" }
+      - { label: Last Archived Snapshot, name: lastArchivedSnapshot, widget: string, required: false }
+      - label: Archivable Documents
+        name: archivableDocuments
+        widget: list
+        required: false
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: URL, name: url, widget: string }
+      - { label: Draft, name: draft, widget: boolean, required: false }
 

@@ -1,6 +1,5 @@
 {
   "name": {
-    "primary": "Deutsch-Polnische Schulbuchkommission",
     "translations": [
       {
         "language": "de",
@@ -9,14 +8,14 @@
       {
         "language": "pl",
         "name": "Polsko-Niemiecka Komisja Podręcznikowa"
-      },
-      {
-        "language": "en",
-        "name": "German-Polish Textbook Commission"
       }
-    ]
+    ],
+    "englishName": "German-Polish Textbook Commission"
   },
-  "foundingYear": null,
+  "proposedDate": null,
+  "startDate": "1972-02",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": null,
   "memberCountries": [
     "Germany",
     "Poland"

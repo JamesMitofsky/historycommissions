@@ -1,6 +1,5 @@
 {
   "name": {
-    "primary": "Gemeinsame Kommission für die Erforschung der jüngeren Geschichte der deutsch-russischen Beziehungen",
     "translations": [
       {
         "language": "de",
@@ -9,14 +8,14 @@
       {
         "language": "ru",
         "name": "Совместная комиссия по изучению новейшей истории российско-германских отношений"
-      },
-      {
-        "language": "en",
-        "name": "Joint Commission for the Study of the Recent History of German-Russian Relations"
       }
-    ]
+    ],
+    "englishName": "Joint Commission for the Study of the Recent History of German-Russian Relations"
   },
-  "foundingYear": 1997,
+  "proposedDate": null,
+  "startDate": "1997",
+  "lastActiveStatusDate": "2022",
+  "lastActiveStatus": "suspended",
   "memberCountries": [
     "Germany",
     "Russia"

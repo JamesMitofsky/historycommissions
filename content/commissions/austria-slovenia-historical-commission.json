@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "de",
+        "name": "Österreichisch-Slowenische Historikerkommission"
+      },
+      {
+        "language": "sl",
+        "name": "Avstrijsko-slovenska zgodovinska komisija"
+      }
+    ],
+    "englishName": "Austrian-Slovenian Historical Commission"
+  },
+  "proposedDate": null,
+  "startDate": "2001",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Austria",
+    "Slovenia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

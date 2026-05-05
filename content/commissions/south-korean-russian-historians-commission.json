@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "ko",
+        "name": "한러 역사학자 위원회"
+      },
+      {
+        "language": "ru",
+        "name": "Комиссия историков Республики Корея и России"
+      }
+    ],
+    "englishName": "South Korean-Russian Historians' Commission"
+  },
+  "proposedDate": null,
+  "startDate": "2018",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "South Korea",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

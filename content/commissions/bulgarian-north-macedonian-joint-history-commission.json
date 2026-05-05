@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "bg",
+        "name": "Съвместна историческа комисия България–Северна Македония"
+      },
+      {
+        "language": "mk",
+        "name": "Заедничка историска комисија Бугарија–Северна Македонија"
+      }
+    ],
+    "englishName": "Joint Bulgaria–North Macedonia History Commission"
+  },
+  "proposedDate": null,
+  "startDate": "2018",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "ongoing",
+  "memberCountries": [
+    "Bulgaria",
+    "North Macedonia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

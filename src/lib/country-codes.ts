@@ -20,6 +20,7 @@ export const TAG_TO_COUNTRY_CODE: Record<string, string> = {
   Korea: "kr",
   "South Korea": "kr",
   Lithuania: "lt",
+  Moldova: "md",
   "N. Macedonia": "mk",
   "North Macedonia": "mk",
   Poland: "pl",

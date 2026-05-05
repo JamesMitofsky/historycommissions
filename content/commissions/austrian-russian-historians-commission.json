@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "de",
+        "name": "Österreichisch-Russische Historikerkommission"
+      },
+      {
+        "language": "ru",
+        "name": "Австрийско-российская комиссия историков"
+      }
+    ],
+    "englishName": "Austrian-Russian Historians' Commission"
+  },
+  "proposedDate": null,
+  "startDate": "2008",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Austria",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

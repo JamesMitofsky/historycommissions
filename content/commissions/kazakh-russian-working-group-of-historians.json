@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "ru",
+        "name": "Совместная рабочая группа историков РФ и РК"
+      },
+      {
+        "language": "kk",
+        "name": "Ресей мен Қазақстан тарихшыларының бірлескен жұмыс тобы"
+      }
+    ],
+    "englishName": "Joint Working Group of Historians of Russia and Kazakhstan"
+  },
+  "proposedDate": null,
+  "startDate": "2018",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Kazakhstan",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

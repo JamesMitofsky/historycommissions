@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "ja",
+        "name": "日露関係における複雑な問題に関する委員会"
+      },
+      {
+        "language": "ru",
+        "name": "Комиссия по сложным проблемам российско-японских отношений"
+      }
+    ],
+    "englishName": "Commission on Complex Problems in Russian-Japanese Relations"
+  },
+  "proposedDate": null,
+  "startDate": "2012",
+  "lastActiveStatusDate": "2012-15",
+  "lastActiveStatus": "ended",
+  "memberCountries": [
+    "Japan",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "concluded",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

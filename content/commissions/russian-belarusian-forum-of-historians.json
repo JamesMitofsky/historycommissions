@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "ru",
+        "name": "Российско-белорусский форум историков"
+      },
+      {
+        "language": "be",
+        "name": "Расійска-беларускі форум гісторыкаў"
+      }
+    ],
+    "englishName": "Russian-Belarusian Forum of Historians"
+  },
+  "proposedDate": null,
+  "startDate": "2023",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "ongoing",
+  "memberCountries": [
+    "Russia",
+    "Belarus"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

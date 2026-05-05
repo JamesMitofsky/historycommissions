@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "ja",
+        "name": "日韓歴史共同研究委員会（第1期）"
+      },
+      {
+        "language": "ko",
+        "name": "한일역사공동연구위원회 (제1기)"
+      }
+    ],
+    "englishName": "Japan-Korea Joint History Research Committee (1st Term)"
+  },
+  "proposedDate": null,
+  "startDate": "2002.3",
+  "lastActiveStatusDate": "2001.10",
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Japan",
+    "South Korea"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "concluded",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

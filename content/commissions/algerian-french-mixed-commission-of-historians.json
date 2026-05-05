@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "fr",
+        "name": "Commission mixte algéro-française d'historiens"
+      },
+      {
+        "language": "ar",
+        "name": "اللجنة المختلطة الجزائرية الفرنسية للمؤرخين"
+      }
+    ],
+    "englishName": "Mixed Algeria-France Commission of Historians"
+  },
+  "proposedDate": null,
+  "startDate": "2022",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "ongoing",
+  "memberCountries": [
+    "Algeria",
+    "France"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}
