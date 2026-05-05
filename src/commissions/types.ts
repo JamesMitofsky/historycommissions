@@ -2,6 +2,7 @@ export type CommissionStatus = "active" | "dormant" | "concluded" | "unknown";
 export type LinkStatus = "working" | "broken" | "to_be_located";
 
 export interface Commission {
+  slug: string;
   name: {
     primary: string;
     translations: { language: string; name: string }[];
