@@ -10,6 +10,13 @@ export const getCommissions = (): Commission[] => {
     .filter((f) => f.endsWith(".json"))
     .map((f) => {
       const raw = fs.readFileSync(path.join(COMMISSIONS_DIR, f), "utf8");
-      return JSON.parse(raw) as Commission;
+      const slug = f.replace(/\.json$/, "");
+      return { ...JSON.parse(raw) as Commission, slug };
     });
+};
+
+export const getCommission = (slug: string): Commission => {
+  const filePath = path.join(COMMISSIONS_DIR, `${slug}.json`);
+  const raw = fs.readFileSync(filePath, "utf8");
+  return { ...JSON.parse(raw) as Commission, slug };
 };

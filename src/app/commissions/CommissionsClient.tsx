@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import type { Commission, CommissionStatus } from "@/commissions/types";
 import { FlagTag } from "@/components/FlagTag";
 
@@ -87,40 +88,25 @@ function CommissionCard({ c }: { c: Commission }) {
   const primaryName = englishName(c);
   const hasAlternate = c.name.primary !== primaryName;
   const languages = c.siteLanguages.map(langLabel).join(", ");
-  const sponsors = c.sponsoringInstitutions.join(" · ") || null;
-
-  const linkEl = c.linkStatus === "working" ? (
-    <a href={c.url} target="_blank" rel="noopener noreferrer"
-      className="group/link text-sm font-medium text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 transition-colors underline underline-offset-4 decoration-sky-300 dark:decoration-sky-600">
-      Website<span className="inline-block transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">&nbsp;↗</span>
-    </a>
-  ) : c.lastArchivedSnapshot ? (
-    <a href={c.lastArchivedSnapshot} target="_blank" rel="noopener noreferrer"
-      className="group/link text-sm font-medium text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 transition-colors underline underline-offset-4 decoration-sky-300 dark:decoration-sky-600">
-      Archive<span className="inline-block transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">&nbsp;↗</span>
-    </a>
-  ) : null;
 
   return (
     <article className="py-8 border-t border-[var(--border)]">
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <div className="min-w-0">
-          <StatusBadge status={c.status} />
-          <h2 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-[var(--foreground)]">
+      <div className="mb-4">
+        <StatusBadge status={c.status} />
+        <Link href={`/commissions/${c.slug}`}>
+          <h2 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-[var(--foreground)] hover:underline underline-offset-2">
             {primaryName}
           </h2>
-          {hasAlternate && (
-            <p className="text-sm text-[var(--secondary)] mt-0.5 leading-snug">{c.name.primary}</p>
-          )}
-        </div>
-        <div className="shrink-0 pt-0.5">{linkEl}</div>
+        </Link>
+        {hasAlternate && (
+          <p className="text-sm text-[var(--secondary)] mt-0.5 leading-snug">{c.name.primary}</p>
+        )}
       </div>
 
       <div className="space-y-5">
         {/* Member countries */}
         {c.memberCountries.length > 0 && (
           <div>
-            <SectionLabel>Member Countries</SectionLabel>
             <div className="flex flex-wrap gap-1.5">
               {c.memberCountries.map((country) => (
                 <FlagTag key={country} tag={country} />
@@ -129,35 +115,12 @@ function CommissionCard({ c }: { c: Commission }) {
           </div>
         )}
 
-        {/* Details */}
         <div>
-          <SectionLabel>Details</SectionLabel>
           <MetaTable rows={[
             { label: "Site languages", value: languages || null },
             { label: "Founded", value: c.foundingYear ?? null },
-            { label: "Sponsors", value: sponsors },
           ]} />
         </div>
-
-        {/* Publications */}
-        {c.publications.length > 0 && (
-          <div>
-            <SectionLabel>Publications</SectionLabel>
-            <ul className="list-disc list-outside pl-4 space-y-2.5">
-              {c.publications.map((pub, i) => (
-                <li key={i} className="text-sm text-[var(--foreground)]">
-                  {pub.url ? (
-                    <a href={pub.url} target="_blank" rel="noopener noreferrer"
-                      className="text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 transition-colors underline underline-offset-4 decoration-sky-300 dark:decoration-sky-600">
-                      {pub.title}
-                    </a>
-                  ) : pub.title}
-                  {pub.year && <span className="text-[var(--secondary)] ml-1.5">({pub.year})</span>}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
 
       </div>
     </article>
@@ -329,7 +292,7 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
             if (group.length === 0) return null;
             return (
               <section key={status} className="mb-10">
-                <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--secondary)] opacity-60 mb-0">
+                <h2 className="text-base font-semibold uppercase tracking-widest text-[var(--secondary)] opacity-60 mb-0">
                   {STATUS_LABELS[status]}
                 </h2>
                 {group.map((c, i) => <CommissionCard key={i} c={c} />)}
