@@ -1,6 +1,5 @@
 {
   "name": {
-    "primary": "Belarusisch-Deutsche Geschichtskommission",
     "translations": [
       {
         "language": "de",
@@ -9,14 +8,14 @@
       {
         "language": "be",
         "name": "Беларуска-Нямецкая гістарычная камісія"
-      },
-      {
-        "language": "en",
-        "name": "Belarusian-German History Commission"
       }
-    ]
+    ],
+    "englishName": "Belarusian-German History Commission"
   },
-  "foundingYear": null,
+  "proposedDate": null,
+  "startDate": "2020.1",
+  "lastActiveStatusDate": "2021.7",
+  "lastActiveStatus": "suspended",
   "memberCountries": [
     "Belarus",
     "Germany"

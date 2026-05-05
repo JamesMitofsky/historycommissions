@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "lv",
+        "name": "Komisija sarežģīto vēsturisko jautājumu risināšanai Latvijas un Krievijas attiecībās"
+      },
+      {
+        "language": "ru",
+        "name": "Комиссия по сложным историческим вопросам в отношениях между Латвией и Россией"
+      }
+    ],
+    "englishName": "Commission on Complex Historical Issues in Relations between Latvia and Russia"
+  },
+  "proposedDate": null,
+  "startDate": "2010",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "ongoing",
+  "memberCountries": [
+    "Latvia",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

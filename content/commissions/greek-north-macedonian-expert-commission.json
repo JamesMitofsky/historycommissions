@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "el",
+        "name": "Επιτροπή Εμπειρογνωμόνων για Ιστορία, Αρχαιολογία και Εκπαιδευτικά Ζητήματα"
+      },
+      {
+        "language": "mk",
+        "name": "Експертска комисија за историја, археологија и образовни прашања"
+      }
+    ],
+    "englishName": "Expert Commission on History, Archaeology and Educational Issues"
+  },
+  "proposedDate": null,
+  "startDate": "2018",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "ongoing",
+  "memberCountries": [
+    "Greece",
+    "North Macedonia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "de",
+        "name": "Deutsch-Italienische Historikerkommission"
+      },
+      {
+        "language": "it",
+        "name": "Commissione degli storici italo-tedesca"
+      }
+    ],
+    "englishName": "German-Italian Historians' Commission"
+  },
+  "proposedDate": null,
+  "startDate": "2008",
+  "lastActiveStatusDate": "2009-12",
+  "lastActiveStatus": "ended",
+  "memberCountries": [
+    "Germany",
+    "Italy"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "concluded",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

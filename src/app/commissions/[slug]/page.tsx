@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
   const en = c.name.translations.find((t) => t.language === "en");
-  const title = en?.name ?? c.name.primary;
+  const title = en?.name ?? c.name.englishName;
   return { title };
 }
 
@@ -100,13 +100,13 @@ export default async function CommissionPage({ params }: Props) {
   }
 
   const en = c.name.translations.find((t) => t.language === "en");
-  const primaryName = en?.name ?? c.name.primary;
-  const hasAlternate = c.name.primary !== primaryName;
+  const primaryName = en?.name ?? c.name.englishName;
+  const hasAlternate = c.name.englishName !== primaryName;
   const languages = c.siteLanguages.map(langLabel).join(", ");
   const sponsors = c.sponsoringInstitutions.join(" · ") || null;
 
   const otherNames = c.name.translations
-    .filter((t) => t.language !== "en" && t.name !== c.name.primary)
+    .filter((t) => t.language !== "en" && t.name !== c.name.englishName)
     .map((t) => t.name);
 
   const linkEl = c.linkStatus === "working" ? (
@@ -141,7 +141,7 @@ export default async function CommissionPage({ params }: Props) {
               {primaryName}
             </h1>
             {hasAlternate && (
-              <p className="text-sm text-[var(--secondary)] mt-1 leading-snug">{c.name.primary}</p>
+              <p className="text-sm text-[var(--secondary)] mt-1 leading-snug">{c.name.englishName}</p>
             )}
             {otherNames.map((n) => (
               <p key={n} className="text-sm text-[var(--secondary)] mt-0.5 leading-snug">{n}</p>
@@ -167,7 +167,10 @@ export default async function CommissionPage({ params }: Props) {
           <SectionLabel>Details</SectionLabel>
           <MetaTable rows={[
             { label: "Site languages", value: languages || null },
-            { label: "Founded", value: c.foundingYear ?? null },
+            { label: "Proposed", value: c.proposedDate ?? null },
+            { label: "Founded", value: c.startDate ?? null },
+            { label: "Last active", value: c.lastActiveStatusDate ?? null },
+            { label: "Last status", value: c.lastActiveStatus ?? null },
             { label: "Sponsors", value: sponsors },
           ]} />
         </div>

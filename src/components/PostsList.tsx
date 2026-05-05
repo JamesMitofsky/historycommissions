@@ -29,7 +29,9 @@ export function PostsList({ posts }: { posts: Post[] }) {
         .sort((a, b) => {
           const scoreDiff = (a.score ?? 0) - (b.score ?? 0);
           if (Math.abs(scoreDiff) > 0.05) return scoreDiff;
-          return (b.item.date ?? "").localeCompare(a.item.date ?? "");
+          const aDate = typeof a.item.date === "string" ? a.item.date : a.item.date?.toISOString() ?? "";
+          const bDate = typeof b.item.date === "string" ? b.item.date : b.item.date?.toISOString() ?? "";
+          return bDate.localeCompare(aDate);
         })
         .map((r) => r.item)
     : posts;

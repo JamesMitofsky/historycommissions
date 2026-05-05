@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import type { Commission } from "./types";
+import { CommissionSchema, type Commission } from "./types";
 
 const COMMISSIONS_DIR = path.join(process.cwd(), "content/commissions");
 
@@ -11,12 +11,14 @@ export const getCommissions = (): Commission[] => {
     .map((f) => {
       const raw = fs.readFileSync(path.join(COMMISSIONS_DIR, f), "utf8");
       const slug = f.replace(/\.json$/, "");
-      return { ...JSON.parse(raw) as Commission, slug };
+      const data = JSON.parse(raw);
+      return CommissionSchema.parse({ ...data, slug });
     });
 };
 
 export const getCommission = (slug: string): Commission => {
   const filePath = path.join(COMMISSIONS_DIR, `${slug}.json`);
   const raw = fs.readFileSync(filePath, "utf8");
-  return { ...JSON.parse(raw) as Commission, slug };
+  const data = JSON.parse(raw);
+  return CommissionSchema.parse({ ...data, slug });
 };

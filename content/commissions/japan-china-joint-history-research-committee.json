@@ -1,6 +1,5 @@
 {
   "name": {
-    "primary": "Japan-China Joint History Research Committee",
     "translations": [
       {
         "language": "ja",
@@ -9,14 +8,14 @@
       {
         "language": "zh",
         "name": "中日历史共同研究委员会"
-      },
-      {
-        "language": "en",
-        "name": "Japan-China Joint History Research Committee"
       }
-    ]
+    ],
+    "englishName": "Japan-China Joint History Research Committee"
   },
-  "foundingYear": 2006,
+  "proposedDate": null,
+  "startDate": "2006",
+  "lastActiveStatusDate": "2006-10",
+  "lastActiveStatus": "ended",
   "memberCountries": [
     "Japan",
     "China"

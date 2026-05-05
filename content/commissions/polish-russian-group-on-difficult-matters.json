@@ -1,18 +1,21 @@
 {
   "name": {
-    "primary": "Polish-Russian Group on Difficult Matters",
     "translations": [
-      {
-        "language": "en",
-        "name": "Polish-Russian Group on Difficult Matters"
-      },
       {
         "language": "pl",
         "name": "Polsko-Rosyjska Grupa ds. Trudnych"
+      },
+      {
+        "language": "ru",
+        "name": "Польско-российская группа по сложным вопросам"
       }
-    ]
+    ],
+    "englishName": "Polish-Russian Group on Difficult Matters"
   },
-  "foundingYear": null,
+  "proposedDate": null,
+  "startDate": "2001",
+  "lastActiveStatusDate": "2013",
+  "lastActiveStatus": "ended",
   "memberCountries": [
     "Poland",
     "Russia"

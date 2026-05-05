@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "ru",
+        "name": "Совместная российско-литовская комиссия историков"
+      },
+      {
+        "language": "lt",
+        "name": "Jungtinė Rusijos ir Lietuvos istorikų komisija"
+      }
+    ],
+    "englishName": "Joint Russian-Lithuanian Commission of Historians"
+  },
+  "proposedDate": null,
+  "startDate": "2006",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Russia",
+    "Lithuania"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

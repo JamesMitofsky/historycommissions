@@ -1,6 +1,5 @@
 {
   "name": {
-    "primary": "Deutsch-Tschechische und Deutsch-Slowakische Historische Kommission",
     "translations": [
       {
         "language": "de",
@@ -13,14 +12,14 @@
       {
         "language": "sk",
         "name": "Nemecko-česká a nemecko-slovenská historická komisia"
-      },
-      {
-        "language": "en",
-        "name": "German-Czech and German-Slovak Historical Commission"
       }
-    ]
+    ],
+    "englishName": "German-Czech and German-Slovak Historical Commission"
   },
-  "foundingYear": 1990,
+  "proposedDate": null,
+  "startDate": "1990",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
   "memberCountries": [
     "Germany",
     "Czech Republic",

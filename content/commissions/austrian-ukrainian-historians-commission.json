@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "de",
+        "name": "Österreichisch-Ukrainische Historikerkommission"
+      },
+      {
+        "language": "uk",
+        "name": "Австрійсько-українська комісія істориків"
+      }
+    ],
+    "englishName": "Austrian-Ukrainian Historians' Commission"
+  },
+  "proposedDate": null,
+  "startDate": "2016",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "ongoing",
+  "memberCountries": [
+    "Austria",
+    "Ukraine"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "active",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

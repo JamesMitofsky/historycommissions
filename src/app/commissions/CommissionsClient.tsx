@@ -43,7 +43,7 @@ function langLabel(code: string): string {
 
 function englishName(c: Commission): string {
   const en = c.name.translations.find((t) => t.language === "en");
-  return en?.name ?? c.name.primary;
+  return en?.name ?? c.name.englishName;
 }
 
 // ─── Shared sub-components ────────────────────────────────────────────────────
@@ -86,8 +86,6 @@ function StatusBadge({ status }: { status: CommissionStatus }) {
 
 function CommissionCard({ c }: { c: Commission }) {
   const primaryName = englishName(c);
-  const hasAlternate = c.name.primary !== primaryName;
-  const languages = c.siteLanguages.map(langLabel).join(", ");
 
   return (
     <article className="py-8 border-t border-[var(--border)]">
@@ -98,9 +96,6 @@ function CommissionCard({ c }: { c: Commission }) {
             {primaryName}
           </h2>
         </Link>
-        {hasAlternate && (
-          <p className="text-sm text-[var(--secondary)] mt-0.5 leading-snug">{c.name.primary}</p>
-        )}
       </div>
 
       <div className="space-y-5">
@@ -117,8 +112,9 @@ function CommissionCard({ c }: { c: Commission }) {
 
         <div>
           <MetaTable rows={[
-            { label: "Site languages", value: languages || null },
-            { label: "Founded", value: c.foundingYear ?? null },
+            { label: "Proposed", value: c.proposedDate ?? null },
+            { label: "Founded", value: c.startDate ? c.startDate.slice(0, 4) : null },
+            { label: "Last active", value: c.lastActiveStatusDate ? c.lastActiveStatusDate.slice(0, 4) : null },
           ]} />
         </div>
 
@@ -131,7 +127,7 @@ function CommissionCard({ c }: { c: Commission }) {
 
 interface DropdownProps {
   label: string;
-  options: { value: string; display: string }[];
+  options: { value: string; display: string; textColor?: string }[];
   selected: Set<string>;
   onToggle: (value: string) => void;
   onClear: () => void;
@@ -139,8 +135,13 @@ interface DropdownProps {
 
 function FilterDropdown({ label, options, selected, onToggle, onClear }: DropdownProps) {
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
   const ref = useRef<HTMLDivElement>(null);
   const count = selected.size;
+
+  const filtered = options.filter(({ display }) =>
+    display.toLowerCase().includes(search.toLowerCase())
+  );
 
   useEffect(() => {
     function onMouseDown(e: MouseEvent) {
@@ -154,11 +155,10 @@ function FilterDropdown({ label, options, selected, onToggle, onClear }: Dropdow
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((o) => !o)}
-        className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border transition-colors ${
-          count > 0
+        className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border transition-colors ${count > 0
             ? "border-[var(--foreground)] text-[var(--foreground)]"
             : "border-[var(--border)] text-[var(--secondary)] hover:text-[var(--foreground)] hover:border-[var(--secondary)]"
-        }`}
+          }`}
       >
         {label}
         {count > 0 && (
@@ -173,24 +173,38 @@ function FilterDropdown({ label, options, selected, onToggle, onClear }: Dropdow
 
       {open && (
         <div className="absolute top-full mt-1 left-0 z-20 min-w-44 rounded-lg border border-[var(--border)] bg-[var(--background)] shadow-sm py-1">
+          <div className="px-3 py-2 border-b border-[var(--border)]">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full text-sm px-2 py-1 rounded border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder-[var(--secondary)] focus:outline-none focus:border-[var(--foreground)]"
+            />
+          </div>
+          {filtered.length === 0 ? (
+            <div className="px-3 py-2 text-xs text-[var(--secondary)]">No matches</div>
+          ) : (
+            filtered.map(({ value, display, textColor }) => (
+              <label key={value} className="flex items-center gap-2.5 px-3 py-1.5 cursor-pointer hover:bg-[var(--border)] transition-colors">
+                <input
+                  type="checkbox"
+                  checked={selected.has(value)}
+                  onChange={() => onToggle(value)}
+                  className="accent-[var(--foreground)]"
+                />
+                <span className={`text-sm ${textColor ?? "text-[var(--foreground)]"}`}>{display}</span>
+              </label>
+            ))
+          )}
           {count > 0 && (
-            <div className="px-3 pt-1 pb-2 border-b border-[var(--border)]">
-              <button onClick={() => { onClear(); }} className="text-xs text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors">
+            <div className="px-3 py-1.5 border-t border-[var(--border)]">
+              <button onClick={() => { onClear(); setSearch(""); }} className="text-xs text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors">
                 Clear
               </button>
             </div>
           )}
-          {options.map(({ value, display }) => (
-            <label key={value} className="flex items-center gap-2.5 px-3 py-1.5 cursor-pointer hover:bg-[var(--border)] transition-colors">
-              <input
-                type="checkbox"
-                checked={selected.has(value)}
-                onChange={() => onToggle(value)}
-                className="accent-[var(--foreground)]"
-              />
-              <span className="text-sm text-[var(--foreground)]">{display}</span>
-            </label>
-          ))}
         </div>
       )}
     </div>
@@ -203,6 +217,7 @@ type Filters = {
   status: Set<string>;
   languages: Set<string>;
   countries: Set<string>;
+  search: string;
 };
 
 function toggle(set: Set<string>, value: string): Set<string> {
@@ -211,16 +226,27 @@ function toggle(set: Set<string>, value: string): Set<string> {
   return next;
 }
 
+function parseYear(date: string | null | undefined): number {
+  if (!date) return Infinity;
+  return parseInt(date.split(/[.\-]/)[0], 10) || Infinity;
+}
+
 export function CommissionsClient({ commissions }: { commissions: Commission[] }) {
   const [filters, setFilters] = useState<Filters>({
     status: new Set(),
     languages: new Set(),
     countries: new Set(),
+    search: "",
   });
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
 
   const statusOptions = Array.from(new Set(commissions.map((c) => c.status)))
     .sort()
-    .map((v) => ({ value: v, display: STATUS_LABELS[v as CommissionStatus] ?? v }));
+    .map((v) => ({
+      value: v,
+      display: STATUS_LABELS[v as CommissionStatus] ?? v,
+      textColor: STATUS_STYLE[v as CommissionStatus],
+    }));
 
   const languageOptions = Array.from(
     new Set(commissions.flatMap((c) => c.siteLanguages))
@@ -238,19 +264,34 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
     if (filters.status.size > 0 && !filters.status.has(c.status)) return false;
     if (filters.languages.size > 0 && !c.siteLanguages.some((l) => filters.languages.has(l))) return false;
     if (filters.countries.size > 0 && !c.memberCountries.some((co) => filters.countries.has(co))) return false;
+    if (filters.search) {
+      const searchLower = filters.search.toLowerCase();
+      const matchesName = englishName(c).toLowerCase().includes(searchLower) || c.name.englishName.toLowerCase().includes(searchLower);
+      if (!matchesName) return false;
+    }
     return true;
+  }).sort((a, b) => {
+    const diff = parseYear(a.startDate) - parseYear(b.startDate);
+    return sortDir === "asc" ? diff : -diff;
   });
 
   const activeCount = filters.status.size + filters.languages.size + filters.countries.size;
 
   function clearAll() {
-    setFilters({ status: new Set(), languages: new Set(), countries: new Set() });
+    setFilters({ status: new Set(), languages: new Set(), countries: new Set(), search: "" });
   }
 
   return (
     <div>
       {/* Filter bar */}
-      <div className="flex flex-wrap items-center gap-2 mb-3">
+      <div className="flex flex-wrap items-center gap-2 mb-8">
+        <input
+          type="text"
+          placeholder="Search commissions..."
+          value={filters.search}
+          onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
+          className="text-sm px-3 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder-[var(--secondary)] focus:outline-none focus:border-[var(--foreground)]"
+        />
         <FilterDropdown
           label="Status"
           options={statusOptions}
@@ -272,33 +313,30 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
           onToggle={(v) => setFilters((f) => ({ ...f, countries: toggle(f.countries, v) }))}
           onClear={() => setFilters((f) => ({ ...f, countries: new Set() }))}
         />
-        {activeCount > 0 && (
+        {(activeCount > 0 || filters.search) && (
           <button onClick={clearAll} className="text-xs text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors ml-1">
             Clear all
           </button>
         )}
       </div>
 
-      <p className="text-xs text-[var(--secondary)] mb-8">
-        {filtered.length} of {commissions.length} commissions
-      </p>
+      <div className="flex items-center justify-between mb-8">
+        <p className="text-xs text-[var(--secondary)]">
+          {filtered.length} of {commissions.length} commissions
+        </p>
+        <button
+          onClick={() => setSortDir((d) => d === "asc" ? "desc" : "asc")}
+          className="text-xs text-[var(--secondary)] hover:text-[var(--foreground)] bg-[var(--border)] hover:bg-[var(--border)] px-2 py-1 rounded-md transition-colors"
+        >
+          {sortDir === "asc" ? "Oldest first ↑" : "Most recent first ↓"}
+        </button>
+      </div>
 
       {filtered.length === 0 ? (
         <p className="text-sm text-[var(--secondary)] py-8">No commissions match the selected filters.</p>
       ) : (
         <div>
-          {(["active", "dormant", "concluded", "unknown"] as CommissionStatus[]).map((status) => {
-            const group = filtered.filter((c) => c.status === status);
-            if (group.length === 0) return null;
-            return (
-              <section key={status} className="mb-10">
-                <h2 className="text-base font-semibold uppercase tracking-widest text-[var(--secondary)] opacity-60 mb-0">
-                  {STATUS_LABELS[status]}
-                </h2>
-                {group.map((c, i) => <CommissionCard key={i} c={c} />)}
-              </section>
-            );
-          })}
+          {filtered.map((c, i) => <CommissionCard key={i} c={c} />)}
         </div>
       )}
     </div>

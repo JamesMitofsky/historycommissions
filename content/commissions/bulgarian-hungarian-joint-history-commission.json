@@ -1,6 +1,5 @@
 {
   "name": {
-    "primary": "Bulgarian-Hungarian Joint History Commission",
     "translations": [
       {
         "language": "bg",
@@ -9,14 +8,14 @@
       {
         "language": "hu",
         "name": "Bolgár-Magyar Történész Vegyes Bizottság"
-      },
-      {
-        "language": "en",
-        "name": "Bulgarian-Hungarian Joint History Commission"
       }
-    ]
+    ],
+    "englishName": "Bulgarian-Hungarian Joint History Commission"
   },
-  "foundingYear": null,
+  "proposedDate": null,
+  "startDate": "2009",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
   "memberCountries": [
     "Bulgaria",
     "Hungary"

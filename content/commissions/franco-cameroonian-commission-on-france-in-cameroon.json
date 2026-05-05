@@ -1,0 +1,34 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "fr",
+        "name": "Commission franco-camerounaise sur le rôle de la France au Cameroun (1945–1971)"
+      }
+    ],
+    "englishName": "Franco-Cameroonian Commission on the Role of France in Cameroon (1945–1971)"
+  },
+  "proposedDate": null,
+  "startDate": "2022.7",
+  "lastActiveStatusDate": "2025",
+  "lastActiveStatus": "ended",
+  "memberCountries": [
+    "France",
+    "Cameroon"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [
+    "Role of France in Cameroon 1945–1971",
+    "Decolonisation"
+  ],
+  "publications": [],
+  "workingGroups": [],
+  "status": "concluded",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

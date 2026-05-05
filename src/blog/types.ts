@@ -1,13 +1,2 @@
-export type Post = {
-  slug: string;
-  content: string;
-  title: string | null;
-  date: string | null;
-  updated: string | null;
-  author: string | null;
-  tags: string[];
-  image: string | null;
-  imageAttribution: string | null;
-  imageAttributionUrl: string | null;
-  blurDataURL: string | null;
-};
+export type { Post, PostFrontmatter } from "./schema";
+export { PostSchema, PostFrontmatterSchema } from "./schema";

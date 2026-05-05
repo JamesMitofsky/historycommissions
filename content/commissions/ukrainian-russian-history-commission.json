@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "uk",
+        "name": "Українсько-російська комісія з питань історії"
+      },
+      {
+        "language": "ru",
+        "name": "Украинско-российская историческая комиссия"
+      }
+    ],
+    "englishName": "Ukrainian-Russian History Commission"
+  },
+  "proposedDate": null,
+  "startDate": "2002",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Ukraine",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

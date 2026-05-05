@@ -1,18 +1,21 @@
 {
   "name": {
-    "primary": "Slovene-Italian Historical and Cultural Commission",
     "translations": [
       {
         "language": "sl",
         "name": "Slovensko-italijanska zgodovinsko-kulturna komisija"
       },
       {
-        "language": "en",
-        "name": "Slovene-Italian Historical and Cultural Commission"
+        "language": "it",
+        "name": "Commissione storico-culturale sloveno-italiana"
       }
-    ]
+    ],
+    "englishName": "Slovene-Italian Historical and Cultural Commission"
   },
-  "foundingYear": null,
+  "proposedDate": null,
+  "startDate": "1993.10",
+  "lastActiveStatusDate": "2000",
+  "lastActiveStatus": "ended",
   "memberCountries": [
     "Slovenia",
     "Italy"

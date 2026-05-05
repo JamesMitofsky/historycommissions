@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "it",
+        "name": "Commissione storico-culturale italo-croata"
+      },
+      {
+        "language": "hr",
+        "name": "Talijansko-hrvatska povijesna komisija"
+      }
+    ],
+    "englishName": "Italian-Croatian Historical Commission"
+  },
+  "proposedDate": null,
+  "startDate": "1993.10",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Italy",
+    "Croatia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

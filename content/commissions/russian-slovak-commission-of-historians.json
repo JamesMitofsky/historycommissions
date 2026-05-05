@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "ru",
+        "name": "Комиссия историков России и Словакии"
+      },
+      {
+        "language": "sk",
+        "name": "Komisia historikov Ruska a Slovenska"
+      }
+    ],
+    "englishName": "Commission of Historians of Russia and Slovakia"
+  },
+  "proposedDate": null,
+  "startDate": "2004",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Russia",
+    "Slovakia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

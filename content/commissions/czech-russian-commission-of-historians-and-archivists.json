@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "cs",
+        "name": "Česko-ruská komise historiků a archivářů"
+      },
+      {
+        "language": "ru",
+        "name": "Чешско-российская комиссия историков и архивистов"
+      }
+    ],
+    "englishName": "Czech-Russian Commission of Historians and Archivists"
+  },
+  "proposedDate": null,
+  "startDate": "1995",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Czech Republic",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

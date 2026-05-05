@@ -1,0 +1,35 @@
+{
+  "name": {
+    "translations": [
+      {
+        "language": "ru",
+        "name": "Российско-румынская двусторонняя комиссия историков"
+      },
+      {
+        "language": "ro",
+        "name": "Comisia bilaterală de istorici româno-rusă"
+      }
+    ],
+    "englishName": "Romanian-Russian Bilateral Commission of Historians"
+  },
+  "proposedDate": null,
+  "startDate": "1993.10",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "unclear",
+  "memberCountries": [
+    "Romania",
+    "Russia"
+  ],
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "publications": [],
+  "workingGroups": [],
+  "status": "unknown",
+  "chairs": [],
+  "url": "",
+  "linkStatus": "to_be_located",
+  "siteLanguages": [],
+  "lastArchivedSnapshot": null,
+  "archivableDocuments": [],
+  "draft": true
+}

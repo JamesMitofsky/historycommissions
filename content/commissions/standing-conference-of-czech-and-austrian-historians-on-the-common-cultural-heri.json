@@ -1,6 +1,5 @@
 {
   "name": {
-    "primary": "Stálá konference českých a rakouských historiků ke společnému kulturnímu dědictví",
     "translations": [
       {
         "language": "cs",
@@ -9,14 +8,14 @@
       {
         "language": "de",
         "name": "Ständige Konferenz tschechischer und österreichischer Historiker zum gemeinsamen kulturellen Erbe"
-      },
-      {
-        "language": "en",
-        "name": "Standing Conference of Czech and Austrian Historians on the Common Cultural Heritage"
       }
-    ]
+    ],
+    "englishName": "Standing Conference of Czech and Austrian Historians on the Common Cultural Heritage"
   },
-  "foundingYear": 2009,
+  "proposedDate": null,
+  "startDate": "2009",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "ongoing",
   "memberCountries": [
     "Czech Republic",
     "Austria"

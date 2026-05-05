@@ -1,6 +1,5 @@
 {
   "name": {
-    "primary": "Deutsch-Ukrainische Historikerkommission (DUHK)",
     "translations": [
       {
         "language": "de",
@@ -9,14 +8,14 @@
       {
         "language": "uk",
         "name": "Німецько-українська комісія істориків"
-      },
-      {
-        "language": "en",
-        "name": "German-Ukrainian Historical Commission"
       }
-    ]
+    ],
+    "englishName": "German-Ukrainian Historical Commission"
   },
-  "foundingYear": 2015,
+  "proposedDate": null,
+  "startDate": "2015",
+  "lastActiveStatusDate": null,
+  "lastActiveStatus": "ongoing",
   "memberCountries": [
     "Germany",
     "Ukraine"
