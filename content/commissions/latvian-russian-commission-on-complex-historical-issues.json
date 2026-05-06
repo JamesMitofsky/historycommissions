@@ -1,4 +1,9 @@
 {
+  "draft": true,
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "workingGroups": [],
+  "publications": [],
   "name": {
     "translations": [
       {
@@ -12,24 +17,19 @@
     ],
     "englishName": "Commission on Complex Historical Issues in Relations between Latvia and Russia"
   },
-  "proposedDate": null,
+  "linkStatus": "to_be_located",
+  "lastActiveStatus": "dormant",
+  "chairs": [],
+  "url": "",
   "startDate": "2010",
-  "lastActiveStatusDate": null,
-  "lastActiveStatus": "ongoing",
+  "status": "active",
+  "proposedDate": null,
+  "siteLanguages": [],
   "memberCountries": [
     "Latvia",
     "Russia"
   ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "active",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "to_be_located",
-  "siteLanguages": [],
-  "lastArchivedSnapshot": null,
   "archivableDocuments": [],
-  "draft": true
+  "lastActiveStatusDate": null,
+  "lastArchivedSnapshot": null
 }
