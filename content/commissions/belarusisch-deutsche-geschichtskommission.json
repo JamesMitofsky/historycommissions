@@ -1,4 +1,10 @@
 {
+  "sponsoringInstitutions": [
+    "Deutsche Gesellschaft für Osteuropakunde e. V. (German Association for East European Studies)"
+  ],
+  "keyTopics": [],
+  "workingGroups": [],
+  "publications": [],
   "name": {
     "translations": [
       {
@@ -12,28 +18,22 @@
     ],
     "englishName": "Belarusian-German History Commission"
   },
-  "proposedDate": null,
-  "startDate": "2020.1",
-  "lastActiveStatusDate": "2021.7",
-  "lastActiveStatus": "suspended",
-  "memberCountries": [
-    "Belarus",
-    "Germany"
-  ],
-  "sponsoringInstitutions": [
-    "Deutsche Gesellschaft für Osteuropakunde e. V. (German Association for East European Studies)"
-  ],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "concluded",
+  "linkStatus": "broken",
+  "lastActiveStatus": "dormant",
   "chairs": [],
   "url": "https://geschichte-historyja.org/",
-  "linkStatus": "broken",
+  "startDate": "2020.1",
+  "status": "concluded",
+  "proposedDate": null,
   "siteLanguages": [
     "de",
     "be"
   ],
-  "lastArchivedSnapshot": "https://web.archive.org/web/20260311185036/https://geschichte-historyja.org/",
-  "archivableDocuments": []
+  "memberCountries": [
+    "Belarus",
+    "Germany"
+  ],
+  "archivableDocuments": [],
+  "lastActiveStatusDate": "2021.7",
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260311185036/https://geschichte-historyja.org/"
 }
