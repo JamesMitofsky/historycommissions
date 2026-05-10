@@ -22,7 +22,7 @@
   "chairs": [],
   "url": "",
   "startDate": "2010",
-  "status": "active",
+  "status": "dormant",
   "proposedDate": null,
   "siteLanguages": [],
   "memberCountries": [
@@ -30,6 +30,6 @@
     "Russia"
   ],
   "archivableDocuments": [],
-  "lastActiveStatusDate": null,
+  "lastActiveStatusDate": "2014",
   "lastArchivedSnapshot": null
 }
