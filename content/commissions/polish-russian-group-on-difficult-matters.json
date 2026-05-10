@@ -1,4 +1,23 @@
 {
+  "sponsoringInstitutions": [],
+  "keyTopics": [
+    "Polish-Soviet War of 1920",
+    "Origins of World War II and the Molotov-Ribbentrop Pact",
+    "Katyn massacre",
+    "Communisation of Poland",
+    "Cold War Polish-Soviet/Russian relations",
+    "Solidarity movement and martial law",
+    "Contemporary Poland-Russia relations (1918–2008)"
+  ],
+  "workingGroups": [],
+  "publications": [
+    {
+      "title": "White Spots—Black Spots: Difficult Matters in Polish-Russian Relations, 1918–2008",
+      "year": 2015,
+      "url": "https://upittpress.org/books/9780822944409/",
+      "format": "monograph"
+    }
+  ],
   "name": {
     "translations": [
       {
@@ -12,34 +31,8 @@
     ],
     "englishName": "Polish-Russian Group on Difficult Matters"
   },
-  "proposedDate": null,
-  "startDate": "2001",
-  "lastActiveStatusDate": "2013",
+  "linkStatus": "working",
   "lastActiveStatus": "ended",
-  "memberCountries": [
-    "Poland",
-    "Russia"
-  ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [
-    "Polish-Soviet War of 1920",
-    "Origins of World War II and the Molotov-Ribbentrop Pact",
-    "Katyn massacre",
-    "Communisation of Poland",
-    "Cold War Polish-Soviet/Russian relations",
-    "Solidarity movement and martial law",
-    "Contemporary Poland-Russia relations (1918–2008)"
-  ],
-  "publications": [
-    {
-      "title": "White Spots—Black Spots: Difficult Matters in Polish-Russian Relations, 1918–2008",
-      "year": 2015,
-      "url": "https://upittpress.org/books/9780822944409/",
-      "format": "monograph"
-    }
-  ],
-  "workingGroups": [],
-  "status": "unknown",
   "chairs": [
     {
       "name": "Adam Daniel Rotfeld",
@@ -53,10 +46,17 @@
     }
   ],
   "url": "https://upittpress.org/books/9780822944409/",
-  "linkStatus": "working",
+  "startDate": "2001",
+  "status": "concluded",
+  "proposedDate": null,
   "siteLanguages": [
     "en"
   ],
-  "lastArchivedSnapshot": "https://web.archive.org/web/20260208102257/https://upittpress.org/books/9780822944409/",
-  "archivableDocuments": []
+  "memberCountries": [
+    "Poland",
+    "Russia"
+  ],
+  "archivableDocuments": [],
+  "lastActiveStatusDate": "2013",
+  "lastArchivedSnapshot": "https://web.archive.org/web/20260208102257/https://upittpress.org/books/9780822944409/"
 }
