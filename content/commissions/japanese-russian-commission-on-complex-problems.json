@@ -1,4 +1,9 @@
 {
+  "draft": true,
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "workingGroups": [],
+  "publications": [],
   "name": {
     "translations": [
       {
@@ -12,24 +17,19 @@
     ],
     "englishName": "Commission on Complex Problems in Russian-Japanese Relations"
   },
-  "proposedDate": null,
-  "startDate": "2012",
-  "lastActiveStatusDate": "2012-15",
+  "linkStatus": "to_be_located",
   "lastActiveStatus": "ended",
+  "chairs": [],
+  "url": "",
+  "startDate": "2012",
+  "status": "concluded",
+  "proposedDate": null,
+  "siteLanguages": [],
   "memberCountries": [
     "Japan",
     "Russia"
   ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "concluded",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "to_be_located",
-  "siteLanguages": [],
-  "lastArchivedSnapshot": null,
   "archivableDocuments": [],
-  "draft": true
+  "lastActiveStatusDate": "2015",
+  "lastArchivedSnapshot": null
 }
