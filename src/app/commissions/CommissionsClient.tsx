@@ -311,7 +311,10 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
   return (
     <div>
       <div className="mb-6">
-        <CommissionGlobe commissions={filtered} />
+        <CommissionGlobe
+          commissions={commissions}
+          visibleSlugs={hasAnyFilter ? new Set(filtered.map((c) => c.slug)) : undefined}
+        />
       </div>
 
       {/* Filter bar */}

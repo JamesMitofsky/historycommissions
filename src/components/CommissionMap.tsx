@@ -16,7 +16,7 @@ const COLOR_PAIRS = [
 
 type Party = { numericId: number; name: string; fill: string; fillHover: string; stroke: string };
 
-export function CommissionMap({ memberCountries }: { memberCountries: string[] }) {
+export function CommissionMap({ memberCountries, aspectRatio = 1 }: { memberCountries: string[]; aspectRatio?: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -40,7 +40,7 @@ export function CommissionMap({ memberCountries }: { memberCountries: string[] }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((worldData: any) => {
         const width = container.clientWidth || 600;
-        const height = width;
+        const height = Math.round(width * aspectRatio);
 
         const svg = d3.select(svgRef.current!);
         svg.selectAll("*").remove();

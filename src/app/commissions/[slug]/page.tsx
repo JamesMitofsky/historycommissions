@@ -158,8 +158,8 @@ export default async function CommissionPage({ params }: Props) {
 
       <div className="space-y-8">
         {c.memberCountries.length > 0 && (
-          <div style={{ maxWidth: "40%" }}>
-            <CommissionMap memberCountries={c.memberCountries} />
+          <div>
+            <CommissionMap memberCountries={c.memberCountries} aspectRatio={6 / 19} />
           </div>
         )}
 

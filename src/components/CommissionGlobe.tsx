@@ -16,6 +16,7 @@ type Arc = {
   endLng: number;
   label: string;
   status: string;
+  slug: string;
 };
 
 function buildArcs(
@@ -38,6 +39,7 @@ function buildArcs(
       endLng: b[0],
       label: c.name.englishName,
       status: c.status,
+      slug: c.slug,
     });
   }
   return arcs;
@@ -56,13 +58,17 @@ type GeoFeature = any;
 const IDLE_MS = 15_000;
 const HOME = { lat: 40, lng: 38 };
 
-export function CommissionGlobe({ commissions }: { commissions: Commission[] }) {
+export function CommissionGlobe({ commissions, visibleSlugs }: { commissions: Commission[]; visibleSlugs?: Set<string> }) {
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const globeRef = useRef<any>(null);
   const [arcs, setArcs] = useState<Arc[]>([]);
   const [polygons, setPolygons] = useState<GeoFeature[]>([]);
   const [highlightedIds, setHighlightedIds] = useState<Set<number>>(new Set());
+  // Cache annotated feature objects by id — only create new objects for features
+  // whose highlight status changed so globe.gl only re-renders those polygons.
+  const annotatedCacheRef = useRef<Map<number, GeoFeature>>(new Map());
+  const [annotatedPolygons, setAnnotatedPolygons] = useState<GeoFeature[]>([]);
   const [containerWidth, setContainerWidth] = useState(500);
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const centroidsRef = useRef<Map<number, [number, number]>>(new Map());
@@ -93,16 +99,35 @@ export function CommissionGlobe({ commissions }: { commissions: Commission[] }) 
 
   useEffect(() => {
     if (centroidsRef.current.size === 0) return;
-    setArcs(buildArcs(commissions, centroidsRef.current));
     const ids = new Set<number>();
+    const visible = visibleSlugs ?? new Set(commissions.map((c) => c.slug));
     for (const c of commissions) {
+      if (!visible.has(c.slug)) continue;
       for (const name of c.memberCountries) {
         const id = numericIdForTag(name);
         if (id != null) ids.add(id);
       }
     }
     setHighlightedIds(ids);
-  }, [commissions]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [commissions, visibleSlugs]);
+
+  useEffect(() => {
+    if (polygons.length === 0) return;
+    const cache = annotatedCacheRef.current;
+    let changed = false;
+    const next = polygons.map((f) => {
+      const id = +f.id;
+      const highlighted = highlightedIds.has(id);
+      const existing = cache.get(id);
+      if (existing && existing._highlighted === highlighted) return existing;
+      const updated = { ...f, _highlighted: highlighted };
+      cache.set(id, updated);
+      changed = true;
+      return updated;
+    });
+    if (changed || annotatedPolygons.length === 0) setAnnotatedPolygons(next);
+  }, [polygons, highlightedIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -115,7 +140,7 @@ export function CommissionGlobe({ commissions }: { commissions: Commission[] }) 
   }, []);
 
   const globeWidth = containerWidth;
-  const globeHeight = Math.round(containerWidth * 0.7);
+  const globeHeight = Math.round(containerWidth * 0.9);
 
   // Height is the limiting dimension. Altitude must fit the sphere within globeHeight.
   // react-globe.gl uses 75° FOV (vertical). minAlt = 1/sin(FOV/2) - 1, plus margin.
@@ -152,12 +177,28 @@ export function CommissionGlobe({ commissions }: { commissions: Commission[] }) 
         style={{ height: globeHeight }}
         onPointerDown={scheduleReset}
         onPointerMove={scheduleReset}
-        onWheel={scheduleReset}
       >
         <Globe
           ref={globeRef}
+          animateIn={false}
           onGlobeReady={() => {
-            globeRef.current?.pointOfView({ ...HOME, altitude: minAlt }, 0);
+            const startLng = HOME.lng + 55;
+            const duration = 2200;
+            const startTime = performance.now();
+            const spin = (now: number) => {
+              const t = Math.min((now - startTime) / duration, 1);
+              const eased = 1 - Math.pow(1 - t, 3);
+              globeRef.current?.pointOfView({ lat: HOME.lat, lng: startLng + (HOME.lng - startLng) * eased, altitude: minAlt }, 0);
+              if (t < 1) requestAnimationFrame(spin);
+            };
+            requestAnimationFrame(spin);
+            const controls = globeRef.current?.controls();
+            if (controls) {
+              controls.rotateSpeed = 0.4;
+              controls.enableZoom = false;
+              controls.dampingFactor = 0.08;
+              controls.enableDamping = true;
+            }
           }}
           width={globeWidth}
           height={globeHeight}
@@ -165,26 +206,31 @@ export function CommissionGlobe({ commissions }: { commissions: Commission[] }) 
           globeImageUrl={null}
           showAtmosphere={false}
           showGraticules={false}
-          polygonsData={polygons}
-          polygonCapColor={(d: object) => highlightedIds.has(+(d as GeoFeature).id) ? "#94a3b8" : "#d1d5db"}
+          polygonsData={annotatedPolygons}
+          polygonCapColor={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? "#94a3b8" : "#d1d5db"}
           polygonSideColor={() => "rgba(0,0,0,0)"}
           polygonStrokeColor={() => "#ffffff"}
-          polygonAltitude={(d: object) => highlightedIds.has(+(d as GeoFeature).id) ? 0.014 : 0.006}
+          polygonAltitude={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? 0.014 : 0.006}
+          polygonLabel={(d: object) => {
+            const name = (d as GeoFeature).properties?.name;
+            return name ? `<div style="background:rgba(15,23,42,0.85);color:#f1f5f9;padding:4px 8px;border-radius:4px;font-size:12px;font-family:sans-serif;pointer-events:none">${name}</div>` : "";
+          }}
           arcsData={arcs}
           arcStartLat={(d) => (d as Arc).startLat}
           arcStartLng={(d) => (d as Arc).startLng}
           arcEndLat={(d) => (d as Arc).endLat}
           arcEndLng={(d) => (d as Arc).endLng}
-          arcColor={(d: object) => ARC_COLOR[(d as Arc).status] ?? ARC_COLOR.unknown}
+          arcColor={(d: object) => {
+            const arc = d as Arc;
+            if (visibleSlugs && !visibleSlugs.has(arc.slug)) return "rgba(0,0,0,0)";
+            return ARC_COLOR[arc.status] ?? ARC_COLOR.unknown;
+          }}
           arcDashLength={0.7}
           arcDashGap={0.02}
           arcDashAnimateTime={4000}
           arcStroke={1.2}
           arcAltitudeAutoScale={0.25}
           enablePointerInteraction={true}
-          onZoom={({ altitude }: { altitude: number }) => {
-            if (altitude < minAlt) globeRef.current?.pointOfView({ altitude: minAlt }, 0);
-          }}
         />
       </div>
     </div>
