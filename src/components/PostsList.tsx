@@ -76,7 +76,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
                         {formattedDate}
                       </time>
                     )}
-                    <h2 className="mt-0.5 text-base font-serif font-semibold leading-snug text-foreground">
+                    <h2 className="mt-0.5 text-base font-semibold leading-snug text-foreground" style={{ fontFamily: "var(--font-playfair)" }}>
                       {post.title ?? post.slug}
                     </h2>
                     {post.tags.length > 0 && (

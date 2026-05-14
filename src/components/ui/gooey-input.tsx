@@ -57,14 +57,14 @@ function SearchIcon({ layoutId }: { layoutId: string }) {
 }
 
 const transition = {
-  duration: 0.4,
+  duration: 0.25,
   type: "spring" as const,
   bounce: 0.25,
 };
 
 const iconBubbleVariants = {
   collapsed: { scale: 0, opacity: 0, x: 0 },
-  expanded: { scale: 1, opacity: 1, x: -5 },
+  expanded: { scale: 1, opacity: 1, x: -10 },
 };
 
 export interface GooeyInputClassNames {
@@ -101,9 +101,9 @@ export function GooeyInput({
   className,
   classNames,
   collapsedWidth = 155,
-  expandedWidth = 415,
+  expandedWidth = 375,
   expandedOffset = 50,
-  gooeyBlur = 5,
+  gooeyBlur = 6,
   value: valueProp,
   defaultValue = "",
   onValueChange,

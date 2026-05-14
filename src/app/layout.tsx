@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Serif_4, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Source_Serif_4, DM_Sans, Playfair_Display } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
@@ -8,7 +8,7 @@ import { getBlurDataURL } from "@/blog/get-blur-data-url";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +18,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const sourceSerif4 = Source_Serif_4({
@@ -58,9 +64,9 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, sourceSerif4.variable, "font-sans", inter.variable, "text-[18px]")}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, sourceSerif4.variable, playfairDisplay.variable, dmSans.variable, "text-[18px]")}
     >
-      <body className="min-h-full flex flex-col font-serif text-base leading-[1.7] antialiased [text-rendering:optimizeLegibility]">
+      <body className="min-h-full flex flex-col font-sans text-base leading-[1.7] antialiased [text-rendering:optimizeLegibility]">
         {/* Masthead — image + nav + site title in one unit */}
         <header className="relative w-full h-56 overflow-hidden">
           <Image
@@ -85,7 +91,7 @@ export default async function RootLayout({
                 <p className="text-[0.65rem] font-medium tracking-[0.18em] uppercase text-white/60 mb-1">
                   A digital archive
                 </p>
-                <h1 className="text-3xl font-semibold text-white leading-tight">
+                <h1 className="text-3xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-playfair)" }}>
                   History Commissions
                 </h1>
               </Link>
