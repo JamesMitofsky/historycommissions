@@ -6,6 +6,7 @@ import Image from "next/image";
 import Fuse from "fuse.js";
 import type { Post } from "@/blog/types";
 import { FlagTag } from "@/components/FlagTag";
+import { GooeyInput } from "@/components/ui/gooey-input";
 
 export function PostsList({ posts }: { posts: Post[] }) {
   const [query, setQuery] = useState("");
@@ -26,64 +27,56 @@ export function PostsList({ posts }: { posts: Post[] }) {
 
   const results = query.trim()
     ? fuse.search(query)
-        .sort((a, b) => {
-          const scoreDiff = (a.score ?? 0) - (b.score ?? 0);
-          if (Math.abs(scoreDiff) > 0.05) return scoreDiff;
-          const aDate = typeof a.item.date === "string" ? a.item.date : a.item.date?.toISOString() ?? "";
-          const bDate = typeof b.item.date === "string" ? b.item.date : b.item.date?.toISOString() ?? "";
-          return bDate.localeCompare(aDate);
-        })
-        .map((r) => r.item)
+      .sort((a, b) => {
+        const scoreDiff = (a.score ?? 0) - (b.score ?? 0);
+        if (Math.abs(scoreDiff) > 0.05) return scoreDiff;
+        const aDate = typeof a.item.date === "string" ? a.item.date : a.item.date?.toISOString() ?? "";
+        const bDate = typeof b.item.date === "string" ? b.item.date : b.item.date?.toISOString() ?? "";
+        return bDate.localeCompare(aDate);
+      })
+      .map((r) => r.item)
     : posts;
 
   return (
     <div>
-      <div className="mb-4">
-        <input
-          type="search"
-          placeholder="Search posts…"
+      <div className="flex justify-end">
+        <GooeyInput
+          placeholder="Search..."
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="w-full rounded-lg border border-[var(--border)] bg-transparent px-4 py-2.5 text-sm text-[var(--foreground)] placeholder:text-[var(--secondary)] focus:outline-none focus:border-[var(--secondary)] transition-colors"
+          onValueChange={setQuery}
         />
       </div>
 
       {results.length === 0 ? (
-        <p className="text-sm text-[var(--secondary)] py-8">No posts match &ldquo;{query}&rdquo;.</p>
+        <p className="text-sm text-muted-foreground py-8">No posts match &ldquo;{query}&rdquo;.</p>
       ) : (
-        <ul className="divide-y divide-[var(--border)]">
-          {results.map((post) => {
+        <ul className="divide-y divide-border/40">
+          {results.map((post, i) => {
             const formattedDate = post.date
               ? new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })
               : null;
 
             return (
-              <li key={post.slug}>
-                <Link href={`/posts/${post.slug}`} className="group flex items-start gap-4 py-6">
-                  {post.image && (
-                    <div className="shrink-0 w-48 h-32 rounded overflow-hidden bg-[var(--border)]">
-                      <Image
-                        src={post.image}
-                        alt=""
-                        width={192}
-                        height={128}
-                        className="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
-                        placeholder={post.blurDataURL ? "blur" : "empty"}
-                        blurDataURL={post.blurDataURL ?? undefined}
-                      />
-                    </div>
-                  )}
+              <li
+                key={post.slug}
+                style={{ animationDelay: `${i * 60}ms` }}
+                className="animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both"
+              >
+                <Link
+                  href={`/posts/${post.slug}`}
+                  className="group flex items-start gap-6 py-5 transition-opacity duration-150 hover:opacity-75"
+                >
                   <div className="flex-1 min-w-0">
                     {formattedDate && (
-                      <time className="text-xs font-medium tracking-wide uppercase text-[var(--secondary)]">
+                      <time className="text-xs text-muted-foreground tabular-nums">
                         {formattedDate}
                       </time>
                     )}
-                    <h2 className="text-[1.05rem] font-semibold leading-snug text-[var(--foreground)] group-hover:opacity-70 transition-opacity">
+                    <h2 className="mt-0.5 text-base font-serif font-semibold leading-snug text-foreground">
                       {post.title ?? post.slug}
                     </h2>
                     {post.tags.length > 0 && (
@@ -94,6 +87,19 @@ export function PostsList({ posts }: { posts: Post[] }) {
                       </div>
                     )}
                   </div>
+                  {post.image && (
+                    <div className="shrink-0 w-64 h-[160px] overflow-hidden bg-muted">
+                      <Image
+                        src={post.image}
+                        alt=""
+                        width={256}
+                        height={160}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        placeholder={post.blurDataURL ? "blur" : "empty"}
+                        blurDataURL={post.blurDataURL ?? undefined}
+                      />
+                    </div>
+                  )}
                 </Link>
               </li>
             );

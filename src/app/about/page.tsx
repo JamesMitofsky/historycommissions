@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <main className="max-w-2xl mx-auto px-6 py-14">
+    <main className="max-w-2xl mx-auto px-6 pb-14 pt-8">
       <h1 className="text-2xl font-semibold mb-8 text-[var(--foreground)]">About</h1>
       <div className="space-y-5 text-[var(--foreground)] leading-relaxed">
         <p>
@@ -24,7 +24,7 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-[var(--border)] text-sm text-[var(--secondary)] leading-relaxed">
+      <div className="mt-12 pt-8 border-t border-[var(--border)] text-sm text-muted-foreground leading-relaxed">
         <p>
           This project is maintained by{" "}
           <a

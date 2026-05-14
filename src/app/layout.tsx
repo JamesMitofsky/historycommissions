@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import { Geist, Geist_Mono, Source_Serif_4, Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { Nav } from "@/components/Nav";
 import { getBlurDataURL } from "@/blog/get-blur-data-url";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,9 +58,9 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif4.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, sourceSerif4.variable, "font-sans", inter.variable, "text-[18px]")}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-serif text-base leading-[1.7] antialiased [text-rendering:optimizeLegibility]">
         {/* Masthead — image + nav + site title in one unit */}
         <header className="relative w-full h-56 overflow-hidden">
           <Image
