@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import type { Commission, CommissionStatus } from "@/commissions/types";
+import { CommissionMap } from "@/components/CommissionMap";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -125,7 +126,7 @@ export default async function CommissionPage({ params }: Props) {
   ) : null;
 
   return (
-    <main className="max-w-2xl mx-auto px-6 py-12 animate-in fade-in duration-400">
+    <main className="max-w-2xl mx-auto px-6 py-12 animate-in fade-in duration-400 delay-200">
       <Button variant="ghost" size="sm" asChild className="mb-8 -ml-2 text-muted-foreground hover:text-foreground">
         <Link href="/commissions">
           ← All commissions
@@ -156,6 +157,12 @@ export default async function CommissionPage({ params }: Props) {
       <Separator className="mb-8" />
 
       <div className="space-y-8">
+        {c.memberCountries.length > 0 && (
+          <div style={{ maxWidth: "40%" }}>
+            <CommissionMap memberCountries={c.memberCountries} />
+          </div>
+        )}
+
         {c.memberCountries.length > 0 && (
           <div>
             <SectionLabel>Member Countries</SectionLabel>

@@ -63,7 +63,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
             return (
               <li
                 key={post.slug}
-                style={{ animationDelay: `${i * 60}ms` }}
+                style={{ animationDelay: `${100 + i * 60}ms` }}
                 className="animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both"
               >
                 <Link
@@ -88,15 +88,16 @@ export function PostsList({ posts }: { posts: Post[] }) {
                     )}
                   </div>
                   {post.image && (
-                    <div className="shrink-0 w-64 h-[160px] overflow-hidden bg-muted">
+                    <div className="relative shrink-0 w-64 h-[160px] overflow-hidden bg-muted">
                       <Image
                         src={post.image}
                         alt=""
-                        width={256}
-                        height={160}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        fill
+                        sizes="256px"
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
                         placeholder={post.blurDataURL ? "blur" : "empty"}
                         blurDataURL={post.blurDataURL ?? undefined}
+                        unoptimized={post.image.toLowerCase().endsWith(".svg")}
                       />
                     </div>
                   )}

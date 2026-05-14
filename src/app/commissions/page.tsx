@@ -1,5 +1,6 @@
 import { getCommissions } from "@/commissions/get-commissions";
 import { CommissionsClient } from "./CommissionsClient";
+import { CommissionGlobe } from "@/components/CommissionGlobe";
 
 export default function CommissionsPage() {
   const commissions = getCommissions();
@@ -11,6 +12,9 @@ export default function CommissionsPage() {
         <p className="mt-1 text-sm text-muted-foreground">
           {commissions.length}{" "}bilateral historians&apos; commissions
         </p>
+      </div>
+      <div className="mb-6">
+        <CommissionGlobe commissions={commissions} />
       </div>
       <CommissionsClient commissions={commissions} />
     </main>

@@ -35,15 +35,15 @@ const STATUS_LABELS: Record<CommissionStatus, string> = {
 const STATUS_DOT: Record<CommissionStatus, string> = {
   active: "bg-emerald-500",
   dormant: "bg-amber-400",
-  concluded: "bg-neutral-400",
-  unknown: "bg-neutral-300",
+  concluded: "bg-red-500",
+  unknown: "bg-red-400",
 };
 
 const STATUS_TEXT: Record<CommissionStatus, string> = {
   active: "text-emerald-700 dark:text-emerald-400",
   dormant: "text-amber-700 dark:text-amber-400",
-  concluded: "text-muted-foreground",
-  unknown: "text-muted-foreground",
+  concluded: "text-red-700 dark:text-red-400",
+  unknown: "text-red-700 dark:text-red-400",
 };
 
 const LANG_NAMES: Record<string, string> = {
@@ -181,7 +181,7 @@ function CommissionCard({ c, index }: { c: Commission; index: number }) {
 
   return (
     <article
-      style={{ animationDelay: `${index * 40}ms` }}
+      style={{ animationDelay: `${100 + index * 40}ms` }}
       className="py-7 border-t border-border animate-in fade-in slide-in-from-bottom-1 duration-400 fill-mode-both"
     >
       <div className="mb-3">

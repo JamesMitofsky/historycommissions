@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { getPost, getPostSlugs } from "@/blog";
 import { Prose } from "@/ui";
 import { FlagTag } from "@/ui/FlagTag";
+import { CommissionMap } from "@/components/CommissionMap";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -69,7 +70,7 @@ export default async function PostPage({ params }: Props) {
     : null;
 
   return (
-    <main className="max-w-2xl mx-auto px-6 py-12">
+    <main className="max-w-2xl mx-auto px-6 py-12 animate-in fade-in duration-400 delay-200">
       <Link
         href="/"
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[var(--foreground)] transition-colors mb-10"
@@ -78,22 +79,34 @@ export default async function PostPage({ params }: Props) {
       </Link>
 
       <header className="mb-10">
-        {post.image && (
-          <figure className="mb-6">
-            <div className="rounded-lg overflow-hidden bg-[var(--border)] aspect-[16/7]">
-              <Image
-                src={post.image}
-                alt={post.title ?? ""}
-                width={672}
-                height={294}
-                className="w-full h-full object-cover"
-                priority
-                placeholder={post.blurDataURL ? "blur" : "empty"}
-                blurDataURL={post.blurDataURL ?? undefined}
-              />
+        {(post.image || post.tags.length > 0) && (
+          <div className="mb-6">
+            <div className="flex gap-3 items-stretch">
+              {post.tags.length > 0 && (
+                <div className={post.image ? "flex-[1] min-w-0" : "w-full"}>
+                  <CommissionMap memberCountries={post.tags} />
+                </div>
+              )}
+              {post.image && (
+                <div className={post.tags.length > 0 ? "flex-[2] min-w-0" : "w-full"}>
+                  <div className="relative rounded-lg overflow-hidden bg-[var(--border)] h-full">
+                    <Image
+                      src={post.image}
+                      alt={post.title ?? ""}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 672px"
+                      className="object-cover"
+                      priority
+                      placeholder={post.blurDataURL ? "blur" : "empty"}
+                      blurDataURL={post.blurDataURL ?? undefined}
+                      unoptimized={post.image.toLowerCase().endsWith(".svg")}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
             {post.imageAttribution && (
-              <figcaption className="mt-1.5 text-xs text-muted-foreground text-right">
+              <p className="mt-1.5 text-xs text-muted-foreground text-right">
                 {post.imageAttributionUrl ? (
                   <a
                     href={post.imageAttributionUrl}
@@ -107,9 +120,9 @@ export default async function PostPage({ params }: Props) {
                   post.imageAttribution
                 )}{" "}
                 (CC BY-SA 3.0)
-              </figcaption>
+              </p>
             )}
-          </figure>
+          </div>
         )}
 
         {post.title && (

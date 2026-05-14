@@ -36,3 +36,46 @@ export const TAG_TO_COUNTRY_CODE: Record<string, string> = {
 export function countryCodeForTag(tag: string): string | null {
   return TAG_TO_COUNTRY_CODE[tag] ?? null;
 }
+
+export const TAG_TO_NUMERIC_ID: Record<string, number> = {
+  Algeria: 12,
+  Algier: 12,
+  Austria: 40,
+  Belarus: 112,
+  Bulgaria: 100,
+  Cameron: 120,
+  Cameroon: 120,
+  China: 156,
+  Croatia: 191,
+  "Czech Republic": 203,
+  Estonia: 233,
+  France: 250,
+  Georgia: 268,
+  Germany: 276,
+  Greece: 300,
+  Haiti: 332,
+  Hungary: 348,
+  Israel: 376,
+  Italy: 380,
+  Japan: 392,
+  Kazakhstan: 398,
+  Korea: 410,
+  "South Korea": 410,
+  Latvia: 428,
+  Liechtenstein: 438,
+  Lithuania: 440,
+  Moldova: 498,
+  "N. Macedonia": 807,
+  "North Macedonia": 807,
+  Poland: 616,
+  Romania: 642,
+  Russia: 643,
+  Slovakia: 703,
+  Slovenia: 705,
+  Ukraine: 804,
+  Finland: 246,
+};
+
+export function numericIdForTag(tag: string): number | null {
+  return TAG_TO_NUMERIC_ID[tag] ?? null;
+}
