@@ -1,11 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import * as topojson from "topojson-client";
-import * as d3 from "d3";
+import worldCountries from "world-countries";
+import { MeshPhongMaterial, Color } from "three";
 import type { Commission } from "@/commissions/types";
 import { numericIdForTag } from "@/lib/country-codes";
+
+// Pre-build centroid map from world-countries (manually curated latlng, not polygon-derived).
+// Keyed by ISO 3166-1 numeric id (ccn3 as number). latlng is [lat, lng].
+const WORLD_CENTROIDS = new Map<number, [number, number]>(
+  worldCountries
+    .filter((c) => c.ccn3 && c.latlng.length === 2)
+    .map((c) => [parseInt(c.ccn3, 10), [c.latlng[1], c.latlng[0]] as [number, number]])
+);
 
 const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
 
@@ -58,7 +67,7 @@ type GeoFeature = any;
 const IDLE_MS = 15_000;
 const HOME = { lat: 40, lng: 38 };
 
-export function CommissionGlobe({ commissions, visibleSlugs }: { commissions: Commission[]; visibleSlugs?: Set<string> }) {
+export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: { commissions: Commission[]; visibleSlugs?: Set<string>; onCountryClick?: (country: string) => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const globeRef = useRef<any>(null);
@@ -81,7 +90,9 @@ export function CommissionGlobe({ commissions, visibleSlugs }: { commissions: Co
         setPolygons(features);
         const centroids = new Map<number, [number, number]>();
         for (const f of features) {
-          centroids.set(+f.id, d3.geoCentroid(f));
+          const id = +f.id;
+          const pt = WORLD_CENTROIDS.get(id);
+          if (pt) centroids.set(id, pt);
         }
         centroidsRef.current = centroids;
         setArcs(buildArcs(commissions, centroids));
@@ -94,7 +105,7 @@ export function CommissionGlobe({ commissions, visibleSlugs }: { commissions: Co
         }
         setHighlightedIds(ids);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -109,7 +120,7 @@ export function CommissionGlobe({ commissions, visibleSlugs }: { commissions: Co
       }
     }
     setHighlightedIds(ids);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commissions, visibleSlugs]);
 
   useEffect(() => {
@@ -128,6 +139,23 @@ export function CommissionGlobe({ commissions, visibleSlugs }: { commissions: Co
     });
     if (changed || annotatedPolygons.length === 0) setAnnotatedPolygons(next);
   }, [polygons, highlightedIds]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const numericIdToTag = useMemo(() => {
+    const map = new Map<number, string>();
+    for (const c of commissions) {
+      for (const tag of c.memberCountries) {
+        const id = numericIdForTag(tag);
+        if (id != null && !map.has(id)) map.set(id, tag);
+      }
+    }
+    return map;
+  }, [commissions]);
+
+  const waterMaterial = useMemo(() => {
+    const mat = new MeshPhongMaterial();
+    mat.color = new Color(0x4a7a91);
+    return mat;
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -204,16 +232,23 @@ export function CommissionGlobe({ commissions, visibleSlugs }: { commissions: Co
           height={globeHeight}
           backgroundColor="rgba(0,0,0,0)"
           globeImageUrl={null}
+          globeMaterial={waterMaterial}
           showAtmosphere={false}
           showGraticules={false}
           polygonsData={annotatedPolygons}
-          polygonCapColor={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? "#94a3b8" : "#d1d5db"}
+          polygonCapColor={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? "#9b7d5e" : "#b8a48a"}
           polygonSideColor={() => "rgba(0,0,0,0)"}
-          polygonStrokeColor={() => "#ffffff"}
-          polygonAltitude={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? 0.014 : 0.006}
+          polygonStrokeColor={() => "rgba(255,255,255,0.25)"}
+          polygonAltitude={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? 0.008 : 0.003}
           polygonLabel={(d: object) => {
             const name = (d as GeoFeature).properties?.name;
             return name ? `<div style="background:rgba(15,23,42,0.85);color:#f1f5f9;padding:4px 8px;border-radius:4px;font-size:12px;font-family:sans-serif;pointer-events:none">${name}</div>` : "";
+          }}
+          onPolygonClick={(d: object) => {
+            if (!onCountryClick) return;
+            const id = +(d as GeoFeature).id;
+            const tag = numericIdToTag.get(id);
+            if (tag) onCountryClick(tag);
           }}
           arcsData={arcs}
           arcStartLat={(d) => (d as Arc).startLat}
@@ -225,9 +260,9 @@ export function CommissionGlobe({ commissions, visibleSlugs }: { commissions: Co
             if (visibleSlugs && !visibleSlugs.has(arc.slug)) return "rgba(0,0,0,0)";
             return ARC_COLOR[arc.status] ?? ARC_COLOR.unknown;
           }}
-          arcDashLength={0.7}
-          arcDashGap={0.02}
-          arcDashAnimateTime={4000}
+          arcDashLength={0.8}
+          arcDashGap={0.01}
+          arcDashAnimateTime={12000}
           arcStroke={1.2}
           arcAltitudeAutoScale={0.25}
           enablePointerInteraction={true}

@@ -314,6 +314,9 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
         <CommissionGlobe
           commissions={commissions}
           visibleSlugs={hasAnyFilter ? new Set(filtered.map((c) => c.slug)) : undefined}
+          onCountryClick={(country) =>
+            setFilters((f) => ({ ...f, countries: new Set([country]) }))
+          }
         />
       </div>
 
