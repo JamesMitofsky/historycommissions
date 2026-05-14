@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import * as topojson from "topojson-client";
 import * as d3 from "d3";
 import type { Commission } from "@/commissions/types";
-import { TAG_TO_NUMERIC_ID } from "@/lib/country-codes";
+import { numericIdForTag } from "@/lib/country-codes";
 
 const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
 
@@ -25,7 +25,7 @@ function buildArcs(
   const arcs: Arc[] = [];
   for (const c of commissions) {
     if (c.memberCountries.length < 2) continue;
-    const ids = c.memberCountries.map((name) => TAG_TO_NUMERIC_ID[name]).filter((id): id is number => id != null);
+    const ids = c.memberCountries.map((name) => numericIdForTag(name)).filter((id): id is number => id != null);
     if (ids.length < 2) continue;
     const [id1, id2] = ids;
     const a = centroids.get(id1);
@@ -65,7 +65,7 @@ export function CommissionGlobe({ commissions }: { commissions: Commission[] }) 
   const [highlightedIds, setHighlightedIds] = useState<Set<number>>(new Set());
   const [containerWidth, setContainerWidth] = useState(500);
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const minAltRef = useRef(0);
+  const centroidsRef = useRef<Map<number, [number, number]>>(new Map());
 
   useEffect(() => {
     fetch("/countries-110m.json")
@@ -77,16 +77,31 @@ export function CommissionGlobe({ commissions }: { commissions: Commission[] }) 
         for (const f of features) {
           centroids.set(+f.id, d3.geoCentroid(f));
         }
+        centroidsRef.current = centroids;
         setArcs(buildArcs(commissions, centroids));
         const ids = new Set<number>();
         for (const c of commissions) {
           for (const name of c.memberCountries) {
-            const id = TAG_TO_NUMERIC_ID[name];
+            const id = numericIdForTag(name);
             if (id != null) ids.add(id);
           }
         }
         setHighlightedIds(ids);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (centroidsRef.current.size === 0) return;
+    setArcs(buildArcs(commissions, centroidsRef.current));
+    const ids = new Set<number>();
+    for (const c of commissions) {
+      for (const name of c.memberCountries) {
+        const id = numericIdForTag(name);
+        if (id != null) ids.add(id);
+      }
+    }
+    setHighlightedIds(ids);
   }, [commissions]);
 
   useEffect(() => {
@@ -106,7 +121,6 @@ export function CommissionGlobe({ commissions }: { commissions: Commission[] }) 
   // react-globe.gl uses 75° FOV (vertical). minAlt = 1/sin(FOV/2) - 1, plus margin.
   const FOV_RAD = (75 * Math.PI) / 180;
   const minAlt = 1 / Math.sin(FOV_RAD / 2) - 1 + 1;
-  minAltRef.current = minAlt;
 
   useEffect(() => {
     if (!globeRef.current || globeHeight === 0) return;
@@ -116,7 +130,7 @@ export function CommissionGlobe({ commissions }: { commissions: Commission[] }) 
   const scheduleReset = () => {
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
     idleTimerRef.current = setTimeout(() => {
-      globeRef.current?.pointOfView({ ...HOME, altitude: minAltRef.current }, 1200);
+      globeRef.current?.pointOfView({ ...HOME, altitude: minAlt }, 1200);
     }, IDLE_MS);
   };
 

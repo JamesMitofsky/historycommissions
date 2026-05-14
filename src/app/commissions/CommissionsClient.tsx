@@ -7,6 +7,7 @@ import { FlagTag } from "@/components/FlagTag";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CommissionGlobe } from "@/components/CommissionGlobe";
 import {
   Popover,
   PopoverContent,
@@ -232,6 +233,21 @@ function parseYear(date: string | null | undefined): number {
   return parseInt(date.split(/[.\-]/)[0], 10) || Infinity;
 }
 
+type SortMode = "recency-asc" | "recency-desc" | "activity";
+
+const SORT_LABELS: Record<SortMode, string> = {
+  "recency-asc": "Oldest first",
+  "recency-desc": "Newest first",
+  activity: "By status",
+};
+
+const ACTIVITY_ORDER: Record<CommissionStatus, number> = {
+  active: 0,
+  unknown: 1,
+  dormant: 2,
+  concluded: 3,
+};
+
 export function CommissionsClient({ commissions }: { commissions: Commission[] }) {
   const [filters, setFilters] = useState<Filters>({
     status: new Set(),
@@ -239,7 +255,8 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
     countries: new Set(),
     search: "",
   });
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+  const [sortMode, setSortMode] = useState<SortMode>("activity");
+  const [sortOpen, setSortOpen] = useState(false);
 
   const statusOptions = useMemo(() =>
     Array.from(new Set(commissions.map((c) => c.status)))
@@ -262,19 +279,27 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
     [commissions]
   );
 
-  const filtered = commissions.filter((c) => {
-    if (filters.status.size > 0 && !filters.status.has(c.status)) return false;
-    if (filters.languages.size > 0 && !c.siteLanguages.some((l) => filters.languages.has(l))) return false;
-    if (filters.countries.size > 0 && !c.memberCountries.some((co) => filters.countries.has(co))) return false;
-    if (filters.search) {
-      const s = filters.search.toLowerCase();
-      if (!englishName(c).toLowerCase().includes(s) && !c.name.englishName.toLowerCase().includes(s)) return false;
-    }
-    return true;
-  }).sort((a, b) => {
-    const diff = parseYear(a.startDate) - parseYear(b.startDate);
-    return sortDir === "asc" ? diff : -diff;
-  });
+  const filtered = useMemo(() =>
+    commissions.filter((c) => {
+      if (filters.status.size > 0 && !filters.status.has(c.status)) return false;
+      if (filters.languages.size > 0 && !c.siteLanguages.some((l) => filters.languages.has(l))) return false;
+      if (filters.countries.size > 0 && !c.memberCountries.some((co) => filters.countries.has(co))) return false;
+      if (filters.search) {
+        const s = filters.search.toLowerCase();
+        if (!englishName(c).toLowerCase().includes(s) && !c.name.englishName.toLowerCase().includes(s)) return false;
+      }
+      return true;
+    }).sort((a, b) => {
+      if (sortMode === "activity") {
+        const diff = ACTIVITY_ORDER[a.status] - ACTIVITY_ORDER[b.status];
+        if (diff !== 0) return diff;
+        return parseYear(a.startDate) - parseYear(b.startDate);
+      }
+      const diff = parseYear(a.startDate) - parseYear(b.startDate);
+      return sortMode === "recency-asc" ? diff : -diff;
+    }),
+    [commissions, filters, sortMode]
+  );
 
   const activeCount = filters.status.size + filters.languages.size + filters.countries.size;
   const hasAnyFilter = activeCount > 0 || !!filters.search;
@@ -285,6 +310,10 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
 
   return (
     <div>
+      <div className="mb-6">
+        <CommissionGlobe commissions={filtered} />
+      </div>
+
       {/* Filter bar */}
       <div className="flex flex-wrap items-center gap-2 mb-6">
         <Input
@@ -326,15 +355,35 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
         <p className="text-xs text-muted-foreground">
           {filtered.length} of {commissions.length} commissions
         </p>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setSortDir((d) => d === "asc" ? "desc" : "asc")}
-          className="text-xs text-muted-foreground h-8 gap-1.5"
-        >
-          <ArrowUpDown className="size-3" />
-          {sortDir === "asc" ? "Oldest first" : "Most recent first"}
-        </Button>
+        <Popover open={sortOpen} onOpenChange={setSortOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-xs text-muted-foreground h-8 gap-1.5"
+              aria-expanded={sortOpen}
+            >
+              <ArrowUpDown className="size-3" />
+              {SORT_LABELS[sortMode]}
+              <ChevronDown className={cn("size-3 opacity-50 transition-transform duration-200", sortOpen && "rotate-180")} />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-44 p-1" align="end">
+            {(["activity", "recency-asc", "recency-desc"] as SortMode[]).map((mode) => (
+              <button
+                key={mode}
+                onClick={() => { setSortMode(mode); setSortOpen(false); }}
+                className={cn(
+                  "flex items-center gap-2 w-full rounded px-2 py-1.5 text-xs text-left transition-colors hover:bg-accent",
+                  sortMode === mode ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
+                <Check className={cn("size-3 shrink-0", sortMode === mode ? "opacity-100" : "opacity-0")} />
+                {SORT_LABELS[mode]}
+              </button>
+            ))}
+          </PopoverContent>
+        </Popover>
       </div>
 
       {filtered.length === 0 ? (

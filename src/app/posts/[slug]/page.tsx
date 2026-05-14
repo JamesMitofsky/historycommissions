@@ -81,7 +81,7 @@ export default async function PostPage({ params }: Props) {
       <header className="mb-10">
         {(post.image || post.tags.length > 0) && (
           <div className="mb-6">
-            <div className="flex gap-3 items-stretch">
+            <div className="flex gap-3 items-stretch min-h-[180px]">
               {post.tags.length > 0 && (
                 <div className={post.image ? "flex-[1] min-w-0" : "w-full"}>
                   <CommissionMap memberCountries={post.tags} />

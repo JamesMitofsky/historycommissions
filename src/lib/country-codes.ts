@@ -1,81 +1,34 @@
-export const TAG_TO_COUNTRY_CODE: Record<string, string> = {
-  Algeria: "dz",
-  Algier: "dz",
-  Austria: "at",
-  Bulgaria: "bg",
-  Cameron: "cm",
-  Cameroon: "cm",
-  China: "cn",
-  Estonia: "ee",
+import countries from "i18n-iso-countries";
+import en from "i18n-iso-countries/langs/en.json";
+import Fuse from "fuse.js";
+
+countries.registerLocale(en);
+
+const ENTRIES = Object.entries(countries.getNames("en")).map(([code, name]) => ({ code, name }));
+
+
+const fuse = new Fuse(ENTRIES, {
+  keys: ["name"],
+  threshold: 0.4,
+  ignoreLocation: true,
+  minMatchCharLength: 2,
+});
+
+const SPECIAL_ALPHA2: Record<string, string> = {
   Europe: "eu",
-  Finland: "fi",
-  France: "fr",
-  Georgia: "ge",
-  Germany: "de",
-  Haiti: "ht",
-  Hungary: "hu",
-  Israel: "il",
-  Italy: "it",
-  Japan: "jp",
-  Korea: "kr",
-  "South Korea": "kr",
-  Lithuania: "lt",
-  Moldova: "md",
-  "N. Macedonia": "mk",
-  "North Macedonia": "mk",
-  Poland: "pl",
-  Russia: "ru",
-  Slovakia: "sk",
-  Slovenia: "si",
-  Ukraine: "ua",
-  "Czech Republic": "cz",
-  Liechtenstein: "li",
-  Belarus: "by",
 };
 
 export function countryCodeForTag(tag: string): string | null {
-  return TAG_TO_COUNTRY_CODE[tag] ?? null;
+  if (SPECIAL_ALPHA2[tag]) return SPECIAL_ALPHA2[tag];
+  const exact = countries.getAlpha2Code(tag, "en");
+  if (exact) return exact.toLowerCase();
+  const results = fuse.search(tag);
+  return results[0]?.item.code.toLowerCase() ?? null;
 }
 
-export const TAG_TO_NUMERIC_ID: Record<string, number> = {
-  Algeria: 12,
-  Algier: 12,
-  Austria: 40,
-  Belarus: 112,
-  Bulgaria: 100,
-  Cameron: 120,
-  Cameroon: 120,
-  China: 156,
-  Croatia: 191,
-  "Czech Republic": 203,
-  Estonia: 233,
-  France: 250,
-  Georgia: 268,
-  Germany: 276,
-  Greece: 300,
-  Haiti: 332,
-  Hungary: 348,
-  Israel: 376,
-  Italy: 380,
-  Japan: 392,
-  Kazakhstan: 398,
-  Korea: 410,
-  "South Korea": 410,
-  Latvia: 428,
-  Liechtenstein: 438,
-  Lithuania: 440,
-  Moldova: 498,
-  "N. Macedonia": 807,
-  "North Macedonia": 807,
-  Poland: 616,
-  Romania: 642,
-  Russia: 643,
-  Slovakia: 703,
-  Slovenia: 705,
-  Ukraine: 804,
-  Finland: 246,
-};
-
 export function numericIdForTag(tag: string): number | null {
-  return TAG_TO_NUMERIC_ID[tag] ?? null;
+  const alpha2 = countryCodeForTag(tag);
+  if (!alpha2 || alpha2 === "eu") return null;
+  const numeric = countries.alpha2ToNumeric(alpha2.toUpperCase());
+  return numeric != null ? parseInt(numeric, 10) : null;
 }
