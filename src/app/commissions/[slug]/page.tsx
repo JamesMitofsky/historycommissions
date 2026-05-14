@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCommissions, getCommission } from "@/commissions/get-commissions";
 import { FlagTag } from "@/components/FlagTag";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 import type { Commission, CommissionStatus } from "@/commissions/types";
 
 type Props = {
@@ -38,8 +41,8 @@ const STATUS_LABELS: Record<CommissionStatus, string> = {
 const STATUS_STYLE: Record<CommissionStatus, string> = {
   active: "text-emerald-700 dark:text-emerald-500",
   dormant: "text-amber-700 dark:text-amber-500",
-  concluded: "text-[var(--secondary)]",
-  unknown: "text-[var(--secondary)]",
+  concluded: "text-muted-foreground",
+  unknown: "text-muted-foreground",
 };
 
 const STATUS_DOT: Record<CommissionStatus, string> = {
@@ -64,7 +67,7 @@ function langLabel(code: string) {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary)] opacity-60 mb-2">
+    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-2">
       {children}
     </p>
   );
@@ -78,8 +81,8 @@ function MetaTable({ rows }: { rows: { label: string; value: React.ReactNode }[]
       <tbody>
         {visible.map(({ label, value }) => (
           <tr key={label} className="align-top">
-            <td className="pr-5 py-0.5 text-[var(--secondary)] whitespace-nowrap w-28 opacity-70">{label}</td>
-            <td className="py-0.5 text-[var(--foreground)]">{value}</td>
+            <td className="pr-5 py-0.5 text-muted-foreground whitespace-nowrap w-28">{label}</td>
+            <td className="py-0.5 text-foreground">{value}</td>
           </tr>
         ))}
       </tbody>
@@ -122,36 +125,37 @@ export default async function CommissionPage({ params }: Props) {
   ) : null;
 
   return (
-    <main className="max-w-2xl mx-auto px-6 py-12">
-      <Link
-        href="/commissions"
-        className="inline-flex items-center gap-1.5 text-sm text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors mb-10"
-      >
-        ← All commissions
-      </Link>
+    <main className="max-w-2xl mx-auto px-6 py-12 animate-in fade-in duration-400">
+      <Button variant="ghost" size="sm" asChild className="mb-8 -ml-2 text-muted-foreground hover:text-foreground">
+        <Link href="/commissions">
+          ← All commissions
+        </Link>
+      </Button>
 
       <header className="mb-8">
-        <span className={`inline-flex items-center gap-1.5 text-xs font-medium ${STATUS_STYLE[c.status]}`}>
-          <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${STATUS_DOT[c.status]}`} />
+        <span className={cn("inline-flex items-center gap-1.5 text-xs font-medium", STATUS_STYLE[c.status])}>
+          <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", STATUS_DOT[c.status])} />
           {STATUS_LABELS[c.status]}
         </span>
         <div className="flex items-start justify-between gap-4 mt-1.5">
           <div className="min-w-0">
-            <h1 className="text-2xl font-semibold leading-tight text-[var(--foreground)]">
+            <h1 className="text-2xl font-semibold leading-tight text-foreground">
               {primaryName}
             </h1>
             {hasAlternate && (
-              <p className="text-sm text-[var(--secondary)] mt-1 leading-snug">{c.name.englishName}</p>
+              <p className="text-sm text-muted-foreground mt-1 leading-snug">{c.name.englishName}</p>
             )}
             {otherNames.map((n) => (
-              <p key={n} className="text-sm text-[var(--secondary)] mt-0.5 leading-snug">{n}</p>
+              <p key={n} className="text-sm text-muted-foreground mt-0.5 leading-snug">{n}</p>
             ))}
           </div>
           <div className="shrink-0 pt-1">{linkEl}</div>
         </div>
       </header>
 
-      <div className="border-t border-[var(--border)] pt-8 space-y-8">
+      <Separator className="mb-8" />
+
+      <div className="space-y-8">
         {c.memberCountries.length > 0 && (
           <div>
             <SectionLabel>Member Countries</SectionLabel>
@@ -180,10 +184,10 @@ export default async function CommissionPage({ params }: Props) {
             <SectionLabel>Chairs</SectionLabel>
             <ul className="space-y-1.5">
               {c.chairs.map((chair, i) => (
-                <li key={i} className="text-sm text-[var(--foreground)]">
+                <li key={i} className="text-sm text-foreground">
                   {chair.name}
-                  {chair.affiliation && <span className="text-[var(--secondary)] ml-1.5">— {chair.affiliation}</span>}
-                  <span className="text-[var(--secondary)] ml-1.5">({chair.country})</span>
+                  {chair.affiliation && <span className="text-muted-foreground ml-1.5">— {chair.affiliation}</span>}
+                  <span className="text-muted-foreground ml-1.5">({chair.country})</span>
                 </li>
               ))}
             </ul>
@@ -195,7 +199,7 @@ export default async function CommissionPage({ params }: Props) {
             <SectionLabel>Working Groups</SectionLabel>
             <ul className="list-disc list-outside pl-4 space-y-1">
               {c.workingGroups.map((wg, i) => (
-                <li key={i} className="text-sm text-[var(--foreground)]">{wg}</li>
+                <li key={i} className="text-sm text-foreground">{wg}</li>
               ))}
             </ul>
           </div>
@@ -206,7 +210,7 @@ export default async function CommissionPage({ params }: Props) {
             <SectionLabel>Key Topics</SectionLabel>
             <ul className="list-disc list-outside pl-4 space-y-1">
               {c.keyTopics.map((topic, i) => (
-                <li key={i} className="text-sm text-[var(--foreground)]">{topic}</li>
+                <li key={i} className="text-sm text-foreground">{topic}</li>
               ))}
             </ul>
           </div>
@@ -217,14 +221,14 @@ export default async function CommissionPage({ params }: Props) {
             <SectionLabel>Publications</SectionLabel>
             <ul className="list-disc list-outside pl-4 space-y-2.5">
               {c.publications.map((pub, i) => (
-                <li key={i} className="text-sm text-[var(--foreground)]">
+                <li key={i} className="text-sm text-foreground">
                   {pub.url ? (
                     <a href={pub.url} target="_blank" rel="noopener noreferrer"
                       className="text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 transition-colors underline underline-offset-4 decoration-sky-300 dark:decoration-sky-600">
                       {pub.title}
                     </a>
                   ) : pub.title}
-                  {pub.year && <span className="text-[var(--secondary)] ml-1.5">({pub.year})</span>}
+                  {pub.year && <span className="text-muted-foreground ml-1.5">({pub.year})</span>}
                 </li>
               ))}
             </ul>

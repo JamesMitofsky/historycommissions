@@ -1,9 +1,27 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import type { Commission, CommissionStatus } from "@/commissions/types";
 import { FlagTag } from "@/components/FlagTag";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { Check, ChevronDown, ArrowUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // ─── Labels / mappings ────────────────────────────────────────────────────────
 
@@ -14,18 +32,18 @@ const STATUS_LABELS: Record<CommissionStatus, string> = {
   unknown: "Status unknown",
 };
 
-const STATUS_STYLE: Record<CommissionStatus, string> = {
-  active: "text-emerald-700 dark:text-emerald-500",
-  dormant: "text-amber-700 dark:text-amber-500",
-  concluded: "text-[var(--secondary)]",
-  unknown: "text-[var(--secondary)]",
-};
-
 const STATUS_DOT: Record<CommissionStatus, string> = {
   active: "bg-emerald-500",
   dormant: "bg-amber-400",
   concluded: "bg-neutral-400",
   unknown: "bg-neutral-300",
+};
+
+const STATUS_TEXT: Record<CommissionStatus, string> = {
+  active: "text-emerald-700 dark:text-emerald-400",
+  dormant: "text-amber-700 dark:text-amber-400",
+  concluded: "text-muted-foreground",
+  unknown: "text-muted-foreground",
 };
 
 const LANG_NAMES: Record<string, string> = {
@@ -50,7 +68,7 @@ function englishName(c: Commission): string {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary)] opacity-60 mb-2">
+    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-2">
       {children}
     </p>
   );
@@ -64,8 +82,8 @@ function MetaTable({ rows }: { rows: { label: string; value: React.ReactNode }[]
       <tbody>
         {visible.map(({ label, value }) => (
           <tr key={label} className="align-top">
-            <td className="pr-5 py-0.5 text-[var(--secondary)] whitespace-nowrap w-28 opacity-70">{label}</td>
-            <td className="py-0.5 text-[var(--foreground)]">{value}</td>
+            <td className="pr-5 py-0.5 text-muted-foreground whitespace-nowrap w-28">{label}</td>
+            <td className="py-0.5 text-foreground">{value}</td>
           </tr>
         ))}
       </tbody>
@@ -75,139 +93,122 @@ function MetaTable({ rows }: { rows: { label: string; value: React.ReactNode }[]
 
 function StatusBadge({ status }: { status: CommissionStatus }) {
   return (
-    <span className={`inline-flex items-center gap-1.5 text-xs font-medium ${STATUS_STYLE[status]}`}>
-      <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${STATUS_DOT[status]}`} />
+    <span className={cn("inline-flex items-center gap-1.5 text-xs font-medium", STATUS_TEXT[status])}>
+      <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", STATUS_DOT[status])} />
       {STATUS_LABELS[status]}
     </span>
   );
 }
 
-// ─── Commission card ──────────────────────────────────────────────────────────
+// ─── Filter Popover ───────────────────────────────────────────────────────────
 
-function CommissionCard({ c }: { c: Commission }) {
-  const primaryName = englishName(c);
-
-  return (
-    <article className="py-8 border-t border-[var(--border)]">
-      <div className="mb-4">
-        <StatusBadge status={c.status} />
-        <Link href={`/commissions/${c.slug}`}>
-          <h2 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-[var(--foreground)] hover:underline underline-offset-2">
-            {primaryName}
-          </h2>
-        </Link>
-      </div>
-
-      <div className="space-y-5">
-        {/* Member countries */}
-        {c.memberCountries.length > 0 && (
-          <div>
-            <div className="flex flex-wrap gap-1.5">
-              {c.memberCountries.map((country) => (
-                <FlagTag key={country} tag={country} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div>
-          <MetaTable rows={[
-            { label: "Proposed", value: c.proposedDate ?? null },
-            { label: "Founded", value: c.startDate ? c.startDate.slice(0, 4) : null },
-            { label: "Last active", value: c.lastActiveStatusDate ? c.lastActiveStatusDate.slice(0, 4) : null },
-          ]} />
-        </div>
-
-      </div>
-    </article>
-  );
-}
-
-// ─── Filter dropdown ──────────────────────────────────────────────────────────
-
-interface DropdownProps {
+interface FilterPopoverProps {
   label: string;
-  options: { value: string; display: string; textColor?: string }[];
+  options: { value: string; display: string }[];
   selected: Set<string>;
   onToggle: (value: string) => void;
   onClear: () => void;
 }
 
-function FilterDropdown({ label, options, selected, onToggle, onClear }: DropdownProps) {
+function FilterPopover({ label, options, selected, onToggle, onClear }: FilterPopoverProps) {
   const [open, setOpen] = useState(false);
-  const [search, setSearch] = useState("");
-  const ref = useRef<HTMLDivElement>(null);
   const count = selected.size;
 
-  const filtered = options.filter(({ display }) =>
-    display.toLowerCase().includes(search.toLowerCase())
-  );
-
-  useEffect(() => {
-    function onMouseDown(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    }
-    if (open) document.addEventListener("mousedown", onMouseDown);
-    return () => document.removeEventListener("mousedown", onMouseDown);
-  }, [open]);
-
   return (
-    <div className="relative" ref={ref}>
-      <button
-        onClick={() => setOpen((o) => !o)}
-        className={`inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border transition-colors ${count > 0
-            ? "border-[var(--foreground)] text-[var(--foreground)]"
-            : "border-[var(--border)] text-[var(--secondary)] hover:text-[var(--foreground)] hover:border-[var(--secondary)]"
-          }`}
-      >
-        {label}
-        {count > 0 && (
-          <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[var(--foreground)] text-[var(--background)] text-[10px] font-semibold leading-none">
-            {count}
-          </span>
-        )}
-        <svg className={`w-3 h-3 transition-transform ${open ? "rotate-180" : ""}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <path d="M2 4l4 4 4-4" />
-        </svg>
-      </button>
-
-      {open && (
-        <div className="absolute top-full mt-1 left-0 z-20 min-w-44 rounded-lg border border-[var(--border)] bg-[var(--background)] shadow-sm py-1">
-          <div className="px-3 py-2 border-b border-[var(--border)]">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full text-sm px-2 py-1 rounded border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder-[var(--secondary)] focus:outline-none focus:border-[var(--foreground)]"
-            />
-          </div>
-          {filtered.length === 0 ? (
-            <div className="px-3 py-2 text-xs text-[var(--secondary)]">No matches</div>
-          ) : (
-            filtered.map(({ value, display, textColor }) => (
-              <label key={value} className="flex items-center gap-2.5 px-3 py-1.5 cursor-pointer hover:bg-[var(--border)] transition-colors">
-                <input
-                  type="checkbox"
-                  checked={selected.has(value)}
-                  onChange={() => onToggle(value)}
-                  className="accent-[var(--foreground)]"
-                />
-                <span className={`text-sm ${textColor ?? "text-[var(--foreground)]"}`}>{display}</span>
-              </label>
-            ))
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          size="sm"
+          className={cn(
+            "gap-1.5 font-normal",
+            count > 0 && "border-foreground/50"
           )}
+          aria-expanded={open}
+        >
+          {label}
           {count > 0 && (
-            <div className="px-3 py-1.5 border-t border-[var(--border)]">
-              <button onClick={() => { onClear(); setSearch(""); }} className="text-xs text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors">
-                Clear
+            <Badge variant="secondary" className="h-4 min-w-4 px-1 text-[10px] font-semibold rounded-full">
+              {count}
+            </Badge>
+          )}
+          <ChevronDown className={cn("size-3 opacity-50 transition-transform duration-200", open && "rotate-180")} />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-52 p-0" align="start">
+        <Command>
+          <CommandInput placeholder={`Search ${label.toLowerCase()}…`} />
+          <CommandList>
+            <CommandEmpty>No matches</CommandEmpty>
+            <CommandGroup>
+              {options.map(({ value, display }) => (
+                <CommandItem
+                  key={value}
+                  value={display}
+                  onSelect={() => onToggle(value)}
+                >
+                  <Check
+                    className={cn(
+                      "size-3.5 shrink-0",
+                      selected.has(value) ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {display}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+          {count > 0 && (
+            <div className="border-t px-2 py-1.5">
+              <button
+                onClick={() => { onClear(); }}
+                className="w-full text-left text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Clear {label.toLowerCase()}
               </button>
             </div>
           )}
-        </div>
-      )}
-    </div>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
+// ─── Commission card ──────────────────────────────────────────────────────────
+
+function CommissionCard({ c, index }: { c: Commission; index: number }) {
+  const primaryName = englishName(c);
+
+  return (
+    <article
+      style={{ animationDelay: `${index * 40}ms` }}
+      className="py-7 border-t border-border animate-in fade-in slide-in-from-bottom-1 duration-400 fill-mode-both"
+    >
+      <div className="mb-3">
+        <StatusBadge status={c.status} />
+        <Link href={`/commissions/${c.slug}`}>
+          <h2 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-foreground hover:text-foreground/70 transition-colors">
+            {primaryName}
+          </h2>
+        </Link>
+      </div>
+
+      <div className="space-y-4">
+        {c.memberCountries.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {c.memberCountries.map((country) => (
+              <FlagTag key={country} tag={country} />
+            ))}
+          </div>
+        )}
+
+        <MetaTable rows={[
+          { label: "Proposed", value: c.proposedDate ?? null },
+          { label: "Founded", value: c.startDate ? c.startDate.slice(0, 4) : null },
+          { label: "Last active", value: c.lastActiveStatusDate ? c.lastActiveStatusDate.slice(0, 4) : null },
+        ]} />
+      </div>
+    </article>
   );
 }
 
@@ -240,34 +241,34 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
   });
   const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
 
-  const statusOptions = Array.from(new Set(commissions.map((c) => c.status)))
-    .sort()
-    .map((v) => ({
-      value: v,
-      display: STATUS_LABELS[v as CommissionStatus] ?? v,
-      textColor: STATUS_STYLE[v as CommissionStatus],
-    }));
+  const statusOptions = useMemo(() =>
+    Array.from(new Set(commissions.map((c) => c.status)))
+      .sort()
+      .map((v) => ({ value: v, display: STATUS_LABELS[v as CommissionStatus] ?? v })),
+    [commissions]
+  );
 
-  const languageOptions = Array.from(
-    new Set(commissions.flatMap((c) => c.siteLanguages))
-  )
-    .sort((a, b) => langLabel(a).localeCompare(langLabel(b)))
-    .map((v) => ({ value: v, display: langLabel(v) }));
+  const languageOptions = useMemo(() =>
+    Array.from(new Set(commissions.flatMap((c) => c.siteLanguages)))
+      .sort((a, b) => langLabel(a).localeCompare(langLabel(b)))
+      .map((v) => ({ value: v, display: langLabel(v) })),
+    [commissions]
+  );
 
-  const countryOptions = Array.from(
-    new Set(commissions.flatMap((c) => c.memberCountries))
-  )
-    .sort()
-    .map((v) => ({ value: v, display: v }));
+  const countryOptions = useMemo(() =>
+    Array.from(new Set(commissions.flatMap((c) => c.memberCountries)))
+      .sort()
+      .map((v) => ({ value: v, display: v })),
+    [commissions]
+  );
 
   const filtered = commissions.filter((c) => {
     if (filters.status.size > 0 && !filters.status.has(c.status)) return false;
     if (filters.languages.size > 0 && !c.siteLanguages.some((l) => filters.languages.has(l))) return false;
     if (filters.countries.size > 0 && !c.memberCountries.some((co) => filters.countries.has(co))) return false;
     if (filters.search) {
-      const searchLower = filters.search.toLowerCase();
-      const matchesName = englishName(c).toLowerCase().includes(searchLower) || c.name.englishName.toLowerCase().includes(searchLower);
-      if (!matchesName) return false;
+      const s = filters.search.toLowerCase();
+      if (!englishName(c).toLowerCase().includes(s) && !c.name.englishName.toLowerCase().includes(s)) return false;
     }
     return true;
   }).sort((a, b) => {
@@ -276,6 +277,7 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
   });
 
   const activeCount = filters.status.size + filters.languages.size + filters.countries.size;
+  const hasAnyFilter = activeCount > 0 || !!filters.search;
 
   function clearAll() {
     setFilters({ status: new Set(), languages: new Set(), countries: new Set(), search: "" });
@@ -284,59 +286,62 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
   return (
     <div>
       {/* Filter bar */}
-      <div className="flex flex-wrap items-center gap-2 mb-8">
-        <input
+      <div className="flex flex-wrap items-center gap-2 mb-6">
+        <Input
           type="text"
-          placeholder="Search commissions..."
+          placeholder="Search commissions…"
           value={filters.search}
           onChange={(e) => setFilters((f) => ({ ...f, search: e.target.value }))}
-          className="text-sm px-3 py-1.5 rounded-lg border border-[var(--border)] bg-[var(--background)] text-[var(--foreground)] placeholder-[var(--secondary)] focus:outline-none focus:border-[var(--foreground)]"
+          className="h-8 w-52 text-sm"
         />
-        <FilterDropdown
+        <FilterPopover
           label="Status"
           options={statusOptions}
           selected={filters.status}
           onToggle={(v) => setFilters((f) => ({ ...f, status: toggle(f.status, v) }))}
           onClear={() => setFilters((f) => ({ ...f, status: new Set() }))}
         />
-        <FilterDropdown
+        <FilterPopover
           label="Languages"
           options={languageOptions}
           selected={filters.languages}
           onToggle={(v) => setFilters((f) => ({ ...f, languages: toggle(f.languages, v) }))}
           onClear={() => setFilters((f) => ({ ...f, languages: new Set() }))}
         />
-        <FilterDropdown
+        <FilterPopover
           label="Countries"
           options={countryOptions}
           selected={filters.countries}
           onToggle={(v) => setFilters((f) => ({ ...f, countries: toggle(f.countries, v) }))}
           onClear={() => setFilters((f) => ({ ...f, countries: new Set() }))}
         />
-        {(activeCount > 0 || filters.search) && (
-          <button onClick={clearAll} className="text-xs text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors ml-1">
+        {hasAnyFilter && (
+          <Button variant="ghost" size="sm" onClick={clearAll} className="text-muted-foreground hover:text-foreground h-8">
             Clear all
-          </button>
+          </Button>
         )}
       </div>
 
-      <div className="flex items-center justify-between mb-8">
-        <p className="text-xs text-[var(--secondary)]">
+      <div className="flex items-center justify-between mb-6">
+        <p className="text-xs text-muted-foreground">
           {filtered.length} of {commissions.length} commissions
         </p>
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={() => setSortDir((d) => d === "asc" ? "desc" : "asc")}
-          className="text-xs text-[var(--secondary)] hover:text-[var(--foreground)] bg-[var(--border)] hover:bg-[var(--border)] px-2 py-1 rounded-md transition-colors"
+          className="text-xs text-muted-foreground h-8 gap-1.5"
         >
-          {sortDir === "asc" ? "Oldest first ↑" : "Most recent first ↓"}
-        </button>
+          <ArrowUpDown className="size-3" />
+          {sortDir === "asc" ? "Oldest first" : "Most recent first"}
+        </Button>
       </div>
 
       {filtered.length === 0 ? (
-        <p className="text-sm text-[var(--secondary)] py-8">No commissions match the selected filters.</p>
+        <p className="text-sm text-muted-foreground py-8">No commissions match the selected filters.</p>
       ) : (
         <div>
-          {filtered.map((c, i) => <CommissionCard key={i} c={c} />)}
+          {filtered.map((c, i) => <CommissionCard key={c.slug} c={c} index={i} />)}
         </div>
       )}
     </div>

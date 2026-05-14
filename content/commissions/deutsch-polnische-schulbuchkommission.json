@@ -10,16 +10,13 @@
         "name": "Polsko-Niemiecka Komisja Podręcznikowa"
       }
     ],
-    "englishName": "German-Polish Textbook Commission"
+    "englishName": "History and Civic Education as a Foundation for International Understanding"
   },
   "proposedDate": null,
   "startDate": "1972-02",
   "lastActiveStatusDate": null,
   "lastActiveStatus": null,
-  "memberCountries": [
-    "Germany",
-    "Poland"
-  ],
+  "memberCountries": ["Germany", "Poland"],
   "sponsoringInstitutions": [],
   "keyTopics": [
     "German-Polish history in educational media",
@@ -56,10 +53,7 @@
   ],
   "url": "https://schulbuchkommission.eu/",
   "linkStatus": "working",
-  "siteLanguages": [
-    "de",
-    "pl"
-  ],
+  "siteLanguages": ["de", "pl"],
   "lastArchivedSnapshot": "https://web.archive.org/web/20260312003536/https://schulbuchkommission.eu/",
   "archivableDocuments": []
 }

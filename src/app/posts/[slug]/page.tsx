@@ -72,7 +72,7 @@ export default async function PostPage({ params }: Props) {
     <main className="max-w-2xl mx-auto px-6 py-12">
       <Link
         href="/"
-        className="inline-flex items-center gap-1.5 text-sm text-[var(--secondary)] hover:text-[var(--foreground)] transition-colors mb-10"
+        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[var(--foreground)] transition-colors mb-10"
       >
         ← All posts
       </Link>
@@ -93,7 +93,7 @@ export default async function PostPage({ params }: Props) {
               />
             </div>
             {post.imageAttribution && (
-              <figcaption className="mt-1.5 text-xs text-[var(--secondary)] text-right">
+              <figcaption className="mt-1.5 text-xs text-muted-foreground text-right">
                 {post.imageAttributionUrl ? (
                   <a
                     href={post.imageAttributionUrl}
@@ -117,7 +117,7 @@ export default async function PostPage({ params }: Props) {
             {post.title}
           </h1>
         )}
-        <div className="flex items-center justify-between text-sm text-[var(--secondary)]">
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
           {formattedDate && <time>{formattedDate}</time>}
           {post.author && <span>{post.author}</span>}
         </div>
