@@ -140,7 +140,7 @@ export default async function CommissionPage({ params }: Props) {
         </span>
         <div className="flex items-start justify-between gap-4 mt-1.5">
           <div className="min-w-0">
-            <h1 className="text-2xl font-semibold leading-tight text-foreground" style={{ fontFamily: "var(--font-playfair)" }}>
+            <h1 className="text-2xl font-semibold leading-tight text-foreground font-playfair">
               {primaryName}
             </h1>
             {hasAlternate && (

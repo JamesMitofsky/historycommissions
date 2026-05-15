@@ -68,7 +68,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans text-base leading-[1.7] antialiased [text-rendering:optimizeLegibility]">
         {/* Masthead — image + nav + site title in one unit */}
-        <header className="relative w-full h-56 overflow-hidden">
+        <header className="relative w-full h-56 overflow-hidden" style={{ viewTransitionName: "site-header" }}>
           <Image
             src="/hero.webp"
             alt=""
@@ -91,7 +91,7 @@ export default async function RootLayout({
                 <p className="text-[0.65rem] font-medium tracking-[0.18em] uppercase text-white/60 mb-1">
                   A digital archive
                 </p>
-                <h1 className="text-3xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-playfair)" }}>
+                <h1 className="text-3xl font-bold text-white leading-tight font-playfair">
                   <span className="block">History</span>
                   <span className="block">Commissions</span>
                 </h1>

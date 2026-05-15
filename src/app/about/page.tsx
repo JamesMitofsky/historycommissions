@@ -2,12 +2,12 @@ export default function AboutPage() {
   return (
     <main className="max-w-2xl mx-auto px-6 pb-14 pt-8">
       <h1
-        style={{ animationDelay: "60ms", fontFamily: "var(--font-playfair)" }}
-        className="text-2xl font-semibold mb-8 text-[var(--foreground)] animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+        style={{ animationDelay: "60ms" }}
+        className="text-2xl font-semibold mb-8 text-foreground animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both font-playfair"
       >
         About
       </h1>
-      <div className="space-y-5 text-[var(--foreground)] leading-relaxed">
+      <div className="space-y-5 text-foreground leading-relaxed">
         <p
           style={{ animationDelay: "140ms" }}
           className="animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
@@ -37,7 +37,7 @@ export default function AboutPage() {
 
       <div
         style={{ animationDelay: "320ms" }}
-        className="mt-12 pt-8 border-t border-[var(--border)] text-sm text-muted-foreground leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+        className="mt-12 pt-8 border-t border-border text-sm text-muted-foreground leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
       >
         <p>
           This project is maintained by{" "}

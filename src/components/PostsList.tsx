@@ -1,15 +1,22 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { ViewTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Fuse from "fuse.js";
 import type { Post } from "@/blog/types";
 import { FlagTag } from "@/components/FlagTag";
 import { GooeyInput } from "@/components/ui/gooey-input";
+import { navigatingViaViewTransition, setNavigatingViaViewTransition } from "@/lib/navigation-state";
 
 export function PostsList({ posts }: { posts: Post[] }) {
   const [query, setQuery] = useState("");
+  const [animate] = useState(!navigatingViaViewTransition);
+
+  useEffect(() => {
+    setNavigatingViaViewTransition(false);
+  }, []);
 
   const fuse = useMemo(
     () =>
@@ -40,8 +47,8 @@ export function PostsList({ posts }: { posts: Post[] }) {
   return (
     <div>
       <div
-        style={{ animationDelay: "60ms" }}
-        className="flex justify-end animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+        className={`flex justify-end ${animate ? "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" : ""}`}
+        style={animate ? { animationDelay: "60ms" } : undefined}
       >
         <GooeyInput
           placeholder="Search..."
@@ -66,11 +73,13 @@ export function PostsList({ posts }: { posts: Post[] }) {
             return (
               <li
                 key={post.slug}
-                style={{ animationDelay: `${100 + i * 60}ms` }}
-                className="animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both"
+                className={animate ? "animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both" : ""}
+                style={animate ? { animationDelay: `${100 + i * 60}ms` } : undefined}
               >
                 <Link
                   href={`/posts/${post.slug}`}
+                  transitionTypes={["nav-forward"]}
+                  onClick={() => { setNavigatingViaViewTransition(true); }}
                   className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 py-5 transition-opacity duration-150 hover:opacity-75"
                 >
                   <div className="flex-1 min-w-0">
@@ -79,9 +88,11 @@ export function PostsList({ posts }: { posts: Post[] }) {
                         {formattedDate}
                       </time>
                     )}
-                    <h2 className="mt-0.5 text-base font-semibold leading-snug text-foreground" style={{ fontFamily: "var(--font-playfair)" }}>
-                      {post.title ?? post.slug}
-                    </h2>
+                    <ViewTransition name={`post-title-${post.slug}`}>
+                      <h2 className="mt-0.5 text-base font-semibold leading-snug text-foreground font-playfair">
+                        {post.title ?? post.slug}
+                      </h2>
+                    </ViewTransition>
                     {post.tags.length > 0 && (
                       <div className="mt-2 flex flex-wrap gap-1.5">
                         {post.tags.map((tag) => (
@@ -91,18 +102,20 @@ export function PostsList({ posts }: { posts: Post[] }) {
                     )}
                   </div>
                   {post.image && (
-                    <div className="relative w-full sm:w-64 h-48 sm:h-[160px] shrink-0 overflow-hidden bg-muted">
-                      <Image
-                        src={post.image}
-                        alt=""
-                        fill
-                        sizes="256px"
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        placeholder={post.blurDataURL ? "blur" : "empty"}
-                        blurDataURL={post.blurDataURL ?? undefined}
-                        unoptimized={post.image.toLowerCase().endsWith(".svg")}
-                      />
-                    </div>
+                    <ViewTransition name={`post-image-${post.slug}`}>
+                      <div className="relative w-full sm:w-64 h-48 sm:h-[160px] shrink-0 overflow-hidden bg-muted">
+                        <Image
+                          src={post.image}
+                          alt=""
+                          fill
+                          sizes="256px"
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          placeholder={post.blurDataURL ? "blur" : "empty"}
+                          blurDataURL={post.blurDataURL ?? undefined}
+                          unoptimized={post.image.toLowerCase().endsWith(".svg")}
+                        />
+                      </div>
+                    </ViewTransition>
                   )}
                 </Link>
               </li>

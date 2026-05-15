@@ -188,7 +188,7 @@ function CommissionCard({ c, index }: { c: Commission; index: number }) {
       <div className="mb-3">
         <StatusBadge status={c.status} />
         <Link href={`/commissions/${c.slug}`}>
-          <h2 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-foreground hover:text-foreground/70 transition-colors">
+          <h2 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-foreground font-playfair hover:text-foreground/70 transition-colors">
             {primaryName}
           </h2>
         </Link>
@@ -327,9 +327,9 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
     <div>
       <div className="mb-10">
         <h1
-          style={{ animationDelay: mounted ? "60ms" : undefined, fontFamily: "var(--font-playfair)" }}
+          style={{ animationDelay: mounted ? "60ms" : undefined }}
           className={cn(
-            "text-2xl font-semibold text-[var(--foreground)]",
+            "text-2xl font-semibold text-foreground font-playfair",
             mounted && "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
           )}
         >

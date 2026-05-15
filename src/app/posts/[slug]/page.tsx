@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ViewTransition } from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -8,6 +8,7 @@ import { getPost, getPostSlugs } from "@/blog";
 import { Prose } from "@/ui";
 import { FlagTag } from "@/ui/FlagTag";
 import { CommissionMap } from "@/components/CommissionMap";
+import { BackLink } from "@/components/BackLink";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -63,26 +64,23 @@ export default async function PostPage({ params }: Props) {
 
   const formattedDate = post.date
     ? new Date(post.date).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : null;
 
   return (
-    <main className="max-w-2xl mx-auto px-6 py-12 animate-in fade-in duration-400 delay-200">
-      <Link
-        href="/"
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[var(--foreground)] transition-colors mb-10"
-      >
-        ← All posts
-      </Link>
+    <main className="max-w-2xl mx-auto px-6 py-12">
+      <BackLink />
 
       <header className="mb-10">
         {post.title && (
-          <h1 className="text-2xl font-semibold leading-tight text-[var(--foreground)] mb-4">
-            {post.title}
-          </h1>
+          <ViewTransition name={`post-title-${post.slug}`}>
+            <h1 className="text-2xl font-semibold leading-tight font-playfair text-foreground mb-4">
+              {post.title}
+            </h1>
+          </ViewTransition>
         )}
         <div className="flex items-center justify-between text-sm text-muted-foreground">
           {formattedDate && <time>{formattedDate}</time>}
@@ -105,21 +103,23 @@ export default async function PostPage({ params }: Props) {
                 </div>
               )}
               {post.image && (
-                <div className={post.tags.length > 0 ? "sm:flex-[2] min-w-0" : "w-full"}>
-                  <div className="relative rounded-lg overflow-hidden bg-[var(--border)] h-[200px] sm:h-full">
-                    <Image
-                      src={post.image}
-                      alt={post.title ?? ""}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 672px"
-                      className="object-cover"
-                      priority
-                      placeholder={post.blurDataURL ? "blur" : "empty"}
-                      blurDataURL={post.blurDataURL ?? undefined}
-                      unoptimized={post.image.toLowerCase().endsWith(".svg")}
-                    />
+                <ViewTransition name={`post-image-${post.slug}`}>
+                  <div className={post.tags.length > 0 ? "sm:flex-[2] min-w-0" : "w-full"}>
+                    <div className="relative rounded-lg overflow-hidden bg-border h-[200px] sm:h-full">
+                      <Image
+                        src={post.image}
+                        alt={post.title ?? ""}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 672px"
+                        className="object-cover"
+                        priority
+                        placeholder={post.blurDataURL ? "blur" : "empty"}
+                        blurDataURL={post.blurDataURL ?? undefined}
+                        unoptimized={post.image.toLowerCase().endsWith(".svg")}
+                      />
+                    </div>
                   </div>
-                </div>
+                </ViewTransition>
               )}
             </div>
             {post.imageAttribution && (
@@ -142,7 +142,7 @@ export default async function PostPage({ params }: Props) {
           </div>
         )}
 
-        <div className="mt-8 border-b border-[var(--border)]" />
+        <div className="mt-8 border-b border-border" />
       </header>
 
       <Prose>
