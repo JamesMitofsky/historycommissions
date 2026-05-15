@@ -92,7 +92,8 @@ export default async function RootLayout({
                   A digital archive
                 </p>
                 <h1 className="text-3xl font-bold text-white leading-tight" style={{ fontFamily: "var(--font-playfair)" }}>
-                  History Commissions
+                  <span className="block">History</span>
+                  <span className="block">Commissions</span>
                 </h1>
               </Link>
             </div>

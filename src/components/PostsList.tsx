@@ -68,7 +68,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
               >
                 <Link
                   href={`/posts/${post.slug}`}
-                  className="group flex items-start gap-6 py-5 transition-opacity duration-150 hover:opacity-75"
+                  className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 py-5 transition-opacity duration-150 hover:opacity-75"
                 >
                   <div className="flex-1 min-w-0">
                     {formattedDate && (
@@ -88,7 +88,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
                     )}
                   </div>
                   {post.image && (
-                    <div className="relative shrink-0 w-64 h-[160px] overflow-hidden bg-muted">
+                    <div className="relative w-full sm:w-64 h-48 sm:h-[160px] shrink-0 overflow-hidden bg-muted">
                       <Image
                         src={post.image}
                         alt=""

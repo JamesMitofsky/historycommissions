@@ -79,17 +79,34 @@ export default async function PostPage({ params }: Props) {
       </Link>
 
       <header className="mb-10">
+        {post.title && (
+          <h1 className="text-2xl font-semibold leading-tight text-[var(--foreground)] mb-4">
+            {post.title}
+          </h1>
+        )}
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          {formattedDate && <time>{formattedDate}</time>}
+          {post.author && <span>{post.author}</span>}
+        </div>
+        {post.tags.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {post.tags.map((tag) => (
+              <FlagTag key={tag} tag={tag} />
+            ))}
+          </div>
+        )}
+
         {(post.image || post.tags.length > 0) && (
-          <div className="mb-6">
-            <div className="flex gap-3 items-stretch min-h-[180px]">
+          <div className="mt-6">
+            <div className="flex flex-col sm:flex-row gap-3 sm:items-stretch sm:min-h-[180px]">
               {post.tags.length > 0 && (
-                <div className={post.image ? "flex-[1] min-w-0" : "w-full"}>
+                <div className={post.image ? "sm:flex-[1] min-w-0" : "w-full"}>
                   <CommissionMap memberCountries={post.tags} />
                 </div>
               )}
               {post.image && (
-                <div className={post.tags.length > 0 ? "flex-[2] min-w-0" : "w-full"}>
-                  <div className="relative rounded-lg overflow-hidden bg-[var(--border)] h-full">
+                <div className={post.tags.length > 0 ? "sm:flex-[2] min-w-0" : "w-full"}>
+                  <div className="relative rounded-lg overflow-hidden bg-[var(--border)] h-[200px] sm:h-full">
                     <Image
                       src={post.image}
                       alt={post.title ?? ""}
@@ -122,23 +139,6 @@ export default async function PostPage({ params }: Props) {
                 (CC BY-SA 3.0)
               </p>
             )}
-          </div>
-        )}
-
-        {post.title && (
-          <h1 className="text-2xl font-semibold leading-tight text-[var(--foreground)] mb-4">
-            {post.title}
-          </h1>
-        )}
-        <div className="flex items-center justify-between text-sm text-muted-foreground">
-          {formattedDate && <time>{formattedDate}</time>}
-          {post.author && <span>{post.author}</span>}
-        </div>
-        {post.tags.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {post.tags.map((tag) => (
-              <FlagTag key={tag} tag={tag} />
-            ))}
           </div>
         )}
 

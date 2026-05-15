@@ -78,7 +78,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
   // whose highlight status changed so globe.gl only re-renders those polygons.
   const annotatedCacheRef = useRef<Map<number, GeoFeature>>(new Map());
   const [annotatedPolygons, setAnnotatedPolygons] = useState<GeoFeature[]>([]);
-  const [containerWidth, setContainerWidth] = useState(500);
+  const [containerWidth, setContainerWidth] = useState(0);
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const centroidsRef = useRef<Map<number, [number, number]>>(new Map());
 
@@ -193,8 +193,10 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (containerWidth === 0) return <div ref={containerRef} className="w-full overflow-hidden" />;
+
   return (
-    <div ref={containerRef} className="w-full">
+    <div ref={containerRef} className="w-full overflow-hidden">
       <div className="flex gap-2 mb-2 text-xs">
         <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.active, color: "#fff" }}>Active</span>
         <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.dormant, color: "#fff" }}>Dormant</span>
@@ -223,7 +225,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
             const controls = globeRef.current?.controls();
             if (controls) {
               controls.rotateSpeed = 0.4;
-              controls.enableZoom = false;
+              controls.enableZoom = navigator.maxTouchPoints > 0;
               controls.dampingFactor = 0.08;
               controls.enableDamping = true;
             }
@@ -263,7 +265,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
           arcDashLength={0.8}
           arcDashGap={0.01}
           arcDashAnimateTime={12000}
-          arcStroke={1.2}
+          arcStroke={.4}
           arcAltitudeAutoScale={0.25}
           enablePointerInteraction={true}
         />
