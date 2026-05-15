@@ -248,6 +248,8 @@ const ACTIVITY_ORDER: Record<CommissionStatus, number> = {
   concluded: 3,
 };
 
+type FilterMode = "exclusive" | "inclusive";
+
 export function CommissionsClient({ commissions }: { commissions: Commission[] }) {
   const [filters, setFilters] = useState<Filters>({
     status: new Set(),
@@ -255,6 +257,7 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
     countries: new Set(),
     search: "",
   });
+  const [filterMode, setFilterMode] = useState<FilterMode>("exclusive");
   const [sortMode, setSortMode] = useState<SortMode>("activity");
   const [sortOpen, setSortOpen] = useState(false);
 
@@ -282,8 +285,18 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
   const filtered = useMemo(() =>
     commissions.filter((c) => {
       if (filters.status.size > 0 && !filters.status.has(c.status)) return false;
-      if (filters.languages.size > 0 && !c.siteLanguages.some((l) => filters.languages.has(l))) return false;
-      if (filters.countries.size > 0 && !c.memberCountries.some((co) => filters.countries.has(co))) return false;
+      if (filters.languages.size > 0) {
+        const match = filterMode === "exclusive"
+          ? [...filters.languages].every((l) => c.siteLanguages.includes(l))
+          : c.siteLanguages.some((l) => filters.languages.has(l));
+        if (!match) return false;
+      }
+      if (filters.countries.size > 0) {
+        const match = filterMode === "exclusive"
+          ? [...filters.countries].every((co) => c.memberCountries.includes(co))
+          : c.memberCountries.some((co) => filters.countries.has(co));
+        if (!match) return false;
+      }
       if (filters.search) {
         const s = filters.search.toLowerCase();
         if (!englishName(c).toLowerCase().includes(s) && !c.name.englishName.toLowerCase().includes(s)) return false;
@@ -298,7 +311,7 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
       const diff = parseYear(a.startDate) - parseYear(b.startDate);
       return sortMode === "recency-asc" ? diff : -diff;
     }),
-    [commissions, filters, sortMode]
+    [commissions, filters, filterMode, sortMode]
   );
 
   const activeCount = filters.status.size + filters.languages.size + filters.countries.size;
@@ -350,6 +363,32 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
           onToggle={(v) => setFilters((f) => ({ ...f, countries: toggle(f.countries, v) }))}
           onClear={() => setFilters((f) => ({ ...f, countries: new Set() }))}
         />
+        {activeCount > 0 && (
+          <div className="flex items-center rounded-md border text-xs h-8 overflow-hidden">
+            <button
+              onClick={() => setFilterMode("exclusive")}
+              className={cn(
+                "px-2.5 h-full transition-colors",
+                filterMode === "exclusive"
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              Match only
+            </button>
+            <button
+              onClick={() => setFilterMode("inclusive")}
+              className={cn(
+                "px-2.5 h-full transition-colors",
+                filterMode === "inclusive"
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              Match any
+            </button>
+          </div>
+        )}
         {hasAnyFilter && (
           <Button variant="ghost" size="sm" onClick={clearAll} className="text-muted-foreground hover:text-foreground h-8">
             Clear all
