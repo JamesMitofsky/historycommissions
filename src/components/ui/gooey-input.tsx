@@ -116,9 +116,23 @@ export function GooeyInput({
   const iconLayoutId = `gooey-input-icon-${safeId}`;
   const inputLayoutId = `gooey-input-field-${safeId}`;
 
+  const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const prevExpandedRef = useRef(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [availableWidth, setAvailableWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!rootRef.current) return;
+    const measure = () => {
+      const parent = rootRef.current?.parentElement;
+      if (parent) setAvailableWidth(parent.getBoundingClientRect().width);
+    };
+    measure();
+    const obs = new ResizeObserver(measure);
+    if (rootRef.current.parentElement) obs.observe(rootRef.current.parentElement);
+    return () => obs.disconnect();
+  }, []);
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
 
   const isControlled = valueProp !== undefined;
@@ -151,12 +165,17 @@ export function GooeyInput({
     prevExpandedRef.current = isExpanded;
   }, [isExpanded, setSearchText]);
 
+  const effectiveExpandedWidth = availableWidth != null
+    ? Math.min(expandedWidth, availableWidth - expandedOffset)
+    : expandedWidth;
+  const effectiveOffset = expandedOffset;
+
   const buttonVariants = useMemo(
     () => ({
       collapsed: { width: collapsedWidth, marginLeft: 0 },
-      expanded: { width: expandedWidth, marginLeft: expandedOffset },
+      expanded: { width: effectiveExpandedWidth, marginLeft: effectiveOffset },
     }),
-    [collapsedWidth, expandedWidth, expandedOffset],
+    [collapsedWidth, effectiveExpandedWidth, effectiveOffset],
   );
 
   const handleExpand = useCallback(() => {
@@ -179,6 +198,7 @@ export function GooeyInput({
 
   return (
     <div
+      ref={rootRef}
       className={cn(
         "relative flex items-center justify-center",
         className,
@@ -216,6 +236,7 @@ export function GooeyInput({
             ) : null}
             <motion.input
               layoutId={inputLayoutId}
+              transition={transition}
               ref={inputRef}
               type="search"
               enterKeyHint="search"
