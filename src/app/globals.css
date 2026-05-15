@@ -152,26 +152,26 @@
   animation: none;
 }
 
-::view-transition-old(.nav-forward) {
+:root:active-view-transition-type(nav-forward) ::view-transition-old(root) {
   --slide-offset: -50px;
   animation:
     150ms ease-in both fade-vt reverse,
     350ms ease-in-out both slide-vt reverse;
 }
-::view-transition-new(.nav-forward) {
+:root:active-view-transition-type(nav-forward) ::view-transition-new(root) {
   --slide-offset: 50px;
   animation:
     200ms ease-out 150ms both fade-vt,
     350ms ease-in-out both slide-vt;
 }
 
-::view-transition-old(.nav-back) {
+:root:active-view-transition-type(nav-back) ::view-transition-old(root) {
   --slide-offset: 50px;
   animation:
     150ms ease-in both fade-vt reverse,
     350ms ease-in-out both slide-vt reverse;
 }
-::view-transition-new(.nav-back) {
+:root:active-view-transition-type(nav-back) ::view-transition-new(root) {
   --slide-offset: -50px;
   animation:
     200ms ease-out 150ms both fade-vt,

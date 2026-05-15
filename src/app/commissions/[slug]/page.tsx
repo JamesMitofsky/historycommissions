@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCommissions, getCommission } from "@/commissions/get-commissions";
 import { FlagTag } from "@/components/FlagTag";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import type { Commission, CommissionStatus } from "@/commissions/types";
 import { CommissionMap } from "@/components/CommissionMap";
@@ -149,15 +148,10 @@ export default async function CommissionPage({ params }: Props) {
             {hasAlternate && (
               <p className="text-sm text-muted-foreground mt-1 leading-snug">{c.name.englishName}</p>
             )}
-            {otherNames.map((n) => (
-              <p key={n} className="text-sm text-muted-foreground mt-0.5 leading-snug">{n}</p>
-            ))}
           </div>
           <div className="shrink-0 pt-1">{linkEl}</div>
         </div>
       </header>
-
-      <Separator className="mb-8" />
 
       <div className="space-y-8">
         {c.memberCountries.length > 0 && (
@@ -166,6 +160,17 @@ export default async function CommissionPage({ params }: Props) {
               <CommissionMap memberCountries={c.memberCountries} aspectRatio={6 / 19} />
             </div>
           </ViewTransition>
+        )}
+
+        {otherNames.length > 0 && (
+          <div>
+            <SectionLabel>Other Names</SectionLabel>
+            <ul className="space-y-0.5">
+              {otherNames.map((n) => (
+                <li key={n} className="text-sm text-muted-foreground leading-snug">{n}</li>
+              ))}
+            </ul>
+          </div>
         )}
 
         {c.memberCountries.length > 0 && (
