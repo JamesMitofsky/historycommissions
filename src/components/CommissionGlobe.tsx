@@ -218,22 +218,20 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (containerWidth === 0) return <div ref={containerRef} className="w-full overflow-hidden" />;
-
   return (
     <div ref={containerRef} className="w-full overflow-hidden">
-      <div className="flex gap-2 mb-2 text-xs">
+      <div className="flex gap-2 mb-2 text-xs animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" style={{ animationDelay: "220ms" }}>
         <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.active, color: "#fff" }}>Active</span>
         <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.dormant, color: "#fff" }}>Dormant</span>
         <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.concluded, color: "#fff" }}>Concluded / Unknown</span>
       </div>
       <div
-        className="overflow-hidden"
-        style={{ height: globeHeight }}
+        className="overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-900 fill-mode-both"
+        style={{ height: containerWidth > 0 ? globeHeight : undefined, aspectRatio: "10 / 9", animationDelay: "340ms" }}
         onPointerDown={scheduleReset}
         onPointerMove={scheduleReset}
       >
-        <Globe
+        {containerWidth > 0 && <Globe
           ref={globeRef}
           animateIn={false}
           onGlobeReady={() => {
@@ -293,7 +291,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
           arcStroke={.4}
           arcAltitude={(d) => (d as Arc).altitude}
           enablePointerInteraction={true}
-        />
+        />}
       </div>
     </div>
   );

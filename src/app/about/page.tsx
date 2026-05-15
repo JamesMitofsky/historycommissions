@@ -1,9 +1,17 @@
 export default function AboutPage() {
   return (
     <main className="max-w-2xl mx-auto px-6 pb-14 pt-8">
-      <h1 className="text-2xl font-semibold mb-8 text-[var(--foreground)]">About</h1>
+      <h1
+        style={{ animationDelay: "60ms", fontFamily: "var(--font-playfair)" }}
+        className="text-2xl font-semibold mb-8 text-[var(--foreground)] animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+      >
+        About
+      </h1>
       <div className="space-y-5 text-[var(--foreground)] leading-relaxed">
-        <p>
+        <p
+          style={{ animationDelay: "140ms" }}
+          className="animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+        >
           Since the 1990s, there has been a proliferation of efforts to confront
           the &ldquo;difficult past,&rdquo; including cross-national dialogue among historians
           from countries involved in past conflicts. In particular, over twenty bilateral
@@ -15,7 +23,10 @@ export default function AboutPage() {
           historical knowledge at a time when universal truth in history is no longer
           self-evident.
         </p>
-        <p>
+        <p
+          style={{ animationDelay: "220ms" }}
+          className="animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+        >
           This forum aims at bringing together information about joint historians&rsquo;
           commissions or other similar endeavors from across the world. Through a
           comparative study of these cross-national dialogues, it is hoped that one
@@ -24,7 +35,10 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-[var(--border)] text-sm text-muted-foreground leading-relaxed">
+      <div
+        style={{ animationDelay: "320ms" }}
+        className="mt-12 pt-8 border-t border-[var(--border)] text-sm text-muted-foreground leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+      >
         <p>
           This project is maintained by{" "}
           <a

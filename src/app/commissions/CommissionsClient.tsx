@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import type { Commission, CommissionStatus } from "@/commissions/types";
 import { FlagTag } from "@/components/FlagTag";
@@ -260,6 +260,8 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
   const [filterMode, setFilterMode] = useState<FilterMode>("exclusive");
   const [sortMode, setSortMode] = useState<SortMode>("activity");
   const [sortOpen, setSortOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const statusOptions = useMemo(() =>
     Array.from(new Set(commissions.map((c) => c.status)))
@@ -323,6 +325,26 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
 
   return (
     <div>
+      <div className="mb-10">
+        <h1
+          style={{ animationDelay: mounted ? "60ms" : undefined, fontFamily: "var(--font-playfair)" }}
+          className={cn(
+            "text-2xl font-semibold text-[var(--foreground)]",
+            mounted && "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+          )}
+        >
+          Bilateral Commissions
+        </h1>
+        <p
+          style={{ animationDelay: mounted ? "140ms" : undefined }}
+          className={cn(
+            "mt-1 text-sm text-muted-foreground",
+            mounted && "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+          )}
+        >
+          {commissions.length}{" "}bilateral historians&apos; commissions
+        </p>
+      </div>
       <div className="mb-6">
         <CommissionGlobe
           commissions={commissions}

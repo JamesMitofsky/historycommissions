@@ -39,7 +39,10 @@ export function PostsList({ posts }: { posts: Post[] }) {
 
   return (
     <div>
-      <div className="flex justify-end">
+      <div
+        style={{ animationDelay: "60ms" }}
+        className="flex justify-end animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+      >
         <GooeyInput
           placeholder="Search..."
           value={query}
