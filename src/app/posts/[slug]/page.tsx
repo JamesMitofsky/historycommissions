@@ -98,13 +98,13 @@ export default async function PostPage({ params }: Props) {
           <div className="mt-6">
             <div className="flex flex-col sm:flex-row gap-3 sm:items-stretch sm:min-h-[180px]">
               {post.tags.length > 0 && (
-                <div className={post.image ? "sm:flex-[1] min-w-0" : "w-full"}>
+                <div className={post.image ? "order-2 sm:order-none sm:flex-[1] min-w-0" : "w-full"}>
                   <CommissionMap memberCountries={post.tags} />
                 </div>
               )}
               {post.image && (
                 <ViewTransition name={`post-image-${post.slug}`}>
-                  <div className={post.tags.length > 0 ? "sm:flex-[2] min-w-0" : "w-full"}>
+                  <div className={post.tags.length > 0 ? "order-1 sm:order-none sm:flex-[2] min-w-0" : "w-full"}>
                     <div className="relative rounded-lg overflow-hidden bg-border h-[200px] sm:h-full">
                       <Image
                         src={post.image}
