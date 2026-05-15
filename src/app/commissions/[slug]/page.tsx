@@ -1,13 +1,13 @@
-import Link from "next/link";
+import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCommissions, getCommission } from "@/commissions/get-commissions";
 import { FlagTag } from "@/components/FlagTag";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import type { Commission, CommissionStatus } from "@/commissions/types";
 import { CommissionMap } from "@/components/CommissionMap";
+import { BackLink } from "@/components/BackLink";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -126,12 +126,13 @@ export default async function CommissionPage({ params }: Props) {
   ) : null;
 
   return (
-    <main className="max-w-2xl mx-auto px-6 py-12 animate-in fade-in duration-400 delay-200">
-      <Button variant="ghost" size="sm" asChild className="mb-8 -ml-2 text-muted-foreground hover:text-foreground">
-        <Link href="/commissions">
-          ← All commissions
-        </Link>
-      </Button>
+    <main className="max-w-2xl mx-auto px-6 py-12">
+      <BackLink
+        href="/commissions"
+        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+      >
+        ← All commissions
+      </BackLink>
 
       <header className="mb-8">
         <span className={cn("inline-flex items-center gap-1.5 text-xs font-medium", STATUS_STYLE[c.status])}>
@@ -140,9 +141,11 @@ export default async function CommissionPage({ params }: Props) {
         </span>
         <div className="flex items-start justify-between gap-4 mt-1.5">
           <div className="min-w-0">
-            <h1 className="text-2xl font-semibold leading-tight text-foreground font-playfair">
-              {primaryName}
-            </h1>
+            <ViewTransition name={`commission-title-${c.slug}`}>
+              <h1 className="text-2xl font-semibold leading-tight text-foreground font-playfair">
+                {primaryName}
+              </h1>
+            </ViewTransition>
             {hasAlternate && (
               <p className="text-sm text-muted-foreground mt-1 leading-snug">{c.name.englishName}</p>
             )}
@@ -158,9 +161,11 @@ export default async function CommissionPage({ params }: Props) {
 
       <div className="space-y-8">
         {c.memberCountries.length > 0 && (
-          <div>
-            <CommissionMap memberCountries={c.memberCountries} aspectRatio={6 / 19} />
-          </div>
+          <ViewTransition name={`commission-map-${c.slug}`}>
+            <div>
+              <CommissionMap memberCountries={c.memberCountries} aspectRatio={6 / 19} />
+            </div>
+          </ViewTransition>
         )}
 
         {c.memberCountries.length > 0 && (

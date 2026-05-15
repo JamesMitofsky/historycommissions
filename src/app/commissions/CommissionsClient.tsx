@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { ViewTransition } from "react";
 import Link from "next/link";
 import type { Commission, CommissionStatus } from "@/commissions/types";
 import { FlagTag } from "@/components/FlagTag";
@@ -8,6 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CommissionGlobe } from "@/components/CommissionGlobe";
+import { CommissionMap } from "@/components/CommissionMap";
+import { navigatingViaViewTransition, setNavigatingViaViewTransition } from "@/lib/navigation-state";
 import {
   Popover,
   PopoverContent,
@@ -177,38 +180,53 @@ function FilterPopover({ label, options, selected, onToggle, onClear }: FilterPo
 
 // ─── Commission card ──────────────────────────────────────────────────────────
 
-function CommissionCard({ c, index }: { c: Commission; index: number }) {
+function CommissionCard({ c, index, animate }: { c: Commission; index: number; animate: boolean }) {
   const primaryName = englishName(c);
 
   return (
     <article
-      style={{ animationDelay: `${100 + index * 40}ms` }}
-      className="py-7 border-t border-border animate-in fade-in slide-in-from-bottom-1 duration-400 fill-mode-both"
+      className={cn(
+        "border-t border-border",
+        animate && "animate-in fade-in slide-in-from-bottom-1 duration-400 fill-mode-both"
+      )}
+      style={animate ? { animationDelay: `${100 + index * 40}ms` } : undefined}
     >
-      <div className="mb-3">
-        <StatusBadge status={c.status} />
-        <Link href={`/commissions/${c.slug}`}>
-          <h2 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-foreground font-playfair hover:text-foreground/70 transition-colors">
-            {primaryName}
-          </h2>
-        </Link>
-      </div>
-
-      <div className="space-y-4">
-        {c.memberCountries.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            {c.memberCountries.map((country) => (
-              <FlagTag key={country} tag={country} />
-            ))}
+      <Link
+        href={`/commissions/${c.slug}`}
+        transitionTypes={["nav-forward"]}
+        onClick={() => { setNavigatingViaViewTransition(true); }}
+        className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 py-7 transition-opacity duration-150 hover:opacity-75"
+      >
+        <div className="flex-1 min-w-0">
+          <StatusBadge status={c.status} />
+          <ViewTransition name={`commission-title-${c.slug}`}>
+            <h2 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-foreground font-playfair">
+              {primaryName}
+            </h2>
+          </ViewTransition>
+          {c.memberCountries.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {c.memberCountries.map((country) => (
+                <FlagTag key={country} tag={country} />
+              ))}
+            </div>
+          )}
+          <div className="mt-3">
+            <MetaTable rows={[
+              { label: "Proposed", value: c.proposedDate ?? null },
+              { label: "Founded", value: c.startDate ? c.startDate.slice(0, 4) : null },
+              { label: "Last active", value: c.lastActiveStatusDate ? c.lastActiveStatusDate.slice(0, 4) : null },
+            ]} />
           </div>
+        </div>
+        {c.memberCountries.length > 0 && (
+          <ViewTransition name={`commission-map-${c.slug}`}>
+            <div className="w-full sm:w-48 shrink-0">
+              <CommissionMap memberCountries={c.memberCountries} aspectRatio={0.6} />
+            </div>
+          </ViewTransition>
         )}
-
-        <MetaTable rows={[
-          { label: "Proposed", value: c.proposedDate ?? null },
-          { label: "Founded", value: c.startDate ? c.startDate.slice(0, 4) : null },
-          { label: "Last active", value: c.lastActiveStatusDate ? c.lastActiveStatusDate.slice(0, 4) : null },
-        ]} />
-      </div>
+      </Link>
     </article>
   );
 }
@@ -260,8 +278,8 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
   const [filterMode, setFilterMode] = useState<FilterMode>("exclusive");
   const [sortMode, setSortMode] = useState<SortMode>("activity");
   const [sortOpen, setSortOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [animate] = useState(!navigatingViaViewTransition);
+  useEffect(() => { setNavigatingViaViewTransition(false); }, []);
 
   const statusOptions = useMemo(() =>
     Array.from(new Set(commissions.map((c) => c.status)))
@@ -327,19 +345,19 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
     <div>
       <div className="mb-10">
         <h1
-          style={{ animationDelay: mounted ? "60ms" : undefined }}
+          style={{ animationDelay: animate ? "60ms" : undefined }}
           className={cn(
             "text-2xl font-semibold text-foreground font-playfair",
-            mounted && "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+            animate && "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
           )}
         >
           Bilateral Commissions
         </h1>
         <p
-          style={{ animationDelay: mounted ? "140ms" : undefined }}
+          style={{ animationDelay: animate ? "140ms" : undefined }}
           className={cn(
             "mt-1 text-sm text-muted-foreground",
-            mounted && "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+            animate && "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
           )}
         >
           {commissions.length}{" "}bilateral historians&apos; commissions
@@ -457,7 +475,7 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
         <p className="text-sm text-muted-foreground py-8">No commissions match the selected filters.</p>
       ) : (
         <div>
-          {filtered.map((c, i) => <CommissionCard key={c.slug} c={c} index={i} />)}
+          {filtered.map((c, i) => <CommissionCard key={c.slug} c={c} index={i} animate={animate} />)}
         </div>
       )}
     </div>
