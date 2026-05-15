@@ -23,10 +23,33 @@ type Arc = {
   startLng: number;
   endLat: number;
   endLng: number;
+  altitude: number;
   label: string;
   status: string;
   slug: string;
 };
+
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// Peak altitude (fraction of globe radius) for the shortest arcs.
+const ARC_ALT_MAX = 0.03;
+// Floor altitude for arcs at or beyond ARC_DIST_MAX_KM.
+const ARC_ALT_MIN = 0.1;
+// Distance (km) treated as "maximum" — arcs this long or longer clamp to ARC_ALT_MIN.
+const ARC_DIST_MAX_KM = 10000;
+
+function arcAltitudeForDistance(distKm: number): number {
+  const t = Math.min(distKm / ARC_DIST_MAX_KM, 1);
+  return ARC_ALT_MAX - t * (ARC_ALT_MAX - ARC_ALT_MIN);
+}
 
 function buildArcs(
   commissions: Commission[],
@@ -41,11 +64,13 @@ function buildArcs(
     const a = centroids.get(id1);
     const b = centroids.get(id2);
     if (!a || !b) continue;
+    const dist = haversineKm(a[1], a[0], b[1], b[0]);
     arcs.push({
       startLat: a[1],
       startLng: a[0],
       endLat: b[1],
       endLng: b[0],
+      altitude: arcAltitudeForDistance(dist),
       label: c.name.englishName,
       status: c.status,
       slug: c.slug,
@@ -225,7 +250,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
             const controls = globeRef.current?.controls();
             if (controls) {
               controls.rotateSpeed = 0.4;
-              controls.enableZoom = navigator.maxTouchPoints > 0;
+              controls.enableZoom = true;
               controls.dampingFactor = 0.08;
               controls.enableDamping = true;
             }
@@ -266,7 +291,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
           arcDashGap={0.01}
           arcDashAnimateTime={12000}
           arcStroke={.4}
-          arcAltitudeAutoScale={0.25}
+          arcAltitude={(d) => (d as Arc).altitude}
           enablePointerInteraction={true}
         />
       </div>
