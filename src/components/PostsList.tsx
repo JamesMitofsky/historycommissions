@@ -5,9 +5,15 @@ import { ViewTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Fuse from "fuse.js";
+import { Info } from "lucide-react";
 import type { Post } from "@/blog/types";
 import { FlagTag } from "@/components/FlagTag";
 import { GooeyInput } from "@/components/ui/gooey-input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { navigatingViaViewTransition, setNavigatingViaViewTransition } from "@/lib/navigation-state";
 
 export function PostsList({ posts }: { posts: Post[] }) {
@@ -49,7 +55,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
   return (
     <div>
       <div
-        className={`flex justify-end ${animate ? "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" : ""}`}
+        className={`flex justify-end items-center gap-2 ${animate ? "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" : ""}`}
         style={animate ? { animationDelay: "60ms" } : undefined}
       >
         <GooeyInput
@@ -57,6 +63,24 @@ export function PostsList({ posts }: { posts: Post[] }) {
           value={query}
           onValueChange={setQuery}
         />
+        <Popover>
+          <PopoverTrigger asChild>
+            <button
+              type="button"
+              aria-label="About this search"
+              className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/60 size-8 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
+            >
+              <Info className="size-4" aria-hidden />
+            </button>
+          </PopoverTrigger>
+          <PopoverContent align="end" sideOffset={6} className="w-72 text-sm leading-relaxed">
+            <p className="font-semibold text-foreground mb-1">Fuzzy search</p>
+            <p className="text-muted-foreground">
+              Matches on post titles, country tags, and content — typos and partial words are forgiven.
+              Title matches rank above tag matches, which rank above body matches.
+            </p>
+          </PopoverContent>
+        </Popover>
       </div>
 
       {results.length === 0 ? (
@@ -75,16 +99,16 @@ export function PostsList({ posts }: { posts: Post[] }) {
             return (
               <li
                 key={post.slug}
-                className={`py-5 ${animate ? "animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both" : ""}`}
+                className={`group py-5 flex flex-col sm:flex-row items-start gap-4 sm:gap-6 ${animate ? "animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both" : ""}`}
                 style={animate ? { animationDelay: `${100 + i * 60}ms` } : undefined}
               >
-                <Link
-                  href={`/posts/${post.slug}`}
-                  transitionTypes={["nav-forward"]}
-                  onClick={() => { setNavigatingViaViewTransition(true); }}
-                  className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 transition-opacity duration-150 hover:opacity-75"
-                >
-                  <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0">
+                  <Link
+                    href={`/posts/${post.slug}`}
+                    transitionTypes={["nav-forward"]}
+                    onClick={() => { setNavigatingViaViewTransition(true); }}
+                    className="block transition-opacity duration-150 group-hover:opacity-75"
+                  >
                     {formattedDate && (
                       <time className="text-xs text-muted-foreground tabular-nums">
                         {formattedDate}
@@ -95,10 +119,26 @@ export function PostsList({ posts }: { posts: Post[] }) {
                         {post.title ?? post.slug}
                       </h2>
                     </ViewTransition>
-                  </div>
-                  {post.image && (
+                  </Link>
+                  {post.tags.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {post.tags.map((tag) => (
+                        <FlagTag key={tag} tag={tag} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {post.image && (
+                  <Link
+                    href={`/posts/${post.slug}`}
+                    transitionTypes={["nav-forward"]}
+                    onClick={() => { setNavigatingViaViewTransition(true); }}
+                    aria-hidden
+                    tabIndex={-1}
+                    className="block w-full sm:w-64 shrink-0 transition-opacity duration-150 group-hover:opacity-75"
+                  >
                     <ViewTransition name={`post-image-${post.slug}`}>
-                      <div className="relative w-full sm:w-64 h-48 sm:h-[160px] shrink-0 overflow-hidden bg-muted">
+                      <div className="relative w-full h-48 sm:h-[160px] overflow-hidden bg-muted">
                         <Image
                           src={post.image}
                           alt=""
@@ -111,14 +151,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
                         />
                       </div>
                     </ViewTransition>
-                  )}
-                </Link>
-                {post.tags.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {post.tags.map((tag) => (
-                      <FlagTag key={tag} tag={tag} />
-                    ))}
-                  </div>
+                  </Link>
                 )}
               </li>
             );
