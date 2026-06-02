@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 import { getBlurDataURL } from "@/blog/get-blur-data-url";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -46,6 +47,14 @@ export const metadata: Metadata = {
   description:
     "A digital archive of joint historians' commissions and dialogues over history.",
   icons: { icon: "/favicon.ico" },
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.xml", title: "History Commissions — Posts" },
+        { url: "/commissions/feed.xml", title: "History Commissions — Bilateral Commissions" },
+      ],
+    },
+  },
   openGraph: {
     siteName: "History Commissions",
     type: "website",
@@ -64,9 +73,9 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, sourceSerif4.variable, playfairDisplay.variable, dmSans.variable, "text-[18px]")}
+      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, sourceSerif4.variable, playfairDisplay.variable, dmSans.variable, "text-[20px]")}
     >
-      <body className="min-h-full flex flex-col font-sans text-base leading-[1.7] antialiased [text-rendering:optimizeLegibility]">
+      <body className="min-h-full flex flex-col font-sans text-base leading-[1.65] antialiased [text-rendering:optimizeLegibility]">
         {/* Masthead — image + nav + site title in one unit */}
         <header className="relative w-full h-56 overflow-hidden" style={{ viewTransitionName: "site-header" }}>
           <Image
@@ -100,7 +109,8 @@ export default async function RootLayout({
           </div>
         </header>
 
-        {children}
+        <div className="flex-1">{children}</div>
+        <Footer />
         <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" strategy="afterInteractive" />
         <Script id="netlify-identity-redirect" strategy="afterInteractive">{`
           if (window.netlifyIdentity) {

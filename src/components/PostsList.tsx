@@ -22,12 +22,14 @@ export function PostsList({ posts }: { posts: Post[] }) {
     () =>
       new Fuse(posts, {
         keys: [
-          { name: "title", weight: 0.7 },
-          { name: "content", weight: 0.3 },
+          { name: "title", weight: 1.0 },
+          { name: "tags", weight: 0.7 },
+          { name: "content", weight: 0.15 },
         ],
-        threshold: 0.4,
+        threshold: 0.35,
         ignoreLocation: true,
-        minMatchCharLength: 2,
+        minMatchCharLength: 3,
+        includeScore: true,
       }),
     [posts]
   );
@@ -73,14 +75,14 @@ export function PostsList({ posts }: { posts: Post[] }) {
             return (
               <li
                 key={post.slug}
-                className={animate ? "animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both" : ""}
+                className={`py-5 ${animate ? "animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both" : ""}`}
                 style={animate ? { animationDelay: `${100 + i * 60}ms` } : undefined}
               >
                 <Link
                   href={`/posts/${post.slug}`}
                   transitionTypes={["nav-forward"]}
                   onClick={() => { setNavigatingViaViewTransition(true); }}
-                  className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 py-5 transition-opacity duration-150 hover:opacity-75"
+                  className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 transition-opacity duration-150 hover:opacity-75"
                 >
                   <div className="flex-1 min-w-0">
                     {formattedDate && (
@@ -93,13 +95,6 @@ export function PostsList({ posts }: { posts: Post[] }) {
                         {post.title ?? post.slug}
                       </h2>
                     </ViewTransition>
-                    {post.tags.length > 0 && (
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        {post.tags.map((tag) => (
-                          <FlagTag key={tag} tag={tag} />
-                        ))}
-                      </div>
-                    )}
                   </div>
                   {post.image && (
                     <ViewTransition name={`post-image-${post.slug}`}>
@@ -118,6 +113,13 @@ export function PostsList({ posts }: { posts: Post[] }) {
                     </ViewTransition>
                   )}
                 </Link>
+                {post.tags.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {post.tags.map((tag) => (
+                      <FlagTag key={tag} tag={tag} />
+                    ))}
+                  </div>
+                )}
               </li>
             );
           })}

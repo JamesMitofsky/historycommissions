@@ -186,7 +186,7 @@ function CommissionCard({ c, index, animate }: { c: Commission; index: number; a
   return (
     <article
       className={cn(
-        "border-t border-border",
+        "border-t border-border py-7",
         animate && "animate-in fade-in slide-in-from-bottom-1 duration-400 fill-mode-both"
       )}
       style={animate ? { animationDelay: `${100 + index * 40}ms` } : undefined}
@@ -195,7 +195,7 @@ function CommissionCard({ c, index, animate }: { c: Commission; index: number; a
         href={`/commissions/${c.slug}`}
         transitionTypes={["nav-forward"]}
         onClick={() => { setNavigatingViaViewTransition(true); }}
-        className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 py-7 transition-opacity duration-150 hover:opacity-75"
+        className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 transition-opacity duration-150 hover:opacity-75"
       >
         <div className="flex-1 min-w-0">
           <StatusBadge status={c.status} />
@@ -204,13 +204,6 @@ function CommissionCard({ c, index, animate }: { c: Commission; index: number; a
               {primaryName}
             </h2>
           </ViewTransition>
-          {c.memberCountries.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {c.memberCountries.map((country) => (
-                <FlagTag key={country} tag={country} />
-              ))}
-            </div>
-          )}
           <div className="mt-3">
             <MetaTable rows={[
               { label: "Proposed", value: c.proposedDate ?? null },
@@ -227,6 +220,13 @@ function CommissionCard({ c, index, animate }: { c: Commission; index: number; a
           </ViewTransition>
         )}
       </Link>
+      {c.memberCountries.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {c.memberCountries.map((country) => (
+            <FlagTag key={country} tag={country} />
+          ))}
+        </div>
+      )}
     </article>
   );
 }
