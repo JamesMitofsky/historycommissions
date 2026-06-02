@@ -1,0 +1,13 @@
+{
+  "name": {
+    "englishName": "French-Haitian Commission"
+  },
+  "proposedDate": "2027",
+  "memberCountries": [
+    "France",
+    "Haiti"
+  ],
+  "linkStatus": "working",
+  "draft": true,
+  "status": "unknown"
+}
