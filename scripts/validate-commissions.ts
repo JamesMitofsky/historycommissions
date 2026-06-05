@@ -4,9 +4,6 @@
  * would break the build is caught loudly on the PR, before it reaches production.
  *
  *   pnpm validate:commissions
- *
- * Drafts (draft: true) are skipped, mirroring the build: they are hidden from the
- * public site and not required to be complete.
  */
 import fs from "fs";
 import path from "path";
@@ -17,7 +14,6 @@ const COMMISSIONS_DIR = path.join(process.cwd(), "content/commissions");
 const files = fs.readdirSync(COMMISSIONS_DIR).filter((f) => f.endsWith(".json"));
 
 let failures = 0;
-let skipped = 0;
 
 for (const file of files) {
   const raw = fs.readFileSync(path.join(COMMISSIONS_DIR, file), "utf8");
@@ -32,11 +28,6 @@ for (const file of files) {
     continue;
   }
 
-  if ((data as { draft?: unknown } | null)?.draft === true) {
-    skipped++;
-    continue;
-  }
-
   const result = CommissionSchema.safeParse({ ...(data as object), slug });
   if (!result.success) {
     failures++;
@@ -47,14 +38,12 @@ for (const file of files) {
   }
 }
 
-const published = files.length - skipped;
+const published = files.length;
 if (failures > 0) {
   console.error(
-    `\n${failures} of ${published} published commission(s) failed validation (${skipped} drafts skipped).`
+    `\n${failures} of ${published} published commission(s) failed validation.`
   );
   process.exit(1);
 }
 
-console.log(
-  `✓ All ${published} published commissions are valid (${skipped} drafts skipped).`
-);
+console.log(`✓ All ${published} published commissions are valid.`);

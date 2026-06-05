@@ -73,7 +73,6 @@ export const CommissionSchema = z.object({
       })
     )
     .default([]),
-  draft: z.boolean().default(false),
 });
 
 export type Commission = z.infer<typeof CommissionSchema>;
