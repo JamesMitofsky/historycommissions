@@ -1,29 +1,27 @@
 import Link from "next/link";
+import { getGeneralSettings } from "@/settings";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const general = getGeneralSettings();
 
   return (
     <footer className="border-t border-border mt-16">
       <div className="max-w-2xl mx-auto px-6 py-10 text-sm text-muted-foreground flex flex-col gap-6 sm:flex-row sm:justify-between sm:items-start">
         <div className="space-y-1">
           <p className="font-playfair text-base font-semibold text-foreground">
-            History Commissions
+            {general.siteTitle}
           </p>
-          <p>A digital archive of joint historians&rsquo; commissions.</p>
-          <p>&copy; {year} Daqing Yang.</p>
+          <p>{general.footer.tagline}</p>
+          <p>&copy; {year} {general.footer.copyrightHolder}.</p>
         </div>
 
         <nav aria-label="Footer" className="flex flex-col gap-2 sm:items-end">
-          <Link href="/" className="hover:text-foreground transition-colors">
-            Home
-          </Link>
-          <Link href="/commissions" className="hover:text-foreground transition-colors">
-            Bilateral Commissions
-          </Link>
-          <Link href="/about" className="hover:text-foreground transition-colors">
-            About
-          </Link>
+          {general.nav.map(({ href, label }) => (
+            <Link key={href} href={href} className="hover:text-foreground transition-colors">
+              {label}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex flex-col gap-2 sm:items-end">

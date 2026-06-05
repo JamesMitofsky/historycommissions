@@ -1,11 +1,13 @@
 import { getPosts } from "@/blog";
 import { buildRss } from "@/lib/rss";
 import { siteUrl } from "@/lib/site-url";
+import { getGeneralSettings } from "@/settings";
 
 export const dynamic = "force-static";
 
 export async function GET() {
   const base = siteUrl();
+  const { feeds } = getGeneralSettings();
   const posts = await getPosts();
 
   const items = posts.map((post) => {
@@ -32,10 +34,9 @@ export async function GET() {
   });
 
   const xml = buildRss({
-    title: "History Commissions",
+    title: feeds.postsTitle,
     link: base,
-    description:
-      "A digital archive of joint historians' commissions and dialogues over history.",
+    description: feeds.postsDescription,
     selfUrl: `${base}/feed.xml`,
     items,
   });

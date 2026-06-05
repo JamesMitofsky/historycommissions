@@ -2,10 +2,13 @@ import { ImageResponse } from "next/og";
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
+import { getGeneralSettings } from "@/settings";
+
+const general = getGeneralSettings();
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "History Commissions — A digital archive of joint historians' commissions";
+export const alt = `${general.siteTitle} — ${general.description}`;
 
 export default async function Image() {
   const heroJpeg = await sharp(path.join(process.cwd(), "public/hero.webp"))
@@ -67,7 +70,7 @@ export default async function Image() {
               marginBottom: 14,
             }}
           >
-            A DIGITAL ARCHIVE
+            {general.kicker.toUpperCase()}
           </div>
           <div
             style={{
@@ -78,7 +81,7 @@ export default async function Image() {
               lineHeight: 1.15,
             }}
           >
-            History Commissions
+            {general.siteTitle}
           </div>
           <div
             style={{
@@ -89,7 +92,7 @@ export default async function Image() {
               lineHeight: 1.4,
             }}
           >
-            Joint historians&apos; commissions and dialogues from around the world
+            {general.og.subtitle}
           </div>
         </div>
       </div>
