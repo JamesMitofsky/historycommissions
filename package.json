@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "generate:country-options": "tsx scripts/generate-country-options.ts",
+    "prebuild": "tsx scripts/generate-country-options.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

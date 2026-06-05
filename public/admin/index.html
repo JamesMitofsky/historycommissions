@@ -5,9 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Content Manager</title>
+    <style>
+      .country-field {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        padding: 6px;
+        border: 1px solid #dfdfe3;
+        border-radius: 5px;
+        background: #fff;
+      }
+      .country-field__input {
+        flex: 1 1 8rem;
+        min-width: 8rem;
+        border: 0;
+        outline: 0;
+        padding: 6px 4px;
+        font-size: 15px;
+        background: transparent;
+      }
+      .country-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 4px 3px 8px;
+        border-radius: 4px;
+        background: #eef0f4;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      .country-chip__remove {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        font-size: 15px;
+        line-height: 1;
+        padding: 0 2px;
+        color: #6b6f76;
+      }
+      .country-chip__remove:hover {
+        color: #c0392b;
+      }
+    </style>
   </head>
   <body>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script src="country-options.js"></script>
+    <script src="country-widget.js"></script>
   </body>
 </html>

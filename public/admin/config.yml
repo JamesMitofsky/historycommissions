@@ -72,7 +72,7 @@ collections:
       - { label: Title, name: title, widget: string, hint: "Headline shown at the top of the published post and in post listings." }
       - { label: Publish Date, name: date, widget: datetime, hint: "When the post is published. Posts are ordered by this date, newest first." }
       - { label: Author, name: author, widget: string, required: false, hint: "Shown as a byline under the title. Leave blank to show no author." }
-      - { label: Tags, name: tags, widget: list, required: false, hint: "Country names only (e.g. Poland, Germany). Each tag draws a flag and adds the country to the post's map — so use real country names, not freeform keywords." }
+      - { label: Tags, name: tags, widget: countryList, required: false, hint: "Pick country names from the dropdown (e.g. Poland, Germany). Each tag draws a flag and adds the country to the post's map. The dropdown is the safe choice; typing a value not on the list is allowed but may not resolve to a flag/map." }
       - { label: Image, name: image, widget: image, required: false, hint: "Featured image shown at the top of the post." }
       - { label: Image Attribution, name: imageAttribution, widget: string, required: false, hint: "Photo credit shown in small text under the image. '(CC BY-SA 3.0)' is added automatically." }
       - { label: Image Attribution URL, name: imageAttributionUrl, widget: string, required: false, hint: "Optional link for the photo credit (e.g. the source page). If set, the credit text becomes clickable." }
@@ -116,7 +116,7 @@ collections:
         options: [active, dormant, ended, unknown]
         required: false
         hint: "Last known activity, shown as plain text in the details table. Same vocabulary as the colored Status badge below, but this is a historical note recording the status as of the 'Last Active Status Date'."
-      - { label: Member Countries, name: memberCountries, widget: list, hint: "Country names only (e.g. Poland, Germany). These draw the map, the globe arcs, and the flag tags — so spelling must match real country names or the map won't render." }
+      - { label: Member Countries, name: memberCountries, widget: countryList, hint: "Pick country names from the dropdown (e.g. Poland, Germany). These draw the map, the globe arcs, and the flag tags. Picking from the list guarantees correct spelling; typing a value not on the list is allowed but may not render." }
       - { label: Sponsoring Institutions, name: sponsoringInstitutions, widget: list, required: false, hint: "Organizations that established or fund the commission. Shown in the details." }
       - { label: Key Topics, name: keyTopics, widget: list, required: false, hint: "Main research areas. Shown as a bulleted 'Key Topics' list on the page." }
       - label: Publications
@@ -146,7 +146,7 @@ collections:
         hint: "People who lead the commission. Add one row per chair."
         fields:
           - { label: Name, name: name, widget: string, hint: "Full name of the chair." }
-          - { label: Country, name: country, widget: string, hint: "Country the chair is based in or represents." }
+          - { label: Country, name: country, widget: country, hint: "Country the chair is based in or represents. Pick from the dropdown, or type a value not on the list." }
           - { label: Affiliation, name: affiliation, widget: string, required: false, hint: "University or institution the chair belongs to (optional)." }
       - { label: Commission URL, name: url, widget: string, required: false, hint: "The commission's official website. Shown as the 'Website' link, but only when Link Status below is 'working'." }
       - label: Link Status
