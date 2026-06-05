@@ -288,17 +288,8 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
         >
           Bilateral Commissions
         </h1>
-        <p
-          style={{ animationDelay: animate ? "140ms" : undefined }}
-          className={cn(
-            "mt-1 text-sm text-muted-foreground",
-            animate && "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
-          )}
-        >
-          {commissions.length}{" "}bilateral historians&apos; commissions
-        </p>
       </div>
-      <div className="mb-6">
+      <div className="mb-12">
         <CommissionGlobe
           commissions={commissions}
           visibleSlugs={hasAnyFilter ? new Set(filtered.map((c) => c.slug)) : undefined}
@@ -309,7 +300,7 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
       </div>
 
       {/* Filter bar */}
-      <div className="flex flex-wrap items-center gap-2 mb-6">
+      <div className="flex flex-wrap items-center gap-2 mt-4 mb-6">
         <Input
           type="text"
           placeholder="Search commissions…"
@@ -331,6 +322,9 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
           onToggle={(v) => setFilters((f) => ({ ...f, countries: toggle(f.countries, v) }))}
           onClear={() => setFilters((f) => ({ ...f, countries: new Set() }))}
         />
+        <span className="text-xs text-muted-foreground tabular-nums">
+          {filtered.length}/{commissions.length}
+        </span>
         {activeCount > 0 && (
           <div className="flex items-center rounded-md border text-xs h-8 overflow-hidden">
             <button
@@ -362,22 +356,15 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
             Clear all
           </Button>
         )}
-      </div>
-
-      <div className="flex items-center justify-between mb-6">
-        <p className="text-xs text-muted-foreground">
-          {filtered.length} of {commissions.length} commissions
-        </p>
         <Popover open={sortOpen} onOpenChange={setSortOpen}>
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
               size="sm"
-              className="text-xs text-muted-foreground h-8 gap-1.5"
+              className="text-xs text-muted-foreground h-8 gap-1.5 ml-auto"
               aria-expanded={sortOpen}
             >
               <ArrowUpDown className="size-3" />
-              {SORT_LABELS[sortMode]}
               <ChevronDown className={cn("size-3 opacity-50 transition-transform duration-200", sortOpen && "rotate-180")} />
             </Button>
           </PopoverTrigger>

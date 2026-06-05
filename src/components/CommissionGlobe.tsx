@@ -172,7 +172,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
 
   const waterMaterial = useMemo(() => {
     const mat = new MeshPhongMaterial();
-    mat.color = new Color(0x4a7a91);
+    mat.color = new Color(0x5a8299);
     return mat;
   }, []);
 
@@ -190,7 +190,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
   const GLOBE_HEIGHT_RATIO = 0.6;
   // Fraction of canvas height the sphere should fill. Near 1 = tight vertical
   // whitespace; lower leaves margin above/below.
-  const GLOBE_FILL = 0.92;
+  const GLOBE_FILL = 0.6;
 
   const globeWidth = containerWidth;
   const globeHeight = Math.round(containerWidth * GLOBE_HEIGHT_RATIO);
@@ -222,17 +222,17 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
 
   return (
     <div ref={containerRef} className="w-full overflow-hidden">
-      <div className="flex gap-2 mb-2 text-xs animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" style={{ animationDelay: "220ms" }}>
-        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.active, color: "#fff" }}>Active</span>
-        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.dormant, color: "#fff" }}>Dormant / Unknown</span>
-        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.ended, color: "#fff" }}>Ended</span>
-      </div>
       <div
-        className="overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-900 fill-mode-both"
+        className="relative overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-900 fill-mode-both"
         style={{ height: containerWidth > 0 ? globeHeight : undefined, aspectRatio: `1 / ${GLOBE_HEIGHT_RATIO}`, animationDelay: "340ms" }}
         onPointerDown={scheduleReset}
         onPointerMove={scheduleReset}
       >
+        <div className="absolute bottom-2 right-2 z-10 flex flex-col items-end gap-1 text-xs animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both pointer-events-none" style={{ animationDelay: "220ms" }}>
+          <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.active, color: "#fff" }}>Active</span>
+          <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.ended, color: "#fff" }}>Ended</span>
+          <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.dormant, color: "#fff" }}>Dormant / Unknown</span>
+        </div>
         {containerWidth > 0 && <Globe
           ref={globeRef}
           animateIn={false}
@@ -250,7 +250,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
             const controls = globeRef.current?.controls();
             if (controls) {
               controls.rotateSpeed = 0.4;
-              controls.enableZoom = true;
+              controls.enableZoom = false;
               controls.dampingFactor = 0.08;
               controls.enableDamping = true;
             }
@@ -263,9 +263,9 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
           showAtmosphere={false}
           showGraticules={false}
           polygonsData={annotatedPolygons}
-          polygonCapColor={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? "#9b7d5e" : "#b8a48a"}
+          polygonCapColor={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? "#e6d2ad" : "rgba(142, 143, 136, 0.7)"}
           polygonSideColor={() => "rgba(0,0,0,0)"}
-          polygonStrokeColor={() => "rgba(255,255,255,0.25)"}
+          polygonStrokeColor={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? "rgba(92,66,38,0.7)" : "rgba(255,255,255,0.08)"}
           polygonAltitude={(d: object) => (d as GeoFeature & { _highlighted: boolean })._highlighted ? 0.008 : 0.003}
           polygonLabel={(d: object) => {
             const name = (d as GeoFeature).properties?.name;
