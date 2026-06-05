@@ -15,16 +15,17 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     sortable_fields: [date, title]
     fields:
-      - { label: Title, name: title, widget: string }
-      - { label: Publish Date, name: date, widget: datetime }
-      - { label: Author, name: author, widget: string, required: false }
-      - { label: Tags, name: tags, widget: list, required: false }
-      - { label: Image, name: image, widget: image, required: false }
-      - { label: Image Attribution, name: imageAttribution, widget: string, required: false }
-      - { label: Image Attribution URL, name: imageAttributionUrl, widget: string, required: false }
+      - { label: Title, name: title, widget: string, hint: "Headline shown at the top of the published post and in post listings." }
+      - { label: Publish Date, name: date, widget: datetime, hint: "When the post is published. Posts are ordered by this date, newest first." }
+      - { label: Author, name: author, widget: string, required: false, hint: "Shown as a byline under the title. Leave blank to show no author." }
+      - { label: Tags, name: tags, widget: list, required: false, hint: "Country names only (e.g. Poland, Germany). Each tag draws a flag and adds the country to the post's map — so use real country names, not freeform keywords." }
+      - { label: Image, name: image, widget: image, required: false, hint: "Featured image shown at the top of the post." }
+      - { label: Image Attribution, name: imageAttribution, widget: string, required: false, hint: "Photo credit shown in small text under the image. '(CC BY-SA 3.0)' is added automatically." }
+      - { label: Image Attribution URL, name: imageAttributionUrl, widget: string, required: false, hint: "Optional link for the photo credit (e.g. the source page). If set, the credit text becomes clickable." }
       - label: Body
         name: body
         widget: richtext
+        hint: "The main article text. Use the toolbar for headings, lists, links, and quotes."
         modes: [rich_text]
         editor_components: [image]
         buttons: ["bold", "italic", "strikethrough", "link", "heading-one", "heading-two", "heading-three", "heading-four", "quote", "bulleted-list", "numbered-list"]
@@ -44,63 +45,70 @@ collections:
         name: name
         widget: object
         fields:
-          - { label: Primary Name, name: englishName, widget: string }
+          - { label: Primary Name, name: englishName, widget: string, hint: "The main name, used in the page title, listings, and search. Usually the English name." }
           - label: Translations
             name: translations
             widget: list
+            hint: "The commission's name in other languages. Add one row per language."
             fields:
               - { label: Language Code, name: language, widget: string, hint: "e.g. en, de, fr" }
-              - { label: Name, name: name, widget: string }
-      - { label: Proposed Date, name: proposedDate, widget: string, required: false }
-      - { label: Start Date, name: startDate, widget: string, required: false }
-      - { label: Last Active Status Date, name: lastActiveStatusDate, widget: string, required: false }
+              - { label: Name, name: name, widget: string, hint: "The commission's name written in the language above." }
+      - { label: Proposed Date, name: proposedDate, widget: string, required: false, hint: "When the commission was first proposed. Shown in the details table as 'Proposed'. A year (e.g. 1995) is enough." }
+      - { label: Start Date, name: startDate, widget: string, required: false, hint: "When the commission actually began. Shown as 'Founded' and used when sorting the list by date. A year is enough." }
+      - { label: Last Active Status Date, name: lastActiveStatusDate, widget: string, required: false, hint: "Most recent date its activity was confirmed. Shown as 'Last active'." }
       - label: Last Active Status
         name: lastActiveStatus
         widget: select
         options: [ongoing, concluded, dormant, unknown]
         required: false
-      - { label: Member Countries, name: memberCountries, widget: list }
-      - { label: Sponsoring Institutions, name: sponsoringInstitutions, widget: list, required: false }
-      - { label: Key Topics, name: keyTopics, widget: list, required: false }
+        hint: "Last known activity, shown as plain text in the details table. This is a historical note and is separate from the colored Status badge set further below."
+      - { label: Member Countries, name: memberCountries, widget: list, hint: "Country names only (e.g. Poland, Germany). These draw the map, the globe arcs, and the flag tags — so spelling must match real country names or the map won't render." }
+      - { label: Sponsoring Institutions, name: sponsoringInstitutions, widget: list, required: false, hint: "Organizations that established or fund the commission. Shown in the details." }
+      - { label: Key Topics, name: keyTopics, widget: list, required: false, hint: "Main research areas. Shown as a bulleted 'Key Topics' list on the page." }
       - label: Publications
         name: publications
         widget: list
         required: false
         fields:
-          - { label: Title, name: title, widget: string }
-          - { label: Year, name: year, widget: string, required: false }
-          - { label: URL, name: url, widget: string, required: false }
+          - { label: Title, name: title, widget: string, hint: "Title of the publication, shown in the Publications list." }
+          - { label: Year, name: year, widget: string, required: false, hint: "Publication year, shown next to the title." }
+          - { label: URL, name: url, widget: string, required: false, hint: "Link to the publication. If set, the title becomes a clickable link." }
           - label: Format
             name: format
             widget: select
             options: [monograph, proceedings, report, textbook_review, teaching_material, other]
             required: false
-      - { label: Working Groups, name: workingGroups, widget: list, required: false }
+            hint: "Document type. Note: this is NOT shown anywhere on the public site yet — for internal categorization only."
+      - { label: Working Groups, name: workingGroups, widget: list, required: false, hint: "Names of sub-committees or working groups within the commission." }
       - label: Status
         name: status
         widget: select
-        options: [active, dormant, concluded, unknown]
+        options: [active, dormant, ended, unknown]
+        hint: "Current status. Sets the colored badge on the page and list: active = green, dormant = blue, unknown = blue, ended = gray. Also used to filter and sort the commissions list."
       - label: Chairs
         name: chairs
         widget: list
         required: false
+        hint: "People who lead the commission. Add one row per chair."
         fields:
-          - { label: Name, name: name, widget: string }
-          - { label: Country, name: country, widget: string }
-          - { label: Affiliation, name: affiliation, widget: string, required: false }
-      - { label: Commission URL, name: url, widget: string, required: false }
+          - { label: Name, name: name, widget: string, hint: "Full name of the chair." }
+          - { label: Country, name: country, widget: string, hint: "Country the chair is based in or represents." }
+          - { label: Affiliation, name: affiliation, widget: string, required: false, hint: "University or institution the chair belongs to (optional)." }
+      - { label: Commission URL, name: url, widget: string, required: false, hint: "The commission's official website. Shown as the 'Website' link, but only when Link Status below is 'working'." }
       - label: Link Status
         name: linkStatus
         widget: select
         options: [working, broken, to_be_located]
+        hint: "Controls which link visitors see. 'working' shows the live Website link above. 'broken' or 'to_be_located' hides it and instead shows the Archive link below (if an archived snapshot is set)."
       - { label: Site Languages, name: siteLanguages, widget: list, required: false, hint: "e.g. en, de, fr" }
-      - { label: Last Archived Snapshot, name: lastArchivedSnapshot, widget: string, required: false }
+      - { label: Last Archived Snapshot, name: lastArchivedSnapshot, widget: string, required: false, hint: "A Wayback Machine URL. Shown as the 'Archive' link whenever Link Status above is not 'working'." }
       - label: Archivable Documents
         name: archivableDocuments
         widget: list
         required: false
+        hint: "Important documents worth preserving. Add one row per document."
         fields:
-          - { label: Title, name: title, widget: string }
-          - { label: URL, name: url, widget: string }
-      - { label: Draft, name: draft, widget: boolean, required: false }
+          - { label: Title, name: title, widget: string, hint: "Name of the document." }
+          - { label: URL, name: url, widget: string, hint: "Direct link to the document." }
+      - { label: Draft, name: draft, widget: boolean, required: false, hint: "For internal use. Note: this does NOT hide the commission — it still appears publicly when turned on. It changes nothing on the site yet." }
 
