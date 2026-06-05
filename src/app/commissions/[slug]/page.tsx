@@ -52,19 +52,6 @@ const STATUS_DOT: Record<CommissionStatus, string> = {
   unknown: "bg-neutral-300",
 };
 
-const LANG_NAMES: Record<string, string> = {
-  de: "German", ru: "Russian", en: "English", fr: "French",
-  uk: "Ukrainian", pl: "Polish", cs: "Czech", sk: "Slovak",
-  bg: "Bulgarian", hu: "Hungarian", sl: "Slovenian", it: "Italian",
-  ja: "Japanese", ko: "Korean", zh: "Chinese", be: "Belarusian",
-  eu: "European", mk: "Macedonian", ge: "Georgian", lt: "Lithuanian",
-  ee: "Estonian", fi: "Finnish", he: "Hebrew", ar: "Arabic",
-};
-
-function langLabel(code: string) {
-  return LANG_NAMES[code] ?? code.toUpperCase();
-}
-
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-2">
@@ -105,7 +92,6 @@ export default async function CommissionPage({ params }: Props) {
   const en = c.name.translations.find((t) => t.language === "en");
   const primaryName = en?.name ?? c.name.englishName;
   const hasAlternate = c.name.englishName !== primaryName;
-  const languages = c.siteLanguages.map(langLabel).join(", ");
   const sponsors = c.sponsoringInstitutions.join(" · ") || null;
 
   const otherNames = c.name.translations
@@ -182,7 +168,6 @@ export default async function CommissionPage({ params }: Props) {
         <div>
           <SectionLabel>Details</SectionLabel>
           <MetaTable rows={[
-            { label: "Site languages", value: languages || null },
             { label: "Proposed", value: c.proposedDate ?? null },
             { label: "Founded", value: c.startDate ?? null },
             { label: "Last active", value: c.lastActiveStatusDate ?? null },

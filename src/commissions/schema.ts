@@ -65,7 +65,6 @@ export const CommissionSchema = z.object({
     .default([]),
   url: z.string(),
   linkStatus: LinkStatusSchema.default("to_be_located"),
-  siteLanguages: z.array(z.string()).default([]),
   lastArchivedSnapshot: z.string().nullable().default(null),
   archivableDocuments: z
     .array(

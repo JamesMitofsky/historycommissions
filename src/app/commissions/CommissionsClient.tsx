@@ -50,19 +50,6 @@ const STATUS_TEXT: Record<CommissionStatus, string> = {
   unknown: "text-red-700 dark:text-red-400",
 };
 
-const LANG_NAMES: Record<string, string> = {
-  de: "German", ru: "Russian", en: "English", fr: "French",
-  uk: "Ukrainian", pl: "Polish", cs: "Czech", sk: "Slovak",
-  bg: "Bulgarian", hu: "Hungarian", sl: "Slovenian", it: "Italian",
-  ja: "Japanese", ko: "Korean", zh: "Chinese", be: "Belarusian",
-  eu: "European", mk: "Macedonian", ge: "Georgian", lt: "Lithuanian",
-  ee: "Estonian", fi: "Finnish", he: "Hebrew", ar: "Arabic",
-};
-
-function langLabel(code: string): string {
-  return LANG_NAMES[code] ?? code.toUpperCase();
-}
-
 function englishName(c: Commission): string {
   const en = c.name.translations.find((t) => t.language === "en");
   return en?.name ?? c.name.englishName;
@@ -235,7 +222,6 @@ function CommissionCard({ c, index, animate }: { c: Commission; index: number; a
 
 type Filters = {
   status: Set<string>;
-  languages: Set<string>;
   countries: Set<string>;
   search: string;
 };
@@ -271,7 +257,6 @@ type FilterMode = "exclusive" | "inclusive";
 export function CommissionsClient({ commissions }: { commissions: Commission[] }) {
   const [filters, setFilters] = useState<Filters>({
     status: new Set(),
-    languages: new Set(),
     countries: new Set(),
     search: "",
   });
@@ -288,13 +273,6 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
     [commissions]
   );
 
-  const languageOptions = useMemo(() =>
-    Array.from(new Set(commissions.flatMap((c) => c.siteLanguages)))
-      .sort((a, b) => langLabel(a).localeCompare(langLabel(b)))
-      .map((v) => ({ value: v, display: langLabel(v) })),
-    [commissions]
-  );
-
   const countryOptions = useMemo(() =>
     Array.from(new Set(commissions.flatMap((c) => c.memberCountries)))
       .sort()
@@ -305,12 +283,6 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
   const filtered = useMemo(() =>
     commissions.filter((c) => {
       if (filters.status.size > 0 && !filters.status.has(c.status)) return false;
-      if (filters.languages.size > 0) {
-        const match = filterMode === "exclusive"
-          ? [...filters.languages].every((l) => c.siteLanguages.includes(l))
-          : c.siteLanguages.some((l) => filters.languages.has(l));
-        if (!match) return false;
-      }
       if (filters.countries.size > 0) {
         const match = filterMode === "exclusive"
           ? [...filters.countries].every((co) => c.memberCountries.includes(co))
@@ -334,11 +306,11 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
     [commissions, filters, filterMode, sortMode]
   );
 
-  const activeCount = filters.status.size + filters.languages.size + filters.countries.size;
+  const activeCount = filters.status.size + filters.countries.size;
   const hasAnyFilter = activeCount > 0 || !!filters.search;
 
   function clearAll() {
-    setFilters({ status: new Set(), languages: new Set(), countries: new Set(), search: "" });
+    setFilters({ status: new Set(), countries: new Set(), search: "" });
   }
 
   return (
@@ -388,13 +360,6 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
           selected={filters.status}
           onToggle={(v) => setFilters((f) => ({ ...f, status: toggle(f.status, v) }))}
           onClear={() => setFilters((f) => ({ ...f, status: new Set() }))}
-        />
-        <FilterPopover
-          label="Languages"
-          options={languageOptions}
-          selected={filters.languages}
-          onToggle={(v) => setFilters((f) => ({ ...f, languages: toggle(f.languages, v) }))}
-          onClear={() => setFilters((f) => ({ ...f, languages: new Set() }))}
         />
         <FilterPopover
           label="Countries"

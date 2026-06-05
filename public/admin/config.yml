@@ -93,7 +93,6 @@ collections:
         name: linkStatus
         widget: select
         options: [working, broken, to_be_located]
-      - { label: Site Languages, name: siteLanguages, widget: list, required: false, hint: "e.g. en, de, fr" }
       - { label: Last Archived Snapshot, name: lastArchivedSnapshot, widget: string, required: false }
       - label: Archivable Documents
         name: archivableDocuments
