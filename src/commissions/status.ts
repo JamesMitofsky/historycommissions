@@ -12,7 +12,7 @@ export const STATUS_LABELS: Record<CommissionStatus, string> = {
   active: "Active",
   dormant: "Dormant",
   ended: "Ended",
-  unknown: "Status unknown",
+  unknown: "Unknown",
 };
 
 export const STATUS_DOT: Record<CommissionStatus, string> = {
