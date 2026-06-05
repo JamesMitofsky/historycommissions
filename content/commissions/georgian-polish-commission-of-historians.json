@@ -11,7 +11,7 @@
   "proposedDate": null,
   "startDate": "2017-01-01",
   "lastActiveStatusDate": null,
-  "lastActiveStatus": "unclear",
+  "lastActiveStatus": "unknown",
   "memberCountries": [
     "Georgia",
     "Poland"
@@ -26,5 +26,5 @@
   "linkStatus": "to_be_located",
   "lastArchivedSnapshot": null,
   "archivableDocuments": [],
-  "draft": true
+  "draft": false
 }

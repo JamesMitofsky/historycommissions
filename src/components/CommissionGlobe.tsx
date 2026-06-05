@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import * as topojson from "topojson-client";
 import worldCountries from "world-countries";
 import { MeshPhongMaterial, Color } from "three";
-import type { Commission } from "@/commissions/types";
+import type { Commission, CommissionStatus } from "@/commissions/types";
+import { STATUS_ARC_COLOR } from "@/commissions/status";
 import { numericIdForTag } from "@/lib/country-codes";
 
 // Pre-build centroid map from world-countries (manually curated latlng, not polygon-derived).
@@ -25,7 +26,7 @@ type Arc = {
   endLng: number;
   altitude: number;
   label: string;
-  status: string;
+  status: CommissionStatus;
   slug: string;
 };
 
@@ -78,14 +79,6 @@ function buildArcs(
   }
   return arcs;
 }
-
-// Non-active groups use agnostic colors; `unknown` is grouped with `dormant`.
-const ARC_COLOR: Record<string, string> = {
-  active: "rgba(52, 211, 153, 1)",
-  dormant: "rgba(14, 165, 233, 0.95)",
-  ended: "rgba(113, 113, 122, 0.85)",
-  unknown: "rgba(14, 165, 233, 0.7)",
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GeoFeature = any;
@@ -230,9 +223,9 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
   return (
     <div ref={containerRef} className="w-full overflow-hidden">
       <div className="flex gap-2 mb-2 text-xs animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" style={{ animationDelay: "220ms" }}>
-        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.active, color: "#fff" }}>Active</span>
-        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.dormant, color: "#fff" }}>Dormant / Unknown</span>
-        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.ended, color: "#fff" }}>Ended</span>
+        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.active, color: "#fff" }}>Active</span>
+        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.dormant, color: "#fff" }}>Dormant / Unknown</span>
+        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: STATUS_ARC_COLOR.ended, color: "#fff" }}>Ended</span>
       </div>
       <div
         className="overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-900 fill-mode-both"
@@ -292,7 +285,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
           arcColor={(d: object) => {
             const arc = d as Arc;
             if (visibleSlugs && !visibleSlugs.has(arc.slug)) return "rgba(0,0,0,0)";
-            return ARC_COLOR[arc.status] ?? ARC_COLOR.unknown;
+            return STATUS_ARC_COLOR[arc.status] ?? STATUS_ARC_COLOR.unknown;
           }}
           arcDashLength={0.8}
           arcDashGap={0.01}

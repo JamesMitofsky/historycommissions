@@ -1,0 +1,29 @@
+name: Validate
+
+# Runs on every push to main (Decap commits straight to main via git-gateway) and
+# on every pull request (the Decap editorial-workflow path). A red ✗ here is the
+# loud, early signal that a CMS edit would break the build — surfaced before it
+# reaches production, with the offending commission and field named in the log.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Validate commission content against the Zod schema
+        run: pnpm validate:commissions
+      - name: Build the site
+        run: pnpm build

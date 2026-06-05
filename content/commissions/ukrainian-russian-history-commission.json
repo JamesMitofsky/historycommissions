@@ -15,7 +15,7 @@
   "proposedDate": null,
   "startDate": "2002-01-01",
   "lastActiveStatusDate": null,
-  "lastActiveStatus": "unclear",
+  "lastActiveStatus": "unknown",
   "memberCountries": [
     "Ukraine",
     "Russia"
@@ -30,5 +30,5 @@
   "linkStatus": "to_be_located",
   "lastArchivedSnapshot": null,
   "archivableDocuments": [],
-  "draft": true
+  "draft": false
 }

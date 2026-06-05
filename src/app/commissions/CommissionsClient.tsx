@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CommissionGlobe } from "@/components/CommissionGlobe";
 import { CommissionMap } from "@/components/CommissionMap";
+import { StatusBadge } from "@/components/StatusBadge";
+import { STATUS_LABELS, STATUS_ORDER } from "@/commissions/status";
 import { navigatingViaViewTransition, setNavigatingViaViewTransition } from "@/lib/navigation-state";
 import {
   Popover,
@@ -26,31 +28,6 @@ import {
 } from "@/components/ui/command";
 import { Check, ChevronDown, ArrowUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-// ─── Labels / mappings ────────────────────────────────────────────────────────
-
-const STATUS_LABELS: Record<CommissionStatus, string> = {
-  active: "Active",
-  dormant: "Dormant",
-  ended: "Ended",
-  unknown: "Status unknown",
-};
-
-// Non-active groups use agnostic colors (no good/bad connotation).
-// `unknown` is grouped with `dormant` (shares its color).
-const STATUS_DOT: Record<CommissionStatus, string> = {
-  active: "bg-emerald-500",
-  dormant: "bg-sky-500",
-  ended: "bg-zinc-400",
-  unknown: "bg-sky-500",
-};
-
-const STATUS_TEXT: Record<CommissionStatus, string> = {
-  active: "text-emerald-700 dark:text-emerald-400",
-  dormant: "text-sky-700 dark:text-sky-400",
-  ended: "text-zinc-600 dark:text-zinc-400",
-  unknown: "text-sky-700 dark:text-sky-400",
-};
 
 function englishName(c: Commission): string {
   const en = c.name.translations.find((t) => t.language === "en");
@@ -81,15 +58,6 @@ function MetaTable({ rows }: { rows: { label: string; value: React.ReactNode }[]
         ))}
       </tbody>
     </table>
-  );
-}
-
-function StatusBadge({ status }: { status: CommissionStatus }) {
-  return (
-    <span className={cn("inline-flex items-center gap-1.5 text-xs font-medium", STATUS_TEXT[status])}>
-      <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", STATUS_DOT[status])} />
-      {STATUS_LABELS[status]}
-    </span>
   );
 }
 
@@ -247,13 +215,6 @@ const SORT_LABELS: Record<SortMode, string> = {
   activity: "By status",
 };
 
-const ACTIVITY_ORDER: Record<CommissionStatus, number> = {
-  active: 0,
-  dormant: 1,
-  unknown: 2,
-  ended: 3,
-};
-
 type FilterMode = "exclusive" | "inclusive";
 
 export function CommissionsClient({ commissions }: { commissions: Commission[] }) {
@@ -298,7 +259,7 @@ export function CommissionsClient({ commissions }: { commissions: Commission[] }
       return true;
     }).sort((a, b) => {
       if (sortMode === "activity") {
-        const diff = ACTIVITY_ORDER[a.status] - ACTIVITY_ORDER[b.status];
+        const diff = STATUS_ORDER[a.status] - STATUS_ORDER[b.status];
         if (diff !== 0) return diff;
         return parseYear(a.startDate) - parseYear(b.startDate);
       }

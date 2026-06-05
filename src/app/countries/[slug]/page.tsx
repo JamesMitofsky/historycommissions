@@ -8,35 +8,12 @@ import { getCommissions } from "@/commissions/get-commissions";
 import { FlagTag } from "@/components/FlagTag";
 import { BackLink } from "@/components/BackLink";
 import { CommissionMap } from "@/components/CommissionMap";
+import { StatusBadge } from "@/components/StatusBadge";
 import { countryCodeForTag } from "@/lib/country-codes";
 import { countrySlug } from "@/lib/country-slug";
-import { cn } from "@/lib/utils";
-import type { CommissionStatus } from "@/commissions/types";
 
 type Props = {
   params: Promise<{ slug: string }>;
-};
-
-const STATUS_LABELS: Record<CommissionStatus, string> = {
-  active: "Active",
-  dormant: "Dormant",
-  ended: "Ended",
-  unknown: "Status unknown",
-};
-
-// Non-active groups use agnostic colors; `unknown` shares `dormant`'s color.
-const STATUS_DOT: Record<CommissionStatus, string> = {
-  active: "bg-emerald-500",
-  dormant: "bg-sky-500",
-  ended: "bg-zinc-400",
-  unknown: "bg-sky-500",
-};
-
-const STATUS_TEXT: Record<CommissionStatus, string> = {
-  active: "text-emerald-700 dark:text-emerald-400",
-  dormant: "text-sky-700 dark:text-sky-400",
-  ended: "text-zinc-600 dark:text-zinc-400",
-  unknown: "text-sky-700 dark:text-sky-400",
 };
 
 export async function generateStaticParams() {
@@ -202,10 +179,7 @@ export default async function CountryPage({ params }: Props) {
                   className="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 transition-opacity duration-150 hover:opacity-75"
                 >
                   <div className="flex-1 min-w-0">
-                    <span className={cn("inline-flex items-center gap-1.5 text-xs font-medium", STATUS_TEXT[c.status])}>
-                      <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", STATUS_DOT[c.status])} />
-                      {STATUS_LABELS[c.status]}
-                    </span>
+                    <StatusBadge status={c.status} />
                     <h3 className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-foreground font-playfair">
                       {englishName(c)}
                     </h3>

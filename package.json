@@ -6,12 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp"
-    ]
+    "lint": "eslint",
+    "validate:commissions": "tsx scripts/validate-commissions.ts"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
@@ -34,9 +30,7 @@
     "react-dom": "19.2.4",
     "react-globe.gl": "^2.37.1",
     "remark-gfm": "^4.0.1",
-    "shadcn": "^4.7.0",
     "sharp": "^0.34.5",
-    "svg-dotted-map": "^2.1.0",
     "tailwind-merge": "^3.6.0",
     "three": "^0.184.0",
     "topojson-client": "^3.1.0",
@@ -54,7 +48,9 @@
     "@types/topojson-client": "^3.1.5",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "shadcn": "^4.10.0",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

@@ -38,7 +38,7 @@ export const CommissionSchema = z.object({
   proposedDate: z.string().nullable().default(null),
   startDate: z.string().nullable().default(null),
   lastActiveStatusDate: z.string().nullable().default(null),
-  lastActiveStatus: z.string().nullable().default(null),
+  lastActiveStatus: CommissionStatusSchema.nullable().default(null),
   memberCountries: z.array(z.string()).default([]),
   sponsoringInstitutions: z.array(z.string()).default([]),
   keyTopics: z.array(z.string()).default([]),
@@ -48,7 +48,7 @@ export const CommissionSchema = z.object({
         title: z.string().min(1),
         year: z.number().int().positive().nullable().default(null),
         url: z.string().nullable().default(null),
-        format: PublicationFormatSchema,
+        format: PublicationFormatSchema.default("other"),
       })
     )
     .default([]),
@@ -63,7 +63,7 @@ export const CommissionSchema = z.object({
       })
     )
     .default([]),
-  url: z.string(),
+  url: z.string().default(""),
   linkStatus: LinkStatusSchema.default("to_be_located"),
   lastArchivedSnapshot: z.string().nullable().default(null),
   archivableDocuments: z

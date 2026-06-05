@@ -15,7 +15,7 @@
   "proposedDate": null,
   "startDate": "2018-01-01",
   "lastActiveStatusDate": null,
-  "lastActiveStatus": "ongoing",
+  "lastActiveStatus": "active",
   "memberCountries": [
     "Bulgaria",
     "North Macedonia"
@@ -30,5 +30,5 @@
   "linkStatus": "to_be_located",
   "lastArchivedSnapshot": null,
   "archivableDocuments": [],
-  "draft": true
+  "draft": false
 }

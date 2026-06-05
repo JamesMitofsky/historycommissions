@@ -15,7 +15,7 @@
   "proposedDate": null,
   "startDate": "1990-01-01",
   "lastActiveStatusDate": "1998-01-01",
-  "lastActiveStatus": "ended?",
+  "lastActiveStatus": "ended",
   "memberCountries": [
     "Austria",
     "Czech Republic"
@@ -30,5 +30,5 @@
   "linkStatus": "to_be_located",
   "lastArchivedSnapshot": null,
   "archivableDocuments": [],
-  "draft": true
+  "draft": false
 }

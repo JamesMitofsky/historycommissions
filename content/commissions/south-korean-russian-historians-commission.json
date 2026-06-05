@@ -1,5 +1,5 @@
 {
-  "draft": true,
+  "draft": false,
   "sponsoringInstitutions": [],
   "keyTopics": [],
   "workingGroups": [],
@@ -18,7 +18,7 @@
     "englishName": "South Korean-Russian Historians' Commission"
   },
   "linkStatus": "to_be_located",
-  "lastActiveStatus": "unclear",
+  "lastActiveStatus": "unknown",
   "chairs": [],
   "url": "",
   "startDate": "2018-01-01",

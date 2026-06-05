@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCommissions, getCommission } from "@/commissions/get-commissions";
 import { FlagTag } from "@/components/FlagTag";
-import { cn } from "@/lib/utils";
-import type { Commission, CommissionStatus } from "@/commissions/types";
+import type { Commission } from "@/commissions/types";
 import { CommissionMap } from "@/components/CommissionMap";
+import { StatusBadge } from "@/components/StatusBadge";
 import { BackLink } from "@/components/BackLink";
 
 type Props = {
@@ -30,28 +30,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // ─── Display helpers ──────────────────────────────────────────────────────────
-
-const STATUS_LABELS: Record<CommissionStatus, string> = {
-  active: "Active",
-  dormant: "Dormant",
-  ended: "Ended",
-  unknown: "Status unknown",
-};
-
-// Non-active groups use agnostic colors; `unknown` shares `dormant`'s color.
-const STATUS_STYLE: Record<CommissionStatus, string> = {
-  active: "text-emerald-700 dark:text-emerald-500",
-  dormant: "text-sky-700 dark:text-sky-500",
-  ended: "text-zinc-600 dark:text-zinc-400",
-  unknown: "text-sky-700 dark:text-sky-500",
-};
-
-const STATUS_DOT: Record<CommissionStatus, string> = {
-  active: "bg-emerald-500",
-  dormant: "bg-sky-500",
-  ended: "bg-zinc-400",
-  unknown: "bg-sky-500",
-};
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -99,7 +77,7 @@ export default async function CommissionPage({ params }: Props) {
     .filter((t) => t.language !== "en" && t.name !== c.name.englishName)
     .map((t) => t.name);
 
-  const linkEl = c.linkStatus === "working" ? (
+  const linkEl = c.linkStatus === "working" && c.url ? (
     <a href={c.url} target="_blank" rel="noopener noreferrer"
       className="group/link text-sm font-medium text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 transition-colors underline underline-offset-4 decoration-sky-300 dark:decoration-sky-600">
       Website<span className="inline-block transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">&nbsp;↗</span>
@@ -116,10 +94,7 @@ export default async function CommissionPage({ params }: Props) {
       <BackLink href="/commissions">← All commissions</BackLink>
 
       <header className="mb-8">
-        <span className={cn("inline-flex items-center gap-1.5 text-xs font-medium", STATUS_STYLE[c.status])}>
-          <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", STATUS_DOT[c.status])} />
-          {STATUS_LABELS[c.status]}
-        </span>
+        <StatusBadge status={c.status} />
         <div className="flex items-start justify-between gap-4 mt-1.5">
           <div className="min-w-0">
             <ViewTransition name={`commission-title-${c.slug}`}>

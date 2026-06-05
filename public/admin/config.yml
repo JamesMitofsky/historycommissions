@@ -1,5 +1,10 @@
 local_backend: true
 
+# Editor saves become pull requests instead of direct commits to main. Combined
+# with the validate-commissions CI check, an entry that breaks the build schema
+# cannot be published — its status is visible in the Decap editorial workflow UI.
+publish_mode: editorial_workflow
+
 backend:
   name: git-gateway
   branch: main
@@ -87,7 +92,7 @@ collections:
     create: true
     format: json
     extension: json
-    slug: "{{slug}}"
+    slug: "{{fields.name.englishName}}"
     summary: "{{name.englishName}}"
     fields:
       - label: Name
@@ -108,9 +113,9 @@ collections:
       - label: Last Active Status
         name: lastActiveStatus
         widget: select
-        options: [ongoing, concluded, dormant, unknown]
+        options: [active, dormant, ended, unknown]
         required: false
-        hint: "Last known activity, shown as plain text in the details table. This is a historical note and is separate from the colored Status badge set further below."
+        hint: "Last known activity, shown as plain text in the details table. Same vocabulary as the colored Status badge below, but this is a historical note recording the status as of the 'Last Active Status Date'."
       - { label: Member Countries, name: memberCountries, widget: list, hint: "Country names only (e.g. Poland, Germany). These draw the map, the globe arcs, and the flag tags — so spelling must match real country names or the map won't render." }
       - { label: Sponsoring Institutions, name: sponsoringInstitutions, widget: list, required: false, hint: "Organizations that established or fund the commission. Shown in the details." }
       - { label: Key Topics, name: keyTopics, widget: list, required: false, hint: "Main research areas. Shown as a bulleted 'Key Topics' list on the page." }
@@ -120,7 +125,7 @@ collections:
         required: false
         fields:
           - { label: Title, name: title, widget: string, hint: "Title of the publication, shown in the Publications list." }
-          - { label: Year, name: year, widget: string, required: false, hint: "Publication year, shown next to the title." }
+          - { label: Year, name: year, widget: number, value_type: int, required: false, hint: "Publication year, shown next to the title." }
           - { label: URL, name: url, widget: string, required: false, hint: "Link to the publication. If set, the title becomes a clickable link." }
           - label: Format
             name: format
@@ -158,5 +163,5 @@ collections:
         fields:
           - { label: Title, name: title, widget: string, hint: "Name of the document." }
           - { label: URL, name: url, widget: string, hint: "Direct link to the document." }
-      - { label: Draft, name: draft, widget: boolean, required: false, hint: "For internal use. Note: this does NOT hide the commission — it still appears publicly when turned on. It changes nothing on the site yet." }
+      - { label: Draft, name: draft, widget: boolean, required: false, hint: "When on, the commission is hidden from the public site and skipped by the build — use it for work-in-progress entries that aren't ready to publish." }
 
