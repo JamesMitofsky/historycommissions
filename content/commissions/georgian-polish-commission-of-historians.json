@@ -23,8 +23,6 @@
   "status": "unknown",
   "chairs": [],
   "url": "",
-  "linkStatus": "to_be_located",
-  "lastArchivedSnapshot": null,
-  "archivableDocuments": [],
-  "draft": false
+  "linkStatus": "not_located",
+  "archivableDocuments": []
 }

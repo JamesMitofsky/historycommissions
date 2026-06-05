@@ -16,7 +16,10 @@
   "startDate": "1972-02-01",
   "lastActiveStatusDate": null,
   "lastActiveStatus": null,
-  "memberCountries": ["Germany", "Poland"],
+  "memberCountries": [
+    "Germany",
+    "Poland"
+  ],
   "sponsoringInstitutions": [],
   "keyTopics": [
     "German-Polish history in educational media",
@@ -52,7 +55,6 @@
     }
   ],
   "url": "https://schulbuchkommission.eu/",
-  "linkStatus": "working",
-  "lastArchivedSnapshot": "https://web.archive.org/web/20260312003536/https://schulbuchkommission.eu/",
+  "linkStatus": "live",
   "archivableDocuments": []
 }

@@ -78,15 +78,15 @@ export default async function CommissionPage({ params }: Props) {
     .filter((t) => t.language !== "en" && t.name !== c.name.englishName)
     .map((t) => t.name);
 
-  const linkEl = c.linkStatus === "working" && c.url ? (
+  const linkEl = c.linkStatus === "live" && c.url ? (
     <a href={c.url} target="_blank" rel="noopener noreferrer"
       className="group/link text-sm font-medium text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 transition-colors underline underline-offset-4 decoration-sky-300 dark:decoration-sky-600">
       Website<span className="inline-block transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">&nbsp;↗</span>
     </a>
-  ) : c.lastArchivedSnapshot ? (
-    <a href={c.lastArchivedSnapshot} target="_blank" rel="noopener noreferrer"
+  ) : c.linkStatus === "archived" && c.url ? (
+    <a href={`https://web.archive.org/web/${c.url}`} target="_blank" rel="noopener noreferrer"
       className="group/link text-sm font-medium text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 transition-colors underline underline-offset-4 decoration-sky-300 dark:decoration-sky-600">
-      Archive<span className="inline-block transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">&nbsp;↗</span>
+      Archived copy<span className="inline-block transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5">&nbsp;↗</span>
     </a>
   ) : null;
 

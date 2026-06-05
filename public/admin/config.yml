@@ -26,15 +26,6 @@ collections:
           - { label: Site Title, name: siteTitle, widget: string, hint: "Shown in the masthead, browser tab, footer and feeds" }
           - { label: Masthead Kicker, name: kicker, widget: string, hint: "Small uppercase line above the title (e.g. 'A digital archive')" }
           - { label: Meta Description, name: description, widget: text, hint: "Used for SEO and social sharing previews" }
-          - label: Navigation Links
-            name: nav
-            widget: list
-            label_singular: Link
-            summary: "{{fields.label}} → {{fields.href}}"
-            fields:
-              - { label: Path, name: href, widget: string, hint: "e.g. /about or /" }
-              - { label: Label, name: label, widget: string, hint: "Shown on wider screens" }
-              - { label: Short Label, name: shortLabel, widget: string, hint: "Shown on small/mobile screens" }
           - label: Footer
             name: footer
             widget: object
@@ -138,7 +129,7 @@ collections:
         name: status
         widget: select
         options: [active, dormant, ended, unknown]
-        hint: "Current status. Sets the colored badge on the page and list: active = green, dormant = blue, unknown = blue, ended = gray. Also used to filter and sort the commissions list."
+        hint: "Current status. Sets the colored badge on the page and list."
       - label: Chairs
         name: chairs
         widget: list
@@ -148,13 +139,16 @@ collections:
           - { label: Name, name: name, widget: string, hint: "Full name of the chair." }
           - { label: Country, name: country, widget: country, hint: "Country the chair is based in or represents. Pick from the dropdown, or type a value not on the list." }
           - { label: Affiliation, name: affiliation, widget: string, required: false, hint: "University or institution the chair belongs to (optional)." }
-      - { label: Commission URL, name: url, widget: string, required: false, hint: "The commission's official website. Shown as the 'Website' link, but only when Link Status below is 'working'." }
+      - { label: Commission Website, name: url, widget: string, required: false, hint: "The site to link to. If the live site is dead, set Link Status to 'Dead' below and we send visitors to the Wayback Machine copy automatically — no need to paste an archive URL." }
       - label: Link Status
         name: linkStatus
         widget: select
-        options: [working, broken, to_be_located]
-        hint: "Controls which link visitors see. 'working' shows the live Website link above. 'broken' or 'to_be_located' hides it and instead shows the Archive link below (if an archived snapshot is set)."
-      - { label: Last Archived Snapshot, name: lastArchivedSnapshot, widget: string, required: false, hint: "A Wayback Machine URL. Shown as the 'Archive' link whenever Link Status above is not 'working'." }
+        default: not_located
+        options:
+          - { label: "Live — link directly to the site", value: live }
+          - { label: "Dead — send visitors to the Wayback Machine archive", value: archived }
+          - { label: "Not located yet — no link shown", value: not_located }
+        hint: "Live shows a Website link. Dead builds an automatic Wayback Machine archive link from the URL above. Not located hides the link (use while still searching for the site)."
       - label: Archivable Documents
         name: archivableDocuments
         widget: list
@@ -163,5 +157,4 @@ collections:
         fields:
           - { label: Title, name: title, widget: string, hint: "Name of the document." }
           - { label: URL, name: url, widget: string, hint: "Direct link to the document." }
-      - { label: Draft, name: draft, widget: boolean, required: false, hint: "When on, the commission is hidden from the public site and skipped by the build — use it for work-in-progress entries that aren't ready to publish." }
 

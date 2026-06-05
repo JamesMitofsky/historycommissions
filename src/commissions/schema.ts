@@ -8,9 +8,9 @@ export const CommissionStatusSchema = z.enum([
 ]);
 
 export const LinkStatusSchema = z.enum([
-  "working",
-  "broken",
-  "to_be_located",
+  "live",
+  "archived",
+  "not_located",
 ]);
 
 export const PublicationFormatSchema = z.enum([
@@ -64,8 +64,7 @@ export const CommissionSchema = z.object({
     )
     .default([]),
   url: z.string().default(""),
-  linkStatus: LinkStatusSchema.default("to_be_located"),
-  lastArchivedSnapshot: z.string().nullable().default(null),
+  linkStatus: LinkStatusSchema.default("not_located"),
   archivableDocuments: z
     .array(
       z.object({

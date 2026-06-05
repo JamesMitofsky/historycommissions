@@ -1,5 +1,4 @@
 {
-  "draft": false,
   "sponsoringInstitutions": [],
   "keyTopics": [],
   "workingGroups": [],
@@ -17,7 +16,7 @@
     ],
     "englishName": "Commission on Complex Problems in Russian-Japanese Relations"
   },
-  "linkStatus": "to_be_located",
+  "linkStatus": "not_located",
   "lastActiveStatus": "ended",
   "chairs": [],
   "url": "",
@@ -29,6 +28,5 @@
     "Russia"
   ],
   "archivableDocuments": [],
-  "lastActiveStatusDate": "2015-01-01",
-  "lastArchivedSnapshot": null
+  "lastActiveStatusDate": "2015-01-01"
 }
