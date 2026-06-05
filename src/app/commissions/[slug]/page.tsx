@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const STATUS_LABELS: Record<CommissionStatus, string> = {
   active: "Active",
   dormant: "Dormant",
-  concluded: "Ended",
+  ended: "Ended",
   unknown: "Status unknown",
 };
 
@@ -42,14 +42,14 @@ const STATUS_LABELS: Record<CommissionStatus, string> = {
 const STATUS_STYLE: Record<CommissionStatus, string> = {
   active: "text-emerald-700 dark:text-emerald-500",
   dormant: "text-sky-700 dark:text-sky-500",
-  concluded: "text-zinc-600 dark:text-zinc-400",
+  ended: "text-zinc-600 dark:text-zinc-400",
   unknown: "text-sky-700 dark:text-sky-500",
 };
 
 const STATUS_DOT: Record<CommissionStatus, string> = {
   active: "bg-emerald-500",
   dormant: "bg-sky-500",
-  concluded: "bg-zinc-400",
+  ended: "bg-zinc-400",
   unknown: "bg-sky-500",
 };
 

@@ -128,7 +128,7 @@ collections:
       - label: Status
         name: status
         widget: select
-        options: [active, dormant, concluded, unknown]
+        options: [active, dormant, ended, unknown]
       - label: Chairs
         name: chairs
         widget: list

@@ -3,7 +3,7 @@ import { z } from "zod";
 export const CommissionStatusSchema = z.enum([
   "active",
   "dormant",
-  "concluded",
+  "ended",
   "unknown",
 ]);
 
