@@ -192,13 +192,21 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
     return () => obs.disconnect();
   }, []);
 
-  const globeWidth = containerWidth;
-  const globeHeight = Math.round(containerWidth * 0.9);
+  // Canvas height as a fraction of width. Smaller ratio = smaller, shorter globe.
+  const GLOBE_HEIGHT_RATIO = 0.6;
+  // Fraction of canvas height the sphere should fill. Near 1 = tight vertical
+  // whitespace; lower leaves margin above/below.
+  const GLOBE_FILL = 0.92;
 
-  // Height is the limiting dimension. Altitude must fit the sphere within globeHeight.
-  // react-globe.gl uses 75° FOV (vertical). minAlt = 1/sin(FOV/2) - 1, plus margin.
+  const globeWidth = containerWidth;
+  const globeHeight = Math.round(containerWidth * GLOBE_HEIGHT_RATIO);
+
+  // react-globe.gl uses a 75° vertical FOV. The sphere (radius 1) subtends a
+  // half-angle θ where sin θ = 1/(1+altitude). On screen it fills
+  // tan(θ)/tan(FOV/2) of the canvas height, so to hit GLOBE_FILL we invert that.
   const FOV_RAD = (75 * Math.PI) / 180;
-  const minAlt = 1 / Math.sin(FOV_RAD / 2) - 1 + 1;
+  const theta = Math.atan(GLOBE_FILL * Math.tan(FOV_RAD / 2));
+  const minAlt = 1 / Math.sin(theta) - 1;
 
   useEffect(() => {
     if (!globeRef.current || globeHeight === 0) return;
@@ -227,7 +235,7 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
       </div>
       <div
         className="overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-900 fill-mode-both"
-        style={{ height: containerWidth > 0 ? globeHeight : undefined, aspectRatio: "10 / 9", animationDelay: "340ms" }}
+        style={{ height: containerWidth > 0 ? globeHeight : undefined, aspectRatio: `1 / ${GLOBE_HEIGHT_RATIO}`, animationDelay: "340ms" }}
         onPointerDown={scheduleReset}
         onPointerMove={scheduleReset}
       >
