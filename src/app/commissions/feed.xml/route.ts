@@ -1,4 +1,5 @@
 import { getCommissions } from "@/commissions/get-commissions";
+import { STATUS_LABELS } from "@/commissions/status";
 import { buildRss } from "@/lib/rss";
 import { siteUrl } from "@/lib/site-url";
 import { getGeneralSettings } from "@/settings";
@@ -20,7 +21,7 @@ export async function GET() {
     const countries = c.memberCountries.join(", ");
     const founded = c.startDate ? `Founded ${c.startDate.slice(0, 4)}.` : "";
     const status = c.lastActiveStatus
-      ? `Status: ${c.lastActiveStatus}.`
+      ? `Status: ${STATUS_LABELS[c.lastActiveStatus]}.`
       : "";
     const description = [countries, founded, status].filter(Boolean).join(" ");
     return {

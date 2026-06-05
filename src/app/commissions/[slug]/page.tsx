@@ -6,6 +6,7 @@ import { FlagTag } from "@/components/FlagTag";
 import type { Commission } from "@/commissions/types";
 import { CommissionMap } from "@/components/CommissionMap";
 import { StatusBadge } from "@/components/StatusBadge";
+import { STATUS_LABELS } from "@/commissions/status";
 import { BackLink } from "@/components/BackLink";
 
 type Props = {
@@ -147,7 +148,7 @@ export default async function CommissionPage({ params }: Props) {
             { label: "Proposed", value: c.proposedDate?.slice(0, 4) ?? null },
             { label: "Founded", value: c.startDate?.slice(0, 4) ?? null },
             { label: "Last active", value: c.lastActiveStatusDate?.slice(0, 4) ?? null },
-            { label: "Last status", value: c.lastActiveStatus ?? null },
+            { label: "Last status", value: c.lastActiveStatus ? STATUS_LABELS[c.lastActiveStatus] : null },
             { label: "Sponsors", value: sponsors },
           ]} />
         </div>
