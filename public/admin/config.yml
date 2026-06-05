@@ -105,7 +105,7 @@ collections:
             widget: list
             hint: "The commission's name in other languages. Add one row per language."
             fields:
-              - { label: Language Code, name: language, widget: string, hint: "e.g. en, de, fr" }
+              - { label: Language, name: language, widget: language, hint: "Pick a language from the dropdown (e.g. English, German). Stored as its short code (en, de). The 'en' entry is what surfaces the English name across the site." }
               - { label: Name, name: name, widget: string, hint: "The commission's name written in the language above." }
       - { label: Proposed Date, name: proposedDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "When the commission was first proposed. Shown in the details table as 'Proposed'. Use Jan 1 if only the year is known." }
       - { label: Start Date, name: startDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "When the commission actually began. Shown as 'Founded' and used when sorting the list by date. Use Jan 1 if only the year is known." }
