@@ -20,22 +20,23 @@ type Props = {
 const STATUS_LABELS: Record<CommissionStatus, string> = {
   active: "Active",
   dormant: "Dormant",
-  concluded: "Concluded",
+  concluded: "Ended",
   unknown: "Status unknown",
 };
 
+// Non-active groups use agnostic colors; `unknown` shares `dormant`'s color.
 const STATUS_DOT: Record<CommissionStatus, string> = {
   active: "bg-emerald-500",
-  dormant: "bg-amber-400",
-  concluded: "bg-red-500",
-  unknown: "bg-red-400",
+  dormant: "bg-sky-500",
+  concluded: "bg-zinc-400",
+  unknown: "bg-sky-500",
 };
 
 const STATUS_TEXT: Record<CommissionStatus, string> = {
   active: "text-emerald-700 dark:text-emerald-400",
-  dormant: "text-amber-700 dark:text-amber-400",
-  concluded: "text-red-700 dark:text-red-400",
-  unknown: "text-red-700 dark:text-red-400",
+  dormant: "text-sky-700 dark:text-sky-400",
+  concluded: "text-zinc-600 dark:text-zinc-400",
+  unknown: "text-sky-700 dark:text-sky-400",
 };
 
 export async function generateStaticParams() {

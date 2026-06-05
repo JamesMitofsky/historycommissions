@@ -79,11 +79,12 @@ function buildArcs(
   return arcs;
 }
 
+// Non-active groups use agnostic colors; `unknown` is grouped with `dormant`.
 const ARC_COLOR: Record<string, string> = {
   active: "rgba(52, 211, 153, 1)",
-  dormant: "rgba(251, 191, 36, 0.95)",
-  concluded: "rgba(239, 68, 68, 0.85)",
-  unknown: "rgba(239, 68, 68, 0.65)",
+  dormant: "rgba(14, 165, 233, 0.95)",
+  concluded: "rgba(113, 113, 122, 0.85)",
+  unknown: "rgba(14, 165, 233, 0.7)",
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -230,8 +231,8 @@ export function CommissionGlobe({ commissions, visibleSlugs, onCountryClick }: {
     <div ref={containerRef} className="w-full overflow-hidden">
       <div className="flex gap-2 mb-2 text-xs animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" style={{ animationDelay: "220ms" }}>
         <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.active, color: "#fff" }}>Active</span>
-        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.dormant, color: "#fff" }}>Dormant</span>
-        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.concluded, color: "#fff" }}>Concluded / Unknown</span>
+        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.dormant, color: "#fff" }}>Dormant / Unknown</span>
+        <span className="px-2 py-0.5 rounded-full" style={{ backgroundColor: ARC_COLOR.concluded, color: "#fff" }}>Ended</span>
       </div>
       <div
         className="overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-900 fill-mode-both"
