@@ -21,7 +21,7 @@
   "lastActiveStatus": "ended",
   "chairs": [],
   "url": "",
-  "startDate": "2012",
+  "startDate": "2012-01-01",
   "status": "concluded",
   "proposedDate": null,
   "siteLanguages": [],
@@ -30,6 +30,6 @@
     "Russia"
   ],
   "archivableDocuments": [],
-  "lastActiveStatusDate": "2015",
+  "lastActiveStatusDate": "2015-01-01",
   "lastArchivedSnapshot": null
 }

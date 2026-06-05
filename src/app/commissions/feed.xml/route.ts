@@ -16,7 +16,7 @@ export async function GET() {
   const items = commissions.map((c) => {
     const link = `${base}/commissions/${c.slug}`;
     const countries = c.memberCountries.join(", ");
-    const founded = c.startDate ? `Founded ${c.startDate}.` : "";
+    const founded = c.startDate ? `Founded ${c.startDate.slice(0, 4)}.` : "";
     const status = c.lastActiveStatus
       ? `Status: ${c.lastActiveStatus}.`
       : "";
@@ -25,7 +25,7 @@ export async function GET() {
       title: englishName(c),
       link,
       guid: link,
-      pubDate: c.startDate ? `${c.startDate}-01-01` : null,
+      pubDate: c.startDate ?? null,
       description,
       categories: c.memberCountries,
     };

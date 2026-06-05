@@ -13,8 +13,8 @@
     "englishName": "Austrian-Czech Historical Commission"
   },
   "proposedDate": null,
-  "startDate": "1990",
-  "lastActiveStatusDate": "1998",
+  "startDate": "1990-01-01",
+  "lastActiveStatusDate": "1998-01-01",
   "lastActiveStatus": "ended?",
   "memberCountries": [
     "Austria",

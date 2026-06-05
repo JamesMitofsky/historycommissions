@@ -51,9 +51,9 @@ collections:
             fields:
               - { label: Language Code, name: language, widget: string, hint: "e.g. en, de, fr" }
               - { label: Name, name: name, widget: string }
-      - { label: Proposed Date, name: proposedDate, widget: string, required: false }
-      - { label: Start Date, name: startDate, widget: string, required: false }
-      - { label: Last Active Status Date, name: lastActiveStatusDate, widget: string, required: false }
+      - { label: Proposed Date, name: proposedDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "Use Jan 1 if only the year is known." }
+      - { label: Start Date, name: startDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "Use Jan 1 if only the year is known." }
+      - { label: Last Active Status Date, name: lastActiveStatusDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "Use Jan 1 if only the year is known." }
       - label: Last Active Status
         name: lastActiveStatus
         widget: select

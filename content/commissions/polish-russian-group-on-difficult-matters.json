@@ -46,7 +46,7 @@
     }
   ],
   "url": "https://upittpress.org/books/9780822944409/",
-  "startDate": "2001",
+  "startDate": "2001-01-01",
   "status": "concluded",
   "proposedDate": null,
   "siteLanguages": [
@@ -57,6 +57,6 @@
     "Russia"
   ],
   "archivableDocuments": [],
-  "lastActiveStatusDate": "2013",
+  "lastActiveStatusDate": "2013-01-01",
   "lastArchivedSnapshot": "https://web.archive.org/web/20260208102257/https://upittpress.org/books/9780822944409/"
 }

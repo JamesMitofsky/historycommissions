@@ -184,9 +184,9 @@ export default async function CommissionPage({ params }: Props) {
           <SectionLabel>Details</SectionLabel>
           <MetaTable rows={[
             { label: "Site languages", value: languages || null },
-            { label: "Proposed", value: c.proposedDate ?? null },
-            { label: "Founded", value: c.startDate ?? null },
-            { label: "Last active", value: c.lastActiveStatusDate ?? null },
+            { label: "Proposed", value: c.proposedDate?.slice(0, 4) ?? null },
+            { label: "Founded", value: c.startDate?.slice(0, 4) ?? null },
+            { label: "Last active", value: c.lastActiveStatusDate?.slice(0, 4) ?? null },
             { label: "Last status", value: c.lastActiveStatus ?? null },
             { label: "Sponsors", value: sponsors },
           ]} />

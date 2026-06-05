@@ -21,7 +21,7 @@
   "lastActiveStatus": "dormant",
   "chairs": [],
   "url": "",
-  "startDate": "2010",
+  "startDate": "2010-01-01",
   "status": "dormant",
   "proposedDate": null,
   "siteLanguages": [],
@@ -30,6 +30,6 @@
     "Russia"
   ],
   "archivableDocuments": [],
-  "lastActiveStatusDate": "2014",
+  "lastActiveStatusDate": "2014-01-01",
   "lastArchivedSnapshot": null
 }

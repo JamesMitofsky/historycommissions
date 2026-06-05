@@ -13,8 +13,8 @@
     "englishName": "Joint Commission for the Investigation of the Recent History of German-Russian Relations"
   },
   "proposedDate": null,
-  "startDate": "1997",
-  "lastActiveStatusDate": "2022",
+  "startDate": "1997-01-01",
+  "lastActiveStatusDate": "2022-01-01",
   "lastActiveStatus": "suspended",
   "memberCountries": [
     "Germany",

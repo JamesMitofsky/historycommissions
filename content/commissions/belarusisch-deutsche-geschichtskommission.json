@@ -22,7 +22,7 @@
   "lastActiveStatus": "dormant",
   "chairs": [],
   "url": "https://geschichte-historyja.org/",
-  "startDate": "2020.1",
+  "startDate": "2020-01-01",
   "status": "dormant",
   "proposedDate": null,
   "siteLanguages": [
@@ -34,6 +34,6 @@
     "Germany"
   ],
   "archivableDocuments": [],
-  "lastActiveStatusDate": "2021.7",
+  "lastActiveStatusDate": "2021-07-01",
   "lastArchivedSnapshot": "https://web.archive.org/web/20260311185036/https://geschichte-historyja.org/"
 }
