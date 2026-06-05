@@ -6,8 +6,11 @@ import Script from "next/script";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { getBlurDataURL } from "@/blog/get-blur-data-url";
+import { getGeneralSettings } from "@/settings";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+
+const general = getGeneralSettings();
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 
@@ -41,22 +44,21 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "History Commissions",
-    template: "%s | History Commissions",
+    default: general.siteTitle,
+    template: `%s | ${general.siteTitle}`,
   },
-  description:
-    "A digital archive of joint historians' commissions and dialogues over history.",
+  description: general.description,
   icons: { icon: "/favicon.ico" },
   alternates: {
     types: {
       "application/rss+xml": [
-        { url: "/feed.xml", title: "History Commissions — Posts" },
-        { url: "/commissions/feed.xml", title: "History Commissions — Bilateral Commissions" },
+        { url: "/feed.xml", title: general.feeds.postsTitle },
+        { url: "/commissions/feed.xml", title: general.feeds.commissionsTitle },
       ],
     },
   },
   openGraph: {
-    siteName: "History Commissions",
+    siteName: general.siteTitle,
     type: "website",
   },
   twitter: {
@@ -91,18 +93,21 @@ export default async function RootLayout({
           <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60" />
 
           {/* Nav — top of image */}
-          <Nav />
+          <Nav links={general.nav} />
 
           {/* Site title — bottom of image */}
           <div className="absolute bottom-0 left-0 right-0">
             <div className="max-w-2xl mx-auto px-6 pb-5">
               <Link href="/" className="inline-block">
                 <p className="text-[0.65rem] font-medium tracking-[0.18em] uppercase text-white/60 mb-1">
-                  A digital archive
+                  {general.kicker}
                 </p>
                 <h1 className="text-3xl font-bold text-white leading-tight font-playfair">
-                  <span className="block">History</span>
-                  <span className="block">Commissions</span>
+                  {general.siteTitle.split(" ").map((word) => (
+                    <span key={word} className="block">
+                      {word}
+                    </span>
+                  ))}
                 </h1>
               </Link>
             </div>

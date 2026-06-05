@@ -8,6 +8,55 @@ media_folder: public/images
 public_folder: /images
 
 collections:
+  - name: settings
+    label: Site Settings
+    description: Site-wide content and misc fields. Edit these to update text across the whole site.
+    editor:
+      preview: false
+    files:
+      - name: general
+        label: General Site Settings
+        file: content/settings/general.json
+        fields:
+          - { label: Site Title, name: siteTitle, widget: string, hint: "Shown in the masthead, browser tab, footer and feeds" }
+          - { label: Masthead Kicker, name: kicker, widget: string, hint: "Small uppercase line above the title (e.g. 'A digital archive')" }
+          - { label: Meta Description, name: description, widget: text, hint: "Used for SEO and social sharing previews" }
+          - label: Navigation Links
+            name: nav
+            widget: list
+            label_singular: Link
+            summary: "{{fields.label}} → {{fields.href}}"
+            fields:
+              - { label: Path, name: href, widget: string, hint: "e.g. /about or /" }
+              - { label: Label, name: label, widget: string, hint: "Shown on wider screens" }
+              - { label: Short Label, name: shortLabel, widget: string, hint: "Shown on small/mobile screens" }
+          - label: Footer
+            name: footer
+            widget: object
+            fields:
+              - { label: Tagline, name: tagline, widget: string }
+              - { label: Copyright Holder, name: copyrightHolder, widget: string, hint: "Name after the © year" }
+          - label: Social Sharing Image
+            name: og
+            widget: object
+            fields:
+              - { label: Subtitle, name: subtitle, widget: string, hint: "Caption on the link-preview image" }
+          - label: RSS Feeds
+            name: feeds
+            widget: object
+            fields:
+              - { label: Posts Feed Title, name: postsTitle, widget: string }
+              - { label: Posts Feed Description, name: postsDescription, widget: text }
+              - { label: Commissions Feed Title, name: commissionsTitle, widget: string }
+              - { label: Commissions Feed Description, name: commissionsDescription, widget: text }
+      - name: about
+        label: About Page
+        file: content/settings/about.json
+        fields:
+          - { label: Page Title, name: title, widget: string }
+          - { label: Body, name: body, widget: markdown, hint: "Main about text" }
+          - { label: Contact / Maintainer, name: contact, widget: markdown, hint: "Shown in smaller text below the body. Use links for names and emails." }
+
   - name: posts
     label: Posts
     folder: content/posts

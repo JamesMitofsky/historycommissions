@@ -1,0 +1,23 @@
+{
+  "siteTitle": "History Commissions",
+  "kicker": "A digital archive",
+  "description": "A digital archive of joint historians' commissions and dialogues over history.",
+  "nav": [
+    { "href": "/", "label": "News", "shortLabel": "News" },
+    { "href": "/commissions", "label": "Bilateral Commissions", "shortLabel": "Commissions" },
+    { "href": "/about", "label": "About", "shortLabel": "About" }
+  ],
+  "footer": {
+    "tagline": "A digital archive of joint historians' commissions.",
+    "copyrightHolder": "Daqing Yang"
+  },
+  "og": {
+    "subtitle": "Joint historians' commissions and dialogues from around the world"
+  },
+  "feeds": {
+    "postsTitle": "History Commissions",
+    "postsDescription": "A digital archive of joint historians' commissions and dialogues over history.",
+    "commissionsTitle": "History Commissions — Bilateral Commissions",
+    "commissionsDescription": "Bilateral joint historians' commissions catalogued by History Commissions."
+  }
+}

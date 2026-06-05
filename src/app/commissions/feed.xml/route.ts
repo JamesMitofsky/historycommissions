@@ -1,6 +1,7 @@
 import { getCommissions } from "@/commissions/get-commissions";
 import { buildRss } from "@/lib/rss";
 import { siteUrl } from "@/lib/site-url";
+import { getGeneralSettings } from "@/settings";
 
 export const dynamic = "force-static";
 
@@ -11,6 +12,7 @@ function englishName(c: { name: { englishName: string; translations: { language:
 
 export async function GET() {
   const base = siteUrl();
+  const { feeds } = getGeneralSettings();
   const commissions = getCommissions();
 
   const items = commissions.map((c) => {
@@ -32,10 +34,9 @@ export async function GET() {
   });
 
   const xml = buildRss({
-    title: "History Commissions — Bilateral Commissions",
+    title: feeds.commissionsTitle,
     link: `${base}/commissions`,
-    description:
-      "Bilateral joint historians' commissions catalogued by History Commissions.",
+    description: feeds.commissionsDescription,
     selfUrl: `${base}/commissions/feed.xml`,
     items,
   });

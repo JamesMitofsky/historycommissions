@@ -2,14 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { NavLink } from "@/settings";
 
-const links = [
-  { href: "/", label: "News", shortLabel: "News" },
-  { href: "/commissions", label: "Bilateral Commissions", shortLabel: "Commissions" },
-  { href: "/about", label: "About", shortLabel: "About" },
-];
-
-export function Nav() {
+export function Nav({ links }: { links: NavLink[] }) {
   const pathname = usePathname();
 
   const isActive = (href: string) =>
