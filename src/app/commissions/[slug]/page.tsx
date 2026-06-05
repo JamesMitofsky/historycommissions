@@ -34,22 +34,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const STATUS_LABELS: Record<CommissionStatus, string> = {
   active: "Active",
   dormant: "Dormant",
-  concluded: "Concluded",
+  concluded: "Ended",
   unknown: "Status unknown",
 };
 
+// Non-active groups use agnostic colors; `unknown` shares `dormant`'s color.
 const STATUS_STYLE: Record<CommissionStatus, string> = {
   active: "text-emerald-700 dark:text-emerald-500",
-  dormant: "text-amber-700 dark:text-amber-500",
-  concluded: "text-muted-foreground",
-  unknown: "text-muted-foreground",
+  dormant: "text-sky-700 dark:text-sky-500",
+  concluded: "text-zinc-600 dark:text-zinc-400",
+  unknown: "text-sky-700 dark:text-sky-500",
 };
 
 const STATUS_DOT: Record<CommissionStatus, string> = {
   active: "bg-emerald-500",
-  dormant: "bg-amber-400",
-  concluded: "bg-neutral-400",
-  unknown: "bg-neutral-300",
+  dormant: "bg-sky-500",
+  concluded: "bg-zinc-400",
+  unknown: "bg-sky-500",
 };
 
 const LANG_NAMES: Record<string, string> = {
