@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import path from "path";
 import sharp from "sharp";
 import { getPost } from "@/blog";
+import { formatPostDate } from "@/lib/format-date";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -114,11 +115,7 @@ export default async function Image({
                 marginTop: 20,
               }}
             >
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
+              {formatPostDate(post.date, "long")}
             </div>
           )}
         </div>

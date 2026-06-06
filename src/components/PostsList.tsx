@@ -6,6 +6,7 @@ import Link from "next/link";
 import Fuse from "fuse.js";
 import { Info } from "lucide-react";
 import type { Post } from "@/blog/types";
+import { formatPostDate } from "@/lib/format-date";
 import { FadeImage } from "@/components/FadeImage";
 import { FlagTag } from "@/components/FlagTag";
 import { GooeyInput } from "@/components/ui/gooey-input";
@@ -88,13 +89,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
       ) : (
         <ul className="divide-y divide-border/40">
           {results.map((post, i) => {
-            const formattedDate = post.date
-              ? new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })
-              : null;
+            const formattedDate = post.date ? formatPostDate(post.date) : null;
 
             return (
               <li

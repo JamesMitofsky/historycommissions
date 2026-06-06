@@ -9,6 +9,7 @@ import { FlagTag } from "@/ui/FlagTag";
 import { CommissionMap } from "@/components/CommissionMap";
 import { FadeImage } from "@/components/FadeImage";
 import { BackLink } from "@/components/BackLink";
+import { formatPostDate } from "@/lib/format-date";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -62,13 +63,7 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
-  const formattedDate = post.date
-    ? new Date(post.date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-    : null;
+  const formattedDate = post.date ? formatPostDate(post.date, "long") : null;
 
   return (
     <main className="max-w-2xl mx-auto px-6 py-12">

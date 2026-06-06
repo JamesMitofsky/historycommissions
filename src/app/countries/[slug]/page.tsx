@@ -11,6 +11,7 @@ import { FadeImage } from "@/components/FadeImage";
 import { StatusBadge } from "@/components/StatusBadge";
 import { countryCodeForTag } from "@/lib/country-codes";
 import { countrySlug } from "@/lib/country-slug";
+import { formatPostDate } from "@/lib/format-date";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -111,13 +112,7 @@ export default async function CountryPage({ params }: Props) {
           </p>
           <ul className="divide-y divide-border/40">
             {matchingPosts.map((post) => {
-              const formattedDate = post.date
-                ? new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })
-                : null;
+              const formattedDate = post.date ? formatPostDate(post.date) : null;
               return (
                 <li key={post.slug} className="py-5">
                   <Link
