@@ -4,7 +4,7 @@ date: 2025-11-06T02:34:00.000Z
 updated: 2026-03-25T02:21:14.992Z
 author: Daqing Yang
 tags:
-  - Cameron
+  - Cameroon
   - France
 image: /images/france-cameroon-memorial-committee-report.webp
 ---

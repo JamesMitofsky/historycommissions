@@ -5,7 +5,7 @@ updated: 2016-06-23T14:23:07.369Z
 author: Daqing Yang
 tags:
   - Japan
-  - Korea
+  - South Korea
 image: /images/Japan-Korea-Joint-History-Study.webp
 ---
 

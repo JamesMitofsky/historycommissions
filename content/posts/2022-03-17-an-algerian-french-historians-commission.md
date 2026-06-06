@@ -4,7 +4,7 @@ date: 2022-03-17T09:04:00.012Z
 updated: 2022-09-30T20:56:54.611Z
 author: Daqing Yang
 tags:
-  - Algier
+  - Algeria
   - France
 image: /images/france-algeria-flags.webp
 imageAttribution: Wikimedia Commons
@@ -21,7 +21,7 @@ Among other things, it calls for 
 * The revival of plans for a Franco-Algerian history museum; the organisation of conferences in 2021 (on African independence movements)
 * The establishment of an archival collection jointly held by both countries and open to the public.
 
-On the question of writing a common history of Algier and France, Stora noted:
+On the question of writing a common history of Algeria and France, Stora noted:
 
 Clearly, these are two opposing visions that cannot be reconciled. But underneath these visions, there’s nevertheless a cultural mixing that has taken place, ties that have been forged, contact that has been established and a togetherness that has existed.... So, there’s still a history we can draw on, not as a way to bring about reconciliation, which cannot be, but to find common ground. If we tap into this history, we see that there are things that bridge us together and potential avenues for cooperation, and that allows us to envision a sort of future together, with the help of specific initiatives. These initiatives can take the form of paying tribute to those who were killed or went missing in the war, promoting literature, etc.
 
