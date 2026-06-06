@@ -11,8 +11,9 @@ type FadeImageProps = Omit<ImageProps, "placeholder"> & {
 /**
  * next/image swaps its blur placeholder to the sharp image with a hard cut, which
  * reads as a "flash" once network latency makes the blur visible (e.g. prod).
- * This renders the blur as a separate layer underneath and crossfades the sharp
- * image in on load, so there is no abrupt swap.
+ * This renders the blur as a separate, always-opaque layer underneath and fades
+ * the sharp image in on top of it. Only the sharp layer animates, so there is no
+ * transparent dip (the blur is never faded out from under it).
  */
 export function FadeImage({
   className,
@@ -34,10 +35,7 @@ export function FadeImage({
       {blurDataURL && (
         <span
           aria-hidden
-          className={cn(
-            "pointer-events-none absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-out",
-            loaded ? "opacity-0" : "opacity-100",
-          )}
+          className="pointer-events-none absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url("${blurDataURL}")` }}
         />
       )}
@@ -51,7 +49,7 @@ export function FadeImage({
         className={className}
         style={{
           transitionProperty: "opacity, transform",
-          transitionDuration: "700ms, 300ms",
+          transitionDuration: "500ms, 300ms",
           transitionTimingFunction: "ease-out",
           opacity: loaded ? 1 : 0,
           ...style,
