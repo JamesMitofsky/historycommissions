@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { CircleFlag } from "react-circle-flags";
@@ -8,6 +7,7 @@ import { getCommissions } from "@/commissions/get-commissions";
 import { FlagTag } from "@/components/FlagTag";
 import { BackLink } from "@/components/BackLink";
 import { CommissionMap } from "@/components/CommissionMap";
+import { FadeImage } from "@/components/FadeImage";
 import { StatusBadge } from "@/components/StatusBadge";
 import { countryCodeForTag } from "@/lib/country-codes";
 import { countrySlug } from "@/lib/country-slug";
@@ -136,13 +136,12 @@ export default async function CountryPage({ params }: Props) {
                     </div>
                     {post.image && (
                       <div className="relative w-full sm:w-48 h-32 sm:h-[120px] shrink-0 overflow-hidden bg-muted">
-                        <Image
+                        <FadeImage
                           src={post.image}
                           alt=""
                           fill
                           sizes="192px"
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          placeholder={post.blurDataURL ? "blur" : "empty"}
+                          className="object-cover group-hover:scale-105"
                           blurDataURL={post.blurDataURL ?? undefined}
                           unoptimized={post.image.toLowerCase().endsWith(".svg")}
                         />

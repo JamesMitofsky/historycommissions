@@ -1,5 +1,4 @@
 import { ViewTransition } from "react";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -8,6 +7,7 @@ import { getPost, getPostSlugs } from "@/blog";
 import { Prose } from "@/ui";
 import { FlagTag } from "@/ui/FlagTag";
 import { CommissionMap } from "@/components/CommissionMap";
+import { FadeImage } from "@/components/FadeImage";
 import { BackLink } from "@/components/BackLink";
 
 type Props = {
@@ -106,14 +106,13 @@ export default async function PostPage({ params }: Props) {
                 <ViewTransition name={`post-image-${post.slug}`}>
                   <div className={post.tags.length > 0 ? "order-1 sm:order-none sm:flex-[2] min-w-0" : "w-full"}>
                     <div className="relative rounded-lg overflow-hidden bg-border h-[200px] sm:h-full">
-                      <Image
+                      <FadeImage
                         src={post.image}
                         alt={post.title ?? ""}
                         fill
                         sizes="(max-width: 768px) 100vw, 672px"
                         className="object-cover"
                         priority
-                        placeholder={post.blurDataURL ? "blur" : "empty"}
                         blurDataURL={post.blurDataURL ?? undefined}
                         unoptimized={post.image.toLowerCase().endsWith(".svg")}
                       />

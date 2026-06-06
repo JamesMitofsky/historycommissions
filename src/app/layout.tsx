@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Serif_4, DM_Sans, Playfair_Display } from "next/font/google";
-import Image from "next/image";
+import { FadeImage } from "@/components/FadeImage";
 import Link from "next/link";
 import Script from "next/script";
 import { Nav } from "@/components/Nav";
@@ -80,13 +80,12 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col font-sans text-base leading-[1.65] antialiased [text-rendering:optimizeLegibility]">
         {/* Masthead — image + nav + site title in one unit */}
         <header className="relative w-full h-56 overflow-hidden" style={{ viewTransitionName: "site-header" }}>
-          <Image
+          <FadeImage
             src="/hero.webp"
             alt=""
             fill
             priority
-            className="object-cover object-right-bottom"
-            placeholder={heroBlurDataURL ? "blur" : "empty"}
+            className="object-cover object-center"
             blurDataURL={heroBlurDataURL ?? undefined}
           />
           {/* Gradient: dark at top for nav legibility, dark at bottom for title legibility */}

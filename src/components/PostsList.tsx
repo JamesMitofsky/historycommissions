@@ -3,10 +3,10 @@
 import { useState, useMemo, useEffect } from "react";
 import { ViewTransition } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Fuse from "fuse.js";
 import { Info } from "lucide-react";
 import type { Post } from "@/blog/types";
+import { FadeImage } from "@/components/FadeImage";
 import { FlagTag } from "@/components/FlagTag";
 import { GooeyInput } from "@/components/ui/gooey-input";
 import {
@@ -139,13 +139,12 @@ export function PostsList({ posts }: { posts: Post[] }) {
                   >
                     <ViewTransition name={`post-image-${post.slug}`}>
                       <div className="relative w-full h-48 sm:h-[160px] overflow-hidden bg-muted">
-                        <Image
+                        <FadeImage
                           src={post.image}
                           alt=""
                           fill
                           sizes="256px"
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          placeholder={post.blurDataURL ? "blur" : "empty"}
+                          className="object-cover group-hover:scale-105"
                           blurDataURL={post.blurDataURL ?? undefined}
                           unoptimized={post.image.toLowerCase().endsWith(".svg")}
                         />
