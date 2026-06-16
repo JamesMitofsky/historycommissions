@@ -11,10 +11,10 @@ import { FadeImage } from "@/components/FadeImage";
 import { FlagTag } from "@/components/FlagTag";
 import { GooeyInput } from "@/components/ui/gooey-input";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { navigatingViaViewTransition, setNavigatingViaViewTransition } from "@/lib/navigation-state";
 
 export function PostsList({ posts }: { posts: Post[] }) {
@@ -56,7 +56,7 @@ export function PostsList({ posts }: { posts: Post[] }) {
   return (
     <div>
       <div
-        className={`flex justify-end items-center gap-2 ${animate ? "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" : ""}`}
+        className={`flex justify-end items-center gap-0 ${animate ? "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both" : ""}`}
         style={animate ? { animationDelay: "60ms" } : undefined}
       >
         <GooeyInput
@@ -64,24 +64,24 @@ export function PostsList({ posts }: { posts: Post[] }) {
           value={query}
           onValueChange={setQuery}
         />
-        <Popover>
-          <PopoverTrigger asChild>
+        <HoverCard openDelay={100} closeDelay={100}>
+          <HoverCardTrigger asChild>
             <button
               type="button"
               aria-label="About this search"
-              className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted/60 size-8 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
+              className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground size-4 self-start ml-1 -mt-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
             >
               <Info className="size-4" aria-hidden />
             </button>
-          </PopoverTrigger>
-          <PopoverContent align="end" sideOffset={6} className="w-72 text-sm leading-relaxed">
+          </HoverCardTrigger>
+          <HoverCardContent side="right" align="start" sideOffset={4} className="w-72 text-sm leading-relaxed">
             <p className="font-semibold text-foreground mb-1">Fuzzy search</p>
             <p className="text-muted-foreground">
               Matches on post titles, country tags, and content — typos and partial words are forgiven.
               Title matches rank above tag matches, which rank above body matches.
             </p>
-          </PopoverContent>
-        </Popover>
+          </HoverCardContent>
+        </HoverCard>
       </div>
 
       {results.length === 0 ? (
