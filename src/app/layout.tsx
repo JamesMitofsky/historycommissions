@@ -85,7 +85,7 @@ export default async function RootLayout({
             alt=""
             fill
             priority
-            className="object-cover object-center"
+            className="object-cover object-bottom"
             blurDataURL={heroBlurDataURL ?? undefined}
           />
           {/* Gradient: dark at top for nav legibility, dark at bottom for title legibility */}
