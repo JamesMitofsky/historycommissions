@@ -57,9 +57,10 @@ function SearchIcon({ layoutId }: { layoutId: string }) {
 }
 
 const transition = {
-  duration: 0.25,
   type: "spring" as const,
-  bounce: 0.25,
+  stiffness: 400,
+  damping: 28,
+  mass: 1,
 };
 
 const iconBubbleVariants = {
