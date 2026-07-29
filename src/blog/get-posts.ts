@@ -1,4 +1,4 @@
-import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import type { Post } from "./schema";
 
 /** Frontmatter dates may be YAML dates or strings; normalise both to ISO. */
@@ -41,10 +41,4 @@ export async function getPostEntries(): Promise<CollectionEntry<"posts">[]> {
 
 export async function getPosts(): Promise<Post[]> {
   return (await getPostEntries()).map(toPost);
-}
-
-export async function getPostEntry(
-  slug: string,
-): Promise<CollectionEntry<"posts"> | undefined> {
-  return getEntry("posts", slug);
 }

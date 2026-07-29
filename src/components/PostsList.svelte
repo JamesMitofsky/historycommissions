@@ -162,7 +162,7 @@
                   decoding="async"
                   data-fade-img
                   use:fadeImage
-                  class="absolute inset-0 h-full w-full object-cover group-hover:scale-105"
+                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
               </div>
             </a>

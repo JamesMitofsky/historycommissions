@@ -42,6 +42,3 @@ export const getCommissions = (): Commission[] =>
     .readdirSync(COMMISSIONS_DIR)
     .filter((f) => f.endsWith(".json"))
     .map(loadCommission);
-
-export const getCommission = (slug: string): Commission =>
-  loadCommission(`${slug}.json`);
