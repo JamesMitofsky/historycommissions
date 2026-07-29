@@ -155,7 +155,7 @@
       type="text"
       placeholder="Search commissions…"
       bind:value={search}
-      class="h-8 w-52 text-sm"
+      class="h-8 w-52 text-sm rounded-xs"
     />
 
     <FilterPopover
@@ -179,7 +179,7 @@
 
     {#if activeCount > 0}
       <div
-        class="flex items-center rounded-md border text-xs h-8 overflow-hidden"
+        class="flex items-center rounded-xs border text-xs h-8 overflow-hidden"
       >
         <button
           onclick={() => (filterMode = "exclusive")}
@@ -211,7 +211,7 @@
         onclick={clearAll}
         class={cn(
           buttonVariants({ variant: "ghost", size: "sm" }),
-          "text-muted-foreground hover:text-foreground h-8",
+          "text-muted-foreground hover:text-foreground h-8 rounded-xs",
         )}
       >
         Clear all
@@ -222,7 +222,7 @@
       <Popover.Trigger
         class={cn(
           buttonVariants({ variant: "ghost", size: "sm" }),
-          "text-xs text-muted-foreground h-8 gap-1.5 ml-auto",
+          "text-xs text-muted-foreground h-8 gap-1.5 ml-auto rounded-xs",
         )}
         aria-expanded={sortOpen}
         aria-label="Sort commissions"

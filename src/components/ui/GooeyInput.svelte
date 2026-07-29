@@ -169,15 +169,26 @@
         {disabled}
         onclick={handleExpand}
         class={cn(
-          "flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-full px-4 text-sm font-medium outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
+          "flex h-10 w-full cursor-pointer items-center justify-center rounded-full px-4 text-sm font-medium outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
           surfaceClass,
         )}
       >
-        {#if !isExpanded}
-          <span in:receive={{ key: filterId }} out:send={{ key: filterId }}>
-            {@render searchIcon()}
-          </span>
-        {/if}
+        <!-- The slot the icon occupies collapses its own width over the same
+             350ms the icon takes to fly to the bubble. Without it the icon was
+             yanked out of flow the instant its crossfade ended, and the
+             placeholder jumped left. overflow stays visible so the icon is not
+             clipped while it travels outside this shrinking box. -->
+        <span
+          class="flex-none transition-[width,margin-right] duration-[350ms] ease-out {isExpanded
+            ? 'w-0 mr-0'
+            : 'w-4 mr-2'}"
+        >
+          {#if !isExpanded}
+            <span in:receive={{ key: filterId }} out:send={{ key: filterId }}>
+              {@render searchIcon()}
+            </span>
+          {/if}
+        </span>
         <input
           bind:this={inputEl}
           bind:value

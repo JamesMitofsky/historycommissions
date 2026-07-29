@@ -33,7 +33,7 @@
   <Popover.Trigger
     class={cn(
       buttonVariants({ variant: "outline", size: "sm" }),
-      "gap-1.5 font-normal",
+      "gap-1.5 font-normal rounded-xs",
       count > 0 && "border-foreground/50",
     )}
     aria-expanded={open}

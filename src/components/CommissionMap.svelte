@@ -100,12 +100,13 @@
       const width = container.clientWidth || 600;
       const height = Math.round(width * aspectRatio);
 
+      // Only the viewBox is set here. Width and height come from CSS, where the
+      // aspect ratio is already reserved before this data arrives — setting a
+      // pixel height at this point is what made the map visibly resize once the
+      // topology finished loading.
       const svg = d3.select(svgNode);
       svg.selectAll("*").remove();
-      svg
-        .attr("viewBox", `0 0 ${width} ${height}`)
-        .attr("width", "100%")
-        .attr("height", height);
+      svg.attr("viewBox", `0 0 ${width} ${height}`);
 
       const allCountries = topojson.feature(
         worldData,
@@ -179,7 +180,16 @@
     bind:this={containerEl}
     class="relative rounded-lg overflow-hidden border border-border/50"
   >
-    <svg bind:this={svgEl} style="display: block; width: 100%"></svg>
+    <!-- aspect-ratio reserves the final height from first paint, so the box does
+         not grow when the topology finishes loading. It is the inverse of the
+         `aspectRatio` prop, which is height-over-width. The background matches
+         the ocean rect d3 draws, so the placeholder and the map are the same
+         colour and only the land fades in. -->
+    <svg
+      bind:this={svgEl}
+      style="display: block; width: 100%; aspect-ratio: {1 /
+        aspectRatio}; background-color: #EFF4F8"
+    ></svg>
     <div
       bind:this={tooltipEl}
       class="map-tooltip pointer-events-none absolute rounded px-2 py-1 text-xs font-medium bg-foreground text-background opacity-0 transition-opacity whitespace-nowrap"
