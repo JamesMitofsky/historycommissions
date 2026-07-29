@@ -178,7 +178,7 @@
 {#if parties.length > 0}
   <div
     bind:this={containerEl}
-    class="relative rounded-lg overflow-hidden border border-border/50"
+    class="relative rounded-xs overflow-hidden border border-border/50"
   >
     <!-- aspect-ratio reserves the final height from first paint, so the box does
          not grow when the topology finishes loading. It is the inverse of the
@@ -192,7 +192,7 @@
     ></svg>
     <div
       bind:this={tooltipEl}
-      class="map-tooltip pointer-events-none absolute rounded px-2 py-1 text-xs font-medium bg-foreground text-background opacity-0 transition-opacity whitespace-nowrap"
+      class="map-tooltip pointer-events-none absolute rounded-xs px-2 py-1 text-xs font-medium bg-foreground text-background opacity-0 transition-opacity whitespace-nowrap"
       style="top: 0; left: 0"
     ></div>
   </div>

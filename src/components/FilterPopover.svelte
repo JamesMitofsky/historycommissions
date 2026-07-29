@@ -43,7 +43,7 @@
       <span
         class={cn(
           badgeVariants({ variant: "secondary" }),
-          "h-4 min-w-4 px-1 text-[10px] font-semibold rounded-full",
+          "h-4 min-w-4 px-1 text-[10px] font-semibold rounded-xs",
         )}
       >
         {count}

@@ -96,7 +96,7 @@ const blurDataURL = await getBlurDataURL(post.image);
                   }
                   transition:name={`post-image-${post.slug}`}
                 >
-                  <div class="relative rounded-lg overflow-hidden bg-border h-[200px] sm:h-full">
+                  <div class="relative rounded-xs overflow-hidden bg-border h-[200px] sm:h-full">
                     <FadeImage
                       src={image}
                       alt={post.title ?? ""}

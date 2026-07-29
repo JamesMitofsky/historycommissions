@@ -123,7 +123,7 @@
         {#each visible as { label, value } (label)}
           <tr class="align-top">
             <td
-              class="pr-5 py-0.5 text-muted-foreground whitespace-nowrap w-28"
+              class="pr-5 py-0.5 text-muted-foreground whitespace-nowrap w-px"
             >
               {label}
             </td>
@@ -136,19 +136,6 @@
 {/snippet}
 
 <div>
-  <div class="mb-10">
-    <h1
-      style={animate ? "animation-delay: 60ms" : undefined}
-      class={cn(
-        "text-2xl font-semibold text-foreground font-playfair",
-        animate &&
-          "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both",
-      )}
-    >
-      Bilateral Commissions
-    </h1>
-  </div>
-
   <!-- Filter bar -->
   <div class="flex flex-wrap items-center gap-2 mt-4 mb-6">
     <Input
@@ -239,7 +226,7 @@
               sortOpen = false;
             }}
             class={cn(
-              "flex items-center gap-2 w-full rounded px-2 py-1.5 text-xs text-left transition-colors hover:bg-accent",
+              "flex items-center gap-2 w-full rounded-xs px-2 py-1.5 text-xs text-left transition-colors hover:bg-accent",
               sortMode === mode ? "text-foreground" : "text-muted-foreground",
             )}
           >
@@ -273,55 +260,71 @@
           )}
           style={animate ? `animation-delay: ${100 + i * 40}ms` : undefined}
         >
-          <a
-            href={`/commissions/${c.slug}`}
-            class="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 transition-opacity duration-150 hover:opacity-75"
+          <!-- The country tags are links, so they cannot sit inside the card's
+               own link. Rather than trailing the whole row — where the tall map
+               pushed them well clear of the text they belong to — they live in
+               the left column beside it, and the map is a second, decorative
+               link. The group is named so it does not collide with the
+               unnamed group each FlagTag uses for its own hover state. -->
+          <div
+            class="group/card flex flex-col sm:flex-row items-start gap-4 sm:gap-6"
           >
-            <div class="flex-1 min-w-0">
-              <StatusBadge status={c.status} />
-              <h2
-                class="mt-1.5 text-[1.05rem] font-semibold leading-snug text-foreground font-playfair"
-                style={`view-transition-name: commission-title-${c.slug}`}
+            <!-- One rhythm for the whole column: title, status, details and
+                 tags are all separated by the same step, across the link
+                 boundary as well as within it. -->
+            <div class="flex-1 min-w-0 space-y-2">
+              <a
+                href={`/commissions/${c.slug}`}
+                class="block space-y-2 transition-opacity duration-150 group-hover/card:opacity-75"
               >
-                {englishName(c)}
-              </h2>
-              <div class="mt-3">
-                {@render metaTable([
-                  { label: "Proposed", value: c.proposedDate ?? null },
-                  {
-                    label: "Founded",
-                    value: c.startDate ? c.startDate.slice(0, 4) : null,
-                  },
-                  {
-                    label: "Last active",
-                    value: c.lastActiveStatusDate
-                      ? c.lastActiveStatusDate.slice(0, 4)
-                      : null,
-                  },
-                ])}
-              </div>
+                <h2
+                  class="text-[1.05rem] font-semibold leading-snug text-foreground font-playfair"
+                  style={`view-transition-name: commission-title-${c.slug}`}
+                >
+                  {englishName(c)}
+                </h2>
+                <StatusBadge status={c.status} />
+                <div>
+                  {@render metaTable([
+                    { label: "Proposed", value: c.proposedDate ?? null },
+                    {
+                      label: "Founded",
+                      value: c.startDate ? c.startDate.slice(0, 4) : null,
+                    },
+                    {
+                      label: "Last active",
+                      value: c.lastActiveStatusDate
+                        ? c.lastActiveStatusDate.slice(0, 4)
+                        : null,
+                    },
+                  ])}
+                </div>
+              </a>
+
+              {#if c.memberCountries.length > 0}
+                <div class="flex flex-wrap gap-1.5">
+                  {#each c.memberCountries as country (country)}
+                    <FlagTag tag={country} />
+                  {/each}
+                </div>
+              {/if}
             </div>
 
             {#if c.memberCountries.length > 0}
-              <div
-                class="w-full sm:w-48 shrink-0"
+              <a
+                href={`/commissions/${c.slug}`}
+                aria-hidden="true"
+                tabindex="-1"
+                class="block w-full sm:w-48 shrink-0 transition-opacity duration-150 group-hover/card:opacity-75"
                 style={`view-transition-name: commission-map-${c.slug}`}
               >
                 <CommissionMap
                   memberCountries={c.memberCountries}
                   aspectRatio={0.6}
                 />
-              </div>
+              </a>
             {/if}
-          </a>
-
-          {#if c.memberCountries.length > 0}
-            <div class="mt-3 flex flex-wrap gap-1.5">
-              {#each c.memberCountries as country (country)}
-                <FlagTag tag={country} />
-              {/each}
-            </div>
-          {/if}
+          </div>
         </article>
       {/each}
     </div>

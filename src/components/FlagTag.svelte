@@ -37,7 +37,7 @@
 {#if asLink}
   <a
     href={`/countries/${countrySlug(tag)}`}
-    class="group inline-flex rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
+    class="group inline-flex rounded-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
     aria-label={`View posts and commissions related to ${tag}`}
   >
     <Chip interactive>{@render chipContents()}</Chip>

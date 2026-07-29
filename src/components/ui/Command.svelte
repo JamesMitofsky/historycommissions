@@ -17,7 +17,7 @@
   data-slot="command"
   {shouldFilter}
   class={cn(
-    "flex size-full flex-col overflow-hidden rounded-xl! bg-popover p-1 text-popover-foreground",
+    "flex size-full flex-col overflow-hidden rounded-xs! bg-popover p-1 text-popover-foreground",
     className,
   )}
 >

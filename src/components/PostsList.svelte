@@ -66,7 +66,7 @@
       <LinkPreview.Trigger
         type="button"
         aria-label="About this search"
-        class="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground size-4 self-start ml-1 -mt-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
+        class="inline-flex items-center justify-center rounded-xs text-muted-foreground hover:text-foreground size-4 self-start ml-1 -mt-1 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
       >
         <Info class="size-4" aria-hidden="true" />
       </LinkPreview.Trigger>

@@ -19,7 +19,7 @@
   <div
     role="group"
     data-slot="input-group"
-    class="group/input-group relative flex h-8 w-full min-w-0 items-center rounded-lg border border-input/30 bg-input/30 transition-[color,box-shadow] outline-none has-[[data-slot=command-input]:focus-visible]:border-ring has-[[data-slot=command-input]:focus-visible]:ring-3 has-[[data-slot=command-input]:focus-visible]:ring-ring/50"
+    class="group/input-group relative flex h-8 w-full min-w-0 items-center rounded-xs border border-input/30 bg-input/30 transition-[color,box-shadow] outline-none has-[[data-slot=command-input]:focus-visible]:border-ring has-[[data-slot=command-input]:focus-visible]:ring-3 has-[[data-slot=command-input]:focus-visible]:ring-ring/50"
   >
     <div
       data-slot="input-group-addon"
