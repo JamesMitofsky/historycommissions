@@ -10,8 +10,6 @@ const {
 } = Astro.props;
 ---
 
-<!-- data-nav-back tells the ClientRouter to play the reverse transition; see the
-     astro:before-preparation handler in Layout.astro. -->
-<a {href} data-nav-back class={className}>
+<a {href} class={className}>
   <slot>← All posts</slot>
 </a>

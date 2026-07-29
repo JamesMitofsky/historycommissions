@@ -171,44 +171,19 @@
   animation: none;
 }
 
-/* Astro's ClientRouter stamps data-astro-transition="forward" | "back" on <html>
-   for the duration of the transition. It derives the value from the history
-   index, so the browser back button gets the reverse animation for free; only
-   in-page "back" affordances need the hint (see the before-preparation handler
-   in Layout.astro). */
-html[data-astro-transition="forward"]::view-transition-old(root) {
-  --slide-offset: -50px;
-  animation:
-    150ms ease-in both fade-vt reverse,
-    350ms ease-in-out both slide-vt reverse;
+/* Page-to-page transition: a plain crossfade, no directional movement. Because
+   nothing here depends on travel direction, one rule covers both forward and
+   back navigation. */
+::view-transition-old(root) {
+  animation: 150ms ease-in both fade-vt reverse;
 }
-html[data-astro-transition="forward"]::view-transition-new(root) {
-  --slide-offset: 50px;
-  animation:
-    200ms ease-out 150ms both fade-vt,
-    350ms ease-in-out both slide-vt;
-}
-
-html[data-astro-transition="back"]::view-transition-old(root) {
-  --slide-offset: 50px;
-  animation:
-    150ms ease-in both fade-vt reverse,
-    350ms ease-in-out both slide-vt reverse;
-}
-html[data-astro-transition="back"]::view-transition-new(root) {
-  --slide-offset: -50px;
-  animation:
-    200ms ease-out 150ms both fade-vt,
-    350ms ease-in-out both slide-vt;
+::view-transition-new(root) {
+  animation: 200ms ease-out 150ms both fade-vt;
 }
 
 @keyframes fade-vt {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-@keyframes slide-vt {
-  from { translate: var(--slide-offset) 0; }
-  to { translate: 0 0; }
 }
 
 /* Entry animations are for a cold page load. When you arrive via a client-side

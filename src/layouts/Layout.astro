@@ -162,15 +162,17 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
       }
 
       initFadeImages();
-      document.addEventListener("astro:page-load", initFadeImages);
 
-      // In-page "back" affordances need to opt into the reverse animation; the
-      // browser's own back button already reports direction from history.
-      document.addEventListener("astro:before-preparation", (event) => {
-        if (event.sourceElement?.closest("[data-nav-back]")) {
-          event.direction = "back";
-        }
-      });
+      // astro:after-swap fires inside the view transition, before the new frame
+      // paints. Doing this here rather than only on astro:page-load matters for
+      // the masthead: its image is already cached and `complete`, so it is
+      // marked opaque before it is ever shown. Waiting until page-load meant the
+      // hero rendered at opacity 0 for the length of the transition, which read
+      // as the nav's backdrop-blur flashing away and coming back.
+      document.addEventListener("astro:after-swap", initFadeImages);
+
+      // Still needed for images that finish decoding after the swap.
+      document.addEventListener("astro:page-load", initFadeImages);
 
       // Entry animations belong to a cold load. After a client-side navigation
       // the view transition already provided continuity, so replaying them reads
