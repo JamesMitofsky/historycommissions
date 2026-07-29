@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
 import CommissionsList from "@/components/CommissionsList.svelte";
 import { getCommissions } from "@/commissions/get-commissions";
 
@@ -7,7 +8,7 @@ const commissions = getCommissions();
 ---
 
 <Layout title="Bilateral Commissions">
-  <main class="max-w-2xl mx-auto px-6 pb-14 pt-8">
+  <PageContainer>
     <CommissionsList {commissions} client:load />
-  </main>
+  </PageContainer>
 </Layout>

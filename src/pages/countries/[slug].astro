@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
 import BackLink from "@/components/BackLink.astro";
 import FadeImage from "@/components/FadeImage.astro";
 import FlagTag from "@/components/FlagTag.svelte";
@@ -86,7 +87,7 @@ const postCards = await Promise.all(
   title={canonicalName}
   description={`Posts and bilateral commissions related to ${canonicalName}.`}
 >
-  <main class="max-w-2xl mx-auto px-6 py-12">
+  <PageContainer>
     <BackLink href="/">← Home</BackLink>
 
     <header class="mb-10 flex items-center gap-4">
@@ -233,5 +234,5 @@ const postCards = await Promise.all(
         </section>
       )
     }
-  </main>
+  </PageContainer>
 </Layout>

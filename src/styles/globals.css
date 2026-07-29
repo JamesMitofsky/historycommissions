@@ -171,6 +171,44 @@
   animation: none;
 }
 
+/* The active-link underline exists only under the current page's link, so
+   naming it makes the view transition treat the old page's underline and the
+   new page's underline as one box and morph between them — it slides along the
+   bar instead of blinking out and back in.
+
+   It has to clear the masthead group, which is pinned at z-index 100.
+
+   The old and new images are both solid white bars, so crossfading them would
+   only wash out the middle of the slide. `animation: none` holds both fully
+   opaque and leaves the group's own morph to do all the work.
+
+   Lives here rather than in a page's <style>: the client router swaps page
+   styles out on navigation, and globals.css is a persisted stylesheet. */
+::view-transition-group(nav-underline) {
+  z-index: 101;
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+::view-transition-old(nav-underline),
+::view-transition-new(nav-underline) {
+  animation: none;
+
+  /* The UA sizes a snapshot `inline-size: 100%; block-size: auto`, so it keeps
+     its own aspect ratio while the group's width animates. For a bar 120x2 that
+     means an incoming snapshot is drawn 5px tall inside a group that is still
+     240px wide, then thins to 2px as the group narrows — the underline visibly
+     puffed up and shrank back down mid-slide. Both snapshots are solid fills,
+     so stretching them to the group's box is lossless and keeps the bar exactly
+     2px for the whole trip. */
+  block-size: 100%;
+  object-fit: fill;
+
+  /* Default is `plus-lighter`, which is right for a crossfade. Here both
+     snapshots are opaque for the whole animation, so adding them together only
+     blows out the antialiased ends. */
+  mix-blend-mode: normal;
+}
+
 /* Page-to-page transition: a plain crossfade, no directional movement. Because
    nothing here depends on travel direction, one rule covers both forward and
    back navigation. */

@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
 import Prose from "@/components/Prose.astro";
 import { getAboutSettings } from "@/settings";
 import { renderMarkdown } from "@/lib/markdown";
@@ -10,7 +11,7 @@ const contact = renderMarkdown(about.contact);
 ---
 
 <Layout title={about.title}>
-  <main class="max-w-2xl mx-auto px-6 pb-14 pt-8">
+  <PageContainer>
     <div
       style="animation-delay: 140ms"
       class="animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
@@ -24,5 +25,5 @@ const contact = renderMarkdown(about.contact);
     >
       <Prose><Fragment set:html={contact} /></Prose>
     </div>
-  </main>
+  </PageContainer>
 </Layout>

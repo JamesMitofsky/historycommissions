@@ -137,12 +137,12 @@
 
 <div>
   <!-- Filter bar -->
-  <div class="flex flex-wrap items-center gap-2 mt-4 mb-6">
+  <div class="flex flex-wrap items-center gap-2 mb-6">
     <Input
       type="text"
       placeholder="Search commissions…"
       bind:value={search}
-      class="h-8 w-52 text-sm rounded-xs"
+      class="h-8 w-56 sm:w-72 text-sm rounded-xs"
     />
 
     <FilterPopover
@@ -269,13 +269,20 @@
           <div
             class="group/card flex flex-col sm:flex-row items-start gap-4 sm:gap-6"
           >
-            <!-- One rhythm for the whole column: title, status, details and
-                 tags are all separated by the same step, across the link
-                 boundary as well as within it. -->
+            <!-- One rhythm for the whole column: title, countries, status and
+                 details are all separated by the same step, across the link
+                 boundaries as well as within them.
+
+                 The countries sit directly under the title, which splits the
+                 card's link in two: the tags are links themselves, so they
+                 cannot be nested inside the card's link. The lower half repeats
+                 the same destination, so it is hidden from assistive tech and
+                 taken out of the tab order — the title above already carries
+                 it. -->
             <div class="flex-1 min-w-0 space-y-2">
               <a
                 href={`/commissions/${c.slug}`}
-                class="block space-y-2 transition-opacity duration-150 group-hover/card:opacity-75"
+                class="block transition-opacity duration-150 group-hover/card:opacity-75"
               >
                 <h2
                   class="text-[1.05rem] font-semibold leading-snug text-foreground font-playfair"
@@ -283,6 +290,22 @@
                 >
                   {englishName(c)}
                 </h2>
+              </a>
+
+              {#if c.memberCountries.length > 0}
+                <div class="flex flex-wrap gap-1.5">
+                  {#each c.memberCountries as country (country)}
+                    <FlagTag tag={country} />
+                  {/each}
+                </div>
+              {/if}
+
+              <a
+                href={`/commissions/${c.slug}`}
+                aria-hidden="true"
+                tabindex="-1"
+                class="block space-y-2 transition-opacity duration-150 group-hover/card:opacity-75"
+              >
                 <StatusBadge status={c.status} />
                 <div>
                   {@render metaTable([
@@ -300,14 +323,6 @@
                   ])}
                 </div>
               </a>
-
-              {#if c.memberCountries.length > 0}
-                <div class="flex flex-wrap gap-1.5">
-                  {#each c.memberCountries as country (country)}
-                    <FlagTag tag={country} />
-                  {/each}
-                </div>
-              {/if}
             </div>
 
             {#if c.memberCountries.length > 0}

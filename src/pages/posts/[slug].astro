@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import { render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
 import Prose from "@/components/Prose.astro";
 import BackLink from "@/components/BackLink.astro";
 import FadeImage from "@/components/FadeImage.astro";
@@ -38,7 +39,7 @@ const blurDataURL = await getBlurDataURL(post.image);
   publishedTime={post.date ?? undefined}
   ogImage={`/posts/${post.slug}/opengraph-image.png`}
 >
-  <main class="max-w-2xl mx-auto px-6 py-12">
+  <PageContainer>
     <BackLink />
 
     <header class="mb-10">
@@ -135,5 +136,5 @@ const blurDataURL = await getBlurDataURL(post.image);
     </header>
 
     <Prose><Content /></Prose>
-  </main>
+  </PageContainer>
 </Layout>

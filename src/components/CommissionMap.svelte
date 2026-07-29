@@ -48,13 +48,55 @@
    * the commissions index renders one card per commission, and without this each
    * would issue its own request for the same 100kB file.
    *
+   * It is also *decoded* here rather than in each map. `topojson.feature` rebuilds
+   * 177 geometries from ~8k arc points, and the index has one map per commission,
+   * so doing it per map meant that work ran dozens of times over.
+   *
    * Served from public/ rather than a CDN so the map has no third-party runtime
    * dependency and keeps working offline.
    */
-  let worldPromise: Promise<Topology> | null = null;
-  function loadWorld(): Promise<Topology> {
-    worldPromise ??= fetch("/countries-110m.json").then((r) => r.json());
+  let worldPromise: Promise<FeatureCollection<Geometry>> | null = null;
+  function loadWorld(): Promise<FeatureCollection<Geometry>> {
+    worldPromise ??= fetch("/countries-110m.json")
+      .then((r) => r.json() as Promise<Topology>)
+      .then(
+        (t) =>
+          topojson.feature(
+            t,
+            t.objects.countries,
+          ) as unknown as FeatureCollection<Geometry>,
+      );
     return worldPromise;
+  }
+
+  /**
+   * Every map on a page becomes drawable in the same microtask, because they all
+   * await one shared promise. Projecting and appending the country paths for all
+   * of them in a single task blocks the main thread long enough to stutter a
+   * running view transition — which is why the maps only jittered when arriving
+   * at the index from a commission page, and never on the way out, where a
+   * single map is drawn with no list behind it.
+   *
+   * Draws are queued and drained one slice at a time so the burst yields back to
+   * the compositor between maps.
+   */
+  const drawQueue: (() => void)[] = [];
+  let draining = false;
+  const nextSlice: (cb: () => void) => void =
+    typeof requestIdleCallback === "function"
+      ? (cb) => requestIdleCallback(() => cb(), { timeout: 500 })
+      : (cb) => requestAnimationFrame(() => cb());
+
+  function enqueueDraw(job: () => void) {
+    drawQueue.push(job);
+    if (draining) return;
+    draining = true;
+    const drain = () => {
+      drawQueue.shift()?.();
+      if (drawQueue.length > 0) nextSlice(drain);
+      else draining = false;
+    };
+    nextSlice(drain);
   }
 
   /**
@@ -94,9 +136,16 @@
 
     let cancelled = false;
 
-    loadWorld().then((worldData) => {
+    loadWorld().then((allCountries) => {
       if (cancelled) return;
+      enqueueDraw(() => {
+        if (cancelled) return;
 
+        draw(allCountries);
+      });
+    });
+
+    function draw(allCountries: FeatureCollection<Geometry>) {
       const width = container.clientWidth || 600;
       const height = Math.round(width * aspectRatio);
 
@@ -107,11 +156,6 @@
       const svg = d3.select(svgNode);
       svg.selectAll("*").remove();
       svg.attr("viewBox", `0 0 ${width} ${height}`);
-
-      const allCountries = topojson.feature(
-        worldData,
-        worldData.objects.countries,
-      ) as unknown as FeatureCollection<Geometry>;
 
       const highlightedIds = new Set(currentParties.map((p) => p.numericId));
       const processedFeatures = allCountries.features.map((f) =>
@@ -167,7 +211,7 @@
           tooltip.style.opacity = "0";
           d3.select(this).attr("fill", party.fill);
         });
-    });
+    }
 
     return () => {
       cancelled = true;

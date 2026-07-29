@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
 import BackLink from "@/components/BackLink.astro";
 import SectionLabel from "@/components/SectionLabel.astro";
 import MetaTable from "@/components/MetaTable.astro";
@@ -41,7 +42,7 @@ const siteLink =
 ---
 
 <Layout title={primaryName}>
-  <main class="max-w-2xl mx-auto px-6 py-12">
+  <PageContainer>
     <BackLink href="/commissions">← All commissions</BackLink>
 
     <header class="mb-8">
@@ -244,5 +245,5 @@ const siteLink =
         )
       }
     </div>
-  </main>
+  </PageContainer>
 </Layout>

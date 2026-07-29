@@ -3,9 +3,11 @@ import type { NavLink } from "@/settings";
 
 interface Props {
   links: NavLink[];
+  /** Inlined blur placeholder for the masthead image, painted behind the bar. */
+  heroBlurDataURL?: string | null;
 }
 
-const { links } = Astro.props;
+const { links, heroBlurDataURL } = Astro.props;
 
 // Rendered per page at build time, so the active link needs no client JS —
 // this replaces the `usePathname()` hook the React version depended on.
@@ -14,11 +16,38 @@ const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
+<!-- The frosted bar is painted, not a `backdrop-filter`.
+
+     The masthead carries a `view-transition-name`, which makes it a backdrop
+     root and hands it to the view-transition pseudo tree during a client-side
+     navigation. A descendant's backdrop-filter does not survive that reliably
+     across engines — the blur dropped out for the length of the transition and
+     snapped back when the pseudo tree was torn down, which read as a flash. It
+     is also the one place the production CSS optimizer strips
+     `-webkit-backdrop-filter`, leaving older Safari with no blur at all.
+
+     Nothing is ever moving behind this bar: the masthead image is fixed, and
+     its blur placeholder is already inlined in the page. So the same look comes
+     from painting that placeholder, framed exactly as the sharp image is — the
+     `h-56 bg-cover bg-bottom` below mirrors the masthead's own height and
+     `object-cover object-bottom` — with the tint on top. A plain painted layer
+     is immune to all of the above. -->
 <nav
-  class="absolute top-0 left-0 right-0 z-10 bg-black/30 backdrop-blur-sm [text-shadow:0_1px_2px_rgb(0_0_0_/_0.5)]"
+  class="absolute top-0 left-0 right-0 z-10 overflow-hidden [text-shadow:0_1px_2px_rgb(0_0_0_/_0.5)]"
 >
+  {
+    heroBlurDataURL && (
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-x-0 top-0 h-56 bg-cover bg-bottom"
+        style={`background-image: url("${heroBlurDataURL}")`}
+      />
+    )
+  }
+  <span aria-hidden="true" class="pointer-events-none absolute inset-0 bg-black/30"
+  ></span>
   <div
-    class="max-w-2xl mx-auto px-6 h-14 sm:h-16 flex items-center justify-end gap-5 sm:gap-8"
+    class="relative max-w-2xl mx-auto px-6 h-12 sm:h-14 flex items-center justify-end gap-5 sm:gap-8"
   >
     {
       links.map(({ href, label, shortLabel }) => (
@@ -31,12 +60,19 @@ const isActive = (href: string) =>
         >
           <span class="sm:hidden">{shortLabel}</span>
           <span class="hidden sm:inline">{label}</span>
-          <span
-            class:list={[
-              "absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300",
-              isActive(href) ? "w-full opacity-100" : "w-0 opacity-0",
-            ]}
-          />
+          {/* Rendered only under the current link, and named, so the view
+              transition treats the underline on the outgoing page and the one on
+              the incoming page as the same box and slides it across the bar. A
+              per-link element that merely grew and shrank could not travel
+              between two links, because a client-side navigation replaces the
+              whole nav. See ::view-transition-group(nav-underline) in
+              globals.css. */}
+          {isActive(href) && (
+            <span
+              class="absolute -bottom-1 left-0 h-0.5 w-full bg-white"
+              style="view-transition-name: nav-underline"
+            />
+          )}
         </a>
       ))
     }
