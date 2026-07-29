@@ -173,10 +173,6 @@
       onClear={() => countryFilter.clear()}
     />
 
-    <span class="text-xs text-muted-foreground tabular-nums">
-      {filtered.length}/{commissions.length}
-    </span>
-
     {#if activeCount > 0}
       <div
         class="flex items-center rounded-xs border text-xs h-8 overflow-hidden"
@@ -269,7 +265,9 @@
       {#each filtered as c, i (c.slug)}
         <article
           class={cn(
-            "border-t border-border py-7",
+            // The top border is a separator between cards, so the first card
+            // does not need one — it would read as a rule under the filter bar.
+            "border-t border-border py-7 first:border-t-0",
             animate &&
               "animate-in fade-in slide-in-from-bottom-1 duration-400 fill-mode-both",
           )}
