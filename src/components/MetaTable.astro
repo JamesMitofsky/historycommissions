@@ -1,0 +1,28 @@
+---
+interface Props {
+  rows: { label: string; value: string | number | null | undefined }[];
+}
+
+const { rows } = Astro.props;
+
+const visible = rows.filter(
+  (r) => r.value !== null && r.value !== undefined && r.value !== "",
+);
+---
+
+{
+  visible.length > 0 && (
+    <table class="text-sm w-full border-collapse">
+      <tbody>
+        {visible.map(({ label, value }) => (
+          <tr class="align-top">
+            <td class="pr-5 py-0.5 text-muted-foreground whitespace-nowrap w-28">
+              {label}
+            </td>
+            <td class="py-0.5 text-foreground">{value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}

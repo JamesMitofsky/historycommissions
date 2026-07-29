@@ -1,0 +1,44 @@
+---
+import type { NavLink } from "@/settings";
+
+interface Props {
+  links: NavLink[];
+}
+
+const { links } = Astro.props;
+
+// Rendered per page at build time, so the active link needs no client JS —
+// this replaces the `usePathname()` hook the React version depended on.
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<nav
+  class="absolute top-0 left-0 right-0 z-10 bg-black/30 backdrop-blur-sm [text-shadow:0_1px_2px_rgb(0_0_0_/_0.5)]"
+>
+  <div
+    class="max-w-2xl mx-auto px-6 h-14 sm:h-16 flex items-center justify-end gap-5 sm:gap-8"
+  >
+    {
+      links.map(({ href, label, shortLabel }) => (
+        <a
+          href={href}
+          class:list={[
+            "relative text-base sm:text-base font-semibold tracking-wide transition-colors duration-200",
+            isActive(href) ? "text-white" : "text-white/85 hover:text-white",
+          ]}
+        >
+          <span class="sm:hidden">{shortLabel}</span>
+          <span class="hidden sm:inline">{label}</span>
+          <span
+            class:list={[
+              "absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-300",
+              isActive(href) ? "w-full opacity-100" : "w-0 opacity-0",
+            ]}
+          />
+        </a>
+      ))
+    }
+  </div>
+</nav>

@@ -1,38 +1,50 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { PostFrontmatterSchema, PostSchema, type Post } from "./types";
-import { getBlurDataURL } from "./get-blur-data-url";
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
+import type { Post } from "./schema";
 
-const POSTS_DIR = path.join(process.cwd(), "content/posts");
+/** Frontmatter dates may be YAML dates or strings; normalise both to ISO. */
+function toIso(value: string | Date | undefined): string | null {
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+}
 
-export const getPosts = async (): Promise<Post[]> => {
-  const files = fs
-    .readdirSync(POSTS_DIR)
-    .filter((f) => f.endsWith(".md"))
-    .sort()
-    .reverse();
+export function toPost(entry: CollectionEntry<"posts">): Post {
+  const { data } = entry;
+  return {
+    slug: entry.id,
+    content: entry.body ?? "",
+    title: data.title ?? null,
+    date: toIso(data.date),
+    updated: toIso(data.updated),
+    author: data.author ?? null,
+    tags: data.tags,
+    image: data.image ?? null,
+    imageAttribution: data.imageAttribution ?? null,
+    imageAttributionUrl: data.imageAttributionUrl ?? null,
+  };
+}
 
-  return Promise.all(
-    files.map(async (filename) => {
-      const slug = filename.replace(/\.md$/, "");
-      const raw = fs.readFileSync(path.join(POSTS_DIR, filename), "utf8");
-      const { content, data } = matter(raw);
-      const frontmatter = PostFrontmatterSchema.parse(data);
-      const image: string | null = frontmatter.image ?? null;
-      return PostSchema.parse({
-        slug,
-        content,
-        title: frontmatter.title ?? null,
-        date: frontmatter.date ? new Date(frontmatter.date).toISOString() : null,
-        updated: frontmatter.updated ? new Date(frontmatter.updated).toISOString() : null,
-        author: frontmatter.author ?? null,
-        tags: frontmatter.tags ?? [],
-        image,
-        imageAttribution: frontmatter.imageAttribution ?? null,
-        imageAttributionUrl: frontmatter.imageAttributionUrl ?? null,
-        blurDataURL: await getBlurDataURL(image),
-      });
-    })
-  );
-};
+/**
+ * Newest first. Post filenames are date-prefixed (YYYY-MM-DD-slug), so a plain
+ * descending sort on the id is chronological — and it matches the previous
+ * `readdirSync().sort().reverse()` ordering exactly, including for same-day
+ * posts, since both compare raw code units rather than locale collation rules.
+ */
+function byIdDescending<T extends { id: string }>(a: T, b: T): number {
+  return a.id < b.id ? 1 : a.id > b.id ? -1 : 0;
+}
+
+export async function getPostEntries(): Promise<CollectionEntry<"posts">[]> {
+  const entries = await getCollection("posts");
+  return entries.sort(byIdDescending);
+}
+
+export async function getPosts(): Promise<Post[]> {
+  return (await getPostEntries()).map(toPost);
+}
+
+export async function getPostEntry(
+  slug: string,
+): Promise<CollectionEntry<"posts"> | undefined> {
+  return getEntry("posts", slug);
+}

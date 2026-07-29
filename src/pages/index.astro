@@ -1,0 +1,26 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PostsList from "@/components/PostsList.svelte";
+import { getPosts } from "@/blog";
+import { resolvePostImage } from "@/lib/images";
+
+const posts = await getPosts();
+
+// astro:assets is server-only, so images are optimized here and handed to the
+// island as plain data.
+const items = await Promise.all(
+  posts.map(async (post) => ({
+    post,
+    image: await resolvePostImage(post.image, {
+      widths: [256, 512],
+      sizes: "(max-width: 640px) 100vw, 256px",
+    }),
+  })),
+);
+---
+
+<Layout>
+  <main class="max-w-2xl mx-auto px-6 pb-14 pt-8">
+    <PostsList {items} client:load />
+  </main>
+</Layout>

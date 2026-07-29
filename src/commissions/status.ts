@@ -36,11 +36,3 @@ export const STATUS_ORDER: Record<CommissionStatus, number> = {
   unknown: 2,
   ended: 3,
 };
-
-// rgba values for the globe arcs (three.js needs concrete colors, not classes).
-export const STATUS_ARC_COLOR: Record<CommissionStatus, string> = {
-  active: "rgba(52, 211, 153, 1)",
-  dormant: "rgba(232, 140, 58, 0.95)",
-  ended: "rgba(125, 211, 252, 0.95)",
-  unknown: "rgba(232, 140, 58, 0.7)",
-};

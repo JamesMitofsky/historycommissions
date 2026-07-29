@@ -1,0 +1,202 @@
+---
+import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+import FadeImage from "@/components/FadeImage.astro";
+import { getGeneralSettings } from "@/settings";
+import { getBlurDataURL } from "@/lib/images";
+import heroImage from "@/assets/hero.webp";
+import "@/styles/globals.css";
+
+interface Props {
+  /** Page title. Templated as "%s | Site Title"; omit for the bare site title. */
+  title?: string;
+  description?: string;
+  ogType?: "website" | "article";
+  /** ISO date, emitted as article:published_time. */
+  publishedTime?: string;
+  /** Site-relative path to the OG image for this page. */
+  ogImage?: string;
+}
+
+const general = getGeneralSettings();
+const {
+  title,
+  description = general.description,
+  ogType = "website",
+  publishedTime,
+  ogImage = "/opengraph-image.png",
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${general.siteTitle}` : general.siteTitle;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
+
+const heroBlurDataURL = await getBlurDataURL("hero.webp");
+---
+
+<!doctype html>
+<html
+  lang="en"
+  class="h-full antialiased text-[20px]"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:site_name" content={general.siteTitle} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title ?? general.siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    {
+      publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )
+    }
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title ?? general.siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={general.feeds.postsTitle}
+      href="/feed.xml"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={general.feeds.commissionsTitle}
+      href="/commissions/feed.xml"
+    />
+
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-playfair" preload />
+    <Font cssVariable="--font-source-serif-4" />
+    <Font cssVariable="--font-geist-mono" />
+
+    <ClientRouter />
+  </head>
+
+  <body
+    class="min-h-full flex flex-col font-sans text-base leading-[1.65] antialiased [text-rendering:optimizeLegibility]"
+  >
+    <!-- Masthead — image + nav + site title in one unit -->
+    <header
+      class="relative w-full h-56 overflow-hidden"
+      transition:name="site-header"
+    >
+      <FadeImage
+        src={heroImage}
+        alt=""
+        priority
+        class="absolute inset-0 h-full w-full object-cover object-bottom"
+        sizes="100vw"
+        widths={[640, 1024, heroImage.width]}
+        blurDataURL={heroBlurDataURL}
+      />
+      <!-- Gradient: dark at top for nav legibility, dark at bottom for title legibility -->
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60"
+      >
+      </div>
+
+      <Nav links={general.nav} />
+
+      <div class="absolute bottom-0 left-0 right-0">
+        <div class="max-w-2xl mx-auto px-6 pb-5">
+          <a href="/" class="inline-block">
+            <p
+              class="text-[0.65rem] font-medium tracking-[0.18em] uppercase text-white/60 mb-1"
+            >
+              {general.kicker}
+            </p>
+            <h1
+              class="text-3xl font-bold text-white leading-tight font-playfair"
+            >
+              {
+                general.siteTitle
+                  .split(" ")
+                  .map((word) => <span class="block">{word}</span>)
+              }
+            </h1>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex-1"><slot /></div>
+
+    <Footer />
+
+    <script is:inline>
+      // Fade images in once decoded. Runs on first paint and after every client
+      // router swap; images restored from cache are already `complete`, so they
+      // are marked immediately rather than waiting for a load event that has
+      // already fired.
+      function initFadeImages() {
+        for (const img of document.querySelectorAll(
+          "img[data-fade-img]:not([data-loaded])",
+        )) {
+          if (img.complete) {
+            img.setAttribute("data-loaded", "");
+          } else {
+            img.addEventListener(
+              "load",
+              () => img.setAttribute("data-loaded", ""),
+              { once: true },
+            );
+          }
+        }
+      }
+
+      initFadeImages();
+      document.addEventListener("astro:page-load", initFadeImages);
+
+      // In-page "back" affordances need to opt into the reverse animation; the
+      // browser's own back button already reports direction from history.
+      document.addEventListener("astro:before-preparation", (event) => {
+        if (event.sourceElement?.closest("[data-nav-back]")) {
+          event.direction = "back";
+        }
+      });
+
+      // Entry animations belong to a cold load. After a client-side navigation
+      // the view transition already provided continuity, so replaying them reads
+      // as a flash — see the .vt-nav rule in globals.css.
+      document.addEventListener("astro:after-swap", () => {
+        document.documentElement.classList.add("vt-nav");
+      });
+    </script>
+
+    <script
+      is:inline
+      defer
+      src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script is:inline>
+      // Deferred scripts have all executed by the window load event, so the
+      // widget is guaranteed to be present by the time this runs.
+      window.addEventListener("load", function () {
+        if (!window.netlifyIdentity) return;
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function () {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

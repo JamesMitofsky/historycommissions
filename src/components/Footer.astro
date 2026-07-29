@@ -1,0 +1,50 @@
+---
+import { getGeneralSettings } from "@/settings";
+
+const year = new Date().getFullYear();
+const general = getGeneralSettings();
+---
+
+<footer class="border-t border-border mt-16">
+  <div
+    class="max-w-2xl mx-auto px-6 py-10 text-sm text-muted-foreground flex flex-col gap-6 sm:flex-row sm:justify-between sm:items-start"
+  >
+    <div class="space-y-1">
+      <p class="font-playfair text-base font-semibold text-foreground">
+        {general.siteTitle}
+      </p>
+      <p>{general.footer.tagline}</p>
+      <p>&copy; {year} {general.footer.copyrightHolder}.</p>
+    </div>
+
+    <nav aria-label="Footer" class="flex flex-col gap-2 sm:items-end">
+      {
+        general.nav.map(({ href, label }) => (
+          <a href={href} class="hover:text-foreground transition-colors">
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex flex-col gap-2 sm:items-end">
+      <p class="text-xs uppercase tracking-wider text-muted-foreground/70">
+        Subscribe
+      </p>
+      <a
+        href="/feed.xml"
+        class="hover:text-foreground transition-colors"
+        title="RSS feed of latest posts"
+      >
+        Posts RSS
+      </a>
+      <a
+        href="/commissions/feed.xml"
+        class="hover:text-foreground transition-colors"
+        title="RSS feed of bilateral commissions"
+      >
+        Commissions RSS
+      </a>
+    </div>
+  </div>
+</footer>
