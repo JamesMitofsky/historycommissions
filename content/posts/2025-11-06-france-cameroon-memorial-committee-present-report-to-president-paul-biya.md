@@ -1,5 +1,5 @@
 ---
-title: France-Cameroon Memorial Committee Present Report to President Paul BIYA
+title: France-Cameroon Memorial Committee Presents Report
 date: 2025-11-06T02:34:00.000Z
 updated: 2026-03-25T02:21:14.992Z
 author: Daqing Yang
@@ -8,7 +8,6 @@ tags:
   - France
 image: /images/france-cameroon-memorial-committee-report.webp
 ---
-
 January 2025
 
 Members of the multidisciplinary Franco-Cameroonian Joint Commission on France’s role and commitment against independence and opposition movements in Cameroon from 1945 to 1971 have presented the report of the two-year research to the President of the Republic, His Excellency Paul BIYA.
@@ -23,8 +22,6 @@ President Paul BIYA hailed the courage and tenacity of the 14-man group of resea
 
 [![France-Cameroon Memorial Committee Present Report to President Paul BIYA](https://prc.cm/images/2025/news/remise_rapport_com_memoire_inh.jpg "France-Cameroon Memorial Committee Present Report to President Paul BIYA")](https://prc.cm/en/news/7623-france-cameroon-memorial-committee-present-report-to-president-paul-biya "France-Cameroon Memorial Committee Present Report to President Paul BIYA")
 
- 
-
-[**Read President Paul BIYA’s Speech**](https://prc.cm/en/news/speeches-of-the-president/7621-speech-by-h-e-paul-biya-during-the-presentation-of-the-france-cameroon-memorial-commission-s-report)
+**[Read President Paul BIYA’s Speech](https://prc.cm/en/news/speeches-of-the-president/7621-speech-by-h-e-paul-biya-during-the-presentation-of-the-france-cameroon-memorial-commission-s-report)**
 
 **[Joint Communique](https://prc.cm/en/multimedia/documents/10297-communique-conjoint-remise-du-rapport-au-palais-de-l-unite-english) (pdf)**
