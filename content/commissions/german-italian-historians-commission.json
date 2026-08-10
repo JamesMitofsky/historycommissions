@@ -1,4 +1,8 @@
 {
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "workingGroups": [],
+  "publications": [],
   "name": {
     "translations": [
       {
@@ -12,21 +16,17 @@
     ],
     "englishName": "German-Italian Historians' Commission"
   },
-  "proposedDate": null,
-  "startDate": "2008-01-01",
-  "lastActiveStatusDate": "2009-12-01",
+  "linkStatus": "not_located",
   "lastActiveStatus": "ended",
+  "chairs": [],
+  "url": "",
+  "startDate": "2008-01-01",
+  "status": "ended",
+  "proposedDate": null,
   "memberCountries": [
     "Germany",
     "Italy"
   ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "ended",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "not_located",
-  "archivableDocuments": []
+  "archivableDocuments": [],
+  "lastActiveStatusDate": "2012-01-01"
 }
