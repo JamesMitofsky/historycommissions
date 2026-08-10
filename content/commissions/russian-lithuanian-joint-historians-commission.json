@@ -1,4 +1,8 @@
 {
+  "sponsoringInstitutions": [],
+  "keyTopics": [],
+  "workingGroups": [],
+  "publications": [],
   "name": {
     "translations": [
       {
@@ -12,21 +16,17 @@
     ],
     "englishName": "Joint Russian-Lithuanian Commission of Historians"
   },
-  "proposedDate": null,
+  "linkStatus": "not_located",
+  "lastActiveStatus": "dormant",
+  "chairs": [],
+  "url": "",
   "startDate": "2006-01-01",
-  "lastActiveStatusDate": null,
-  "lastActiveStatus": "unknown",
+  "status": "unknown",
+  "proposedDate": null,
   "memberCountries": [
     "Russia",
     "Lithuania"
   ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "unknown",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "not_located",
-  "archivableDocuments": []
+  "archivableDocuments": [],
+  "lastActiveStatusDate": null
 }
