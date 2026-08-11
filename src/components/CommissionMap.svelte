@@ -1,47 +1,15 @@
-<script lang="ts">
-  import * as d3 from "d3";
+<script module lang="ts">
   import * as topojson from "topojson-client";
   import type { Topology } from "topojson-specification";
   import type { Feature, FeatureCollection, Geometry } from "geojson";
-  import { numericIdForTag } from "@/lib/country-codes";
 
-  interface Props {
-    memberCountries: string[];
-    aspectRatio?: number;
-  }
-
-  let { memberCountries, aspectRatio = 1 }: Props = $props();
-
-  const COLOR_PAIRS = [
-    { fill: "#4A90D9", fillHover: "#2E6FAD", stroke: "#2E6FAD" },
-    { fill: "#E8724A", fillHover: "#C4522E", stroke: "#C4522E" },
-    { fill: "#5CB88A", fillHover: "#3A8F68", stroke: "#3A8F68" },
-    { fill: "#C97DD4", fillHover: "#9E5BAA", stroke: "#9E5BAA" },
-    { fill: "#E8B84A", fillHover: "#C49028", stroke: "#C49028" },
-    { fill: "#6B9E6B", fillHover: "#4A7A4A", stroke: "#4A7A4A" },
-  ];
-
-  type Party = {
-    numericId: number;
-    name: string;
-    fill: string;
-    fillHover: string;
-    stroke: string;
-  };
-
-  const parties = $derived(
-    memberCountries
-      .map((name, i) => {
-        const numericId = numericIdForTag(name);
-        if (numericId === null) return null;
-        return { numericId, name, ...COLOR_PAIRS[i % COLOR_PAIRS.length] };
-      })
-      .filter((p): p is Party => p !== null),
-  );
-
-  let containerEl = $state<HTMLDivElement | null>(null);
-  let svgEl = $state<SVGSVGElement | null>(null);
-  let tooltipEl = $state<HTMLDivElement | null>(null);
+  /**
+   * Everything in this block is module-scoped on purpose: it is created once
+   * for the page, not once per map. In the instance <script> below, each of the
+   * dozens of maps the commissions index renders would get its own copy — its
+   * own `worldPromise` to fetch and decode, its own one-slot draw queue — which
+   * is precisely the duplication the two comments below exist to prevent.
+   */
 
   /**
    * The world topology is fetched once per page and shared by every map on it —
@@ -78,7 +46,9 @@
    * single map is drawn with no list behind it.
    *
    * Draws are queued and drained one slice at a time so the burst yields back to
-   * the compositor between maps.
+   * the compositor between maps. The queue is shared for the same reason it is
+   * useful at all: a per-map queue would only ever hold that map's own draw and
+   * every map would still run in the same frame.
    */
   const drawQueue: (() => void)[] = [];
   let draining = false;
@@ -126,6 +96,49 @@
       geometry: { ...feature.geometry, coordinates: [coords[largestIdx]] },
     };
   }
+</script>
+
+<script lang="ts">
+  import * as d3 from "d3";
+  import { numericIdForTag } from "@/lib/country-codes";
+
+  interface Props {
+    memberCountries: string[];
+    aspectRatio?: number;
+  }
+
+  let { memberCountries, aspectRatio = 1 }: Props = $props();
+
+  const COLOR_PAIRS = [
+    { fill: "#4A90D9", fillHover: "#2E6FAD", stroke: "#2E6FAD" },
+    { fill: "#E8724A", fillHover: "#C4522E", stroke: "#C4522E" },
+    { fill: "#5CB88A", fillHover: "#3A8F68", stroke: "#3A8F68" },
+    { fill: "#C97DD4", fillHover: "#9E5BAA", stroke: "#9E5BAA" },
+    { fill: "#E8B84A", fillHover: "#C49028", stroke: "#C49028" },
+    { fill: "#6B9E6B", fillHover: "#4A7A4A", stroke: "#4A7A4A" },
+  ];
+
+  type Party = {
+    numericId: number;
+    name: string;
+    fill: string;
+    fillHover: string;
+    stroke: string;
+  };
+
+  const parties = $derived(
+    memberCountries
+      .map((name, i) => {
+        const numericId = numericIdForTag(name);
+        if (numericId === null) return null;
+        return { numericId, name, ...COLOR_PAIRS[i % COLOR_PAIRS.length] };
+      })
+      .filter((p): p is Party => p !== null),
+  );
+
+  let containerEl = $state<HTMLDivElement | null>(null);
+  let svgEl = $state<SVGSVGElement | null>(null);
+  let tooltipEl = $state<HTMLDivElement | null>(null);
 
   $effect(() => {
     const container = containerEl;
@@ -141,11 +154,20 @@
       enqueueDraw(() => {
         if (cancelled) return;
 
-        draw(allCountries);
+        draw(allCountries, container, svgNode, tooltip);
       });
     });
 
-    function draw(allCountries: FeatureCollection<Geometry>) {
+    // The three elements are taken as parameters rather than closed over: a
+    // hoisted function declaration does not keep the narrowing the guard above
+    // established, so inside it `container` and `tooltip` are still nullable and
+    // `svelte-check` fails on every use.
+    function draw(
+      allCountries: FeatureCollection<Geometry>,
+      container: HTMLDivElement,
+      svgNode: SVGSVGElement,
+      tooltip: HTMLDivElement,
+    ) {
       const width = container.clientWidth || 600;
       const height = Math.round(width * aspectRatio);
 
