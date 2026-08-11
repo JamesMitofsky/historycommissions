@@ -17,6 +17,9 @@
 /dist/
 /.astro/
 
+# netlify adapter build output (Frameworks API config + bundled SSR function)
+/.netlify/
+
 # production
 /build
 
