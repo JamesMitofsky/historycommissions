@@ -134,8 +134,18 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* The canvas is painted on `html`, not only on `body`: anything that leaves a
+     hole in the page — an overscroll bounce on iOS, a compositing gap during a
+     view transition — then shows the site's own background instead of the UA's
+     dark-mode canvas. `color-scheme` is declared for the same reason: the
+     palette above is light-only unless `.dark` is applied, so the UA must not
+     paint its own surfaces dark underneath it. */
   html {
-    @apply font-sans;
+    @apply font-sans bg-background;
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
   }
 }
 
@@ -159,7 +169,14 @@
   opacity: 1;
 }
 
-/* View Transitions */
+/* View Transitions
+
+   Every rule that targets a ::view-transition-* pseudo below is polish for the
+   engines that honor it. iOS Safari (observed on iOS 26) ignores author CSS on
+   that pseudo tree entirely for same-document transitions — `animation`,
+   `display`, keyframes, `mix-blend-mode`, all of it — so nothing here can be
+   relied on to keep a navigation looking correct. The iOS-safe behavior is set
+   further down, on real elements. */
 ::view-transition-group(site-header) {
   animation: none;
   z-index: 100;
@@ -236,7 +253,41 @@ html.vt-nav .animate-in {
   animation: none !important;
 }
 
+/* iOS Safari drops the pseudo-tree rules above and then freezes the default
+   root cross-fade near its midpoint, compositing the page against the
+   transition overlay's transparent black. The whole page — content included —
+   renders at roughly 0.7 opacity over black for the length of the navigation: a
+   uniform gray veil in light and dark mode alike, with the browser toolbar
+   tinting along with it. No desktop browser, responsive mode, or simulator
+   reproduces this; only a physical iPhone or iPad does.
+
+   `view-transition-name: none` is a plain declaration on a real element, so it
+   is honored wherever view transitions exist. With no name on the root there is
+   no root snapshot, the live DOM keeps painting across the swap, and no overlay
+   frame is left to turn gray — the navigation becomes a hard cut. The named
+   groups above (site-header, nav-underline) are unaffected and still morph, so
+   the masthead stays pinned and the underline still slides.
+
+   `@supports (-webkit-touch-callout: none)` matches iOS and iPadOS WebKit — so
+   every browser on an iPhone or iPad, all of which share this bug — and no
+   desktop engine, which is why the crossfade above still runs on desktop. */
+@supports (-webkit-touch-callout: none) {
+  :root {
+    view-transition-name: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  /* Pseudo-tree rules are ignored on iOS, so reduced motion cannot be enforced
+     through them. Clearing every name is a real-element declaration: nothing is
+     captured, so the transition has no groups to animate and the swap is
+     instant. `!important` because Astro emits `transition:name` as a generated
+     rule and the nav underline sets its name inline. */
+  :root,
+  :root * {
+    view-transition-name: none !important;
+  }
+
   ::view-transition-old(*),
   ::view-transition-new(*),
   ::view-transition-group(*) {
