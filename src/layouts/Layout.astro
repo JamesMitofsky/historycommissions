@@ -82,9 +82,7 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
     />
 
     <Font cssVariable="--font-sans" preload />
-    <Font cssVariable="--font-playfair" preload />
-    <Font cssVariable="--font-source-serif-4" />
-    <Font cssVariable="--font-geist-mono" />
+    <Font cssVariable="--font-serif" preload />
 
     <ClientRouter />
   </head>
@@ -157,13 +155,8 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
       <div class="absolute bottom-0 left-0 right-0">
         <div class="max-w-2xl mx-auto px-6 pb-5">
           <a href="/" class="inline-block">
-            <p
-              class="text-[0.65rem] font-medium tracking-[0.18em] uppercase text-white/60 mb-1"
-            >
-              {general.kicker}
-            </p>
             <h1
-              class="text-3xl font-bold text-white leading-tight font-playfair"
+              class="text-3xl font-bold text-white leading-tight font-serif"
             >
               {
                 general.siteTitle
@@ -222,11 +215,11 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
       // observer is rebuilt against the new one and the old one disconnected —
       // otherwise each page visited would leave one behind, still holding its
       // detached node.
-      var scrollTopObserver;
+      let scrollTopObserver;
       function initScrollState() {
         if (scrollTopObserver) scrollTopObserver.disconnect();
 
-        var sentinel = document.querySelector("[data-scroll-top-sentinel]");
+        const sentinel = document.querySelector("[data-scroll-top-sentinel]");
         if (!sentinel) return;
 
         scrollTopObserver = new IntersectionObserver(function (entries) {
@@ -253,13 +246,13 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
       // Offsets are taken relative to the header rather than the viewport, so a
       // horizontal scrollbar or a page scrolled off the top cannot skew them.
       function measureNavBlurBand() {
-        var links = document.querySelector("[data-nav-links]");
-        var header = links && links.closest("header");
+        const links = document.querySelector("[data-nav-links]");
+        const header = links && links.closest("header");
         if (!header || !links.children.length) return;
 
-        var box = header.getBoundingClientRect();
-        var first = links.children[0].getBoundingClientRect();
-        var root = document.documentElement.style;
+        const box = header.getBoundingClientRect();
+        const first = links.children[0].getBoundingClientRect();
+        const root = document.documentElement.style;
 
         // Offsets are relative to the header, because that is the box the mask
         // resolves its lengths against — but they are stored on <html>, which

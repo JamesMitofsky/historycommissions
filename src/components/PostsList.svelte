@@ -96,7 +96,7 @@
                 </time>
               {/if}
               <h2
-                class="mt-0.5 text-base font-semibold leading-snug text-foreground font-playfair"
+                class="mt-0.5 text-base font-semibold leading-snug text-foreground font-serif"
                 style={`view-transition-name: post-title-${post.slug}`}
               >
                 {post.title ?? post.slug}

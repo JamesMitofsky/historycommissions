@@ -61,40 +61,65 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  // Self-hosted and subset at build time, each exposed as the CSS variable the
-  // Tailwind theme reads — no runtime request to a font vendor.
+  // Both families are vendored under src/assets/fonts and read from disk, so a
+  // build makes no request to Google or Fontsource and cannot be broken by
+  // either being unreachable or by an upstream version changing under it.
+  //
+  // The files named here are already subset and compressed. Astro's font
+  // pipeline does not transcode: it hashes whatever the provider hands it and
+  // writes the @font-face rules, which was invisible while a remote provider was
+  // serving pre-subset woff2 and became very visible when pointing this at the
+  // .ttf originals published 1.13MB of unsubset TrueType. scripts/subset-fonts.py
+  // does that work now, and the .ttf sources beside these are its inputs.
+  //
+  // Not in public/: Astro copies that directory verbatim, which would publish
+  // the sources alongside the output. Inputs belong in src/.
+  //
+  // Both are OFL, and the licence travels with the font — OFL-DMSans.txt and
+  // OFL-LibertinusSerif.txt sit beside the files they cover.
   fonts: [
     {
-      provider: fontProviders.google(),
+      provider: fontProviders.local(),
       name: "DM Sans",
       cssVariable: "--font-sans",
-      weights: ["400 700"],
+      options: {
+        variants: [
+          {
+            // One variable file covers the whole range the UI asks for: 400
+            // body text, 500 for `font-medium`, 600 for `font-semibold`, 700
+            // for `font-bold`. Four static weights would be four files.
+            src: ["./src/assets/fonts/DMSans-Variable.woff2"],
+            weight: "400 700",
+            style: "normal",
+          },
+        ],
+      },
       display: "swap",
       fallbacks: ["system-ui", "sans-serif"],
     },
     {
-      provider: fontProviders.google(),
-      name: "Playfair Display",
-      cssVariable: "--font-playfair",
-      weights: ["400 900"],
+      provider: fontProviders.local(),
+      name: "Libertinus Serif",
+      cssVariable: "--font-serif",
+      // Static faces, because Libertinus Serif has no variable build. The serif
+      // is only ever used on headings and every one of them is `font-semibold`
+      // or `font-bold`, so those are the only two weights vendored.
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/LibertinusSerif-SemiBold.woff2"],
+            weight: 600,
+            style: "normal",
+          },
+          {
+            src: ["./src/assets/fonts/LibertinusSerif-Bold.woff2"],
+            weight: 700,
+            style: "normal",
+          },
+        ],
+      },
       display: "swap",
       fallbacks: ["Georgia", "serif"],
-    },
-    {
-      provider: fontProviders.google(),
-      name: "Source Serif 4",
-      cssVariable: "--font-source-serif-4",
-      weights: ["400 700"],
-      display: "swap",
-      fallbacks: ["Georgia", "serif"],
-    },
-    {
-      provider: fontProviders.google(),
-      name: "Geist Mono",
-      cssVariable: "--font-geist-mono",
-      weights: ["400 600"],
-      display: "swap",
-      fallbacks: ["ui-monospace", "monospace"],
     },
   ],
 });

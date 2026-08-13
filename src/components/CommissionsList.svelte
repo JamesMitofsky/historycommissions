@@ -289,7 +289,7 @@
                 class="block transition-opacity duration-150 group-hover/card:opacity-75"
               >
                 <h2
-                  class="text-[1.05rem] font-semibold leading-snug text-foreground font-playfair"
+                  class="text-[1.05rem] font-semibold leading-snug text-foreground font-serif"
                   style={`view-transition-name: commission-title-${c.slug}`}
                 >
                   {englishName(c)}

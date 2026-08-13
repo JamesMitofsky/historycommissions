@@ -8,17 +8,22 @@ import sharp from "sharp";
  * Open Graph card renderer: JSX-ish tree → SVG (satori) → PNG (resvg + sharp).
  *
  * satori ships no fonts of its own, so the two faces used in the card are read
- * from @fontsource packages — a devDependency purely as a source of font
- * binaries. They are .woff: satori reads ttf/otf/woff but not woff2.
+ * from the same vendored family the site is built from — see the `fonts` block
+ * in astro.config.mjs and scripts/subset-fonts.py, which emits these .woff
+ * alongside the .woff2 the browser gets. The format is the reason for the
+ * split: satori reads ttf/otf/woff and not woff2.
+ *
+ * The sans face is the static Regular rather than the variable file the site
+ * serves, because satori resolves a variable font to its default instance and
+ * cannot pick a weight along the axis.
  */
 const FONT_FILES = {
-  sans: "@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff",
-  serif:
-    "@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff",
+  sans: "src/assets/fonts/DMSans-Regular.woff",
+  serif: "src/assets/fonts/LibertinusSerif-Bold.woff",
 } as const;
 
 function readFont(relativePath: string): Buffer {
-  return fs.readFileSync(path.join(process.cwd(), "node_modules", relativePath));
+  return fs.readFileSync(path.join(process.cwd(), relativePath));
 }
 
 let fontsCache: Awaited<ReturnType<typeof loadFonts>> | null = null;
