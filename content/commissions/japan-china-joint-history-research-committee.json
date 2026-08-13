@@ -1,25 +1,4 @@
 {
-  "name": {
-    "translations": [
-      {
-        "language": "ja",
-        "name": "日中歴史共同研究委員会"
-      },
-      {
-        "language": "zh",
-        "name": "中日历史共同研究委员会"
-      }
-    ],
-    "englishName": "Japan-China Joint History Research Committee"
-  },
-  "proposedDate": null,
-  "startDate": "2006-01-01",
-  "lastActiveStatusDate": "2006-10-01",
-  "lastActiveStatus": "ended",
-  "memberCountries": [
-    "Japan",
-    "China"
-  ],
   "sponsoringInstitutions": [
     "Ministry of Foreign Affairs of Japan",
     "Japan Institute of International Affairs (日本国際問題研究所) – Japanese secretariat",
@@ -30,6 +9,10 @@
     "Modern and contemporary history of Japan-China relations",
     "Origins of World War II in Asia",
     "Japanese colonialism and occupation"
+  ],
+  "workingGroups": [
+    "古代・中近世史分科会 (Subcommittee on Ancient and Medieval/Early Modern History)",
+    "近現代史分科会 (Subcommittee on Modern and Contemporary History)"
   ],
   "publications": [
     {
@@ -75,11 +58,21 @@
       "format": "report"
     }
   ],
-  "workingGroups": [
-    "古代・中近世史分科会 (Subcommittee on Ancient and Medieval/Early Modern History)",
-    "近現代史分科会 (Subcommittee on Modern and Contemporary History)"
-  ],
-  "status": "ended",
+  "name": {
+    "translations": [
+      {
+        "language": "ja",
+        "name": "日中歴史共同研究委員会"
+      },
+      {
+        "language": "zh",
+        "name": "中日历史共同研究委员会"
+      }
+    ],
+    "englishName": "Japan-China Joint History Research Committee"
+  },
+  "linkStatus": "live",
+  "lastActiveStatus": "ended",
   "chairs": [
     {
       "name": "Kitaoka Shin'ichi (北岡伸一)",
@@ -93,7 +86,13 @@
     }
   ],
   "url": "https://www.mofa.go.jp/mofaj/area/china/rekishi_kk.html",
-  "linkStatus": "live",
+  "startDate": "2006-01-01",
+  "status": "ended",
+  "proposedDate": null,
+  "memberCountries": [
+    "Japan",
+    "China"
+  ],
   "archivableDocuments": [
     {
       "title": "Report Table of Contents & Preface (Japanese, PDF)",
@@ -123,5 +122,6 @@
       "title": "English translation – Japanese side modern/contemporary history (PDF)",
       "url": "https://www.mofa.go.jp/mofaj/files/100512970.pdf"
     }
-  ]
+  ],
+  "lastActiveStatusDate": "2010-01-01"
 }
