@@ -12,8 +12,8 @@
 
   const code = $derived(countryCodeForTag(tag));
 
-  // Same flag CDN react-circle-flags pointed at, so the rendered artwork is
-  // unchanged — the React wrapper was only building this URL.
+  // The flag artwork is fetched straight from the CDN by country code — the
+  // whole of the dependency this replaced was a URL built from that code.
   const flagSrc = $derived(
     code ? `https://react-circle-flags.pages.dev/${code}.svg` : null,
   );

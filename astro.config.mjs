@@ -43,8 +43,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  // Replaces next/font/google. Astro self-hosts and subsets these at build time
-  // and exposes each as the CSS variable the Tailwind theme already reads.
+  // Self-hosted and subset at build time, each exposed as the CSS variable the
+  // Tailwind theme reads — no runtime request to a font vendor.
   fonts: [
     {
       provider: fontProviders.google(),

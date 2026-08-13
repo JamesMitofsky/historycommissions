@@ -5,11 +5,11 @@ import { Resvg } from "@resvg/resvg-js";
 import sharp from "sharp";
 
 /**
- * Open Graph card renderer, replacing next/og's ImageResponse.
+ * Open Graph card renderer: JSX-ish tree → SVG (satori) → PNG (resvg + sharp).
  *
- * next/og bundled its own fonts; satori does not, so the two faces used in the
- * card are read from @fontsource packages (a devDependency purely as a source of
- * font binaries). They are .woff — satori reads ttf/otf/woff but not woff2.
+ * satori ships no fonts of its own, so the two faces used in the card are read
+ * from @fontsource packages — a devDependency purely as a source of font
+ * binaries. They are .woff: satori reads ttf/otf/woff but not woff2.
  */
 const FONT_FILES = {
   sans: "@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff",

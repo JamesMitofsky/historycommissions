@@ -9,8 +9,8 @@ interface Props {
 
 const { links, heroBlurDataURL } = Astro.props;
 
-// Rendered per page at build time, so the active link needs no client JS —
-// this replaces the `usePathname()` hook the React version depended on.
+// The path is known at build time, so the active link is baked into each page
+// and needs no client JS to work out where it is.
 const pathname = Astro.url.pathname;
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);

@@ -10,7 +10,7 @@ The guiding principle: **the data is the repo.** There is no external database, 
 
 | Concern | Vendor | What speaks to it | Lock-in |
 |---|---|---|---|
-| Hosting + CD | **Netlify** | `@netlify/plugin-nextjs` | Low |
+| Hosting + CD | **Netlify** | `@astrojs/netlify` adapter | Low |
 | Content editor (CMS) | **Decap CMS** (self-hosted lib) | `public/admin/config.yml` | None (lib) |
 | CMS auth + commits | **Netlify Identity + Git Gateway** | `git-gateway` backend | Medium |
 | Content storage | **Git** (this repo) | files in `content/` + `public/` | None |
@@ -21,18 +21,19 @@ The content is not behind any API — it is Markdown and JSON in the tree. Swapp
 
 ## 1. Netlify — Hosting and CD
 
-**What it does.** Builds the Next.js app on every push to `main` (CD is Git-driven) and serves it.
+**What it does.** Builds the site on every push to `main` (CD is Git-driven) and serves it.
 
 **Where the coupling lives.**
-- `netlify.toml` → `@netlify/plugin-nextjs`. This adapter shapes the Next.js build into Netlify Functions. It is the one piece of Netlify-specific config.
+- `astro.config.mjs` → the `@astrojs/netlify` adapter. It writes Netlify's own config — redirects, headers, and a function bundle under `.netlify/v1/` — at the end of the build. The adapter lives in this repo and is maintained by the Astro team, so the Netlify-shaped output is produced here rather than by a plugin running on Netlify's side.
+- `netlify.toml` → build command and `publish = "dist"`. Netlify would auto-detect both; they are pinned so the build does not depend on detection.
 - No secrets are required to build or serve the site itself — the content is static files in the repo. (The CMS auth in §3 is the exception.)
 
 **Getting off safely.**
-1. Point the new host at the same repo and build command (`pnpm build`). Next.js deploys to Vercel, Cloudflare, or any Node host with little or no adapter config.
-2. Remove the `@netlify/plugin-nextjs` block from `netlify.toml`.
+1. Every page is prerendered, so `dist/` is a plain static site. Point any static host — Cloudflare Pages, Vercel, S3, nginx — at the repo with `pnpm build`.
+2. Delete the `adapter:` line from `astro.config.mjs` (and the dependency, if you like). Nothing else in the codebase imports it.
 3. Because there are no runtime env vars for the app itself, there is no "silently-broken-boot" risk here — unlike a DB-backed app. The only thing that follows the host is the CMS auth (§3).
 
-**Lock-in verdict:** Low. One adapter/plugin, and the content is already portable.
+**Lock-in verdict:** Low. One adapter, removable in one line, and the content is already portable.
 
 ---
 
@@ -91,7 +92,7 @@ backend:
 Ordered so the site never goes dark:
 
 1. **Back up first.** The repo *is* the backup — mirror it (`git clone --mirror`) somewhere off Netlify.
-2. **Host:** point the new host at the repo, build with `pnpm build`, remove `@netlify/plugin-nextjs` from `netlify.toml`.
+2. **Host:** point the new host at the repo, build with `pnpm build`, serve `dist/`, and drop the `adapter:` line from `astro.config.mjs`.
 3. **CMS auth:** switch Decap's `backend` in `public/admin/config.yml` off `git-gateway` (to `github`/`gitlab`/etc.) or fall back to the local backend, and re-onboard editors.
 4. **DNS:** point the domain's records at the new host.
 5. **Verify:** site renders (it is static content, so this is low-risk), `/admin` login works against the new backend, editorial-workflow PRs still open, `validate-commissions` CI still guards them.
