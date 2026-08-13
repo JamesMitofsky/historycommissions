@@ -15,7 +15,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@astrojs/netlify": "^8.2.0",
+    "@astrojs/netlify": "^8.2.1",
     "@astrojs/svelte": "^9.0.1",
     "@lucide/svelte": "^1.27.0",
     "@tailwindcss/typography": "^0.5.19",
