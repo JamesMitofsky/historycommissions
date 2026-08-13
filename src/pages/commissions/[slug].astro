@@ -10,6 +10,7 @@ import FlagTag from "@/components/FlagTag.svelte";
 import CommissionMap from "@/components/CommissionMap.svelte";
 import { getCommissions } from "@/commissions/get-commissions";
 import { STATUS_LABELS } from "@/commissions/status";
+import { resolveCountry, resolveCountries } from "@/lib/country";
 
 export const getStaticPaths = (() =>
   getCommissions().map((commission) => ({
@@ -88,7 +89,7 @@ const siteLink =
         c.memberCountries.length > 0 && (
           <div transition:name={`commission-map-${c.slug}`}>
             <CommissionMap
-              memberCountries={c.memberCountries}
+              memberCountries={resolveCountries(c.memberCountries)}
               aspectRatio={6 / 19}
               client:visible
             />
@@ -115,7 +116,7 @@ const siteLink =
             <SectionLabel>Member Countries</SectionLabel>
             <div class="flex flex-wrap gap-1.5">
               {c.memberCountries.map((country) => (
-                <FlagTag tag={country} />
+                <FlagTag country={resolveCountry(country)} />
               ))}
             </div>
           </div>

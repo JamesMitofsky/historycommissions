@@ -4,14 +4,41 @@ import PageContainer from "@/components/PageContainer.astro";
 import PostsList from "@/components/PostsList.svelte";
 import { getPosts } from "@/blog";
 import { resolvePostImage } from "@/lib/images";
+import { excerpt } from "@/lib/excerpt";
+import { resolveCountries } from "@/lib/country";
 
 const posts = await getPosts();
 
+/**
+ * How much of a post's body the search index carries.
+ *
+ * Every byte here is paid for twice — the island's props are serialized into the
+ * HTML alongside the markup Astro already rendered — so this is the one number
+ * that decides how much of the document is search corpus. Whole bodies put the
+ * page at 221kB. 400 characters is roughly a lead paragraph, which is where the
+ * names, places and dates that anyone would type into the box actually live; the
+ * tail of a post is detail that the title and tag keys, weighted far higher,
+ * already match on.
+ */
+const SEARCH_TEXT_LENGTH = 400;
+
 // astro:assets is server-only, so images are optimized here and handed to the
 // island as plain data.
+//
+// Fields are picked one by one rather than spreading the post: see the note on
+// PostListItem for why an island's props are the wrong place for a record that
+// carries more than the component reads.
 const items = await Promise.all(
   posts.map(async (post) => ({
-    post,
+    slug: post.slug,
+    title: post.title,
+    date: post.date,
+    // Resolved to flag and slug here; the island receives plain data and no
+    // country lookup code. See src/lib/country.ts.
+    countries: resolveCountries(post.tags),
+    // Markdown flattened to plain text — the raw body would spend the budget on
+    // link syntax and image paths that no one searches for.
+    searchText: excerpt(post.content, SEARCH_TEXT_LENGTH),
     image: await resolvePostImage(post.image, {
       widths: [256, 512],
       sizes: "(max-width: 640px) 100vw, 256px",
@@ -22,6 +49,12 @@ const items = await Promise.all(
 
 <Layout>
   <PageContainer>
-    <PostsList {items} client:load />
+    {/* `client:idle`, not `client:load`. The list itself is server-rendered and
+        every post in it is a plain link, so nothing here is broken before the
+        island wakes up — the only thing hydration adds is the search field's
+        filtering. `client:load` fetched that JS at High priority alongside the
+        masthead image, which is the one request on the page that a visitor is
+        actually waiting on. Idle puts it after. */}
+    <PostsList {items} client:idle />
   </PageContainer>
 </Layout>

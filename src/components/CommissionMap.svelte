@@ -101,10 +101,16 @@
 <script lang="ts">
   import * as d3 from "d3";
   import type { Attachment } from "svelte/attachments";
-  import { numericIdForTag } from "@/lib/country-codes";
+  import type { ResolvedCountry } from "@/lib/country";
 
   interface Props {
-    memberCountries: string[];
+    /**
+     * Already carrying the ISO numeric ids the topology keys on — resolved on
+     * the server, see src/lib/country.ts. Doing it here meant the ISO register
+     * and a fuzzy matcher were downloaded to turn a name into a number that is
+     * the same on every build.
+     */
+    memberCountries: ResolvedCountry[];
     aspectRatio?: number;
   }
 
@@ -129,8 +135,7 @@
 
   const parties = $derived(
     memberCountries
-      .map((name, i) => {
-        const numericId = numericIdForTag(name);
+      .map(({ name, numericId }, i) => {
         if (numericId === null) return null;
         return { numericId, name, ...COLOR_PAIRS[i % COLOR_PAIRS.length] };
       })

@@ -1,14 +1,35 @@
 <script lang="ts">
   import Fuse from "fuse.js";
-  import type { Post } from "@/blog/schema";
   import type { ResolvedImage } from "@/lib/image-types";
+  import type { ResolvedCountry } from "@/lib/country";
   import { formatPostDate } from "@/lib/format-date";
   import { fadeImage } from "@/lib/fade-image";
   import FlagTag from "./FlagTag.svelte";
   import SearchInput from "./ui/SearchInput.svelte";
 
+  /**
+   * Deliberately not `Post`. Anything an island declares as a prop is written
+   * into the HTML twice — once as the markup Astro renders on the server, and
+   * again as the JSON blob the island rehydrates from — so a prop that is not
+   * read here is pure weight on the document.
+   *
+   * Handing over whole `Post` records did exactly that: every field of every
+   * post travelled, `content` among them, which is the full Markdown body. It
+   * put the posts index at 221kB of HTML to show around thirty headlines. This
+   * shape is the four fields the template actually renders plus one for search.
+   */
   export interface PostListItem {
-    post: Post;
+    slug: string;
+    title: string | null;
+    date: string | null;
+    /** The post's country tags, resolved on the server — see src/lib/country.ts. */
+    countries: ResolvedCountry[];
+    /**
+     * Flattened body text, truncated — the corpus for the lowest-weighted search
+     * key and nothing else, so it is never displayed and never needs to be
+     * complete. See the note in src/pages/index.astro on where the cut falls.
+     */
+    searchText: string;
     image: ResolvedImage | null;
   }
 
@@ -25,9 +46,11 @@
   const fuse = $derived(
     new Fuse(items, {
       keys: [
-        { name: "post.title", weight: 1.0 },
-        { name: "post.tags", weight: 0.7 },
-        { name: "post.content", weight: 0.15 },
+        { name: "title", weight: 1.0 },
+        // Nested path into the resolved objects, so searching still matches on
+        // the country name and not on a slug or a flag path.
+        { name: "countries.name", weight: 0.7 },
+        { name: "searchText", weight: 0.15 },
       ],
       threshold: 0.35,
       ignoreLocation: true,
@@ -44,7 +67,7 @@
         const scoreDiff = (a.score ?? 0) - (b.score ?? 0);
         if (Math.abs(scoreDiff) > 0.05) return scoreDiff;
         // Near-identical relevance falls back to newest first.
-        return (b.item.post.date ?? "").localeCompare(a.item.post.date ?? "");
+        return (b.item.date ?? "").localeCompare(a.item.date ?? "");
       })
       .map((r) => r.item);
   });
@@ -75,8 +98,8 @@
     </p>
   {:else}
     <ul class="divide-y divide-border/40">
-      {#each results as { post, image }, i (post.slug)}
-        {@const formattedDate = post.date ? formatPostDate(post.date) : null}
+      {#each results as { slug, title, date, countries, image }, i (slug)}
+        {@const formattedDate = date ? formatPostDate(date) : null}
         <li
           class={[
             "group py-5 flex flex-col sm:flex-row items-start gap-4 sm:gap-6",
@@ -87,7 +110,7 @@
         >
           <div class="flex-1 min-w-0">
             <a
-              href={`/posts/${post.slug}`}
+              href={`/posts/${slug}`}
               class="block transition-opacity duration-150 group-hover:opacity-75"
             >
               {#if formattedDate}
@@ -97,15 +120,15 @@
               {/if}
               <h2
                 class="mt-0.5 text-base font-semibold leading-snug text-foreground font-serif"
-                style={`view-transition-name: post-title-${post.slug}`}
+                style={`view-transition-name: post-title-${slug}`}
               >
-                {post.title ?? post.slug}
+                {title ?? slug}
               </h2>
             </a>
-            {#if post.tags.length > 0}
+            {#if countries.length > 0}
               <div class="mt-2 flex flex-wrap gap-1.5">
-                {#each post.tags as tag (tag)}
-                  <FlagTag {tag} />
+                {#each countries as country (country.name)}
+                  <FlagTag {country} />
                 {/each}
               </div>
             {/if}
@@ -113,14 +136,14 @@
 
           {#if image}
             <a
-              href={`/posts/${post.slug}`}
+              href={`/posts/${slug}`}
               aria-hidden="true"
               tabindex="-1"
               class="block w-full sm:w-64 shrink-0 transition-opacity duration-150 group-hover:opacity-75"
             >
               <div
                 class="relative w-full h-48 sm:h-[160px] overflow-hidden bg-muted"
-                style={`view-transition-name: post-image-${post.slug}`}
+                style={`view-transition-name: post-image-${slug}`}
               >
                 {#if image.blurDataURL}
                   <span

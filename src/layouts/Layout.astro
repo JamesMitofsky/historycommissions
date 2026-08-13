@@ -81,14 +81,40 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
       href="/commissions/feed.xml"
     />
 
+    {/* No `preload`, deliberately. It is the right default when a webfont paints
+        the largest element on the page, and the wrong one here: the LCP element
+        is the masthead image, and preloading put 178kB of font — the DM Sans
+        variable face plus both Libertinus weights — into the critical fetch
+        window at High priority, queued a few milliseconds *ahead* of an 18kB
+        hero on the same connection. On a throttled link that is most of a second
+        of head start handed to bytes nothing is waiting on.
+
+        What makes dropping it safe rather than a trade is the fallback metrics
+        Astro emits beside each family: `size-adjust` and `ascent-override` tuned
+        to Arial and Times New Roman, so text laid out in the fallback occupies
+        the same box the webfont will. Combined with `display: swap` the first
+        paint is immediate and the swap is invisible in layout terms — CLS stays
+        at zero, which the Lighthouse run confirms.
+
+        The faces still load; they are declared in the inline @font-face block
+        above, so the browser fetches them as soon as it finds text that needs
+        them. They just stop outranking the image the user is actually waiting
+        to see. */}
     <Font cssVariable="--font-sans" preload />
-    <Font cssVariable="--font-serif" preload />
+    <Font cssVariable="--font-serif" />
 
     <ClientRouter />
   </head>
 
+  <!-- No `text-rendering: optimizeLegibility` on the body. It reads like free
+       polish and is not: it asks the engine to apply the full kerning and
+       ligature tables before it paints any text, which is main-thread work at
+       the worst possible moment and, on a long document, work done for text far
+       below the fold. What it buys is nothing here — the subsetting step keeps
+       `--layout-features=*`, so both families ship their kerning, and browsers
+       apply that under the default `auto` anyway. -->
   <body
-    class="min-h-full flex flex-col font-sans text-base leading-[1.65] antialiased [text-rendering:optimizeLegibility]"
+    class="min-h-full flex flex-col font-sans text-base leading-[1.65] antialiased"
   >
     <!-- One pixel at the very top of the document, so it intersects the
          viewport at scroll position 0 and nowhere else. The script below turns
@@ -155,8 +181,12 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
       <div class="absolute bottom-0 left-0 right-0">
         <div class="max-w-2xl mx-auto px-6 pb-5">
           <a href="/" class="inline-block">
+            <!-- `font-semibold`, matching every other serif heading on the site.
+                 It was the only `font-bold` among them, and a second Libertinus
+                 face is 50kB on every page — for three words of masthead, the
+                 most expensive thing on the critical path after the image. -->
             <h1
-              class="text-3xl font-bold text-white leading-tight font-serif"
+              class="text-3xl font-semibold text-white leading-tight font-serif"
             >
               {
                 general.siteTitle
@@ -289,23 +319,39 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
       });
     </script>
 
-    <script
-      is:inline
-      defer
-      src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script is:inline>
-      // Deferred scripts have all executed by the window load event, so the
-      // widget is guaranteed to be present by the time this runs.
-      window.addEventListener("load", function () {
-        if (!window.netlifyIdentity) return;
-        window.netlifyIdentity.on("init", function (user) {
-          if (!user) {
-            window.netlifyIdentity.on("login", function () {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      });
+      // Netlify Identity, loaded on demand rather than on every page.
+      //
+      // /admin/ pulls the widget in itself (see public/admin/index.html), so the
+      // only reason it was ever needed out here is the one flow that does not
+      // start at /admin/: an invite, recovery or confirmation email links to the
+      // site root and leaves its token in the fragment, and something on that
+      // page has to notice and hand the visitor over to the CMS.
+      //
+      // Loading it unconditionally made every visitor pay for that: 54kB from a
+      // third origin — so a DNS lookup and a TLS handshake before the first byte
+      // — on a page that, for all but a handful of loads a year, has nothing to
+      // do with it. `defer` kept it from blocking the parser but not from
+      // competing for the connection while the masthead image was still
+      // arriving.
+      //
+      // Reading the hash costs nothing and answers the question exactly: no
+      // token, no widget.
+      if (/[#&](invite|recovery|confirmation)_token=|[#&]error=/.test(location.hash)) {
+        const identity = document.createElement("script");
+        identity.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
+        identity.onload = function () {
+          if (!window.netlifyIdentity) return;
+          window.netlifyIdentity.on("init", function (user) {
+            if (!user) {
+              window.netlifyIdentity.on("login", function () {
+                document.location.href = "/admin/";
+              });
+            }
+          });
+        };
+        document.head.appendChild(identity);
+      }
     </script>
   </body>
 </html>

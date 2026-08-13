@@ -5,6 +5,7 @@
   import ChevronDown from "@lucide/svelte/icons/chevron-down";
   import ArrowUpDown from "@lucide/svelte/icons/arrow-up-down";
   import type { Commission, CommissionStatus } from "@/commissions/types";
+  import type { ResolvedCountry } from "@/lib/country";
   import { STATUS_LABELS, STATUS_ORDER } from "@/commissions/status";
   import { cn } from "@/lib/utils";
   import FlagTag from "./FlagTag.svelte";
@@ -17,11 +18,22 @@
 
   interface Props {
     commissions: Commission[];
+    /**
+     * Country name as written in content -> its flag, slug and map id, resolved
+     * on the server. See src/lib/country.ts.
+     *
+     * A lookup rather than resolved values on each commission, because the same
+     * countries recur across the list and an island's props are serialized into
+     * the page: keying by name sends each country once instead of once per card
+     * it appears on. `memberCountries` stays a list of names, which is what the
+     * filters compare against.
+     */
+    countries: Record<string, ResolvedCountry>;
     /** False when arriving via a view transition — the morph already covered it. */
     animate?: boolean;
   }
 
-  let { commissions, animate = true }: Props = $props();
+  let { commissions, countries, animate = true }: Props = $props();
 
   type SortMode = "recency-asc" | "recency-desc" | "activity";
 
@@ -299,7 +311,7 @@
               {#if c.memberCountries.length > 0}
                 <div class="flex flex-wrap gap-1.5">
                   {#each c.memberCountries as country (country)}
-                    <FlagTag tag={country} />
+                    <FlagTag country={countries[country]} />
                   {/each}
                 </div>
               {/if}
@@ -338,7 +350,7 @@
                 style={`view-transition-name: commission-map-${c.slug}`}
               >
                 <CommissionMap
-                  memberCountries={c.memberCountries}
+                  memberCountries={c.memberCountries.map((n) => countries[n])}
                   aspectRatio={0.6}
                 />
               </a>

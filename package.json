@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "astro dev",
     "generate:country-options": "tsx scripts/generate-country-options.ts",
+    "vendor:flags": "tsx scripts/vendor-flags.ts",
     "generate:language-options": "tsx scripts/generate-language-options.ts",
     "prebuild": "tsx scripts/generate-country-options.ts && tsx scripts/generate-language-options.ts",
     "build": "astro build",
     "preview": "astro preview",
+    "perf": "tsx scripts/perf.ts",
     "check": "astro check && svelte-check --tsconfig ./tsconfig.json",
     "validate:commissions": "tsx scripts/validate-commissions.ts",
     "lint": "eslint ."
@@ -47,12 +49,14 @@
     "eslint-plugin-astro": "^3.0.1",
     "eslint-plugin-svelte": "^3.22.0",
     "globals": "^17.8.0",
+    "lighthouse": "^13.4.1",
     "satori": "^0.29.0",
     "svelte-check": "^4.7.4",
     "svelte-eslint-parser": "^1.8.0",
     "tailwindcss": "^4",
     "tsx": "^4.20.6",
     "typescript": "^5",
-    "typescript-eslint": "^8.65.0"
+    "typescript-eslint": "^8.65.0",
+    "world-countries": "^5.1.0"
   }
 }

@@ -6,7 +6,7 @@ date: 2019-11-05T16:20:00.004Z
 updated: 2020-09-21T21:39:46.502Z
 author: Daqing Yang
 tags:
-  - N. Macedonia
+  - North Macedonia
   - Bulgaria
 image: /images/Bulgaria-Macedonia-Joint-Commission.webp
 ---
