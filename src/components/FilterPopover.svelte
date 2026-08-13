@@ -50,10 +50,10 @@
       </span>
     {/if}
     <ChevronDown
-      class={cn(
+      class={[
         "size-3 opacity-50 transition-transform duration-200",
         open && "rotate-180",
-      )}
+      ]}
     />
   </Popover.Trigger>
 
@@ -66,10 +66,10 @@
           {#each options as { value, display } (value)}
             <CommandItem {value} onSelect={() => onToggle(value)}>
               <Check
-                class={cn(
+                class={[
                   "size-3.5 shrink-0",
                   selected.has(value) ? "opacity-100" : "opacity-0",
-                )}
+                ]}
               />
               {display}
             </CommandItem>

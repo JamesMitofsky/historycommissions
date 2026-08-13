@@ -55,9 +55,11 @@
 
 <div>
   <div
-    class="flex items-center gap-1.5 mb-6 {animate
-      ? 'animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both'
-      : ''}"
+    class={[
+      "flex items-center gap-1.5 mb-6",
+      animate &&
+        "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both",
+    ]}
     style={animate ? "animation-delay: 60ms" : undefined}
   >
     <!-- Same input as the commissions filter bar, so the two lists search the
@@ -102,9 +104,11 @@
       {#each results as { post, image }, i (post.slug)}
         {@const formattedDate = post.date ? formatPostDate(post.date) : null}
         <li
-          class="group py-5 flex flex-col sm:flex-row items-start gap-4 sm:gap-6 {animate
-            ? 'animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both'
-            : ''}"
+          class={[
+            "group py-5 flex flex-col sm:flex-row items-start gap-4 sm:gap-6",
+            animate &&
+              "animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both",
+          ]}
           style={animate ? `animation-delay: ${100 + i * 60}ms` : undefined}
         >
           <div class="flex-1 min-w-0">
@@ -161,7 +165,7 @@
                   loading="lazy"
                   decoding="async"
                   data-fade-img
-                  use:fadeImage
+                  {@attach fadeImage}
                   class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
                 />
               </div>

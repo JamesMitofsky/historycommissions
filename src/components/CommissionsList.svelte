@@ -166,23 +166,23 @@
       >
         <button
           onclick={() => (filterMode = "exclusive")}
-          class={cn(
+          class={[
             "px-2.5 h-full transition-colors",
             filterMode === "exclusive"
               ? "bg-foreground text-background"
               : "text-muted-foreground hover:text-foreground",
-          )}
+          ]}
         >
           Match only
         </button>
         <button
           onclick={() => (filterMode = "inclusive")}
-          class={cn(
+          class={[
             "px-2.5 h-full transition-colors",
             filterMode === "inclusive"
               ? "bg-foreground text-background"
               : "text-muted-foreground hover:text-foreground",
-          )}
+          ]}
         >
           Match any
         </button>
@@ -212,10 +212,10 @@
       >
         <ArrowUpDown class="size-3" />
         <ChevronDown
-          class={cn(
+          class={[
             "size-3 opacity-50 transition-transform duration-200",
             sortOpen && "rotate-180",
-          )}
+          ]}
         />
       </Popover.Trigger>
       <PopoverContent class="w-44 p-1" align="end">
@@ -225,16 +225,16 @@
               sortMode = mode;
               sortOpen = false;
             }}
-            class={cn(
+            class={[
               "flex items-center gap-2 w-full rounded-xs px-2 py-1.5 text-xs text-left transition-colors hover:bg-accent",
               sortMode === mode ? "text-foreground" : "text-muted-foreground",
-            )}
+            ]}
           >
             <Check
-              class={cn(
+              class={[
                 "size-3 shrink-0",
                 sortMode === mode ? "opacity-100" : "opacity-0",
-              )}
+              ]}
             />
             {SORT_LABELS[mode]}
           </button>
@@ -251,13 +251,13 @@
     <div>
       {#each filtered as c, i (c.slug)}
         <article
-          class={cn(
+          class={[
             // The top border is a separator between cards, so the first card
             // does not need one — it would read as a rule under the filter bar.
             "border-t border-border py-7 first:border-t-0",
             animate &&
               "animate-in fade-in slide-in-from-bottom-1 duration-400 fill-mode-both",
-          )}
+          ]}
           style={animate ? `animation-delay: ${100 + i * 40}ms` : undefined}
         >
           <!-- The country tags are links, so they cannot sit inside the card's

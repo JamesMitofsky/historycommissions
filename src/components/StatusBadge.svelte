@@ -18,7 +18,6 @@
     className,
   )}
 >
-  <span class={cn("w-1.5 h-1.5 rounded-xs shrink-0", STATUS_DOT[status])}
-  ></span>
+  <span class={["w-1.5 h-1.5 rounded-xs shrink-0", STATUS_DOT[status]]}></span>
   {STATUS_LABELS[status]}
 </span>

@@ -100,6 +100,7 @@
 
 <script lang="ts">
   import * as d3 from "d3";
+  import type { Attachment } from "svelte/attachments";
   import { numericIdForTag } from "@/lib/country-codes";
 
   interface Props {
@@ -136,115 +137,121 @@
       .filter((p): p is Party => p !== null),
   );
 
-  let containerEl = $state<HTMLDivElement | null>(null);
-  let svgEl = $state<SVGSVGElement | null>(null);
-  let tooltipEl = $state<HTMLDivElement | null>(null);
+  /**
+   * An attachment rather than an `$effect`: d3 owns the contents of the <svg>,
+   * which is exactly the "sync state to an external library" case attachments
+   * exist for. It also makes the dependencies honest — `currentParties` and
+   * `ratio` are arguments, so a change to either re-runs the draw, whereas an
+   * effect only tracked what it read *synchronously* and `aspectRatio` was read
+   * after the topology `await`, where it went untracked.
+   *
+   * The container is the attached node, and d3 already works by querying, so
+   * the two children it needs are looked up rather than bound into state.
+   */
+  function drawMap(
+    currentParties: Party[],
+    ratio: number,
+  ): Attachment<HTMLDivElement> {
+    return (container) => {
+      const svgNode = container.querySelector("svg");
+      const tooltip = container.querySelector<HTMLDivElement>(
+        "[data-map-tooltip]",
+      );
+      if (!svgNode || !tooltip) return;
 
-  $effect(() => {
-    const container = containerEl;
-    const svgNode = svgEl;
-    const tooltip = tooltipEl;
-    const currentParties = parties;
-    if (!container || !svgNode || !tooltip || currentParties.length === 0) return;
+      // Declared with `const` rather than as a hoisted `function`, so the
+      // narrowing the guard above established survives into the closure and
+      // `svelte-check` does not see `tooltip` as nullable on every use.
+      const draw = (allCountries: FeatureCollection<Geometry>) => {
+        const width = container.clientWidth || 600;
+        const height = Math.round(width * ratio);
 
-    let cancelled = false;
+        // Only the viewBox is set here. Width and height come from CSS, where
+        // the aspect ratio is already reserved before this data arrives —
+        // setting a pixel height at this point is what made the map visibly
+        // resize once the topology finished loading.
+        const svg = d3.select(svgNode);
+        svg.selectAll("*").remove();
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
 
-    loadWorld().then((allCountries) => {
-      if (cancelled) return;
-      enqueueDraw(() => {
+        const highlightedIds = new Set(currentParties.map((p) => p.numericId));
+        const processedFeatures = allCountries.features.map((f) =>
+          highlightedIds.has(Number(f.id)) ? keepLargestPolygon(f) : f,
+        );
+        const highlighted = processedFeatures.filter((f) =>
+          highlightedIds.has(Number(f.id)),
+        );
+        if (highlighted.length === 0) return;
+
+        const projection = d3.geoNaturalEarth1();
+        const padding = 48;
+        projection.fitExtent(
+          [
+            [padding, padding],
+            [width - padding, height - padding],
+          ],
+          { type: "FeatureCollection", features: highlighted },
+        );
+
+        const path = d3.geoPath().projection(projection);
+        const partyFor = (f: Feature<Geometry>) =>
+          currentParties.find((p) => p.numericId === Number(f.id));
+
+        svg
+          .append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("fill", "#EFF4F8");
+
+        svg
+          .selectAll("path")
+          .data(processedFeatures)
+          .enter()
+          .append("path")
+          .attr("d", (d) => path(d) ?? "")
+          .attr("fill", (d) => partyFor(d)?.fill ?? "#D3D1C7")
+          .attr("stroke", (d) => partyFor(d)?.stroke ?? "#ffffff")
+          .attr("stroke-width", (d) => (partyFor(d) ? 1.5 : 0.3))
+          .style("cursor", (d) => (partyFor(d) ? "pointer" : "default"))
+          .on("mousemove", function (event: MouseEvent, d) {
+            const party = partyFor(d);
+            if (!party) return;
+            tooltip.textContent = party.name;
+            tooltip.style.opacity = "1";
+            tooltip.style.left = `${event.offsetX + 10}px`;
+            tooltip.style.top = `${event.offsetY - 36}px`;
+            d3.select(this).attr("fill", party.fillHover);
+          })
+          .on("mouseleave", function (_event: MouseEvent, d) {
+            const party = partyFor(d);
+            if (!party) return;
+            tooltip.style.opacity = "0";
+            d3.select(this).attr("fill", party.fill);
+          });
+      };
+
+      let cancelled = false;
+
+      loadWorld().then((allCountries) => {
         if (cancelled) return;
+        enqueueDraw(() => {
+          if (cancelled) return;
 
-        draw(allCountries, container, svgNode, tooltip);
-      });
-    });
-
-    // The three elements are taken as parameters rather than closed over: a
-    // hoisted function declaration does not keep the narrowing the guard above
-    // established, so inside it `container` and `tooltip` are still nullable and
-    // `svelte-check` fails on every use.
-    function draw(
-      allCountries: FeatureCollection<Geometry>,
-      container: HTMLDivElement,
-      svgNode: SVGSVGElement,
-      tooltip: HTMLDivElement,
-    ) {
-      const width = container.clientWidth || 600;
-      const height = Math.round(width * aspectRatio);
-
-      // Only the viewBox is set here. Width and height come from CSS, where the
-      // aspect ratio is already reserved before this data arrives — setting a
-      // pixel height at this point is what made the map visibly resize once the
-      // topology finished loading.
-      const svg = d3.select(svgNode);
-      svg.selectAll("*").remove();
-      svg.attr("viewBox", `0 0 ${width} ${height}`);
-
-      const highlightedIds = new Set(currentParties.map((p) => p.numericId));
-      const processedFeatures = allCountries.features.map((f) =>
-        highlightedIds.has(Number(f.id)) ? keepLargestPolygon(f) : f,
-      );
-      const highlighted = processedFeatures.filter((f) =>
-        highlightedIds.has(Number(f.id)),
-      );
-      if (highlighted.length === 0) return;
-
-      const projection = d3.geoNaturalEarth1();
-      const padding = 48;
-      projection.fitExtent(
-        [
-          [padding, padding],
-          [width - padding, height - padding],
-        ],
-        { type: "FeatureCollection", features: highlighted },
-      );
-
-      const path = d3.geoPath().projection(projection);
-      const partyFor = (f: Feature<Geometry>) =>
-        currentParties.find((p) => p.numericId === Number(f.id));
-
-      svg
-        .append("rect")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("fill", "#EFF4F8");
-
-      svg
-        .selectAll("path")
-        .data(processedFeatures)
-        .enter()
-        .append("path")
-        .attr("d", (d) => path(d) ?? "")
-        .attr("fill", (d) => partyFor(d)?.fill ?? "#D3D1C7")
-        .attr("stroke", (d) => partyFor(d)?.stroke ?? "#ffffff")
-        .attr("stroke-width", (d) => (partyFor(d) ? 1.5 : 0.3))
-        .style("cursor", (d) => (partyFor(d) ? "pointer" : "default"))
-        .on("mousemove", function (event: MouseEvent, d) {
-          const party = partyFor(d);
-          if (!party) return;
-          tooltip.textContent = party.name;
-          tooltip.style.opacity = "1";
-          tooltip.style.left = `${event.offsetX + 10}px`;
-          tooltip.style.top = `${event.offsetY - 36}px`;
-          d3.select(this).attr("fill", party.fillHover);
-        })
-        .on("mouseleave", function (_event: MouseEvent, d) {
-          const party = partyFor(d);
-          if (!party) return;
-          tooltip.style.opacity = "0";
-          d3.select(this).attr("fill", party.fill);
+          draw(allCountries);
         });
-    }
+      });
 
-    return () => {
-      cancelled = true;
+      return () => {
+        cancelled = true;
+      };
     };
-  });
+  }
 </script>
 
 {#if parties.length > 0}
   <div
-    bind:this={containerEl}
     class="relative rounded-xs overflow-hidden border border-border/50"
+    {@attach drawMap(parties, aspectRatio)}
   >
     <!-- aspect-ratio reserves the final height from first paint, so the box does
          not grow when the topology finishes loading. It is the inverse of the
@@ -252,13 +259,12 @@
          the ocean rect d3 draws, so the placeholder and the map are the same
          colour and only the land fades in. -->
     <svg
-      bind:this={svgEl}
       style="display: block; width: 100%; aspect-ratio: {1 /
         aspectRatio}; background-color: #EFF4F8"
     ></svg>
     <div
-      bind:this={tooltipEl}
-      class="map-tooltip pointer-events-none absolute rounded-xs px-2 py-1 text-xs font-medium bg-foreground text-background opacity-0 transition-opacity whitespace-nowrap"
+      data-map-tooltip
+      class="pointer-events-none absolute rounded-xs px-2 py-1 text-xs font-medium bg-foreground text-background opacity-0 transition-opacity whitespace-nowrap"
       style="top: 0; left: 0"
     ></div>
   </div>
