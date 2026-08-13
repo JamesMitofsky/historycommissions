@@ -1,0 +1,15 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+}
+
+const {
+  href = "/",
+  class: className = "inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground border border-border rounded-xs px-3 py-2 hover:bg-muted/60 hover:border-foreground/20 transition-colors mb-10",
+} = Astro.props;
+---
+
+<a {href} class={className}>
+  <slot>← All posts</slot>
+</a>

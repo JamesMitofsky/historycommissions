@@ -1,0 +1,29 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
+import Prose from "@/components/Prose.astro";
+import { getAboutSettings } from "@/settings";
+import { renderMarkdown } from "@/lib/markdown";
+
+const about = getAboutSettings();
+const body = renderMarkdown(about.body);
+const contact = renderMarkdown(about.contact);
+---
+
+<Layout title={about.title}>
+  <PageContainer>
+    <div
+      style="animation-delay: 140ms"
+      class="animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+    >
+      <Prose><Fragment set:html={body} /></Prose>
+    </div>
+
+    <div
+      style="animation-delay: 320ms"
+      class="mt-12 pt-8 border-t border-border text-sm text-muted-foreground leading-relaxed animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both"
+    >
+      <Prose><Fragment set:html={contact} /></Prose>
+    </div>
+  </PageContainer>
+</Layout>

@@ -2,7 +2,7 @@
 
 A digital archive of bilateral **historical commissions** — the joint expert bodies countries set up to reconcile contested history (textbooks, war memory, disputed events).
 
-Built with Next.js. All content lives as plain files in this repo, so Git *is* the database.
+Built with Astro and Svelte. All content lives as plain files in this repo, so Git *is* the database.
 
 - **Commissions** — one JSON file per commission in `content/commissions/`, rendered as a browsable, searchable list plus per-country pages and an interactive globe/map.
 - **Posts** — Markdown news entries in `content/posts/`.
@@ -15,7 +15,7 @@ pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:4321](http://localhost:4321).
 
 ## Editing content (Decap CMS)
 
@@ -31,11 +31,11 @@ npx decap-server
 pnpm dev
 ```
 
-Open [http://localhost:3000/admin/index.html](http://localhost:3000/admin/index.html), click **Use Local Backend**, and edit without auth. Changes write directly to `content/` on disk.
+Open [http://localhost:4321/admin/index.html](http://localhost:4321/admin/index.html), click **Use Local Backend**, and edit without auth. Changes write directly to `content/` on disk.
 
 ## Deploy
 
-Deploys to **Netlify** via `@netlify/plugin-nextjs`. Pushes to `main` trigger a production build automatically.
+Deploys to **Netlify** via the `@astrojs/netlify` adapter. Pushes to `main` trigger a production build automatically.
 
 ## Portability
 

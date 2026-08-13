@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "astro/zod";
 
 export const NavLinkSchema = z.object({
   href: z.string().min(1),

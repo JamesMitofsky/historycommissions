@@ -1,0 +1,140 @@
+---
+import type { GetStaticPaths } from "astro";
+import { render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
+import Prose from "@/components/Prose.astro";
+import BackLink from "@/components/BackLink.astro";
+import FadeImage from "@/components/FadeImage.astro";
+import FlagTag from "@/components/FlagTag.svelte";
+import CommissionMap from "@/components/CommissionMap.svelte";
+import { getPostEntries, toPost } from "@/blog";
+import { formatPostDate } from "@/lib/format-date";
+import { resolveImage, getBlurDataURL } from "@/lib/images";
+import { excerpt } from "@/lib/excerpt";
+
+export const getStaticPaths = (async () => {
+  const entries = await getPostEntries();
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const post = toPost(entry);
+const formattedDate = post.date ? formatPostDate(post.date, "long") : null;
+const description = excerpt(post.content, 200);
+
+const image = resolveImage(post.image);
+const blurDataURL = await getBlurDataURL(post.image);
+---
+
+<Layout
+  title={post.title ?? undefined}
+  description={description || undefined}
+  ogType="article"
+  publishedTime={post.date ?? undefined}
+  ogImage={`/posts/${post.slug}/opengraph-image.png`}
+>
+  <PageContainer>
+    <BackLink />
+
+    <header class="mb-10">
+      {
+        post.title && (
+          <h1
+            class="text-2xl font-semibold leading-tight font-serif text-foreground mb-4"
+            transition:name={`post-title-${post.slug}`}
+          >
+            {post.title}
+          </h1>
+        )
+      }
+      <div
+        class="flex items-center justify-between text-sm text-muted-foreground"
+      >
+        {
+          formattedDate && (
+            <time datetime={post.date ?? undefined}>{formattedDate}</time>
+          )
+        }
+        {post.author && <span>{post.author}</span>}
+      </div>
+      {
+        post.tags.length > 0 && (
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {post.tags.map((tag) => (
+              <FlagTag tag={tag} />
+            ))}
+          </div>
+        )
+      }
+
+      {
+        (image || post.tags.length > 0) && (
+          <div class="mt-6">
+            <div class="flex flex-col sm:flex-row gap-3 sm:items-stretch sm:min-h-[180px]">
+              {post.tags.length > 0 && (
+                <div
+                  class={
+                    image
+                      ? "order-2 sm:order-none sm:flex-[1] min-w-0"
+                      : "w-full"
+                  }
+                >
+                  <CommissionMap memberCountries={post.tags} client:visible />
+                </div>
+              )}
+              {image && (
+                <div
+                  class={
+                    post.tags.length > 0
+                      ? "order-1 sm:order-none sm:flex-[2] min-w-0"
+                      : "w-full"
+                  }
+                  transition:name={`post-image-${post.slug}`}
+                >
+                  <div class="relative rounded-xs overflow-hidden bg-border h-[200px] sm:h-full">
+                    <FadeImage
+                      src={image}
+                      alt={post.title ?? ""}
+                      priority
+                      sizes="(max-width: 768px) 100vw, 672px"
+                      widths={[672, 1344]}
+                      class="absolute inset-0 h-full w-full object-cover"
+                      blurDataURL={blurDataURL}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            {post.imageAttribution && (
+              <p class="mt-1.5 text-xs text-muted-foreground text-right">
+                {post.imageAttributionUrl ? (
+                  <a
+                    href={post.imageAttributionUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hover:underline"
+                  >
+                    {post.imageAttribution}
+                  </a>
+                ) : (
+                  post.imageAttribution
+                )}{" "}
+                (CC BY-SA 3.0)
+              </p>
+            )}
+          </div>
+        )
+      }
+
+      <div class="mt-8 border-b border-border"></div>
+    </header>
+
+    <Prose><Content /></Prose>
+  </PageContainer>
+</Layout>

@@ -1,0 +1,361 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+@plugin "@tailwindcss/typography";
+
+:root {
+  --secondary: oklch(0.97 0 0);
+  --border: oklch(0.922 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.40 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --secondary: #9d9a96;
+    --border: #282624;
+  }
+}
+
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.78 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* The canvas is painted on `html`, not only on `body`: anything that leaves a
+     hole in the page — an overscroll bounce on iOS, a compositing gap during a
+     view transition — then shows the site's own background instead of the UA's
+     dark-mode canvas. `color-scheme` is declared for the same reason: the
+     palette above is light-only unless `.dark` is applied, so the UA must not
+     paint its own surfaces dark underneath it. */
+  html {
+    @apply font-sans bg-background;
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+/* Fading images.
+
+   The browser swaps a blur placeholder to the sharp image with a hard cut, which
+   reads as a flash once network latency makes the blur visible. So the blur is
+   rendered as a separate, always-opaque layer underneath and only the sharp
+   image animates on top of it — there is never a transparent dip, because the
+   blur is never faded out from under it.
+
+   Global rather than component-scoped so Astro pages and Svelte islands can both
+   opt in with the same attribute. Layout.astro sets data-loaded on load. */
+[data-fade-img] {
+  opacity: 0;
+  transition:
+    opacity 500ms ease-out,
+    transform 300ms ease-out;
+}
+[data-fade-img][data-loaded] {
+  opacity: 1;
+}
+
+/* The masthead's blurred second copy (Layout.astro) is masked on both axes, and
+   `mask-composite: intersect` multiplies the two together — blur survives only
+   where both layers agree it should.
+
+   Vertically: full strength down to the bottom of the nav, then off shortly
+   after. Ramping from 0 instead — the obvious way to write it — spends the whole
+   fade behind the links and leaves the least blur exactly where the nav sits.
+
+   Horizontally the band runs off the right edge of the screen rather than
+   closing again past the last link: the links are flushed right, so there is
+   nothing on that side to protect, and a second ramp there only put a soft edge
+   in open space. Only the left edge is shaped, and it reads a custom property
+   Layout.astro sets from the measured left edge of the first nav link — so the
+   blur tracks the links themselves rather than a guess about where they land.
+   Change a label, add a fourth link, or swap the font and the band follows with
+   nothing to edit here.
+
+   The two ramps are deliberately lopsided: 240px on the left, where there is
+   masthead to dissolve into, against 20px below, where a longer fade would only
+   drag the blur down over the site title.
+
+   The fallback is not decoration — it is what renders before the script runs,
+   and all that renders if it never does. It approximates the same edge from the
+   nav's own layout constants: a 672px (max-w-2xl) centred column with its links
+   flushed right, hence 120px left of centre. Below roughly 1000px wide the
+   transparent stop falls off the left edge and the band covers the full width,
+   which is what a nav spanning a phone wants.
+
+   Unprefixed only, deliberately. The cssTarget floor in astro.config.mjs is
+   safari16.4 and Safari has shipped unprefixed mask-image and mask-composite
+   since 15.4. -webkit-mask-composite is not a synonym for the standard property
+   — it takes a different value set (`source-in`, not `intersect`) — so writing
+   the pair would not survive the minifier's prefix dedupe as equivalent CSS. */
+.masthead-blur {
+  mask-image:
+    linear-gradient(
+      to bottom,
+      #000 0,
+      #000 var(--nav-blur-bottom, 56px),
+      transparent calc(var(--nav-blur-bottom, 56px) + 20px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(var(--nav-blur-left, calc(50% - 120px)) - 240px),
+      #000 var(--nav-blur-left, calc(50% - 120px))
+    );
+  mask-composite: intersect;
+}
+
+/* View Transitions
+
+   Every rule that targets a ::view-transition-* pseudo below is polish for the
+   engines that honor it. iOS Safari (observed on iOS 26) ignores author CSS on
+   that pseudo tree entirely for same-document transitions — `animation`,
+   `display`, keyframes, `mix-blend-mode`, all of it — so nothing here can be
+   relied on to keep a navigation looking correct. The iOS-safe behavior is set
+   further down, on real elements. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* The active-link underline exists only under the current page's link, so
+   naming it makes the view transition treat the old page's underline and the
+   new page's underline as one box and morph between them — it slides along the
+   bar instead of blinking out and back in.
+
+   It has to clear the masthead group, which is pinned at z-index 100.
+
+   The name is withdrawn once the page is scrolled. The nav rides on the
+   masthead rather than the viewport, so scrolling carries it off the top of the
+   screen — and a client-side navigation resets the scroll to 0. Captured on the
+   way out, the outgoing underline is far above the fold; captured on the way in,
+   it is back at the top of the bar. The group dutifully animates between those
+   two boxes, which is almost entirely vertical: the underline appeared to drop
+   in from off-screen. With no name there is no group and no morph, which is the
+   right answer anyway when the outgoing underline was never on screen to be
+   morphed from. Layout.astro sets data-scrolled from a sentinel at the top of
+   the document.
+
+   The old and new images are both solid white bars, so crossfading them would
+   only wash out the middle of the slide. `animation: none` holds both fully
+   opaque and leaves the group's own morph to do all the work.
+
+   Lives here rather than in a page's <style>: the client router swaps page
+   styles out on navigation, and globals.css is a persisted stylesheet. */
+.nav-underline {
+  view-transition-name: nav-underline;
+}
+html[data-scrolled] .nav-underline {
+  view-transition-name: none;
+}
+
+::view-transition-group(nav-underline) {
+  z-index: 101;
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+::view-transition-old(nav-underline),
+::view-transition-new(nav-underline) {
+  animation: none;
+
+  /* The UA sizes a snapshot `inline-size: 100%; block-size: auto`, so it keeps
+     its own aspect ratio while the group's width animates. For a bar 120x2 that
+     means an incoming snapshot is drawn 5px tall inside a group that is still
+     240px wide, then thins to 2px as the group narrows — the underline visibly
+     puffed up and shrank back down mid-slide. Both snapshots are solid fills,
+     so stretching them to the group's box is lossless and keeps the bar exactly
+     2px for the whole trip. */
+  block-size: 100%;
+  object-fit: fill;
+
+  /* Default is `plus-lighter`, which is right for a crossfade. Here both
+     snapshots are opaque for the whole animation, so adding them together only
+     blows out the antialiased ends. */
+  mix-blend-mode: normal;
+}
+
+/* Page-to-page transition: a plain crossfade, no directional movement. Because
+   nothing here depends on travel direction, one rule covers both forward and
+   back navigation. */
+::view-transition-old(root) {
+  animation: 150ms ease-in both fade-vt reverse;
+}
+::view-transition-new(root) {
+  animation: 200ms ease-out 150ms both fade-vt;
+}
+
+@keyframes fade-vt {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Entry animations are for a cold page load. When you arrive via a client-side
+   navigation the view transition already carried the visual continuity, so
+   replaying them reads as a flash. Layout.astro adds .vt-nav on astro:after-swap
+   (before paint) and it persists for the rest of the session.
+
+   `animation: none` rather than a 0s duration: it drops the keyframes entirely
+   so the element renders in its natural end state, with no risk of the
+   animation restarting when the rule stops matching. */
+html.vt-nav .animate-in {
+  animation: none !important;
+}
+
+/* iOS Safari drops the pseudo-tree rules above and then freezes the default
+   root cross-fade near its midpoint, compositing the page against the
+   transition overlay's transparent black. The whole page — content included —
+   renders at roughly 0.7 opacity over black for the length of the navigation: a
+   uniform gray veil in light and dark mode alike, with the browser toolbar
+   tinting along with it. No desktop browser, responsive mode, or simulator
+   reproduces this; only a physical iPhone or iPad does.
+
+   `view-transition-name: none` is a plain declaration on a real element, so it
+   is honored wherever view transitions exist. With no name on the root there is
+   no root snapshot, the live DOM keeps painting across the swap, and no overlay
+   frame is left to turn gray — the navigation becomes a hard cut. The named
+   groups above (site-header, nav-underline) are unaffected and still morph, so
+   the masthead stays pinned and the underline still slides.
+
+   `@supports (-webkit-touch-callout: none)` matches iOS and iPadOS WebKit — so
+   every browser on an iPhone or iPad, all of which share this bug — and no
+   desktop engine, which is why the crossfade above still runs on desktop. */
+@supports (-webkit-touch-callout: none) {
+  :root {
+    view-transition-name: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Pseudo-tree rules are ignored on iOS, so reduced motion cannot be enforced
+     through them. Clearing every name is a real-element declaration: nothing is
+     captured, so the transition has no groups to animate and the swap is
+     instant. `!important` because Astro emits `transition:name` as a generated
+     rule, and because .nav-underline above names the underline by class. */
+  :root,
+  :root * {
+    view-transition-name: none !important;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

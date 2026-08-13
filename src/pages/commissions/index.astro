@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
+import CommissionsList from "@/components/CommissionsList.svelte";
+import { getCommissions } from "@/commissions/get-commissions";
+
+const commissions = getCommissions();
+---
+
+<Layout title="Bilateral Commissions">
+  <PageContainer>
+    <CommissionsList {commissions} client:load />
+  </PageContainer>
+</Layout>

@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { z } from "zod";
+import { z } from "astro/zod";
 import { CommissionSchema, type Commission } from "./types";
 
 const COMMISSIONS_DIR = path.join(process.cwd(), "content/commissions");
@@ -26,7 +26,10 @@ function loadCommission(file: string): Commission {
   try {
     data = JSON.parse(raw);
   } catch (e) {
-    throw new Error(`Invalid commission "${file}": not valid JSON — ${(e as Error).message}`);
+    throw new Error(
+      `Invalid commission "${file}": not valid JSON — ${(e as Error).message}`,
+      { cause: e },
+    );
   }
 
   const result = CommissionSchema.safeParse({ ...(data as object), slug });
@@ -39,6 +42,3 @@ export const getCommissions = (): Commission[] =>
     .readdirSync(COMMISSIONS_DIR)
     .filter((f) => f.endsWith(".json"))
     .map(loadCommission);
-
-export const getCommission = (slug: string): Commission =>
-  loadCommission(`${slug}.json`);

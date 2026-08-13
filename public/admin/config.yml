@@ -9,7 +9,11 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: public/images
+# Uploads land in src/assets so Astro optimizes them at build time (astro:assets
+# only processes images under src/). public_folder stays "/images" so the path
+# written into frontmatter is stable and CMS-friendly; src/lib/images.ts maps
+# that path back to the real asset module.
+media_folder: src/assets/images
 public_folder: /images
 
 collections:
