@@ -173,19 +173,29 @@
    `mask-composite: intersect` multiplies the two together — blur survives only
    where both layers agree it should.
 
-   Vertically: full strength through 56px, the nav's height at sm and up and past
-   its 48px below that, then off by 96px. Ramping from 0 instead — the obvious
-   way to write it — spends the whole fade behind the links and leaves the least
-   blur exactly where the nav sits.
+   Vertically: full strength down to the bottom of the nav, then off shortly
+   after. Ramping from 0 instead — the obvious way to write it — spends the whole
+   fade behind the links and leaves the least blur exactly where the nav sits.
 
-   Horizontally: anchored to the centre rather than to a percentage, because the
-   links are. The nav is a 672px (max-w-2xl) column, centred, with its links
-   flushed right, so the left edge of the leftmost link never falls far left of
-   centre at any width. Solid from 120px left of centre and gone 300px further
-   left keeps the blur behind the links and off the empty side of the masthead,
-   where the site title sits. Below roughly 840px wide the transparent stop falls
-   off the left edge and the band covers the full width — which is what a nav
-   spanning the screen wants.
+   Horizontally the band runs off the right edge of the screen rather than
+   closing again past the last link: the links are flushed right, so there is
+   nothing on that side to protect, and a second ramp there only put a soft edge
+   in open space. Only the left edge is shaped, and it reads a custom property
+   Layout.astro sets from the measured left edge of the first nav link — so the
+   blur tracks the links themselves rather than a guess about where they land.
+   Change a label, add a fourth link, or swap the font and the band follows with
+   nothing to edit here.
+
+   The two ramps are deliberately lopsided: 240px on the left, where there is
+   masthead to dissolve into, against 20px below, where a longer fade would only
+   drag the blur down over the site title.
+
+   The fallback is not decoration — it is what renders before the script runs,
+   and all that renders if it never does. It approximates the same edge from the
+   nav's own layout constants: a 672px (max-w-2xl) centred column with its links
+   flushed right, hence 120px left of centre. Below roughly 1000px wide the
+   transparent stop falls off the left edge and the band covers the full width,
+   which is what a nav spanning a phone wants.
 
    Unprefixed only, deliberately. The cssTarget floor in astro.config.mjs is
    safari16.4 and Safari has shipped unprefixed mask-image and mask-composite
@@ -194,11 +204,16 @@
    the pair would not survive the minifier's prefix dedupe as equivalent CSS. */
 .masthead-blur {
   mask-image:
-    linear-gradient(to bottom, #000 0, #000 56px, transparent 96px),
+    linear-gradient(
+      to bottom,
+      #000 0,
+      #000 var(--nav-blur-bottom, 56px),
+      transparent calc(var(--nav-blur-bottom, 56px) + 20px)
+    ),
     linear-gradient(
       to right,
-      transparent calc(50% - 420px),
-      #000 calc(50% - 120px)
+      transparent calc(var(--nav-blur-left, calc(50% - 120px)) - 240px),
+      #000 var(--nav-blur-left, calc(50% - 120px))
     );
   mask-composite: intersect;
 }

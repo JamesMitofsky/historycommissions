@@ -142,7 +142,8 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
         aria-hidden="true"
         sizes="100vw"
         widths={[640, 1024, heroImage.width]}
-        class="masthead-blur pointer-events-none absolute inset-0 h-full w-full object-cover object-bottom blur-[16px]"
+        loading="eager"
+        class="masthead-blur pointer-events-none absolute inset-0 h-full w-full object-cover object-bottom blur-[10px]"
       />
 
       <!-- Gradient: dark at top for nav legibility, dark at bottom for title legibility -->
@@ -239,6 +240,53 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
 
       initScrollState();
       document.addEventListener("astro:page-load", initScrollState);
+
+      // Hands the masthead's blur band the edge it should start at. The band
+      // runs off the right of the screen, so only the left edge — the start of
+      // the first link — has to be known. The links are laid out by flex inside
+      // a centred, max-width column, so where that falls depends on their
+      // labels, the font, and how many there are, none of which CSS can ask
+      // about. Measuring is what keeps the band correct when any of those
+      // change; .masthead-blur in globals.css carries a fallback that
+      // approximates the same edge for the frames before this runs.
+      //
+      // Offsets are taken relative to the header rather than the viewport, so a
+      // horizontal scrollbar or a page scrolled off the top cannot skew them.
+      function measureNavBlurBand() {
+        var links = document.querySelector("[data-nav-links]");
+        var header = links && links.closest("header");
+        if (!header || !links.children.length) return;
+
+        var box = header.getBoundingClientRect();
+        var first = links.children[0].getBoundingClientRect();
+        var root = document.documentElement.style;
+
+        // Offsets are relative to the header, because that is the box the mask
+        // resolves its lengths against — but they are stored on <html>, which
+        // the client router never replaces. Stored on the header they were lost
+        // on every swap, so the band rendered at its CSS fallback position for a
+        // frame and then snapped to the measured one: a visible flicker on the
+        // way back to a page whose header had already been measured once.
+        root.setProperty("--nav-blur-left", first.left - box.left + "px");
+        root.setProperty(
+          "--nav-blur-bottom",
+          links.getBoundingClientRect().bottom - box.top + "px",
+        );
+      }
+
+      // Re-measured on resize because the column is centred and the links are
+      // flushed right, so that edge moves with the viewport — and on navigation
+      // to pick up a nav whose links differ from the outgoing page's. The
+      // properties themselves survive the swap on <html>, so this is a
+      // correction rather than a restoration and nothing flashes while it runs.
+      measureNavBlurBand();
+      addEventListener("resize", measureNavBlurBand, { passive: true });
+      document.addEventListener("astro:page-load", measureNavBlurBand);
+
+      // The labels are set in a webfont loaded with `display: swap`, so their
+      // widths change once it arrives — a first measurement taken against the
+      // fallback face would leave the band a little narrow for good.
+      if (document.fonts) document.fonts.ready.then(measureNavBlurBand);
 
       // Entry animations belong to a cold load. After a client-side navigation
       // the view transition already provided continuity, so replaying them reads

@@ -26,7 +26,11 @@ const isActive = (href: string) =>
 <nav
   class="absolute top-0 left-0 right-0 z-10 [text-shadow:0_1px_2px_rgb(0_0_0_/_0.5)]"
 >
+  <!-- Measured by Layout.astro to place the masthead's blur behind the links —
+       its children are the links and nothing else, which is what makes taking
+       the first one's left edge and the last one's right edge meaningful. -->
   <div
+    data-nav-links
     class="max-w-2xl mx-auto px-6 h-12 sm:h-14 flex items-center justify-end gap-5 sm:gap-8"
   >
     {
