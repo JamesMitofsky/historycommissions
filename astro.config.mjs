@@ -26,6 +26,24 @@ export default defineConfig({
     imageCDN: false,
   }),
 
+  // `<ClientRouter />` already switches prefetching on, but only for links that
+  // opt in with `data-astro-prefetch`. Every internal link here goes to another
+  // prerendered page of the same small site, so there is nothing worth making
+  // opt-in — `prefetchAll` covers the nav, the post cards and the commission
+  // cards alike.
+  //
+  // `load` is the eager end of the scale: rather than waiting for a pointer to
+  // reach a link, it queues every link on the page once the page itself has
+  // finished loading, draining the queue through `requestIdleCallback` so the
+  // fetches land in gaps rather than competing with first paint. Every target is
+  // a prerendered HTML file on the same origin, so what it costs is bandwidth,
+  // not server work. The browser still declines when it disagrees — Astro's
+  // prefetch honours Save-Data and slow connections.
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "load",
+  },
+
   integrations: [svelte()],
 
   vite: {

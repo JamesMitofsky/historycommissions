@@ -1,14 +1,11 @@
 <script lang="ts">
   import Fuse from "fuse.js";
-  import Info from "@lucide/svelte/icons/info";
-  import { LinkPreview } from "bits-ui";
   import type { Post } from "@/blog/schema";
   import type { ResolvedImage } from "@/lib/image-types";
   import { formatPostDate } from "@/lib/format-date";
   import { fadeImage } from "@/lib/fade-image";
   import FlagTag from "./FlagTag.svelte";
-  import Input from "./ui/Input.svelte";
-  import HoverCardContent from "./ui/HoverCardContent.svelte";
+  import SearchInput from "./ui/SearchInput.svelte";
 
   export interface PostListItem {
     post: Post;
@@ -56,43 +53,20 @@
 <div>
   <div
     class={[
-      "flex items-center gap-1.5 mb-6",
+      "mb-6",
       animate &&
         "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both",
     ]}
     style={animate ? "animation-delay: 60ms" : undefined}
   >
-    <!-- Same input as the commissions filter bar, so the two lists search the
-         same way. -->
-    <Input
-      type="text"
+    <!-- Same field as the commissions filter bar, so the two lists search the
+         same way, except that this one is the only control in its row and so
+         takes the full column width. -->
+    <SearchInput
       placeholder="Search posts…"
+      aria-label="Search posts"
       bind:value={query}
-      class="h-8 w-56 sm:w-72 text-sm rounded-xs"
     />
-
-    <LinkPreview.Root openDelay={100} closeDelay={100}>
-      <LinkPreview.Trigger
-        type="button"
-        aria-label="About this search"
-        class="inline-flex items-center justify-center rounded-xs text-muted-foreground hover:text-foreground size-3 self-start transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground/50"
-      >
-        <Info class="size-3" aria-hidden="true" />
-      </LinkPreview.Trigger>
-      <HoverCardContent
-        side="right"
-        align="start"
-        sideOffset={4}
-        class="w-72 text-sm leading-relaxed"
-      >
-        <p class="font-semibold text-foreground mb-1">Fuzzy search</p>
-        <p class="text-muted-foreground">
-          Matches on post titles, country tags, and content — typos and partial
-          words are forgiven. Title matches rank above tag matches, which rank
-          above body matches.
-        </p>
-      </HoverCardContent>
-    </LinkPreview.Root>
   </div>
 
   {#if results.length === 0}

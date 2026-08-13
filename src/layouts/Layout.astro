@@ -1,5 +1,5 @@
 ---
-import { Font } from "astro:assets";
+import { Font, Image } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import Nav from "@/components/Nav.astro";
 import Footer from "@/components/Footer.astro";
@@ -92,6 +92,12 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
   <body
     class="min-h-full flex flex-col font-sans text-base leading-[1.65] antialiased [text-rendering:optimizeLegibility]"
   >
+    <!-- One pixel at the very top of the document, so it intersects the
+         viewport at scroll position 0 and nowhere else. The script below turns
+         that into a `data-scrolled` flag on <html>, which globals.css uses to
+         withdraw the nav underline's view-transition name. -->
+    <div data-scroll-top-sentinel aria-hidden="true" class="h-px w-full"></div>
+
     <!-- Masthead — image + nav + site title in one unit -->
     <header
       class="relative w-full h-56 overflow-hidden"
@@ -106,13 +112,46 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
         widths={[640, 1024, heroImage.width]}
         blurDataURL={heroBlurDataURL}
       />
+
+      <!-- A second copy of the hero, blurred and masked to a band across the
+           top, so the image itself softens under the nav instead of the nav
+           painting something over it.
+
+           The band is shaped by .masthead-blur in globals.css, which masks on
+           both axes so the blur sits under the links and nowhere else — see the
+           rule there for the stops and why they are anchored where they are.
+
+           `filter` and not `backdrop-filter`: the masthead is a view-transition
+           group, and a descendant backdrop-filter inside a captured group drops
+           out for the length of a navigation and snaps back — that is the bug
+           Nav.astro used to paint around. An element filter is part of ordinary
+           paint and is captured with everything else.
+
+           Geometry is copied from the sharp image exactly, so the two are in
+           register and the blur cannot ghost. The one seam this leaves is at the
+           very top edge, where the filter fades toward transparent over roughly
+           its own radius and lets the sharp copy through — the top few pixels
+           blur slightly less than the mask asks for. It softens rather than
+           breaking, because what shows through is the identical image.
+
+           Astro emits the same processed asset for both, so this costs a cache
+           hit rather than a second download. -->
+      <Image
+        src={heroImage}
+        alt=""
+        aria-hidden="true"
+        sizes="100vw"
+        widths={[640, 1024, heroImage.width]}
+        class="masthead-blur pointer-events-none absolute inset-0 h-full w-full object-cover object-bottom blur-[16px]"
+      />
+
       <!-- Gradient: dark at top for nav legibility, dark at bottom for title legibility -->
       <div
         class="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60"
       >
       </div>
 
-      <Nav links={general.nav} heroBlurDataURL={heroBlurDataURL} />
+      <Nav links={general.nav} />
 
       <div class="absolute bottom-0 left-0 right-0">
         <div class="max-w-2xl mx-auto px-6 pb-5">
@@ -173,6 +212,33 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
 
       // Still needed for images that finish decoding after the swap.
       document.addEventListener("astro:page-load", initFadeImages);
+
+      // Flags on <html> whether the document has moved off the top. The nav
+      // underline reads this to decide whether it is worth morphing across a
+      // navigation — see the .nav-underline rules in globals.css.
+      //
+      // The sentinel is replaced on every client-side navigation, so the
+      // observer is rebuilt against the new one and the old one disconnected —
+      // otherwise each page visited would leave one behind, still holding its
+      // detached node.
+      var scrollTopObserver;
+      function initScrollState() {
+        if (scrollTopObserver) scrollTopObserver.disconnect();
+
+        var sentinel = document.querySelector("[data-scroll-top-sentinel]");
+        if (!sentinel) return;
+
+        scrollTopObserver = new IntersectionObserver(function (entries) {
+          document.documentElement.toggleAttribute(
+            "data-scrolled",
+            !entries[0].isIntersecting,
+          );
+        });
+        scrollTopObserver.observe(sentinel);
+      }
+
+      initScrollState();
+      document.addEventListener("astro:page-load", initScrollState);
 
       // Entry animations belong to a cold load. After a client-side navigation
       // the view transition already provided continuity, so replaying them reads

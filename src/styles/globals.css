@@ -169,6 +169,40 @@
   opacity: 1;
 }
 
+/* The masthead's blurred second copy (Layout.astro) is masked on both axes, and
+   `mask-composite: intersect` multiplies the two together — blur survives only
+   where both layers agree it should.
+
+   Vertically: full strength through 56px, the nav's height at sm and up and past
+   its 48px below that, then off by 96px. Ramping from 0 instead — the obvious
+   way to write it — spends the whole fade behind the links and leaves the least
+   blur exactly where the nav sits.
+
+   Horizontally: anchored to the centre rather than to a percentage, because the
+   links are. The nav is a 672px (max-w-2xl) column, centred, with its links
+   flushed right, so the left edge of the leftmost link never falls far left of
+   centre at any width. Solid from 120px left of centre and gone 300px further
+   left keeps the blur behind the links and off the empty side of the masthead,
+   where the site title sits. Below roughly 840px wide the transparent stop falls
+   off the left edge and the band covers the full width — which is what a nav
+   spanning the screen wants.
+
+   Unprefixed only, deliberately. The cssTarget floor in astro.config.mjs is
+   safari16.4 and Safari has shipped unprefixed mask-image and mask-composite
+   since 15.4. -webkit-mask-composite is not a synonym for the standard property
+   — it takes a different value set (`source-in`, not `intersect`) — so writing
+   the pair would not survive the minifier's prefix dedupe as equivalent CSS. */
+.masthead-blur {
+  mask-image:
+    linear-gradient(to bottom, #000 0, #000 56px, transparent 96px),
+    linear-gradient(
+      to right,
+      transparent calc(50% - 420px),
+      #000 calc(50% - 120px)
+    );
+  mask-composite: intersect;
+}
+
 /* View Transitions
 
    Every rule that targets a ::view-transition-* pseudo below is polish for the
@@ -195,12 +229,30 @@
 
    It has to clear the masthead group, which is pinned at z-index 100.
 
+   The name is withdrawn once the page is scrolled. The nav rides on the
+   masthead rather than the viewport, so scrolling carries it off the top of the
+   screen — and a client-side navigation resets the scroll to 0. Captured on the
+   way out, the outgoing underline is far above the fold; captured on the way in,
+   it is back at the top of the bar. The group dutifully animates between those
+   two boxes, which is almost entirely vertical: the underline appeared to drop
+   in from off-screen. With no name there is no group and no morph, which is the
+   right answer anyway when the outgoing underline was never on screen to be
+   morphed from. Layout.astro sets data-scrolled from a sentinel at the top of
+   the document.
+
    The old and new images are both solid white bars, so crossfading them would
    only wash out the middle of the slide. `animation: none` holds both fully
    opaque and leaves the group's own morph to do all the work.
 
    Lives here rather than in a page's <style>: the client router swaps page
    styles out on navigation, and globals.css is a persisted stylesheet. */
+.nav-underline {
+  view-transition-name: nav-underline;
+}
+html[data-scrolled] .nav-underline {
+  view-transition-name: none;
+}
+
 ::view-transition-group(nav-underline) {
   z-index: 101;
   animation-duration: 300ms;
@@ -282,7 +334,7 @@ html.vt-nav .animate-in {
      through them. Clearing every name is a real-element declaration: nothing is
      captured, so the transition has no groups to animate and the swap is
      instant. `!important` because Astro emits `transition:name` as a generated
-     rule and the nav underline sets its name inline. */
+     rule, and because .nav-underline above names the underline by class. */
   :root,
   :root * {
     view-transition-name: none !important;

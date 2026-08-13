@@ -3,11 +3,9 @@ import type { NavLink } from "@/settings";
 
 interface Props {
   links: NavLink[];
-  /** Inlined blur placeholder for the masthead image, painted behind the bar. */
-  heroBlurDataURL?: string | null;
 }
 
-const { links, heroBlurDataURL } = Astro.props;
+const { links } = Astro.props;
 
 // The path is known at build time, so the active link is baked into each page
 // and needs no client JS to work out where it is.
@@ -16,38 +14,20 @@ const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
-<!-- The frosted bar is painted, not a `backdrop-filter`.
+<!-- Sits on the masthead and scrolls away with it, rather than being pinned to
+     the viewport.
 
-     The masthead carries a `view-transition-name`, which makes it a backdrop
-     root and hands it to the view-transition pseudo tree during a client-side
-     navigation. A descendant's backdrop-filter does not survive that reliably
-     across engines — the blur dropped out for the length of the transition and
-     snapped back when the pseudo tree was torn down, which read as a flash. It
-     is also the one place the production CSS optimizer strips
-     `-webkit-backdrop-filter`, leaving older Safari with no blur at all.
-
-     Nothing is ever moving behind this bar: the masthead image is fixed, and
-     its blur placeholder is already inlined in the page. So the same look comes
-     from painting that placeholder, framed exactly as the sharp image is — the
-     `h-56 bg-cover bg-bottom` below mirrors the masthead's own height and
-     `object-cover object-bottom` — with the tint on top. A plain painted layer
-     is immune to all of the above. -->
+     Nothing is painted behind the links here. The bar used to carry a copy of
+     the hero's blur placeholder plus a flat tint to fake frosted glass; the
+     masthead now blurs its own top edge instead (see the gradient-blur layer in
+     Layout.astro), so the frosting happens in the image and the bar itself is
+     just text. What remains for legibility is the masthead's top-down gradient
+     and the text-shadow below. -->
 <nav
-  class="absolute top-0 left-0 right-0 z-10 overflow-hidden [text-shadow:0_1px_2px_rgb(0_0_0_/_0.5)]"
+  class="absolute top-0 left-0 right-0 z-10 [text-shadow:0_1px_2px_rgb(0_0_0_/_0.5)]"
 >
-  {
-    heroBlurDataURL && (
-      <span
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-x-0 top-0 h-56 bg-cover bg-bottom"
-        style={`background-image: url("${heroBlurDataURL}")`}
-      />
-    )
-  }
-  <span aria-hidden="true" class="pointer-events-none absolute inset-0 bg-black/30"
-  ></span>
   <div
-    class="relative max-w-2xl mx-auto px-6 h-12 sm:h-14 flex items-center justify-end gap-5 sm:gap-8"
+    class="max-w-2xl mx-auto px-6 h-12 sm:h-14 flex items-center justify-end gap-5 sm:gap-8"
   >
     {
       links.map(({ href, label, shortLabel }) => (
@@ -65,13 +45,13 @@ const isActive = (href: string) =>
               the incoming page as the same box and slides it across the bar. A
               per-link element that merely grew and shrank could not travel
               between two links, because a client-side navigation replaces the
-              whole nav. See ::view-transition-group(nav-underline) in
-              globals.css. */}
+              whole nav.
+
+              The name is applied by the .nav-underline class rather than inline,
+              so globals.css can withdraw it while the page is scrolled — see the
+              rule there for why. */}
           {isActive(href) && (
-            <span
-              class="absolute -bottom-1 left-0 h-0.5 w-full bg-white"
-              style="view-transition-name: nav-underline"
-            />
+            <span class="nav-underline absolute -bottom-1 left-0 h-0.5 w-full bg-white" />
           )}
         </a>
       ))

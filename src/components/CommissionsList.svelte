@@ -11,7 +11,7 @@
   import StatusBadge from "./StatusBadge.svelte";
   import CommissionMap from "./CommissionMap.svelte";
   import FilterPopover from "./FilterPopover.svelte";
-  import Input from "./ui/Input.svelte";
+  import SearchInput from "./ui/SearchInput.svelte";
   import { buttonVariants } from "./ui/button-variants";
   import PopoverContent from "./ui/PopoverContent.svelte";
 
@@ -138,11 +138,15 @@
 <div>
   <!-- Filter bar -->
   <div class="flex flex-wrap items-center gap-2 mb-6">
-    <Input
-      type="text"
+    <!-- The only control in the bar that grows: the pills and the sort trigger
+         are sized by their content, so the search takes whatever the row has
+         left. `basis-56` keeps it from collapsing to nothing when the filters
+         wrap onto its line. -->
+    <SearchInput
       placeholder="Search commissions…"
+      aria-label="Search commissions"
       bind:value={search}
-      class="h-8 w-56 sm:w-72 text-sm rounded-xs"
+      class="flex-1 basis-56"
     />
 
     <FilterPopover
