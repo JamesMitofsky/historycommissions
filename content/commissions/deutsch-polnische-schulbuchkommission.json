@@ -1,22 +1,4 @@
 {
-  "name": {
-    "translations": [
-      {
-        "language": "de",
-        "name": "Deutsch-Polnische Schulbuchkommission"
-      },
-      {
-        "language": "pl",
-        "name": "Polsko-Niemiecka Komisja Podręcznikowa"
-      }
-    ],
-    "englishName": "German-Polish Textbook Commission"
-  },
-  "proposedDate": null,
-  "startDate": "1972-02-01",
-  "lastActiveStatusDate": null,
-  "lastActiveStatus": null,
-  "memberCountries": ["Germany", "Poland"],
   "sponsoringInstitutions": [],
   "keyTopics": [
     "German-Polish history in educational media",
@@ -24,6 +6,10 @@
     "Transnational history education: Germany – Poland – Ukraine",
     "Representation of 1939–1949 German-Polish relations in textbooks",
     "Teacher professional development workshops"
+  ],
+  "workingGroups": [
+    "Lehrkräfte Arbeitskreis (Teachers' Working Group)",
+    "Transnational History Teaching: Germany – Poland – Ukraine"
   ],
   "publications": [
     {
@@ -37,22 +23,47 @@
       "year": null,
       "url": null,
       "format": "monograph"
+    },
+    {
+      "title": "AI w edukacji historycznej. Wytyczne American Historical Association (AHA) – pierwsza próba uporządkowania chaosu",
+      "year": 2026
     }
   ],
-  "workingGroups": [
-    "Lehrkräfte Arbeitskreis (Teachers' Working Group)",
-    "Transnational History Teaching: Germany – Poland – Ukraine"
-  ],
-  "status": "active",
+  "name": {
+    "translations": [
+      {
+        "language": "de",
+        "name": "Deutsch-Polnische Schulbuchkommission"
+      },
+      {
+        "language": "pl",
+        "name": "Polsko-Niemiecka Komisja Podręcznikowa"
+      }
+    ],
+    "englishName": "German-Polish Textbook Commission"
+  },
+  "linkStatus": "live",
+  "lastActiveStatus": null,
   "chairs": [
     {
-      "name": "Marcin Wiatr",
+      "name": "Prof. Dr. Hans-Jürgen Bömelburg",
+      "country": "Germany",
+      "affiliation": "Justus-Liebig-Universität Gießen"
+    },
+    {
+      "name": "Prof. Dr. Violetta Julkowska",
       "country": "Poland",
-      "affiliation": "Co-Secretary, Deutsch-Polnische Schulbuchkommission"
+      "affiliation": "Adam-Mickiewicz-Universität Posen/Poznań"
     }
   ],
-  "url": "https://schulbuchkommission.eu/",
-  "linkStatus": "working",
-  "lastArchivedSnapshot": "https://web.archive.org/web/20260312003536/https://schulbuchkommission.eu/",
-  "archivableDocuments": []
+  "url": "https://komisja-podrecznikowa.eu/",
+  "startDate": "1972-02-01",
+  "status": "active",
+  "proposedDate": null,
+  "memberCountries": [
+    "Germany",
+    "Poland"
+  ],
+  "archivableDocuments": [],
+  "lastActiveStatusDate": null
 }

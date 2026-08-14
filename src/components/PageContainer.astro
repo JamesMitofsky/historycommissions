@@ -1,0 +1,19 @@
+---
+// The single source of a page's outer rhythm: column width, gutters, and the
+// gap between the masthead and the first element on the page.
+//
+// Every page used to spell these out itself, and they drifted: /about opened a
+// full rem higher than the lists, because the lists happened to add `mt-4` on
+// their filter row on top of the same `pt-8`. Spacing to the first element now
+// lives here and only here — anything a page renders first should start flush.
+interface Props {
+  /** Extra classes, for the rare page that needs more than the shared rhythm. */
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<main class:list={["max-w-2xl mx-auto px-6 pt-12 pb-14", className]}>
+  <slot />
+</main>

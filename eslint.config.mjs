@@ -1,18 +1,44 @@
 import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import js from "@eslint/js";
+import ts from "typescript-eslint";
+import astro from "eslint-plugin-astro";
+import svelte from "eslint-plugin-svelte";
+import globals from "globals";
+import svelteConfig from "./svelte.config.js";
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  // Override default ignores of eslint-config-next.
+export default defineConfig([
+  // Build output and vendored files. `.netlify/**` is the adapter's bundled SSR
+  // function — generated, minified, and not ours to lint; without it a `pnpm
+  // lint` run after any `pnpm build` drowns in several hundred errors from
+  // Astro's own bundle and the real findings scroll off the top.
   globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
+    "dist/**",
+    ".astro/**",
+    ".netlify/**",
+    "node_modules/**",
+    "public/admin/**",
   ]),
-]);
 
-export default eslintConfig;
+  js.configs.recommended,
+  ...ts.configs.recommended,
+  ...astro.configs.recommended,
+  ...svelte.configs.recommended,
+
+  {
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+    },
+  },
+
+  // Svelte files need the TS parser for <script lang="ts"> and a pointer back to
+  // svelte.config.js so the plugin resolves the same preprocessor the build uses.
+  {
+    files: ["**/*.svelte", "**/*.svelte.ts"],
+    languageOptions: {
+      parserOptions: {
+        parser: ts.parser,
+        svelteConfig,
+      },
+    },
+  },
+]);

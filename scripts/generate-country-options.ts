@@ -2,30 +2,31 @@
  * Generates the country option list consumed by the Decap CMS admin widgets
  * (public/admin/country-widget.js).
  *
- * Single source of truth: the SAME i18n-iso-countries English names that
- * src/lib/country-codes.ts resolves tags against. Keeping the editor's picklist
- * and the runtime resolver on one source means any name an editor can pick is a
- * name the map/flag resolver recognises.
+ * Single source of truth: the names come from src/lib/country-codes.ts itself,
+ * so any name an editor can pick is by construction a name the flag and map
+ * resolver recognises.
+ *
+ * They are common names — "Moldova", "South Korea", "Russia" — because that is
+ * what the resolver now matches on. The list used to be the ISO register's
+ * official names, which is how content ended up full of names the resolver could
+ * not find: the picklist offered "Moldova, Republic of", editors typed "Moldova"
+ * instead, and a fuzzy matcher was left to guess at the difference.
  *
  * Output is a plain <script>-includable file that sets window.COUNTRY_OPTIONS,
  * so the static admin (no bundler) can read it without a fetch.
  *
  * Run via the `prebuild` npm script; the generated file is also committed so
- * `next dev` works without a manual build step.
+ * `astro dev` works without a manual build step.
  */
 import { writeFileSync } from "fs";
 import path from "path";
-import countries from "i18n-iso-countries";
-import en from "i18n-iso-countries/langs/en.json";
-
-countries.registerLocale(en);
+import { allCountryNames } from "../src/lib/country-codes";
 
 // "Europe" is a supported special value in country-codes.ts (SPECIAL_ALPHA2).
 const SPECIAL = ["Europe"];
 
-const names = Object.values(countries.getNames("en"));
-const options = Array.from(new Set([...SPECIAL, ...names])).sort((a, b) =>
-  a.localeCompare(b)
+const options = Array.from(new Set([...SPECIAL, ...allCountryNames()])).sort(
+  (a, b) => a.localeCompare(b)
 );
 
 const out =

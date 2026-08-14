@@ -1,0 +1,241 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
+import BackLink from "@/components/BackLink.astro";
+import FadeImage from "@/components/FadeImage.astro";
+import FlagTag from "@/components/FlagTag.svelte";
+import StatusBadge from "@/components/StatusBadge.svelte";
+import CommissionMap from "@/components/CommissionMap.svelte";
+import { getPosts } from "@/blog";
+import type { Post } from "@/blog/schema";
+import { getCommissions } from "@/commissions/get-commissions";
+import type { Commission } from "@/commissions/types";
+import { countrySlug } from "@/lib/country-slug";
+import { resolveCountry, resolveCountries } from "@/lib/country";
+import { formatPostDate } from "@/lib/format-date";
+import { resolveImage, getBlurDataURL } from "@/lib/images";
+
+export const getStaticPaths = (async () => {
+  const posts = await getPosts();
+  const commissions = getCommissions();
+
+  // A country page exists only where there is something to show, and the first
+  // spelling encountered becomes the page's canonical display name.
+  const byCountry = new Map<
+    string,
+    { canonicalName: string; posts: Post[]; commissions: Commission[] }
+  >();
+
+  const bucket = (name: string) => {
+    const slug = countrySlug(name);
+    if (!slug) return null;
+    let entry = byCountry.get(slug);
+    if (!entry) {
+      entry = { canonicalName: name, posts: [], commissions: [] };
+      byCountry.set(slug, entry);
+    }
+    return entry;
+  };
+
+  // Two differently-spelled tags can slugify to the same country ("Czechia" and
+  // "Czech Republic"), so guard against listing the same entry twice.
+  for (const post of posts) {
+    for (const tag of post.tags) {
+      const entry = bucket(tag);
+      if (entry && !entry.posts.includes(post)) entry.posts.push(post);
+    }
+  }
+  for (const commission of commissions) {
+    for (const country of commission.memberCountries) {
+      const entry = bucket(country);
+      if (entry && !entry.commissions.includes(commission)) {
+        entry.commissions.push(commission);
+      }
+    }
+  }
+
+  return Array.from(byCountry, ([slug, data]) => ({
+    params: { slug },
+    props: data,
+  }));
+}) satisfies GetStaticPaths;
+
+const {
+  canonicalName,
+  posts: matchingPosts,
+  commissions: matchingCommissions,
+} = Astro.props;
+
+// The page's own subject, resolved the same way every chip on it is — this
+// header used to build a CDN URL from the country code by hand, which is how it
+// survived the switch to vendored flags until a grep for the old host found it.
+const country = resolveCountry(canonicalName);
+
+function englishName(c: Commission): string {
+  const en = c.name.translations.find((t) => t.language === "en");
+  return en?.name ?? c.name.englishName;
+}
+
+const postCards = await Promise.all(
+  matchingPosts.map(async (post) => ({
+    post,
+    image: resolveImage(post.image),
+    blurDataURL: await getBlurDataURL(post.image),
+  })),
+);
+---
+
+<Layout
+  title={canonicalName}
+  description={`Posts and bilateral commissions related to ${canonicalName}.`}
+>
+  <PageContainer>
+    <BackLink href="/">← Home</BackLink>
+
+    <header class="mb-10 flex items-center gap-4">
+      {
+        country.flag && (
+          <img
+            src={country.flag}
+            alt=""
+            width="48"
+            height="48"
+            class="shrink-0"
+          />
+        )
+      }
+      <div>
+        <p
+          class="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+        >
+          Country
+        </p>
+        <h1
+          class="text-2xl font-semibold leading-tight font-serif text-foreground"
+        >
+          {canonicalName}
+        </h1>
+      </div>
+    </header>
+
+    {
+      postCards.length > 0 && (
+        <section class="mb-14">
+          <h2 class="text-base font-semibold text-foreground mb-1 font-serif">
+            Posts
+          </h2>
+          <p class="text-sm text-muted-foreground mb-4">
+            {postCards.length} {postCards.length === 1 ? "post" : "posts"} tagged{" "}
+            {canonicalName}.
+          </p>
+          <ul class="divide-y divide-border/40">
+            {postCards.map(({ post, image, blurDataURL }) => {
+              const formattedDate = post.date
+                ? formatPostDate(post.date)
+                : null;
+              return (
+                <li class="py-5">
+                  <a
+                    href={`/posts/${post.slug}`}
+                    class="group flex flex-col sm:flex-row items-start gap-4 sm:gap-6 transition-opacity duration-150 hover:opacity-75"
+                  >
+                    <div class="flex-1 min-w-0">
+                      {formattedDate && (
+                        <time class="text-xs text-muted-foreground tabular-nums">
+                          {formattedDate}
+                        </time>
+                      )}
+                      <h3 class="mt-0.5 text-base font-semibold leading-snug text-foreground font-serif">
+                        {post.title ?? post.slug}
+                      </h3>
+                    </div>
+                    {image && (
+                      <div class="relative w-full sm:w-48 h-32 sm:h-[120px] shrink-0 overflow-hidden bg-muted">
+                        <FadeImage
+                          src={image}
+                          alt=""
+                          sizes="(max-width: 640px) 100vw, 192px"
+                          widths={[192, 384]}
+                          class="absolute inset-0 h-full w-full object-cover group-hover:scale-105"
+                          blurDataURL={blurDataURL}
+                        />
+                      </div>
+                    )}
+                  </a>
+                  {post.tags.length > 0 && (
+                    <div class="mt-3 flex flex-wrap gap-1.5">
+                      {post.tags.map((tag) => (
+                        <FlagTag country={resolveCountry(tag)} />
+                      ))}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      matchingCommissions.length > 0 && (
+        <section>
+          <h2 class="text-base font-semibold text-foreground mb-1 font-serif">
+            Bilateral Commissions
+          </h2>
+          <p class="text-sm text-muted-foreground mb-4">
+            {matchingCommissions.length}{" "}
+            {matchingCommissions.length === 1 ? "commission" : "commissions"}{" "}
+            involving {canonicalName}.
+          </p>
+          <div>
+            {matchingCommissions.map((c) => (
+              <article class="border-t border-border py-6">
+                <div class="group/card flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                  <div class="flex-1 min-w-0 space-y-2">
+                    <a
+                      href={`/commissions/${c.slug}`}
+                      class="block space-y-2 transition-opacity duration-150 group-hover/card:opacity-75"
+                    >
+                      <h3 class="text-[1.05rem] font-semibold leading-snug text-foreground font-serif">
+                        {englishName(c)}
+                      </h3>
+                      <StatusBadge status={c.status} />
+                      {c.startDate && (
+                        <p class="text-sm text-muted-foreground">
+                          Founded {c.startDate.slice(0, 4)}
+                        </p>
+                      )}
+                    </a>
+                    {c.memberCountries.length > 0 && (
+                      <div class="flex flex-wrap gap-1.5">
+                        {c.memberCountries.map((country) => (
+                          <FlagTag country={resolveCountry(country)} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  {c.memberCountries.length > 0 && (
+                    <a
+                      href={`/commissions/${c.slug}`}
+                      aria-hidden="true"
+                      tabindex="-1"
+                      class="block w-full sm:w-40 shrink-0 transition-opacity duration-150 group-hover/card:opacity-75"
+                    >
+                      <CommissionMap
+                        memberCountries={resolveCountries(c.memberCountries)}
+                        aspectRatio={0.6}
+                        client:visible
+                      />
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </PageContainer>
+</Layout>

@@ -1,0 +1,357 @@
+---
+import { Font, Image } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+import FadeImage from "@/components/FadeImage.astro";
+import { getGeneralSettings } from "@/settings";
+import { getBlurDataURL } from "@/lib/images";
+import heroImage from "@/assets/hero.webp";
+import "@/styles/globals.css";
+
+interface Props {
+  /** Page title. Templated as "%s | Site Title"; omit for the bare site title. */
+  title?: string;
+  description?: string;
+  ogType?: "website" | "article";
+  /** ISO date, emitted as article:published_time. */
+  publishedTime?: string;
+  /** Site-relative path to the OG image for this page. */
+  ogImage?: string;
+}
+
+const general = getGeneralSettings();
+const {
+  title,
+  description = general.description,
+  ogType = "website",
+  publishedTime,
+  ogImage = "/opengraph-image.png",
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${general.siteTitle}` : general.siteTitle;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
+
+const heroBlurDataURL = await getBlurDataURL("hero.webp");
+---
+
+<!doctype html>
+<html
+  lang="en"
+  class="h-full antialiased text-[20px]"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:site_name" content={general.siteTitle} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title ?? general.siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    {
+      publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )
+    }
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title ?? general.siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={general.feeds.postsTitle}
+      href="/feed.xml"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={general.feeds.commissionsTitle}
+      href="/commissions/feed.xml"
+    />
+
+    {/* No `preload`, deliberately. It is the right default when a webfont paints
+        the largest element on the page, and the wrong one here: the LCP element
+        is the masthead image, and preloading put 178kB of font — the DM Sans
+        variable face plus both Libertinus weights — into the critical fetch
+        window at High priority, queued a few milliseconds *ahead* of an 18kB
+        hero on the same connection. On a throttled link that is most of a second
+        of head start handed to bytes nothing is waiting on.
+
+        What makes dropping it safe rather than a trade is the fallback metrics
+        Astro emits beside each family: `size-adjust` and `ascent-override` tuned
+        to Arial and Times New Roman, so text laid out in the fallback occupies
+        the same box the webfont will. Combined with `display: swap` the first
+        paint is immediate and the swap is invisible in layout terms — CLS stays
+        at zero, which the Lighthouse run confirms.
+
+        The faces still load; they are declared in the inline @font-face block
+        above, so the browser fetches them as soon as it finds text that needs
+        them. They just stop outranking the image the user is actually waiting
+        to see. */}
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-serif" />
+
+    <ClientRouter />
+  </head>
+
+  <!-- No `text-rendering: optimizeLegibility` on the body. It reads like free
+       polish and is not: it asks the engine to apply the full kerning and
+       ligature tables before it paints any text, which is main-thread work at
+       the worst possible moment and, on a long document, work done for text far
+       below the fold. What it buys is nothing here — the subsetting step keeps
+       `--layout-features=*`, so both families ship their kerning, and browsers
+       apply that under the default `auto` anyway. -->
+  <body
+    class="min-h-full flex flex-col font-sans text-base leading-[1.65] antialiased"
+  >
+    <!-- One pixel at the very top of the document, so it intersects the
+         viewport at scroll position 0 and nowhere else. The script below turns
+         that into a `data-scrolled` flag on <html>, which globals.css uses to
+         withdraw the nav underline's view-transition name. -->
+    <div data-scroll-top-sentinel aria-hidden="true" class="h-px w-full"></div>
+
+    <!-- Masthead — image + nav + site title in one unit -->
+    <header
+      class="relative w-full h-56 overflow-hidden"
+      transition:name="site-header"
+    >
+      <FadeImage
+        src={heroImage}
+        alt=""
+        priority
+        class="absolute inset-0 h-full w-full object-cover object-bottom"
+        sizes="100vw"
+        widths={[640, 1024, heroImage.width]}
+        blurDataURL={heroBlurDataURL}
+      />
+
+      <!-- A second copy of the hero, blurred and masked to a band across the
+           top, so the image itself softens under the nav instead of the nav
+           painting something over it.
+
+           The band is shaped by .masthead-blur in globals.css, which masks on
+           both axes so the blur sits under the links and nowhere else — see the
+           rule there for the stops and why they are anchored where they are.
+
+           `filter` and not `backdrop-filter`: the masthead is a view-transition
+           group, and a descendant backdrop-filter inside a captured group drops
+           out for the length of a navigation and snaps back — that is the bug
+           Nav.astro used to paint around. An element filter is part of ordinary
+           paint and is captured with everything else.
+
+           Geometry is copied from the sharp image exactly, so the two are in
+           register and the blur cannot ghost. The one seam this leaves is at the
+           very top edge, where the filter fades toward transparent over roughly
+           its own radius and lets the sharp copy through — the top few pixels
+           blur slightly less than the mask asks for. It softens rather than
+           breaking, because what shows through is the identical image.
+
+           Astro emits the same processed asset for both, so this costs a cache
+           hit rather than a second download. -->
+      <Image
+        src={heroImage}
+        alt=""
+        aria-hidden="true"
+        sizes="100vw"
+        widths={[640, 1024, heroImage.width]}
+        loading="eager"
+        class="masthead-blur pointer-events-none absolute inset-0 h-full w-full object-cover object-bottom blur-[10px]"
+      />
+
+      <!-- Gradient: dark at top for nav legibility, dark at bottom for title legibility -->
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-black/55 via-transparent to-black/60"
+      >
+      </div>
+
+      <Nav links={general.nav} />
+
+      <div class="absolute bottom-0 left-0 right-0">
+        <div class="max-w-2xl mx-auto px-6 pb-5">
+          <a href="/" class="inline-block">
+            <!-- `font-semibold`, matching every other serif heading on the site.
+                 It was the only `font-bold` among them, and a second Libertinus
+                 face is 50kB on every page — for three words of masthead, the
+                 most expensive thing on the critical path after the image. -->
+            <h1
+              class="text-3xl font-semibold text-white leading-tight font-serif"
+            >
+              {
+                general.siteTitle
+                  .split(" ")
+                  .map((word) => <span class="block">{word}</span>)
+              }
+            </h1>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex-1"><slot /></div>
+
+    <Footer />
+
+    <script is:inline>
+      // Fade images in once decoded. Runs on first paint and after every client
+      // router swap; images restored from cache are already `complete`, so they
+      // are marked immediately rather than waiting for a load event that has
+      // already fired.
+      function initFadeImages() {
+        for (const img of document.querySelectorAll(
+          "img[data-fade-img]:not([data-loaded])",
+        )) {
+          if (img.complete) {
+            img.setAttribute("data-loaded", "");
+          } else {
+            img.addEventListener(
+              "load",
+              () => img.setAttribute("data-loaded", ""),
+              { once: true },
+            );
+          }
+        }
+      }
+
+      initFadeImages();
+
+      // astro:after-swap fires inside the view transition, before the new frame
+      // paints. Doing this here rather than only on astro:page-load matters for
+      // the masthead: its image is already cached and `complete`, so it is
+      // marked opaque before it is ever shown. Waiting until page-load meant the
+      // hero rendered at opacity 0 for the length of the transition, which read
+      // as the nav's backdrop-blur flashing away and coming back.
+      document.addEventListener("astro:after-swap", initFadeImages);
+
+      // Still needed for images that finish decoding after the swap.
+      document.addEventListener("astro:page-load", initFadeImages);
+
+      // Flags on <html> whether the document has moved off the top. The nav
+      // underline reads this to decide whether it is worth morphing across a
+      // navigation — see the .nav-underline rules in globals.css.
+      //
+      // The sentinel is replaced on every client-side navigation, so the
+      // observer is rebuilt against the new one and the old one disconnected —
+      // otherwise each page visited would leave one behind, still holding its
+      // detached node.
+      let scrollTopObserver;
+      function initScrollState() {
+        if (scrollTopObserver) scrollTopObserver.disconnect();
+
+        const sentinel = document.querySelector("[data-scroll-top-sentinel]");
+        if (!sentinel) return;
+
+        scrollTopObserver = new IntersectionObserver(function (entries) {
+          document.documentElement.toggleAttribute(
+            "data-scrolled",
+            !entries[0].isIntersecting,
+          );
+        });
+        scrollTopObserver.observe(sentinel);
+      }
+
+      initScrollState();
+      document.addEventListener("astro:page-load", initScrollState);
+
+      // Hands the masthead's blur band the edge it should start at. The band
+      // runs off the right of the screen, so only the left edge — the start of
+      // the first link — has to be known. The links are laid out by flex inside
+      // a centred, max-width column, so where that falls depends on their
+      // labels, the font, and how many there are, none of which CSS can ask
+      // about. Measuring is what keeps the band correct when any of those
+      // change; .masthead-blur in globals.css carries a fallback that
+      // approximates the same edge for the frames before this runs.
+      //
+      // Offsets are taken relative to the header rather than the viewport, so a
+      // horizontal scrollbar or a page scrolled off the top cannot skew them.
+      function measureNavBlurBand() {
+        const links = document.querySelector("[data-nav-links]");
+        const header = links && links.closest("header");
+        if (!header || !links.children.length) return;
+
+        const box = header.getBoundingClientRect();
+        const first = links.children[0].getBoundingClientRect();
+        const root = document.documentElement.style;
+
+        // Offsets are relative to the header, because that is the box the mask
+        // resolves its lengths against — but they are stored on <html>, which
+        // the client router never replaces. Stored on the header they were lost
+        // on every swap, so the band rendered at its CSS fallback position for a
+        // frame and then snapped to the measured one: a visible flicker on the
+        // way back to a page whose header had already been measured once.
+        root.setProperty("--nav-blur-left", first.left - box.left + "px");
+        root.setProperty(
+          "--nav-blur-bottom",
+          links.getBoundingClientRect().bottom - box.top + "px",
+        );
+      }
+
+      // Re-measured on resize because the column is centred and the links are
+      // flushed right, so that edge moves with the viewport — and on navigation
+      // to pick up a nav whose links differ from the outgoing page's. The
+      // properties themselves survive the swap on <html>, so this is a
+      // correction rather than a restoration and nothing flashes while it runs.
+      measureNavBlurBand();
+      addEventListener("resize", measureNavBlurBand, { passive: true });
+      document.addEventListener("astro:page-load", measureNavBlurBand);
+
+      // The labels are set in a webfont loaded with `display: swap`, so their
+      // widths change once it arrives — a first measurement taken against the
+      // fallback face would leave the band a little narrow for good.
+      if (document.fonts) document.fonts.ready.then(measureNavBlurBand);
+
+      // Entry animations belong to a cold load. After a client-side navigation
+      // the view transition already provided continuity, so replaying them reads
+      // as a flash — see the .vt-nav rule in globals.css.
+      document.addEventListener("astro:after-swap", () => {
+        document.documentElement.classList.add("vt-nav");
+      });
+    </script>
+
+    <script is:inline>
+      // Netlify Identity, loaded on demand rather than on every page.
+      //
+      // /admin/ pulls the widget in itself (see public/admin/index.html), so the
+      // only reason it was ever needed out here is the one flow that does not
+      // start at /admin/: an invite, recovery or confirmation email links to the
+      // site root and leaves its token in the fragment, and something on that
+      // page has to notice and hand the visitor over to the CMS.
+      //
+      // Loading it unconditionally made every visitor pay for that: 54kB from a
+      // third origin — so a DNS lookup and a TLS handshake before the first byte
+      // — on a page that, for all but a handful of loads a year, has nothing to
+      // do with it. `defer` kept it from blocking the parser but not from
+      // competing for the connection while the masthead image was still
+      // arriving.
+      //
+      // Reading the hash costs nothing and answers the question exactly: no
+      // token, no widget.
+      if (/[#&](invite|recovery|confirmation)_token=|[#&]error=/.test(location.hash)) {
+        const identity = document.createElement("script");
+        identity.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
+        identity.onload = function () {
+          if (!window.netlifyIdentity) return;
+          window.netlifyIdentity.on("init", function (user) {
+            if (!user) {
+              window.netlifyIdentity.on("login", function () {
+                document.location.href = "/admin/";
+              });
+            }
+          });
+        };
+        document.head.appendChild(identity);
+      }
+    </script>
+  </body>
+</html>

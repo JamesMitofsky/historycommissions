@@ -1,0 +1,30 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PageContainer from "@/components/PageContainer.astro";
+import CommissionsList from "@/components/CommissionsList.svelte";
+import { getCommissions } from "@/commissions/get-commissions";
+import { resolveCountry } from "@/lib/country";
+
+const commissions = getCommissions();
+
+// Flags and map ids resolved here rather than in the island — see
+// src/lib/country.ts. Keyed by name and deduplicated across the whole list, so
+// a country shared by six commissions is serialized into the page once.
+const countries = Object.fromEntries(
+  [...new Set(commissions.flatMap((c) => c.memberCountries))].map((name) => [
+    name,
+    resolveCountry(name),
+  ]),
+);
+---
+
+<Layout title="Bilateral Commissions">
+  <PageContainer>
+    {/* See the note on the posts index: the cards render server-side, so
+        hydration only adds the filter and sort controls and can wait for idle
+        rather than contend with the masthead image. It matters more here — this
+        island carries the popovers, the fuzzy search and every card's map, and
+        is by some distance the largest bundle on the site. */}
+    <CommissionsList {commissions} {countries} client:idle />
+  </PageContainer>
+</Layout>

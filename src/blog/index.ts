@@ -1,3 +1,3 @@
-export { getPosts } from "./get-posts";
-export { getPost, getPostSlugs } from "./get-post";
-export type { Post } from "./types";
+export { getPosts, getPostEntries, toPost } from "./get-posts";
+export { PostFrontmatterSchema } from "./schema";
+export type { Post } from "./schema";

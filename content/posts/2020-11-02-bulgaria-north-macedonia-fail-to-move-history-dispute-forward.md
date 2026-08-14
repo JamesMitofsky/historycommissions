@@ -4,7 +4,7 @@ date: 2020-11-02T03:33:00.007Z
 updated: 2020-11-02T03:34:22.895Z
 author: Daqing Yang
 tags:
-  - N. Macedonia
+  - North Macedonia
   - Bulgaria
 image: /images/Bulgarian_Cyrillic_manuscript.webp
 imageAttribution: Wikimedia Commons

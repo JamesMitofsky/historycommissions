@@ -1,5 +1,4 @@
 {
-  "draft": false,
   "sponsoringInstitutions": [],
   "keyTopics": [],
   "workingGroups": [],
@@ -17,7 +16,7 @@
     ],
     "englishName": "Commission on Complex Historical Issues in Relations between Latvia and Russia"
   },
-  "linkStatus": "to_be_located",
+  "linkStatus": "not_located",
   "lastActiveStatus": "dormant",
   "chairs": [],
   "url": "",
@@ -29,6 +28,5 @@
     "Russia"
   ],
   "archivableDocuments": [],
-  "lastActiveStatusDate": "2014-01-01",
-  "lastArchivedSnapshot": null
+  "lastActiveStatusDate": "2014-01-01"
 }

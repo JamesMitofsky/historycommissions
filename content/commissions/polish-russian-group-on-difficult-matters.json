@@ -31,8 +31,8 @@
     ],
     "englishName": "Polish-Russian Group on Difficult Matters"
   },
-  "linkStatus": "working",
-  "lastActiveStatus": "ended",
+  "linkStatus": "live",
+  "lastActiveStatus": null,
   "chairs": [
     {
       "name": "Adam Daniel Rotfeld",
@@ -47,13 +47,12 @@
   ],
   "url": "https://upittpress.org/books/9780822944409/",
   "startDate": "2001-01-01",
-  "status": "ended",
+  "status": "dormant",
   "proposedDate": null,
   "memberCountries": [
     "Poland",
     "Russia"
   ],
   "archivableDocuments": [],
-  "lastActiveStatusDate": "2013-01-01",
-  "lastArchivedSnapshot": "https://web.archive.org/web/20260208102257/https://upittpress.org/books/9780822944409/"
+  "lastActiveStatusDate": "2013-01-01"
 }
