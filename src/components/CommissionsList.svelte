@@ -149,7 +149,7 @@
 
 <div>
   <!-- Filter bar -->
-  <div class="flex flex-wrap items-center gap-2 mb-6">
+  <div class="flex flex-wrap items-center gap-2 mb-5">
     <!-- The only control in the bar that grows: the pills and the sort trigger
          are sized by their content, so the search takes whatever the row has
          left. `basis-56` keeps it from collapsing to nothing when the filters
@@ -270,7 +270,10 @@
           class={[
             // The top border is a separator between cards, so the first card
             // does not need one — it would read as a rule under the filter bar.
-            "border-t border-border py-7 first:border-t-0",
+            // Its top padding goes for the same reason: with no border to sit
+            // under, `py-7` was just a gap holding the list away from the
+            // controls above it.
+            "border-t border-border py-7 first:border-t-0 first:pt-2",
             animate &&
               "animate-in fade-in slide-in-from-bottom-1 duration-400 fill-mode-both",
           ]}
