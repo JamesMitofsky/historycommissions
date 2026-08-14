@@ -12,6 +12,7 @@ import { getPostEntries, toPost } from "@/blog";
 import { formatPostDate } from "@/lib/format-date";
 import { resolveImage, getBlurDataURL } from "@/lib/images";
 import { excerpt } from "@/lib/excerpt";
+import { resolveCountry, resolveCountries } from "@/lib/country";
 
 export const getStaticPaths = (async () => {
   const entries = await getPostEntries();
@@ -67,7 +68,7 @@ const blurDataURL = await getBlurDataURL(post.image);
         post.tags.length > 0 && (
           <div class="mt-3 flex flex-wrap gap-1.5">
             {post.tags.map((tag) => (
-              <FlagTag tag={tag} />
+              <FlagTag country={resolveCountry(tag)} />
             ))}
           </div>
         )
@@ -85,7 +86,10 @@ const blurDataURL = await getBlurDataURL(post.image);
                       : "w-full"
                   }
                 >
-                  <CommissionMap memberCountries={post.tags} client:visible />
+                  <CommissionMap
+                    memberCountries={resolveCountries(post.tags)}
+                    client:visible
+                  />
                 </div>
               )}
               {image && (

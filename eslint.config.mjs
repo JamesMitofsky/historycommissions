@@ -7,7 +7,17 @@ import globals from "globals";
 import svelteConfig from "./svelte.config.js";
 
 export default defineConfig([
-  globalIgnores(["dist/**", ".astro/**", "node_modules/**", "public/admin/**"]),
+  // Build output and vendored files. `.netlify/**` is the adapter's bundled SSR
+  // function — generated, minified, and not ours to lint; without it a `pnpm
+  // lint` run after any `pnpm build` drowns in several hundred errors from
+  // Astro's own bundle and the real findings scroll off the top.
+  globalIgnores([
+    "dist/**",
+    ".astro/**",
+    ".netlify/**",
+    "node_modules/**",
+    "public/admin/**",
+  ]),
 
   js.configs.recommended,
   ...ts.configs.recommended,

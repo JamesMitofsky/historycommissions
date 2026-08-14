@@ -6,7 +6,7 @@ date: 2022-04-20T14:37:00.009Z
 updated: 2025-10-23T18:36:27.382Z
 author: Daqing Yang
 tags:
-  - N. Macedonia
+  - North Macedonia
   - Bulgaria
 image: /images/macedonia-overview.svg
 imageAttribution: Wikimedia Commons

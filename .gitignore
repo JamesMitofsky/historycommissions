@@ -41,3 +41,14 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# lighthouse reports from `pnpm perf`
+/.lighthouse/
+
+# claude code local state. /.claude/worktrees/ is the one that matters: each
+# entry there is a full working copy of this repo, which git would otherwise
+# report as untracked in the main checkout. settings.json is left trackable on
+# purpose — it is the shared, checked-in half of the config, and settings.local
+# is the personal half.
+/.claude/worktrees/
+/.claude/settings.local.json

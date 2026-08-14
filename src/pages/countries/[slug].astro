@@ -11,8 +11,8 @@ import { getPosts } from "@/blog";
 import type { Post } from "@/blog/schema";
 import { getCommissions } from "@/commissions/get-commissions";
 import type { Commission } from "@/commissions/types";
-import { countryCodeForTag } from "@/lib/country-codes";
 import { countrySlug } from "@/lib/country-slug";
+import { resolveCountry, resolveCountries } from "@/lib/country";
 import { formatPostDate } from "@/lib/format-date";
 import { resolveImage, getBlurDataURL } from "@/lib/images";
 
@@ -67,7 +67,10 @@ const {
   commissions: matchingCommissions,
 } = Astro.props;
 
-const code = countryCodeForTag(canonicalName);
+// The page's own subject, resolved the same way every chip on it is — this
+// header used to build a CDN URL from the country code by hand, which is how it
+// survived the switch to vendored flags until a grep for the old host found it.
+const country = resolveCountry(canonicalName);
 
 function englishName(c: Commission): string {
   const en = c.name.translations.find((t) => t.language === "en");
@@ -92,9 +95,9 @@ const postCards = await Promise.all(
 
     <header class="mb-10 flex items-center gap-4">
       {
-        code && (
+        country.flag && (
           <img
-            src={`https://react-circle-flags.pages.dev/${code}.svg`}
+            src={country.flag}
             alt=""
             width="48"
             height="48"
@@ -163,7 +166,7 @@ const postCards = await Promise.all(
                   {post.tags.length > 0 && (
                     <div class="mt-3 flex flex-wrap gap-1.5">
                       {post.tags.map((tag) => (
-                        <FlagTag tag={tag} />
+                        <FlagTag country={resolveCountry(tag)} />
                       ))}
                     </div>
                   )}
@@ -208,7 +211,7 @@ const postCards = await Promise.all(
                     {c.memberCountries.length > 0 && (
                       <div class="flex flex-wrap gap-1.5">
                         {c.memberCountries.map((country) => (
-                          <FlagTag tag={country} />
+                          <FlagTag country={resolveCountry(country)} />
                         ))}
                       </div>
                     )}
@@ -221,7 +224,7 @@ const postCards = await Promise.all(
                       class="block w-full sm:w-40 shrink-0 transition-opacity duration-150 group-hover/card:opacity-75"
                     >
                       <CommissionMap
-                        memberCountries={c.memberCountries}
+                        memberCountries={resolveCountries(c.memberCountries)}
                         aspectRatio={0.6}
                         client:visible
                       />
