@@ -218,14 +218,17 @@ async function audit(
   const phases = (lcpItems.find((item) => item?.type === "table")?.items ?? [])
     .map((row) => ({ label: String(row.label), ms: Math.round(row.duration ?? 0) }));
 
+  // Read the saving first and carry it, rather than testing it on the audit and
+  // reaching back through the optional chain afterwards — the second lookup is
+  // what the compiler cannot know is still there.
   const opportunities = Object.values(audits)
-    .filter(
-      (a) => a?.details?.type === "opportunity" && a.details.overallSavingsMs > 50,
-    )
-    .map((a) => ({
-      title: a.title,
-      savingsMs: Math.round(a.details!.overallSavingsMs!),
-    }))
+    .flatMap((a) => {
+      if (a?.details?.type !== "opportunity") return [];
+      const savingsMs = a.details.overallSavingsMs ?? 0;
+      return savingsMs > 50
+        ? [{ title: a.title, savingsMs: Math.round(savingsMs) }]
+        : [];
+    })
     .sort((a, b) => b.savingsMs - a.savingsMs);
 
   return {

@@ -76,7 +76,7 @@
 <div>
   <div
     class={[
-      "mb-6",
+      "mb-5",
       animate &&
         "animate-in fade-in slide-in-from-bottom-2 duration-400 fill-mode-both",
     ]}
@@ -102,7 +102,12 @@
         {@const formattedDate = date ? formatPostDate(date) : null}
         <li
           class={[
-            "group py-5 flex flex-col sm:flex-row items-start gap-4 sm:gap-6",
+            // `first:pt-2` because the row's own top padding is the other half
+            // of the gap under the search field — trimming only the margin
+            // above still left the first post sitting well clear of it, while
+            // every later row needs the full `py-5` to separate it from the one
+            // before.
+            "group py-5 first:pt-2 flex flex-col sm:flex-row items-start gap-4 sm:gap-6",
             animate &&
               "animate-in fade-in slide-in-from-bottom-2 duration-500 fill-mode-both",
           ]}
