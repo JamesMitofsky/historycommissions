@@ -1,4 +1,13 @@
 {
+  "sponsoringInstitutions": [],
+  "keyTopics": [
+    "Inventorying",
+    "sharing",
+    "and digitizing colonial-era records stored in France",
+    "Discussing the return of historical items and digitized documents"
+  ],
+  "workingGroups": [],
+  "publications": [],
   "name": {
     "translations": [
       {
@@ -12,21 +21,26 @@
     ],
     "englishName": "Mixed Algeria-France Commission of Historians"
   },
-  "proposedDate": null,
-  "startDate": "2022-01-01",
-  "lastActiveStatusDate": null,
+  "linkStatus": "not_located",
   "lastActiveStatus": "active",
+  "chairs": [
+    {
+      "name": "Benjamin Stora",
+      "country": "France"
+    },
+    {
+      "name": "Mohamed Lahcen Zeghidi",
+      "country": "Algeria"
+    }
+  ],
+  "url": "",
+  "startDate": "2022-01-01",
+  "status": "active",
+  "proposedDate": null,
   "memberCountries": [
     "Algeria",
     "France"
   ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "active",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "not_located",
-  "archivableDocuments": []
+  "archivableDocuments": [],
+  "lastActiveStatusDate": null
 }
