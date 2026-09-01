@@ -1,4 +1,14 @@
 {
+  "sponsoringInstitutions": [],
+  "keyTopics": [
+    "Role of France in Cameroon 1945–1971",
+    "Decolonisation",
+    "An exercise in transparency with regard to Cameroonian and French civil societies",
+    "A gesture of recognition and shared remembrance through artistic creation",
+    "An educational approach for French people about a still little-known conflict"
+  ],
+  "workingGroups": [],
+  "publications": [],
   "name": {
     "translations": [
       {
@@ -8,24 +18,31 @@
     ],
     "englishName": "Franco-Cameroonian Commission on the Role of France in Cameroon (1945–1971)"
   },
-  "proposedDate": null,
-  "startDate": "2022-07-01",
-  "lastActiveStatusDate": "2025-01-01",
+  "linkStatus": "not_located",
   "lastActiveStatus": "ended",
+  "chairs": [
+    {
+      "name": "Karine Ramondy",
+      "country": "France"
+    },
+    {
+      "name": "Blick Bassy",
+      "country": "Cameroon"
+    }
+  ],
+  "url": "",
+  "startDate": "2022-07-01",
+  "status": "ended",
+  "proposedDate": null,
   "memberCountries": [
     "France",
     "Cameroon"
   ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [
-    "Role of France in Cameroon 1945–1971",
-    "Decolonisation"
+  "archivableDocuments": [
+    {
+      "title": "Research Report of Commission ",
+      "url": "https://www.vie-publique.fr/rapport/297054-rapport-du-volet-recherche-de-la-commission-france-cameroun "
+    }
   ],
-  "publications": [],
-  "workingGroups": [],
-  "status": "ended",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "not_located",
-  "archivableDocuments": []
+  "lastActiveStatusDate": "2025-01-01"
 }
