@@ -30,7 +30,7 @@
       "country": "Cameroon"
     }
   ],
-  "url": "https://www.vie-publique.fr/rapport/297054-rapport-du-volet-recherche-de-la-commission-france-cameroun ",
+  "url": "",
   "startDate": "2022-07-01",
   "status": "ended",
   "proposedDate": null,
@@ -38,6 +38,11 @@
     "France",
     "Cameroon"
   ],
-  "archivableDocuments": [],
+  "archivableDocuments": [
+    {
+      "title": "Research Report of Commission ",
+      "url": "https://www.vie-publique.fr/rapport/297054-rapport-du-volet-recherche-de-la-commission-france-cameroun "
+    }
+  ],
   "lastActiveStatusDate": "2025-01-01"
 }
