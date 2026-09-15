@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: "France-Algeria: First Meeting of the Commission of Historians"
 date: 2024-01-11T08:28:00.000Z
 updated: 2025-10-23T18:34:39.136Z

@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: Russian-Austrian Historians' Commission publishes joint history book
 date: 2020-08-10T20:04:00.017Z
 updated: 2021-10-22T16:31:42.262Z

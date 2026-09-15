@@ -39,7 +39,7 @@ The content is not behind any API — it is Markdown and JSON in the tree. Swapp
 
 ## 2. Decap CMS — Content editor
 
-**What it does.** Provides the `/admin` editing UI. It is a **self-hosted JavaScript library** served from `public/admin/` — there is no CMS SaaS to leave. Editor saves become pull requests (`publish_mode: editorial_workflow`), gated by the `validate-commissions` CI check.
+**What it does.** Provides the `/admin` editing UI. It is a **self-hosted JavaScript library** served from `public/admin/` — there is no CMS SaaS to leave. Editor saves commit straight to `main`; an entry stays off the site until its `isPublished` toggle is on, and the `validate-commissions` CI check flags any that break the schema.
 
 **Where the coupling lives.**
 - `public/admin/config.yml` defines the collections. Fully in-repo.
@@ -95,6 +95,6 @@ Ordered so the site never goes dark:
 2. **Host:** point the new host at the repo, build with `pnpm build`, serve `dist/`, and drop the `adapter:` line from `astro.config.mjs`.
 3. **CMS auth:** switch Decap's `backend` in `public/admin/config.yml` off `git-gateway` (to `github`/`gitlab`/etc.) or fall back to the local backend, and re-onboard editors.
 4. **DNS:** point the domain's records at the new host.
-5. **Verify:** site renders (it is static content, so this is low-risk), `/admin` login works against the new backend, editorial-workflow PRs still open, `validate-commissions` CI still guards them.
+5. **Verify:** site renders (it is static content, so this is low-risk), `/admin` login works against the new backend, editor saves land on `main`, `validate-commissions` CI still runs on them.
 
 **The one rule that prevents most portability pain:** the content lives in Git, not in a vendor. Keep a current mirror of the repo and no single service can strand this project — the only thing you ever re-choose is *who hosts the pages* and *who brokers editor logins*, never *where the data is*.

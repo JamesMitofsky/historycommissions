@@ -1,7 +1,7 @@
 /**
- * Validates every published commission JSON against the Zod schema — the same
- * contract the site build enforces. Run in CI (and locally) so a CMS edit that
- * would break the build is caught loudly on the PR, before it reaches production.
+ * Validates every commission JSON, unpublished ones included, against the Zod
+ * schema — the same contract the site build enforces. Run in CI (and locally)
+ * so a CMS edit that would break the build is named loudly, field by field.
  *
  *   pnpm validate:commissions
  */
@@ -38,12 +38,10 @@ for (const file of files) {
   }
 }
 
-const published = files.length;
+const total = files.length;
 if (failures > 0) {
-  console.error(
-    `\n${failures} of ${published} published commission(s) failed validation.`
-  );
+  console.error(`\n${failures} of ${total} commission(s) failed validation.`);
   process.exit(1);
 }
 
-console.log(`✓ All ${published} published commissions are valid.`);
+console.log(`✓ All ${total} commissions are valid.`);

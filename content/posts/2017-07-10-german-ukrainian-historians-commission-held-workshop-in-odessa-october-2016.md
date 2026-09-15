@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: 'German-Ukrainian Historians'' Commission held workshop in Odessa, October 2016'
 date: 2017-07-10T12:12:00.005Z
 updated: 2017-07-10T12:25:58.485Z

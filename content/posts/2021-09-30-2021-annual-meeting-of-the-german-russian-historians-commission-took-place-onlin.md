@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: >-
   2021 Annual Meeting of the German-Russian Historians Commission took place
   online

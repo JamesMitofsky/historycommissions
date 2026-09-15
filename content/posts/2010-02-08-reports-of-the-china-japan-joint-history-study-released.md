@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: Reports of the China-Japan Joint History Study released
 date: 2010-02-08T02:49:00.000Z
 updated: 2016-06-23T14:23:28.028Z

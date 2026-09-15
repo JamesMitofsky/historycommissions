@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: 'Russian–Ukrainian History Dialogue in Helsinki, Finland'
 date: 2018-03-27T23:05:00.003Z
 updated: 2018-04-20T15:21:25.957Z

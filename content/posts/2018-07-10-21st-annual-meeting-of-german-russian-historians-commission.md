@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: 21st Annual Meeting of German-Russian Historians' Commission
 date: 2018-07-10T19:41:00.004Z
 updated: 2020-09-25T21:37:58.283Z

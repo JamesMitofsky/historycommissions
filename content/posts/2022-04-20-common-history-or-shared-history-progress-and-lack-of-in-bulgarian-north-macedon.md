@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: >-
   'Common History' or 'Shared History'? Progress and Lack of in Bulgarian-North
   Macedonian Commission, May 2022

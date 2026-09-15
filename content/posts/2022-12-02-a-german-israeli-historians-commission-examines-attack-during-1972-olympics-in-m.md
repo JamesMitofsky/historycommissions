@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: >-
   A German-Israeli Historians' Commission examines attack during 1972 Olympics
   in Munich' 

@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: Russian-Lithuanian Historians' Commission releases joint publication
 date: 2021-06-08T19:22:00.001Z
 updated: 2021-06-08T19:28:26.118Z

@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: 'Polish-Russian Group for Difficult Matters resumes its activities, March 2017'
 date: 2017-07-12T10:22:00.006Z
 updated: 2017-07-14T09:25:53.466Z

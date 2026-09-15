@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: Fourth Annual German-Ukrainian Historians' Commission meeting held in Munich
 date: 2018-12-04T11:04:00.003Z
 updated: 2020-09-21T22:51:17.384Z

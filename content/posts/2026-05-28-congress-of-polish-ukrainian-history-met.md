@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: Polish-Ukrainian Congress of Historians
 date: 2026-05-28T19:21:00.000+08:00
 tags:

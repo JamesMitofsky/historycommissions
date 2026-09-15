@@ -1,9 +1,8 @@
 name: Validate
 
 # Runs on every push to main (Decap commits straight to main via git-gateway) and
-# on every pull request (the Decap editorial-workflow path). A red ✗ here is the
-# loud, early signal that a CMS edit would break the build — surfaced before it
-# reaches production, with the offending commission and field named in the log.
+# on every pull request. A red ✗ here is the loud signal that a CMS edit broke
+# the build schema, with the offending commission and field named in the log.
 
 on:
   push:
