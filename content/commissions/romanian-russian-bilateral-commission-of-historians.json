@@ -1,11 +1,23 @@
 {
   "sponsoringInstitutions": [],
   "keyTopics": [
-    "Investigate the transfer",
-    "inventory",
-    "and status of Romanian state assets"
+    "Russia and Romania in the 19th century",
+    "Bessarabia and territorial disputes",
+    "Romanian nationalism",
+    "Communism and Soviet influence",
+    "World War II",
+    "Romania’s relationship with Nazi Germany and the USSR"
   ],
-  "workingGroups": [],
+  "workingGroups": [
+    "Academicians L. V. Milov",
+    "V. N. Vinogradov",
+    "V. Ya. Grosul",
+    "I. I. Orlik",
+    "A. A. Yazkova",
+    "L. E. Semenova",
+    "literary scholar M. V. Fridman",
+    "and others."
+  ],
   "publications": [],
   "name": {
     "translations": [
@@ -32,7 +44,7 @@
       "country": "Russia"
     }
   ],
-  "url": "",
+  "url": "https://library.md/m/articles/view/О-РАБОТЕ-КОМИССИИ-ИСТОРИКОВ-РОССИИ-И-РУМЫНИИ",
   "startDate": "1993-10-01",
   "status": "unknown",
   "proposedDate": null,
