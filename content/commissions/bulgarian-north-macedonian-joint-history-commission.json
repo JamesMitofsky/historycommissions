@@ -1,5 +1,13 @@
 {
   "isPublished": true,
+  "sponsoringInstitutions": [],
+  "keyTopics": [
+    "Address controversial historical and educational interpretations",
+    "Recommend textbook changes",
+    "Commemorations of historical figures shared by both nations"
+  ],
+  "workingGroups": [],
+  "publications": [],
   "name": {
     "translations": [
       {
@@ -13,21 +21,31 @@
     ],
     "englishName": "Joint Bulgaria–North Macedonia History Commission"
   },
-  "proposedDate": null,
-  "startDate": "2018-01-01",
-  "lastActiveStatusDate": null,
+  "linkStatus": "not_located",
   "lastActiveStatus": "active",
+  "chairs": [
+    {
+      "name": "Angel Dimitrov",
+      "country": "Bulgaria"
+    },
+    {
+      "name": "Vancho Gjorgjiev",
+      "country": "North Macedonia"
+    },
+    {
+      "name": "Naum Kaychev",
+      "affiliation": "",
+      "country": "Bulgaria"
+    }
+  ],
+  "url": "",
+  "startDate": "2018-01-01",
+  "status": "active",
+  "proposedDate": null,
   "memberCountries": [
     "Bulgaria",
     "North Macedonia"
   ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "active",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "not_located",
-  "archivableDocuments": []
+  "archivableDocuments": [],
+  "lastActiveStatusDate": null
 }
