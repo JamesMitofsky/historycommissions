@@ -1,6 +1,6 @@
 /**
- * Validates every commission JSON, unpublished ones included, against the Zod
- * schema — the same contract the site build enforces. Run in CI (and locally)
+ * Validates every commission JSON against the Zod schema — the same contract
+ * the site build enforces. Run in CI (and locally)
  * so a CMS edit that would break the build is named loudly, field by field.
  *
  *   pnpm validate:commissions

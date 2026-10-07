@@ -38,12 +38,11 @@ function loadCommission(file: string): Commission {
 }
 
 /**
- * Published commissions only. Every file is loaded and validated first, so an
- * unpublished entry with a broken field still fails the build loudly.
+ * Every commission file, loaded and validated — a broken field fails the build
+ * loudly rather than dropping the entry silently.
  */
 export const getCommissions = (): Commission[] =>
   fs
     .readdirSync(COMMISSIONS_DIR)
     .filter((f) => f.endsWith(".json"))
-    .map(loadCommission)
-    .filter((commission) => commission.isPublished);
+    .map(loadCommission);

@@ -1,8 +1,6 @@
 import { z } from "astro/zod";
 
 export const PostFrontmatterSchema = z.object({
-  /** Missing counts as unpublished — same contract as CommissionSchema. */
-  isPublished: z.boolean().default(false),
   title: z.string().min(1).optional(),
   date: z.union([z.string(), z.date()]).optional(),
   updated: z.union([z.string(), z.date()]).optional(),

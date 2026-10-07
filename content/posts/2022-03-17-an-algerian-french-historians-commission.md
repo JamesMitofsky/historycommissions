@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: An Algerian-French Historians' Commission?
 date: 2022-03-17T09:04:00.012Z
 updated: 2022-09-30T20:56:54.611Z

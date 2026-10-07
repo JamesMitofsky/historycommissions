@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: >-
   Annual Conference of the German-Ukrainian Historical Commission to be held in
   Warsaw ( 10.09.2023)

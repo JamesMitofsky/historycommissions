@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: Ten Years of the Bulgarian-Hungarian Joint History Commission
 date: 2016-07-02T17:59:00.001Z
 updated: 2016-10-22T17:51:25.915Z

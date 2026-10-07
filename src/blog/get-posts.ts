@@ -35,11 +35,11 @@ function byIdDescending<T extends { id: string }>(a: T, b: T): number {
 }
 
 /**
- * Every page, feed and OG image reads posts through here, so unpublished posts
- * are dropped in exactly one place. The collection still validates them.
+ * Every page, feed and OG image reads posts through here, so ordering lives in
+ * exactly one place.
  */
 export async function getPostEntries(): Promise<CollectionEntry<"posts">[]> {
-  const entries = await getCollection("posts", ({ data }) => data.isPublished);
+  const entries = await getCollection("posts");
   return entries.sort(byIdDescending);
 }
 

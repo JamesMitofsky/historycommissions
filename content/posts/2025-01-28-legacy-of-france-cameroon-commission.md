@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: "Legacy of France-Cameroon Commission "
 date: 2025-01-28T17:00:00.000-05:00
 image: https://i.guim.co.uk/img/media/79e4c126335b075b715342f454089589be159b1a/238_0_2499_2001/master/2499.jpg?width=1200&quality=85&auto=format&fit=max&s=caa51c637bc0586901b68f5a7ceefba4

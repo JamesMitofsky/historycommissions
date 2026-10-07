@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: What Will Be The Legacy Of The France-Cameroon Commission?
 date: 2025-09-05T16:12:00.000Z
 author: Daqing Yang
