@@ -11,8 +11,8 @@ The guiding principle: **the data is the repo.** There is no external database, 
 | Concern | Vendor | What speaks to it | Lock-in |
 |---|---|---|---|
 | Hosting + CD | **Netlify** | `@astrojs/netlify` adapter | Low |
-| Content editor (CMS) | **TinaCMS** (open-source lib) | `tina/config.ts` | Low |
-| CMS auth + commits | **TinaCloud** | `TINA_CLIENT_ID` / `TINA_TOKEN` | Medium |
+| Content editor (CMS) | **Sveltia CMS** (self-hosted lib) | `public/admin/config.yml` | None (lib) |
+| CMS auth + commits | **GitHub** (personal access tokens) | `github` backend | Low |
 | Content storage | **Git** (this repo) | files in `content/` + `public/` | None |
 
 The content is not behind any API — it is Markdown and JSON in the tree. Swapping a host is mostly a config change; the data comes for free because it never left.
@@ -26,52 +26,52 @@ The content is not behind any API — it is Markdown and JSON in the tree. Swapp
 **Where the coupling lives.**
 - `astro.config.mjs` → the `@astrojs/netlify` adapter. It writes Netlify's own config — redirects, headers, and a function bundle under `.netlify/v1/` — at the end of the build. The adapter lives in this repo and is maintained by the Astro team, so the Netlify-shaped output is produced here rather than by a plugin running on Netlify's side.
 - `netlify.toml` → build command and `publish = "dist"`. Netlify would auto-detect both; they are pinned so the build does not depend on detection.
-- No secrets are required to serve the site — the content is static files in the repo. The production build needs the TinaCloud credentials only to compile the editor (§3); `pnpm build:local` builds everything without them.
+- No secrets are required to build or serve the site — the content is static files in the repo, and CMS sign-in (§3) happens in the editor's browser, not on the host.
 
 **Getting off safely.**
 1. Every page is prerendered, so `dist/` is a plain static site. Point any static host — Cloudflare Pages, Vercel, S3, nginx — at the repo with `pnpm build`.
 2. Delete the `adapter:` line from `astro.config.mjs` (and the dependency, if you like). Nothing else in the codebase imports it.
-3. Because there are no runtime env vars for the app itself, there is no "silently-broken-boot" risk here — unlike a DB-backed app. The only thing that follows the host is the pair of TinaCloud build variables (§3), which the new host needs set.
+3. Because there are no runtime env vars for the app itself, there is no "silently-broken-boot" risk here — unlike a DB-backed app. Nothing about the CMS follows the host either: `/admin` is just static files in `dist/`.
 
 **Lock-in verdict:** Low. One adapter, removable in one line, and the content is already portable.
 
 ---
 
-## 2. TinaCMS — Content editor
+## 2. Sveltia CMS — Content editor
 
-**What it does.** Provides the `/admin` editing UI. It is an **open-source library** (`tinacms`, `@tinacms/cli`) that `tinacms build` compiles into a single-page app under `public/admin/` at build time. Editor saves commit straight to `main`; an entry stays off the site until its `isPublished` toggle is on, and CI flags any save that breaks the schema.
+**What it does.** Provides the `/admin` editing UI. It is a **self-hosted JavaScript library** — an open-source (MIT) successor to Decap CMS that reads Decap's config format — so there is no CMS SaaS to leave. Editor saves commit straight to `main`; an entry stays off the site until its `isPublished` toggle is on, and the `validate-commissions` CI check flags any that break the schema.
 
 **Where the coupling lives.**
-- `tina/config.ts` defines the collections, and `tina/fields.tsx` holds the custom country, language and date pickers. Both are fully in-repo.
-- `tina/tina-lock.json` is the compiled schema TinaCloud indexes. It is generated (`pnpm tina:lock`) and committed.
-- Tina writes the same files Decap did — JSON for commissions and settings, Markdown with YAML frontmatter for posts — so nothing in `src/` knows which CMS produced them. Two things are Tina-specific: it reorders JSON keys into schema order on save, and it re-serialises a post's Markdown body (escaping and link style may change; the rendered HTML does not).
-- The only external piece is the **backend** it authenticates against — see §3.
+- `public/admin/config.yml` defines the collections, and `public/admin/*-widget.js` holds the custom country and language pickers. Fully in-repo.
+- The library itself is pinned in `package.json` and copied into `public/admin/` by `scripts/vendor-cms.ts`, together with the React chunk the custom widgets need and Immutable.js (redirected from unpkg by an import map in `public/admin/index.html`). The editor does not depend on a CDN to load or to run its custom widgets.
+- What it still fetches from public CDNs at runtime is cosmetic or optional: its UI fonts and icon font (jsDelivr), syntax-highlighting grammars, an update check, and a GitHub status check. If those are unreachable the editor still works; icons fall back to their text names.
+- Sveltia keeps keys it does not have fields for (e.g. `nav` in `content/settings/general.json`) when it saves, and it writes the same Markdown/JSON files Decap did.
 
-**Getting off safely.** Tina only reads and writes files in `content/` and `src/assets/images/`. If you drop the CMS, delete `tina/`, the Tina dependencies, and the `tinacms` parts of the `dev`/`build` scripts; the site renders exactly as before. Nothing about the site *rendering* depends on Tina.
+**Getting off safely.** Sveltia only reads and writes files in `content/` and `src/assets/images/`. Because the config is Decap's format, switching back to Decap — or dropping the CMS and editing files via Git — is a change to `public/admin/index.html`, not to the content. Nothing about the site *rendering* depends on the CMS; it is purely an authoring convenience.
 
-**Lock-in verdict:** Low. The library is open source and the files it writes are plain Markdown and JSON.
+**Lock-in verdict:** None (it is a library, and the files it writes are yours).
 
 ---
 
-## 3. TinaCloud — CMS auth and commits
+## 3. GitHub — CMS auth and commits
 
-**What it does.** This is the hosted half of the CMS:
-- **Authentication.** Editors are invited from the TinaCloud dashboard and log in with a TinaCloud account — no GitHub account needed.
-- **Commits.** TinaCloud's GitHub app commits editor saves to the repo on their behalf, and serves the editor its content API.
+**What it does.** The CMS uses the `github` backend: the editor's browser talks to the GitHub API directly, authenticated with that editor's own personal access token, and commits as them. There is no auth broker, OAuth app or server in between.
 
-Configured through two environment variables on the build host, read in `tina/config.ts`:
+Configured in `public/admin/config.yml`:
 
-```ts
-clientId: process.env.TINA_CLIENT_ID,
-token: process.env.TINA_TOKEN, // read-only content token
+```yaml
+backend:
+  name: github
+  repo: JamesMitofsky/historycommissions
+  branch: main
+  auth_methods: [token]
 ```
 
-**Getting off safely.** This is the part that does not move for free, because it is a hosted auth + commit broker. The free tier also caps the number of editor seats, which is worth checking before inviting a large group. Options when leaving TinaCloud:
-1. **Self-host the Tina backend.** Tina supports a self-hosted content API (`contentApiUrlOverride` plus an `authProvider` in `tina/config.ts`) backed by your own database adapter and auth provider. It works, but it means running a server, which this otherwise fully static site does not have today.
-2. **Switch to another Git-based CMS.** Because the content is plain files, Decap/Sveltia or similar can be pointed at the same `content/` paths. The custom fields would need porting again.
-3. **Drop hosted editing.** Use local mode (`pnpm dev`, then `/admin`) or plain Git for content changes. Zero auth infrastructure.
+OAuth sign-in is deliberately off: without a self-hosted OAuth endpoint (`base_url`), Sveltia would route it through Netlify's OAuth service, reintroducing the dependency this setup exists to avoid. If token sign-in becomes a burden, the [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth) is a small open-source OAuth handler you can deploy anywhere and point `base_url` at.
 
-**Lock-in verdict:** Medium. TinaCloud is convenient but a separate vendor; escaping means re-choosing an auth/commit backend and re-onboarding editors, not a rewrite or a data migration.
+**Getting off safely.** GitHub is already where the repo lives, so this adds no new vendor. Moving the repo elsewhere means changing `backend.name` to `gitlab` or `gitea` (both supported) and issuing editors tokens there. Local editing ("Work with Local Repository" on `localhost`) needs no backend at all.
+
+**Lock-in verdict:** Low. The only dependency is the Git host you already use.
 
 ---
 
@@ -81,7 +81,7 @@ token: process.env.TINA_TOKEN, // read-only content token
 - `content/commissions/*.json` — one file per commission.
 - `content/posts/*.md` — news posts.
 - `content/settings/` — site-wide text.
-- `src/assets/images/` — all media (committed to the repo, not an object store).
+- `public/images/` — all media (committed to the repo, not an object store).
 
 **Getting off safely.** There is nothing to get off. The data is a Git repository — clone it and it is fully in your hands. Backups are `git clone` / any Git mirror. Migrating hosts or CMS backends never touches the data, because the data is already the source of truth.
 
@@ -95,8 +95,8 @@ Ordered so the site never goes dark:
 
 1. **Back up first.** The repo *is* the backup — mirror it (`git clone --mirror`) somewhere off Netlify.
 2. **Host:** point the new host at the repo, build with `pnpm build`, serve `dist/`, and drop the `adapter:` line from `astro.config.mjs`.
-3. **CMS auth:** copy `TINA_CLIENT_ID` and `TINA_TOKEN` to the new host, and update the site URL in the TinaCloud project if it changed. Editors and their logins live in TinaCloud, so they do not need re-onboarding.
+3. **CMS auth:** nothing to move for a host change — editors sign in to GitHub from their browser. Only a move *off GitHub* touches the CMS: change `backend` in `public/admin/config.yml` and issue editors tokens on the new Git host.
 4. **DNS:** point the domain's records at the new host.
-5. **Verify:** site renders (it is static content, so this is low-risk), `/admin` login works against the new backend, editor saves land on `main`, `validate-commissions` CI still runs on them.
+5. **Verify:** site renders (it is static content, so this is low-risk), `/admin` sign-in works, editor saves land on `main`, `validate-commissions` CI still runs on them.
 
-**The one rule that prevents most portability pain:** the content lives in Git, not in a vendor. Keep a current mirror of the repo and no single service can strand this project — the only thing you ever re-choose is *who hosts the pages* and *who brokers editor logins*, never *where the data is*.
+**The one rule that prevents most portability pain:** the content lives in Git, not in a vendor. Keep a current mirror of the repo and no single service can strand this project — the only thing you ever re-choose is *who hosts the pages* and *which Git host editors sign in to*, never *where the data is*.

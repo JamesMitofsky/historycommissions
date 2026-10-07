@@ -3,12 +3,6 @@ allowBuilds:
   msw: true
   sharp: true
   unrs-resolver: true
-  # Both arrive with TinaCMS and are declined on purpose. better-sqlite3 backs
-  # Tina's local search index, which this project does not configure, so its
-  # native build would only cost install time. core-js's script prints a
-  # funding banner.
-  better-sqlite3: false
-  core-js: false
 onlyBuiltDependencies:
   - esbuild
   - msw

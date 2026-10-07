@@ -7,10 +7,9 @@ The site runs **Astro 7** with **Svelte 5** islands. Both are newer than most mo
 
 Verify against the installed version rather than the latest release notes: this repo may sit ahead of or behind either.
 
-# TinaCMS
+# CMS
 
-The CMS is TinaCMS, configured in `tina/config.ts` (a React app built by the Tina CLI, type-checked separately via `tina/tsconfig.json`). Its types under `node_modules/tinacms` and `@tinacms/schema-tools` are the source of truth.
+The CMS is **Sveltia CMS** (a Decap successor), configured in `public/admin/config.yml` with custom widgets in `public/admin/*-widget.js`. The pinned package's types under `node_modules/@sveltia/cms/types/` are the source of truth; the docs site (sveltiacms.app, `llms.txt`) may be ahead of the pinned version.
 
-- Any key added to content must also be declared in `tina/config.ts`, or Tina deletes it the next time an editor saves that file. `pnpm validate:tina-schema` checks this.
-- After changing the schema, run `pnpm tina:lock` and commit `tina/tina-lock.json`.
-- `pnpm dev` (`tinacms dev -c "astro dev"`) does not work from an agent shell: Astro detects the agent and backgrounds itself, the child exits, and Tina shuts down with it. Run `pnpm exec tinacms dev` and `pnpm exec astro dev` as separate processes instead.
+- `public/admin/sveltia-cms.js`, `chunks/` and `vendor/` are copied in by `scripts/vendor-cms.ts` (runs before `dev` and `build`) and are gitignored.
+- When upgrading `@sveltia/cms`, re-run `pnpm vendor:cms`: it fails if the Immutable.js import map in `public/admin/index.html` no longer matches the URL Sveltia imports.

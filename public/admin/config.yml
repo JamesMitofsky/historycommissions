@@ -1,0 +1,186 @@
+# Sveltia CMS reads this Decap-format config. The admin is served from this
+# site (scripts/vendor-cms.ts) and commits straight to this repository through
+# the GitHub API — no CMS vendor, auth service or server sits in between.
+#
+# Editors sign in with a GitHub personal access token that can write to this
+# repo. OAuth is switched off because, without a self-hosted auth endpoint
+# (`base_url`), Sveltia would send it through Netlify's OAuth service.
+#
+# Local editing needs no proxy: on localhost, choose "Work with Local
+# Repository" and pick the repo folder; saves write straight to disk.
+backend:
+  name: github
+  repo: JamesMitofsky/historycommissions
+  branch: main
+  auth_methods: [token]
+
+# Uploads land in src/assets so Astro optimizes them at build time (astro:assets
+# only processes images under src/). public_folder stays "/images" so the path
+# written into frontmatter is stable and CMS-friendly; src/lib/images.ts maps
+# that path back to the real asset module.
+# Leave an optional field out of the file when it is empty, instead of writing
+# "" — the site's schemas treat a missing value as null, but "" as a real
+# (empty) string, which would show up as a blank "Proposed" row and the like.
+output:
+  omit_empty_optional_fields: true
+
+media_folder: src/assets/images
+public_folder: /images
+
+collections:
+  - name: settings
+    label: Site Settings
+    description: Site-wide content and misc fields. Edit these to update text across the whole site.
+    editor:
+      preview: false
+    files:
+      - name: general
+        label: General Site Settings
+        file: content/settings/general.json
+        fields:
+          - { label: Site Title, name: siteTitle, widget: string, hint: "Shown in the masthead, browser tab, footer and feeds" }
+          - { label: Masthead Kicker, name: kicker, widget: string, hint: "Small uppercase line above the title (e.g. 'A digital archive')" }
+          - { label: Meta Description, name: description, widget: text, hint: "Used for SEO and social sharing previews" }
+          - label: Footer
+            name: footer
+            widget: object
+            fields:
+              - { label: Tagline, name: tagline, widget: string }
+              - { label: Copyright Holder, name: copyrightHolder, widget: string, hint: "Name after the © year" }
+          - label: Social Sharing Image
+            name: og
+            widget: object
+            fields:
+              - { label: Subtitle, name: subtitle, widget: string, hint: "Caption on the link-preview image" }
+          - label: RSS Feeds
+            name: feeds
+            widget: object
+            fields:
+              - { label: Posts Feed Title, name: postsTitle, widget: string }
+              - { label: Posts Feed Description, name: postsDescription, widget: text }
+              - { label: Commissions Feed Title, name: commissionsTitle, widget: string }
+              - { label: Commissions Feed Description, name: commissionsDescription, widget: text }
+      - name: about
+        label: About Page
+        file: content/settings/about.json
+        fields:
+          - { label: Page Title, name: title, widget: string }
+          - { label: Body, name: body, widget: markdown, hint: "Main about text" }
+          - { label: Contact / Maintainer, name: contact, widget: markdown, hint: "Shown in smaller text below the body. Use links for names and emails." }
+
+  - name: posts
+    label: Posts
+    folder: content/posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, title]
+    view_filters:
+      - { label: Unpublished, field: isPublished, pattern: false }
+      - { label: Published, field: isPublished, pattern: true }
+    fields:
+      - { label: Published, name: isPublished, widget: boolean, default: false, hint: "Only published posts appear on the site. New posts start unpublished — turn this on when the post is ready. Edits to a published post go live as soon as you save." }
+      - { label: Title, name: title, widget: string, hint: "Headline shown at the top of the published post and in post listings." }
+      # output_utc: editors pick in their own timezone, but the stored value is
+      # an absolute UTC timestamp ("…Z") like every existing post. Without it
+      # Sveltia writes a zoneless local time that the build would read as UTC.
+      - { label: Publish Date, name: date, widget: datetime, output_utc: true, hint: "When the post is published. Posts are ordered by this date, newest first." }
+      - { label: Author, name: author, widget: string, required: false, hint: "Shown as a byline under the title. Leave blank to show no author." }
+      - { label: Tags, name: tags, widget: countryList, required: false, hint: "Pick country names from the dropdown (e.g. Poland, Germany). Each tag draws a flag and adds the country to the post's map. The dropdown is the safe choice; typing a value not on the list is allowed but may not resolve to a flag/map." }
+      - { label: Image, name: image, widget: image, required: false, hint: "Featured image shown at the top of the post." }
+      - { label: Image Attribution, name: imageAttribution, widget: string, required: false, hint: "Photo credit shown in small text under the image. '(CC BY-SA 3.0)' is added automatically." }
+      - { label: Image Attribution URL, name: imageAttributionUrl, widget: string, required: false, hint: "Optional link for the photo credit (e.g. the source page). If set, the credit text becomes clickable." }
+      - label: Body
+        name: body
+        widget: richtext
+        hint: "The main article text. Use the toolbar for headings, lists, links, and quotes."
+        modes: [rich_text]
+        editor_components: [image]
+        buttons: ["bold", "italic", "strikethrough", "link", "heading-one", "heading-two", "heading-three", "heading-four", "quote", "bulleted-list", "numbered-list"]
+
+  - name: commissions
+    editor:
+      preview: false
+    label: Commissions
+    folder: content/commissions
+    create: true
+    format: json
+    extension: json
+    slug: "{{fields.name.englishName}}"
+    summary: "{{name.englishName}}"
+    view_filters:
+      - { label: Unpublished, field: isPublished, pattern: false }
+      - { label: Published, field: isPublished, pattern: true }
+    fields:
+      - { label: Published, name: isPublished, widget: boolean, default: false, hint: "Only published commissions appear on the site. New commissions start unpublished — turn this on when the entry is ready. Edits to a published commission go live as soon as you save." }
+      - label: Name
+        name: name
+        widget: object
+        fields:
+          - { label: Primary Name, name: englishName, widget: string, hint: "The main name, used in the page title, listings, and search. Usually the English name." }
+          - label: Translations
+            name: translations
+            widget: list
+            hint: "The commission's name in other languages. Add one row per language."
+            fields:
+              - { label: Language, name: language, widget: language, hint: "Pick a language from the dropdown (e.g. English, German). Stored as its short code (en, de). The 'en' entry is what surfaces the English name across the site." }
+              - { label: Name, name: name, widget: string, hint: "The commission's name written in the language above." }
+      - { label: Proposed Date, name: proposedDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "When the commission was first proposed. Shown in the details table as 'Proposed'. Use Jan 1 if only the year is known." }
+      - { label: Start Date, name: startDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "When the commission actually began. Shown as 'Founded' and used when sorting the list by date. Use Jan 1 if only the year is known." }
+      - { label: Last Active Status Date, name: lastActiveStatusDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "Most recent date its activity was confirmed. Shown as 'Last active'. Use Jan 1 if only the year is known." }
+      - label: Last Active Status
+        name: lastActiveStatus
+        widget: select
+        options: [active, dormant, ended, unknown]
+        required: false
+        hint: "Last known activity, shown as plain text in the details table. Same vocabulary as the colored Status badge below, but this is a historical note recording the status as of the 'Last Active Status Date'."
+      - { label: Member Countries, name: memberCountries, widget: countryList, hint: "Pick country names from the dropdown (e.g. Poland, Germany). These draw the map, the globe arcs, and the flag tags. Picking from the list guarantees correct spelling; typing a value not on the list is allowed but may not render." }
+      - { label: Sponsoring Institutions, name: sponsoringInstitutions, widget: list, required: false, hint: "Organizations that established or fund the commission. Shown in the details." }
+      - { label: Key Topics, name: keyTopics, widget: list, required: false, hint: "Main research areas. Shown as a bulleted 'Key Topics' list on the page." }
+      - label: Publications
+        name: publications
+        widget: list
+        required: false
+        fields:
+          - { label: Title, name: title, widget: string, hint: "Title of the publication, shown in the Publications list." }
+          - { label: Year, name: year, widget: number, value_type: int, required: false, hint: "Publication year, shown next to the title." }
+          - { label: URL, name: url, widget: string, required: false, hint: "Link to the publication. If set, the title becomes a clickable link." }
+          - label: Format
+            name: format
+            widget: select
+            options: [monograph, proceedings, report, textbook_review, teaching_material, other]
+            required: false
+            hint: "Document type. Note: this is NOT shown anywhere on the public site yet — for internal categorization only."
+      - { label: Working Groups, name: workingGroups, widget: list, required: false, hint: "Names of sub-committees or working groups within the commission." }
+      - label: Status
+        name: status
+        widget: select
+        options: [active, dormant, ended, unknown]
+        hint: "Current status. Sets the colored badge on the page and list."
+      - label: Chairs
+        name: chairs
+        widget: list
+        required: false
+        hint: "People who lead the commission. Add one row per chair."
+        fields:
+          - { label: Name, name: name, widget: string, hint: "Full name of the chair." }
+          - { label: Country, name: country, widget: country, hint: "Country the chair is based in or represents. Pick from the dropdown, or type a value not on the list." }
+          - { label: Affiliation, name: affiliation, widget: string, required: false, hint: "University or institution the chair belongs to (optional)." }
+      - { label: Commission Website, name: url, widget: string, required: false, hint: "The site to link to. If the live site is dead, set Link Status to 'Dead' below and we send visitors to the Wayback Machine copy automatically — no need to paste an archive URL." }
+      - label: Link Status
+        name: linkStatus
+        widget: select
+        default: not_located
+        options:
+          - { label: "Live — link directly to the site", value: live }
+          - { label: "Dead — send visitors to the Wayback Machine archive", value: archived }
+          - { label: "Not located yet — no link shown", value: not_located }
+        hint: "Live shows a Website link. Dead builds an automatic Wayback Machine archive link from the URL above. Not located hides the link (use while still searching for the site)."
+      - label: Archivable Documents
+        name: archivableDocuments
+        widget: list
+        required: false
+        hint: "Important documents worth preserving. Add one row per document."
+        fields:
+          - { label: Title, name: title, widget: string, hint: "Name of the document." }
+          - { label: URL, name: url, widget: string, hint: "Direct link to the document." }
+

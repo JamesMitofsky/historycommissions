@@ -1,7 +1,3 @@
-# `pnpm build` runs `tinacms build` before `astro build`, which needs the
-# TinaCloud project's TINA_CLIENT_ID and TINA_TOKEN set as Netlify environment
-# variables. Without them the deploy fails rather than shipping an editor that
-# cannot log in.
 [build]
   command = "pnpm build"
   publish = "dist"

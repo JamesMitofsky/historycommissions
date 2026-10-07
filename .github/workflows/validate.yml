@@ -1,8 +1,8 @@
 name: Validate
 
-# Runs on every push to main (TinaCMS commits editor saves straight to main)
-# and on every pull request. A red ✗ here is the loud signal that a CMS edit
-# broke the build schema, with the offending file and field named in the log.
+# Runs on every push to main (Sveltia CMS commits straight to main) and
+# on every pull request. A red ✗ here is the loud signal that a CMS edit broke
+# the build schema, with the offending commission and field named in the log.
 
 on:
   push:
@@ -24,22 +24,5 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Validate commission content against the Zod schema
         run: pnpm validate:commissions
-      # Tina deletes keys its schema does not declare when an editor saves, and
-      # its own indexer does not complain about them, so this is the only
-      # place an undeclared field would be caught before it is lost.
-      - name: Check every content key is declared in the Tina schema
-        run: pnpm validate:tina-schema
-      # tina-lock.json is what TinaCloud indexes, and only `tinacms dev`
-      # rewrites it, so a schema change committed without it deploys an editor
-      # that disagrees with the config. The option lists are generated too.
-      - name: Check generated Tina files are up to date
-        run: |
-          pnpm generate:country-options
-          pnpm generate:language-options
-          pnpm tina:lock
-          git diff --exit-code -- tina/
-      # TinaCloud credentials are deliberately absent here: --local builds the
-      # admin against a local content API, which exercises the Tina config and
-      # indexes every file without needing a TinaCloud project.
       - name: Build the site
-        run: pnpm build:local
+        run: pnpm build
