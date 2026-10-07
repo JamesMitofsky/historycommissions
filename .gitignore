@@ -17,6 +17,12 @@
 /dist/
 /.astro/
 
+# tinacms: generated client/types and the admin SPA that `tinacms build` and
+# `tinacms dev` write into public/. tina/tina-lock.json is NOT ignored —
+# TinaCloud reads the schema from it, so it must be committed.
+/tina/__generated__/
+/public/admin/
+
 # netlify adapter build output (Frameworks API config + bundled SSR function)
 /.netlify/
 

@@ -17,6 +17,7 @@ export default defineConfig([
     ".netlify/**",
     "node_modules/**",
     "public/admin/**",
+    "tina/__generated__/**",
   ]),
 
   js.configs.recommended,

@@ -25,7 +25,7 @@ export const PublicationFormatSchema = z.enum([
 export const CommissionSchema = z.object({
   slug: z.string().min(1),
   /**
-   * Decap saves straight to main, so this toggle is what keeps an entry off the
+   * TinaCMS saves straight to main, so this toggle is what keeps an entry off the
    * site until an editor publishes it. Missing counts as unpublished: a file
    * that never had the toggle set stays hidden rather than going live by
    * accident, and cannot break the build either.
