@@ -17,23 +17,21 @@ pnpm dev
 
 Open [http://localhost:4321](http://localhost:4321).
 
-## Editing content (Decap CMS)
+## Editing content (Sveltia CMS)
 
-Editors log in at `/admin` with email/password via **Netlify Identity** — no GitHub account needed. Saves commit straight to `main`, and a CI schema check (`validate-commissions`) flags any entry that would break the build.
+The editor at `/admin` is [Sveltia CMS](https://github.com/sveltia/sveltia-cms), an open-source successor to Decap that reads the same `public/admin/config.yml`. It is served from this site itself (the version is pinned in `package.json` and copied in by `scripts/vendor-cms.ts` before every dev run and build), and it commits straight to this repository through the GitHub API. There is no CMS account, auth service or server in between.
+
+Editors sign in with a **GitHub personal access token**. Create a fine-grained token at GitHub → Settings → Developer settings → Fine-grained tokens, limited to this repository with **Contents: Read and write**, and paste it on the `/admin` sign-in screen. Each editor needs a GitHub account with write access to the repo. Saves commit straight to `main`, and a CI schema check (`validate-commissions`) flags any entry that would break the build.
 
 Every post and commission has a **Published** toggle (`isPublished`). Entries stay off the site until it is on — a missing value counts as off — but edits to an already-published entry go live as soon as they are saved.
 
-To edit locally without deploying, run the Decap proxy alongside the dev server:
+To edit locally without deploying:
 
 ```bash
-# Terminal 1
-npx decap-server
-
-# Terminal 2
 pnpm dev
 ```
 
-Open [http://localhost:4321/admin/index.html](http://localhost:4321/admin/index.html), click **Use Local Backend**, and edit without auth. Changes write directly to `content/` on disk.
+Open [http://localhost:4321/admin/index.html](http://localhost:4321/admin/index.html) in Chrome or Edge, click **Work with Local Repository**, and pick this repo's folder. Saves write directly to `content/` on disk; no proxy server and no sign-in are needed.
 
 ## Deploy
 
@@ -45,6 +43,5 @@ Every external dependency and how to move off it: see **[DataPortability.md](./D
 
 ## TODOs
 
-- [ ] Add commissions collection back to Decap CMS
 - [ ] Add TODO.md with commission schema details
 - [ ] Markdown will be deprecated in a year or so in favor of rich text

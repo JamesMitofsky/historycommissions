@@ -1,6 +1,6 @@
 name: Validate
 
-# Runs on every push to main (Decap commits straight to main via git-gateway) and
+# Runs on every push to main (Sveltia CMS commits straight to main) and
 # on every pull request. A red ✗ here is the loud signal that a CMS edit broke
 # the build schema, with the offending commission and field named in the log.
 

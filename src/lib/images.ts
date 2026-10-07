@@ -6,7 +6,7 @@ import type { ImageMetadata } from "astro";
 import type { ResolvedImage } from "./image-types";
 
 /**
- * Post images live in src/assets so astro:assets can optimize them, but Decap
+ * Post images live in src/assets so astro:assets can optimize them, but Sveltia
  * CMS writes public-style paths into frontmatter ("/images/foo.webp" — see
  * media_folder/public_folder in public/admin/config.yml). This eagerly globs the
  * asset directory so a frontmatter path can be mapped back to the real module.

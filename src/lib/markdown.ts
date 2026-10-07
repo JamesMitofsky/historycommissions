@@ -2,7 +2,7 @@ import { markdownToHtml } from "satteri";
 
 /**
  * Render a Markdown string that did not come from a .md file — the About page
- * body and contact block, which Decap stores as fields inside a JSON settings
+ * body and contact block, which the CMS stores as fields inside a JSON settings
  * file rather than as content files.
  *
  * satteri is the same engine Astro's own Markdown pipeline uses, so these

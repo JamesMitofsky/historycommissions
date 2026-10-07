@@ -11,7 +11,7 @@ import { PostFrontmatterSchema } from "@/blog/schema";
  * outside Astro, under plain tsx, in CI.
  *
  * `base` points at the repo-root `content/` directory rather than `src/`, so the
- * paths Decap CMS writes to (see public/admin/config.yml) stay unchanged.
+ * paths Sveltia CMS writes to (see public/admin/config.yml) stay unchanged.
  */
 const posts = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "./content/posts" }),

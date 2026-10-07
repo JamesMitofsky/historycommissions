@@ -17,6 +17,11 @@
 /dist/
 /.astro/
 
+# Sveltia CMS build, copied in from node_modules by scripts/vendor-cms.ts
+/public/admin/sveltia-cms.js
+/public/admin/chunks/
+/public/admin/vendor/
+
 # netlify adapter build output (Frameworks API config + bundled SSR function)
 /.netlify/
 

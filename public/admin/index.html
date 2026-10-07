@@ -50,8 +50,20 @@
     </style>
   </head>
   <body>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!--
+      Sveltia imports Immutable.js from unpkg whenever a custom widget renders.
+      This serves that exact URL from the copy scripts/vendor-cms.ts makes, so
+      the country and language pickers do not depend on a CDN.
+    -->
+    <script type="importmap">
+      {
+        "imports": {
+          "https://unpkg.com/immutable@5.1.9/dist/immutable.es.js": "./vendor/immutable.es.js"
+        }
+      }
+    </script>
+    <!-- Pinned in package.json and copied in by scripts/vendor-cms.ts. -->
+    <script src="sveltia-cms.js"></script>
     <script src="country-options.js"></script>
     <script src="country-widget.js"></script>
     <script src="language-options.js"></script>
