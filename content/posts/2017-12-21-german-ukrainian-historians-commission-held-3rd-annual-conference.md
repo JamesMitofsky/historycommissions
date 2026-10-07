@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: German-Ukrainian Historians' Commission Held 3rd Annual Conference
 date: 2017-12-21T04:05:00.003Z
 updated: 2018-04-20T15:22:56.783Z

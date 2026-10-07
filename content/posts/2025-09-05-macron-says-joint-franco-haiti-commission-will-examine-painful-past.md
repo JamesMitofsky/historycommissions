@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: Macron says joint Franco-Haiti commission will examine 'painful' past
 date: 2025-09-05T15:59:00.000Z
 updated: 2026-03-25T02:24:35.125Z

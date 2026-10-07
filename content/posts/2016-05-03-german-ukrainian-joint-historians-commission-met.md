@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: German-Ukrainian Joint Historians' Commission Met
 date: 2016-05-03T14:31:00.002Z
 updated: 2016-08-04T20:47:03.186Z

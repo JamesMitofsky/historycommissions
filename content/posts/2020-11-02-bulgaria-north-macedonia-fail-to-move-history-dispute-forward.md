@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: 'Bulgaria, North Macedonia Fail to Move History Dispute Forward'
 date: 2020-11-02T03:33:00.007Z
 updated: 2020-11-02T03:34:22.895Z

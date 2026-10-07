@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: Workshop for Young Historians from Ukraine and Germany
 date: 2018-07-02T19:39:00.002Z
 updated: 2018-12-04T11:07:49.819Z

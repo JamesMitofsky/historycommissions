@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: The Fifth Annual Conference of the German-Ukrainian Historians' Commission
 date: 2019-09-02T18:34:00.006Z
 updated: 2020-09-25T22:28:52.968Z

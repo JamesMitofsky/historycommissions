@@ -19,7 +19,9 @@ Open [http://localhost:4321](http://localhost:4321).
 
 ## Editing content (Decap CMS)
 
-Editors log in at `/admin` with email/password via **Netlify Identity** — no GitHub account needed. Saves become pull requests (editorial workflow), and a CI schema check (`validate-commissions`) blocks any entry that would break the build.
+Editors log in at `/admin` with email/password via **Netlify Identity** — no GitHub account needed. Saves commit straight to `main`, and a CI schema check (`validate-commissions`) flags any entry that would break the build.
+
+Every post and commission has a **Published** toggle (`isPublished`). Entries stay off the site until it is on — a missing value counts as off — but edits to an already-published entry go live as soon as they are saved.
 
 To edit locally without deploying, run the Decap proxy alongside the dev server:
 

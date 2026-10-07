@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: >-
   Bulgaria – N. Macedonia joint commission on historical and educational issues
   holds first meeting

@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: German-Ukrainian Historians' Commission (DUHK) issues Statement
 date: 2020-09-25T21:19:00.011Z
 updated: 2020-09-25T22:18:56.332Z

@@ -1,10 +1,5 @@
 local_backend: true
 
-# Editor saves become pull requests instead of direct commits to main. Combined
-# with the validate-commissions CI check, an entry that breaks the build schema
-# cannot be published — its status is visible in the Decap editorial workflow UI.
-publish_mode: editorial_workflow
-
 backend:
   name: git-gateway
   branch: main
@@ -63,7 +58,11 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     sortable_fields: [date, title]
+    view_filters:
+      - { label: Unpublished, field: isPublished, pattern: false }
+      - { label: Published, field: isPublished, pattern: true }
     fields:
+      - { label: Published, name: isPublished, widget: boolean, default: false, hint: "Only published posts appear on the site. New posts start unpublished — turn this on when the post is ready. Edits to a published post go live as soon as you save." }
       - { label: Title, name: title, widget: string, hint: "Headline shown at the top of the published post and in post listings." }
       - { label: Publish Date, name: date, widget: datetime, hint: "When the post is published. Posts are ordered by this date, newest first." }
       - { label: Author, name: author, widget: string, required: false, hint: "Shown as a byline under the title. Leave blank to show no author." }
@@ -89,7 +88,11 @@ collections:
     extension: json
     slug: "{{fields.name.englishName}}"
     summary: "{{name.englishName}}"
+    view_filters:
+      - { label: Unpublished, field: isPublished, pattern: false }
+      - { label: Published, field: isPublished, pattern: true }
     fields:
+      - { label: Published, name: isPublished, widget: boolean, default: false, hint: "Only published commissions appear on the site. New commissions start unpublished — turn this on when the entry is ready. Edits to a published commission go live as soon as you save." }
       - label: Name
         name: name
         widget: object

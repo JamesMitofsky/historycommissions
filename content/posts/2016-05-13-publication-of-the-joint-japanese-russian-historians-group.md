@@ -1,4 +1,5 @@
 ---
+isPublished: true
 title: Publication of the Joint Japanese-Russian Historians' Group
 date: 2016-05-13T14:33:00.003Z
 updated: 2016-06-29T13:34:37.678Z
