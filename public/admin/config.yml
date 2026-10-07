@@ -14,6 +14,11 @@ backend:
   branch: main
   auth_methods: [token]
 
+# The site's own mark replaces Sveltia's default on the sign-in screen, the
+# browser tab and the header (where it links to the live site).
+logo:
+  src: /favicon.svg
+
 # Uploads land in src/assets so Astro optimizes them at build time (astro:assets
 # only processes images under src/). public_folder stays "/images" so the path
 # written into frontmatter is stable and CMS-friendly; src/lib/images.ts maps
