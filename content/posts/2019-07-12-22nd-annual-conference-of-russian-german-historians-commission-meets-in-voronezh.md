@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: >-
   22nd annual conference of Russian-German Historians' Commission meets in
   Voronezh, Russia

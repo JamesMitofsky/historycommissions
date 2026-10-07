@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: Reports of the Japan-Korea Joint History Study released
 date: 2010-03-30T22:46:00.000Z
 updated: 2016-06-23T14:23:07.369Z

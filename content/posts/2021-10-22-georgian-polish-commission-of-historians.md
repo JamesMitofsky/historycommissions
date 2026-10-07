@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: Georgian-Polish Commission of Historians
 date: 2021-10-22T16:40:00.003Z
 updated: 2022-11-11T03:22:29.149Z

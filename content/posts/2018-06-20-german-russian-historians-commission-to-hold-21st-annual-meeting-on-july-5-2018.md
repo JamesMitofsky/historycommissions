@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: >-
   German-Russian Historians' Commission to Hold 21st Annual Meeting on July 5,
   2018

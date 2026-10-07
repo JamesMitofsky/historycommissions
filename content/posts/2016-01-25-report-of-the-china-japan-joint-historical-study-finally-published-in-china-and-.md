@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: >-
   Report of the China-Japan Joint Historical Study finally published in China
   and Japan

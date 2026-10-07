@@ -1,5 +1,4 @@
 ---
-isPublished: true
 title: Mutual History Dialogue between Finland and Estonia
 date: 2023-04-07T15:36:00.001Z
 updated: 2025-10-23T18:35:37.300Z

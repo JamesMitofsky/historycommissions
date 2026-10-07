@@ -39,7 +39,7 @@ The content is not behind any API — it is Markdown and JSON in the tree. Swapp
 
 ## 2. Decap CMS — Content editor
 
-**What it does.** Provides the `/admin` editing UI. It is a **self-hosted JavaScript library** served from `public/admin/` — there is no CMS SaaS to leave. Editor saves commit straight to `main`; an entry stays off the site until its `isPublished` toggle is on, and the `validate-commissions` CI check flags any that break the schema.
+**What it does.** Provides the `/admin` editing UI. It is a **self-hosted JavaScript library** served from `public/admin/` — there is no CMS SaaS to leave. Editor saves commit straight to `main`, and the `validate-commissions` CI check flags any entry that breaks the schema.
 
 **Where the coupling lives.**
 - `public/admin/config.yml` defines the collections. Fully in-repo.
