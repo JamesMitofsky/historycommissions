@@ -102,9 +102,10 @@ collections:
         editor_components: [image]
         buttons: ["bold", "italic", "strikethrough", "link", "heading-one", "heading-two", "heading-three", "heading-four", "quote", "bulleted-list", "numbered-list"]
 
+  # Collections with a preview template in src/cms-preview/register.ts (posts
+  # and commissions) preview as the site renders them, using the site's own
+  # components and stylesheet; the names must match those registrations.
   - name: commissions
-    editor:
-      preview: false
     label: Commissions
     folder: content/commissions
     create: true

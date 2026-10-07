@@ -6,6 +6,7 @@ import Footer from "@/components/Footer.astro";
 import FadeImage from "@/components/FadeImage.astro";
 import { getGeneralSettings } from "@/settings";
 import { getBlurDataURL } from "@/lib/images";
+import { BODY_CLASS, DOCUMENT_CLASS } from "@/lib/page-classes";
 import heroImage from "@/assets/hero.webp";
 import "@/styles/globals.css";
 
@@ -37,10 +38,7 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
 ---
 
 <!doctype html>
-<html
-  lang="en"
-  class="h-full antialiased text-[20px]"
->
+<html lang="en" class={DOCUMENT_CLASS}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -113,9 +111,7 @@ const heroBlurDataURL = await getBlurDataURL("hero.webp");
        below the fold. What it buys is nothing here — the subsetting step keeps
        `--layout-features=*`, so both families ship their kerning, and browsers
        apply that under the default `auto` anyway. -->
-  <body
-    class="min-h-full flex flex-col font-sans text-base leading-[1.65] antialiased"
-  >
+  <body class={BODY_CLASS}>
     <!-- One pixel at the very top of the document, so it intersects the
          viewport at scroll position 0 and nowhere else. The script below turns
          that into a `data-scrolled` flag on <html>, which globals.css uses to

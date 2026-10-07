@@ -1,0 +1,97 @@
+---
+// The CMS. Sveltia itself and the custom widgets are plain scripts served from
+// public/admin/; this is an Astro page rather than a static file there only so
+// the preview code (src/cms-preview) goes through the site's own build — the
+// same Svelte components, Tailwind pass and fonts as the pages it previews.
+import { Font } from "astro:assets";
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Content Manager</title>
+    <style is:global>
+      .country-field {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 6px;
+        padding: 6px;
+        border: 1px solid #dfdfe3;
+        border-radius: 5px;
+        background: #fff;
+      }
+      .country-field__input {
+        flex: 1 1 8rem;
+        min-width: 8rem;
+        border: 0;
+        outline: 0;
+        padding: 6px 4px;
+        font-size: 15px;
+        background: transparent;
+      }
+      .country-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 4px 3px 8px;
+        border-radius: 4px;
+        background: #eef0f4;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      .country-chip__remove {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        font-size: 15px;
+        line-height: 1;
+        padding: 0 2px;
+        color: #6b6f76;
+      }
+      .country-chip__remove:hover {
+        color: #c0392b;
+      }
+    </style>
+    <!--
+      Sveltia imports Immutable.js from unpkg whenever a custom widget renders.
+      This serves that exact URL from the copy scripts/vendor-cms.ts makes, so
+      the country and language pickers do not depend on a CDN.
+
+      In <head> because an import map only applies to module scripts that
+      start loading after it, and Astro adds module scripts of its own to the
+      end of <head>.
+    -->
+    <script is:inline type="importmap">
+      {
+        "imports": {
+          "https://unpkg.com/immutable@5.1.9/dist/immutable.es.js": "/admin/vendor/immutable.es.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Pinned in package.json and copied in by scripts/vendor-cms.ts.
+         Root-relative because Astro serves this page at /admin as well as
+         /admin/, and a bare file name would resolve to the site root from
+         the former. -->
+    <script is:inline src="/admin/sveltia-cms.js"></script>
+    <script is:inline src="/admin/country-options.js"></script>
+    <script is:inline src="/admin/country-widget.js"></script>
+    <script is:inline src="/admin/language-options.js"></script>
+    <script is:inline src="/admin/language-widget.js"></script>
+    <!-- The site's font faces, for the preview frame — see
+         src/cms-preview/register.ts. Inert here: a template's contents are
+         not applied to this document, so the CMS's own UI is untouched. -->
+    <template id="preview-fonts">
+      <Font cssVariable="--font-sans" />
+      <Font cssVariable="--font-serif" />
+    </template>
+    <script>
+      import "@/cms-preview/register";
+    </script>
+  </body>
+</html>
