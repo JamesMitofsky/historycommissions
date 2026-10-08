@@ -1,6 +1,7 @@
 {
   "isPublished": true,
   "name": {
+    "englishName": "Japan-Korea Joint History Research Committee",
     "translations": [
       {
         "language": "ja",
@@ -10,20 +11,11 @@
         "language": "ko",
         "name": "한일역사공동연구위원회"
       }
-    ],
-    "englishName": "Japan-Korea Joint History Research Committee"
+    ]
   },
-  "proposedDate": null,
   "startDate": "2002-03-01",
   "lastActiveStatusDate": "2010-01-01",
   "lastActiveStatus": "unknown",
-  "memberCountries": [
-    "Japan",
-    "South Korea"
-  ],
-  "sponsoringInstitutions": [
-    "公益財団法人日韓文化交流基金 (Japan-Korea Cultural Foundation)"
-  ],
   "keyTopics": [
     "Ancient history of Japan-Korea relations",
     "Medieval and early modern Japan-Korea relations (Wokou piracy, Imjin War / Bunroku-Keichō campaign)",
@@ -73,8 +65,10 @@
     "教科書小グループ (Textbook Sub-Group)"
   ],
   "status": "ended",
-  "chairs": [],
   "url": "https://jkcf.or.jp/projects/2010/17283/",
   "linkStatus": "live",
-  "archivableDocuments": []
+  "memberCountries": [
+    "Japan",
+    "South Korea"
+  ]
 }
