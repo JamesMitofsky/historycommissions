@@ -6,6 +6,8 @@
 // full rem higher than the lists, because the lists happened to add `mt-4` on
 // their filter row on top of the same `pt-8`. Spacing to the first element now
 // lives here and only here — anything a page renders first should start flush.
+import { PAGE_COLUMN_CLASS } from "@/lib/page-classes";
+
 interface Props {
   /** Extra classes, for the rare page that needs more than the shared rhythm. */
   class?: string;
@@ -14,6 +16,6 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<main class:list={["max-w-2xl mx-auto px-6 pt-12 pb-14", className]}>
+<main class:list={[PAGE_COLUMN_CLASS, className]}>
   <slot />
 </main>

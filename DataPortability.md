@@ -42,12 +42,12 @@ The content is not behind any API — it is Markdown and JSON in the tree. Swapp
 **What it does.** Provides the `/admin` editing UI. It is a **self-hosted JavaScript library** — an open-source (MIT) successor to Decap CMS that reads Decap's config format — so there is no CMS SaaS to leave. Editor saves commit straight to `main`; an entry stays off the site until its `isPublished` toggle is on, and the `validate-commissions` CI check flags any that break the schema.
 
 **Where the coupling lives.**
-- `public/admin/config.yml` defines the collections, and `public/admin/*-widget.js` holds the custom country and language pickers. Fully in-repo.
-- The library itself is pinned in `package.json` and copied into `public/admin/` by `scripts/vendor-cms.ts`, together with the React chunk the custom widgets need and Immutable.js (redirected from unpkg by an import map in `public/admin/index.html`). The editor does not depend on a CDN to load or to run its custom widgets.
+- `public/admin/config.yml` defines the collections, and `public/admin/*-widget.js` holds the custom country and language pickers. `src/cms-preview/` registers preview templates that render drafts with the site's own components. Fully in-repo.
+- The library itself is pinned in `package.json` and copied into `public/admin/` by `scripts/vendor-cms.ts`, together with the React chunk the custom widgets need and Immutable.js (redirected from unpkg by an import map in `src/pages/admin/index.astro`). The editor does not depend on a CDN to load or to run its custom widgets.
 - What it still fetches from public CDNs at runtime is cosmetic or optional: its UI fonts and icon font (jsDelivr), syntax-highlighting grammars, an update check, and a GitHub status check. If those are unreachable the editor still works; icons fall back to their text names.
 - Sveltia keeps keys it does not have fields for (e.g. `nav` in `content/settings/general.json`) when it saves, and it writes the same Markdown/JSON files Decap did.
 
-**Getting off safely.** Sveltia only reads and writes files in `content/` and `src/assets/images/`. Because the config is Decap's format, switching back to Decap — or dropping the CMS and editing files via Git — is a change to `public/admin/index.html`, not to the content. Nothing about the site *rendering* depends on the CMS; it is purely an authoring convenience.
+**Getting off safely.** Sveltia only reads and writes files in `content/` and `src/assets/images/`. Because the config is Decap's format, switching back to Decap — or dropping the CMS and editing files via Git — is a change to `src/pages/admin/index.astro` (and dropping or porting `src/cms-preview/`, which uses one Sveltia-only call, `renderRichText`), not to the content. Nothing about the site *rendering* depends on the CMS; it is purely an authoring convenience.
 
 **Lock-in verdict:** None (it is a library, and the files it writes are yours).
 

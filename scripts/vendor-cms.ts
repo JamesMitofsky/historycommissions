@@ -17,9 +17,9 @@
  * Immutable.js goes along too. Sveltia imports it from a hardcoded unpkg URL
  * whenever a custom widget renders, so without a local copy the country and
  * language pickers would depend on unpkg being reachable. The import map in
- * public/admin/index.html redirects that exact URL to the copy made here; this
- * script fails if a Sveltia upgrade starts asking for a different URL, rather
- * than letting the editor quietly go back to the CDN.
+ * src/pages/admin/index.astro redirects that exact URL to the copy made here;
+ * this script fails if a Sveltia upgrade starts asking for a different URL,
+ * rather than letting the editor quietly go back to the CDN.
  *
  * The copies are build output and gitignored.
  */
@@ -58,10 +58,13 @@ const pkg = JSON.parse(
 // leading ^ or ~>, so that is the key the import map has to carry.
 const immutableVersion = pkg.dependencies.immutable.replace(/^\D/, "");
 const immutableUrl = `https://unpkg.com/immutable@${immutableVersion}/dist/immutable.es.js`;
-const indexHtml = fs.readFileSync(path.join(outDir, "index.html"), "utf8");
-if (!indexHtml.includes(`"${immutableUrl}"`)) {
+const adminPage = fs.readFileSync(
+  path.resolve("src/pages/admin/index.astro"),
+  "utf8",
+);
+if (!adminPage.includes(`"${immutableUrl}"`)) {
   console.error(
-    `public/admin/index.html's import map does not map ${immutableUrl}.\n` +
+    `src/pages/admin/index.astro's import map does not map ${immutableUrl}.\n` +
       `Sveltia ${pkg.version} imports Immutable.js from that URL; update the import map key.`,
   );
   process.exit(1);
