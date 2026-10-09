@@ -1,6 +1,7 @@
 {
   "isPublished": true,
   "name": {
+    "englishName": "German-Czech and German-Slovak Historical Commission",
     "translations": [
       {
         "language": "de",
@@ -14,18 +15,9 @@
         "language": "sk",
         "name": "Nemecko-česká a nemecko-slovenská historická komisia"
       }
-    ],
-    "englishName": "German-Czech and German-Slovak Historical Commission"
+    ]
   },
-  "proposedDate": null,
   "startDate": "1990-01-01",
-  "lastActiveStatusDate": null,
-  "lastActiveStatus": "unknown",
-  "memberCountries": [
-    "Germany",
-    "Czech Republic",
-    "Slovakia"
-  ],
   "sponsoringInstitutions": [
     "Deutscher Akademischer Austauschdienst (DAAD)",
     "Auswärtiges Amt (German Federal Foreign Office)"
@@ -52,61 +44,49 @@
     {
       "title": "Kulturelle Langzeitfolgen industriellen Strukturwandels. Ruhrgebiet – Tschechien – Slowakei",
       "year": 2022,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Stadt und Krieg im 20. Jahrhundert. Neue Perspektiven auf Deutschland und Ostmitteleuropa",
       "year": 2019,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Eigentumsregime und Eigentumskonflikte im 20. Jahrhundert: Deutschland und die Tschechoslowakei im internationalen Kontext",
       "year": 2018,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Flüchtlinge und Asyl im Nachbarland. Die Tschechoslowakei und Deutschland 1933 bis 1989",
       "year": 2018,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Erinnern – Ausstellen – Speichern: Deutsch-tschechische und deutsch-slowakische Beziehungsgeschichte im Museum",
       "year": 2017,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Religion und Nation: Tschechen, Deutsche und Slowaken im 20. Jahrhundert",
       "year": 2015,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Das Jahr 1989 im deutsch-tschechisch-slowakischen Kontext",
       "year": 2013,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Mythen und Politik im 20. Jahrhundert. Deutsche – Slowaken – Tschechen",
       "year": 2013,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Begegnung und Konflikt. Schlaglichter auf das Verhältnis von Tschechen, Slowaken und Deutschen 1815–1989",
-      "year": null,
-      "url": null,
       "format": "monograph"
     }
   ],
-  "workingGroups": [],
   "status": "active",
-  "chairs": [],
   "url": "http://www.dt-ds-historikerkommission.de/",
   "linkStatus": "live",
   "archivableDocuments": [
@@ -114,5 +94,10 @@
       "title": "Inhaltsverzeichnis: Umweltgeschichte in mitteleuropäischen Kontexten",
       "url": "https://www.dt-ds-historikerkommission.de/wp-content/uploads/Umweltgeschichte_in_mitteleuropäischen_Kontexten_-_Inhaltsverzeichnis"
     }
+  ],
+  "memberCountries": [
+    "Germany",
+    "Czech Republic",
+    "Slovakia"
   ]
 }
