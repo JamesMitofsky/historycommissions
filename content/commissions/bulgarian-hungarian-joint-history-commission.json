@@ -1,6 +1,7 @@
 {
   "isPublished": true,
   "name": {
+    "englishName": "Bulgarian-Hungarian Joint History Commission",
     "translations": [
       {
         "language": "bg",
@@ -10,17 +11,10 @@
         "language": "hu",
         "name": "Bolgár-Magyar Történész Vegyes Bizottság"
       }
-    ],
-    "englishName": "Bulgarian-Hungarian Joint History Commission"
+    ]
   },
-  "proposedDate": null,
   "startDate": "2009-01-01",
-  "lastActiveStatusDate": null,
-  "lastActiveStatus": "unknown",
-  "memberCountries": [
-    "Bulgaria",
-    "Hungary"
-  ],
+  "lastActiveStatus": "active",
   "sponsoringInstitutions": [
     "Institute for Historical Studies – Bulgarian Academy of Sciences (IHS–BAS)",
     "HUN-REN Research Centre for the Humanities, Institute of History (TTI–BTK), Hungary"
@@ -55,29 +49,24 @@
     {
       "title": "Vol. 11 – Penka Peykovska: Bulgaria on the Move. Migration, Refugees, Integration, and Urbanisation in the 1910s–1930s",
       "year": 2022,
-      "url": null,
       "format": "monograph"
     },
     {
       "title": "Vol. 8 – Anniversary Collection of the Bulgarian-Hungarian History Commission",
       "year": 2024,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Vol. 7 – Balkán-kronológia II. A nemzeti ál(la)mok bűvöletében, 1879–1918 (Balkan Chronology II)",
       "year": 2021,
-      "url": null,
       "format": "monograph"
     },
     {
       "title": "Vol. 6 – Balkán-kronológia I. Birodalmak szorításában, 1700–1878 (Balkan Chronology I)",
       "year": 2020,
-      "url": null,
       "format": "monograph"
     }
   ],
-  "workingGroups": [],
   "status": "active",
   "chairs": [
     {
@@ -98,5 +87,9 @@
       "title": "Balkán kronológia IV. 1946–1989 (PDF)",
       "url": "https://real.mtak.hu/172876/1/VEGLEGES_BALKAN-KRONOLOGIA1946-1989.pdf"
     }
+  ],
+  "memberCountries": [
+    "Bulgaria",
+    "Hungary"
   ]
 }
