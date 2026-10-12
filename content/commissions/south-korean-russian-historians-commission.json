@@ -1,10 +1,7 @@
 {
   "isPublished": true,
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "workingGroups": [],
-  "publications": [],
   "name": {
+    "englishName": "South Korean-Russian Historians' Commission",
     "translations": [
       {
         "language": "ko",
@@ -14,20 +11,15 @@
         "language": "ru",
         "name": "Комиссия историков Республики Корея и России"
       }
-    ],
-    "englishName": "South Korean-Russian Historians' Commission"
+    ]
   },
-  "linkStatus": "not_located",
-  "lastActiveStatus": "unknown",
-  "chairs": [],
-  "url": "",
   "startDate": "2018-01-01",
+  "lastActiveStatusDate": "2022-01-01",
+  "lastActiveStatus": "ended",
   "status": "ended",
-  "proposedDate": null,
+  "linkStatus": "not_located",
   "memberCountries": [
     "South Korea",
     "Russia"
-  ],
-  "archivableDocuments": [],
-  "lastActiveStatusDate": "2022-01-01"
+  ]
 }
