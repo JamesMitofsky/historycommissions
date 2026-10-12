@@ -12,7 +12,21 @@
   "startDate": "2017-01-01",
   "lastActiveStatus": "active",
   "status": "active",
+  "chairs": [
+    {
+      "name": "Dr. David Kolbaia",
+      "country": "Poland",
+      "affiliation": "Center for East European Studies at the University of Warsaw"
+    }
+  ],
+  "url": "https://efrec.gei.de/initiatives/details/polish-georgian-historical-commission",
   "linkStatus": "not_located",
+  "archivableDocuments": [
+    {
+      "title": "Polish-Georgian Historians’ Commission. Collected Works, vol. 1",
+      "url": "https://eng.ipn.gov.pl/en/digital-resources/publications/7394,Polish-Georgian-Historians-Commission-Collected-Works-vol-1-ed-David-Kolbaia-War.html"
+    }
+  ],
   "memberCountries": [
     "Georgia",
     "Poland"
