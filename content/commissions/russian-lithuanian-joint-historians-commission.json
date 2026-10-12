@@ -1,10 +1,7 @@
 {
   "isPublished": true,
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "workingGroups": [],
-  "publications": [],
   "name": {
+    "englishName": "Joint Russian-Lithuanian Commission of Historians",
     "translations": [
       {
         "language": "ru",
@@ -14,20 +11,15 @@
         "language": "lt",
         "name": "Jungtinė Rusijos ir Lietuvos istorikų komisija"
       }
-    ],
-    "englishName": "Joint Russian-Lithuanian Commission of Historians"
+    ]
   },
-  "linkStatus": "not_located",
-  "lastActiveStatus": "dormant",
-  "chairs": [],
-  "url": "",
   "startDate": "2006-01-01",
-  "status": "unknown",
-  "proposedDate": null,
+  "lastActiveStatusDate": "2020-01-01",
+  "lastActiveStatus": "dormant",
+  "status": "dormant",
+  "linkStatus": "not_located",
   "memberCountries": [
     "Russia",
     "Lithuania"
-  ],
-  "archivableDocuments": [],
-  "lastActiveStatusDate": "2020-01-01"
+  ]
 }
