@@ -1,14 +1,7 @@
 {
   "isPublished": true,
-  "sponsoringInstitutions": [],
-  "keyTopics": [
-    "The AVNOJ Decrees",
-    "The Carinthian Border and Minority Issues",
-    "World War II Persecutions"
-  ],
-  "workingGroups": [],
-  "publications": [],
   "name": {
+    "englishName": "Austrian-Slovenian Historical Commission",
     "translations": [
       {
         "language": "de",
@@ -18,14 +11,19 @@
         "language": "sl",
         "name": "Avstrijsko-slovenska zgodovinska komisija"
       }
-    ],
-    "englishName": "Austrian-Slovenian Historical Commission"
+    ]
   },
-  "linkStatus": "not_located",
+  "startDate": "2001-01-01",
   "lastActiveStatus": "ended",
+  "keyTopics": [
+    "The AVNOJ Decrees",
+    "The Carinthian Border and Minority Issues",
+    "World War II Persecutions"
+  ],
+  "status": "ended",
   "chairs": [
     {
-      "name": " Arnold Suppan",
+      "name": "Arnold Suppan",
       "country": "Austria"
     },
     {
@@ -34,23 +32,19 @@
     },
     {
       "name": "Dušan Nećak",
-      "country": " ",
-      "affiliation": " Slovenian Contingent"
+      "country": "Slovenia",
+      "affiliation": "Slovenian Contingent"
     }
   ],
-  "url": "",
-  "startDate": "2001-01-01",
-  "status": "unknown",
-  "proposedDate": null,
+  "linkStatus": "not_located",
+  "archivableDocuments": [
+    {
+      "title": "History Book is Being Created",
+      "url": "https://www.oeaw.ac.at/en/news/oesterreichisch-slowenisches-geschichtsbuch-entsteht"
+    }
+  ],
   "memberCountries": [
     "Austria",
     "Slovenia"
-  ],
-  "archivableDocuments": [
-    {
-      "url": "https://www.oeaw.ac.at/en/news/oesterreichisch-slowenisches-geschichtsbuch-entsteht",
-      "title": "History Book is Being Created "
-    }
-  ],
-  "lastActiveStatusDate": null
+  ]
 }
