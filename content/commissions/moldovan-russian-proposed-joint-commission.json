@@ -1,6 +1,7 @@
 {
   "isPublished": true,
   "name": {
+    "englishName": "Proposed Joint Commission of Historians of Moldova and Russia",
     "translations": [
       {
         "language": "ru",
@@ -10,24 +11,14 @@
         "language": "ro",
         "name": "Comisia mixtă propusă a istoricilor Moldovei și Rusiei"
       }
-    ],
-    "englishName": "Proposed Joint Commission of Historians of Moldova and Russia"
+    ]
   },
   "proposedDate": "2011-01-01",
-  "startDate": null,
-  "lastActiveStatusDate": null,
-  "lastActiveStatus": "unknown",
+  "lastActiveStatus": "ended",
+  "status": "ended",
+  "linkStatus": "not_located",
   "memberCountries": [
     "Moldova",
     "Russia"
-  ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "unknown",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "not_located",
-  "archivableDocuments": []
+  ]
 }
