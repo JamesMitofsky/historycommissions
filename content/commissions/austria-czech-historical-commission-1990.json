@@ -1,6 +1,7 @@
 {
   "isPublished": true,
   "name": {
+    "englishName": "Austrian-Czech Historical Commission",
     "translations": [
       {
         "language": "de",
@@ -10,24 +11,15 @@
         "language": "cs",
         "name": "Rakousko-česká komise historiků"
       }
-    ],
-    "englishName": "Austrian-Czech Historical Commission"
+    ]
   },
-  "proposedDate": null,
   "startDate": "1990-01-01",
   "lastActiveStatusDate": "1998-01-01",
   "lastActiveStatus": "ended",
+  "status": "ended",
+  "linkStatus": "not_located",
   "memberCountries": [
     "Austria",
     "Czech Republic"
-  ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "unknown",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "not_located",
-  "archivableDocuments": []
+  ]
 }
