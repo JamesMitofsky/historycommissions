@@ -1,6 +1,20 @@
 {
   "isPublished": true,
-  "sponsoringInstitutions": [],
+  "name": {
+    "englishName": "Romanian-Russian Bilateral Commission of Historians",
+    "translations": [
+      {
+        "language": "ru",
+        "name": "Российско-румынская двусторонняя комиссия историков"
+      },
+      {
+        "language": "ro",
+        "name": "Comisia bilaterală de istorici româno-rusă"
+      }
+    ]
+  },
+  "startDate": "1993-10-01",
+  "lastActiveStatus": "dormant",
   "keyTopics": [
     "Russia and Romania in the 19th century",
     "Bessarabia and territorial disputes",
@@ -19,22 +33,7 @@
     "literary scholar M. V. Fridman",
     "and others."
   ],
-  "publications": [],
-  "name": {
-    "translations": [
-      {
-        "language": "ru",
-        "name": "Российско-румынская двусторонняя комиссия историков"
-      },
-      {
-        "language": "ro",
-        "name": "Comisia bilaterală de istorici româno-rusă"
-      }
-    ],
-    "englishName": "Romanian-Russian Bilateral Commission of Historians"
-  },
-  "linkStatus": "not_located",
-  "lastActiveStatus": "dormant",
+  "status": "dormant",
   "chairs": [
     {
       "name": "Ioan Bolovan",
@@ -46,13 +45,9 @@
     }
   ],
   "url": "https://library.md/m/articles/view/О-РАБОТЕ-КОМИССИИ-ИСТОРИКОВ-РОССИИ-И-РУМЫНИИ",
-  "startDate": "1993-10-01",
-  "status": "unknown",
-  "proposedDate": null,
+  "linkStatus": "not_located",
   "memberCountries": [
     "Romania",
     "Russia"
-  ],
-  "archivableDocuments": [],
-  "lastActiveStatusDate": null
+  ]
 }
