@@ -1,13 +1,7 @@
 {
   "isPublished": true,
-  "sponsoringInstitutions": [],
-  "keyTopics": [
-    "Established to foster academic cooperation and joint research",
-    "Archival access between Czech and Russian historians and archivists"
-  ],
-  "workingGroups": [],
-  "publications": [],
   "name": {
+    "englishName": "Czech-Russian Commission of Historians and Archivists",
     "translations": [
       {
         "language": "cs",
@@ -17,11 +11,15 @@
         "language": "ru",
         "name": "Чешско-российская комиссия историков и архивистов"
       }
-    ],
-    "englishName": "Czech-Russian Commission of Historians and Archivists"
+    ]
   },
-  "linkStatus": "not_located",
+  "startDate": "1995-01-01",
   "lastActiveStatus": "dormant",
+  "keyTopics": [
+    "Established to foster academic cooperation and joint research",
+    "Archival access between Czech and Russian historians and archivists"
+  ],
+  "status": "dormant",
   "chairs": [
     {
       "name": "Dr. Jan Němeček",
@@ -32,14 +30,9 @@
       "country": "Russia"
     }
   ],
-  "url": "",
-  "startDate": "1995-01-01",
-  "status": "unknown",
-  "proposedDate": null,
+  "linkStatus": "not_located",
   "memberCountries": [
     "Czech Republic",
     "Russia"
-  ],
-  "archivableDocuments": [],
-  "lastActiveStatusDate": null
+  ]
 }
