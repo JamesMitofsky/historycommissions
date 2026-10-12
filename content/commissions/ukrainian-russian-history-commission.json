@@ -1,6 +1,7 @@
 {
   "isPublished": true,
   "name": {
+    "englishName": "Ukrainian-Russian History Commission",
     "translations": [
       {
         "language": "uk",
@@ -10,24 +11,14 @@
         "language": "ru",
         "name": "Украинско-российская историческая комиссия"
       }
-    ],
-    "englishName": "Ukrainian-Russian History Commission"
+    ]
   },
-  "proposedDate": null,
   "startDate": "2002-01-01",
-  "lastActiveStatusDate": null,
-  "lastActiveStatus": "unknown",
+  "lastActiveStatus": "dormant",
+  "status": "dormant",
+  "linkStatus": "not_located",
   "memberCountries": [
     "Ukraine",
     "Russia"
-  ],
-  "sponsoringInstitutions": [],
-  "keyTopics": [],
-  "publications": [],
-  "workingGroups": [],
-  "status": "unknown",
-  "chairs": [],
-  "url": "",
-  "linkStatus": "not_located",
-  "archivableDocuments": []
+  ]
 }
