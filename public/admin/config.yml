@@ -136,7 +136,7 @@ collections:
       - label: Last Active Status
         name: lastActiveStatus
         widget: select
-        options: [active, dormant, ended, unknown]
+        options: [active, suspended, ended, unknown]
         required: false
         hint: "Last known activity, shown as plain text in the details table. Same vocabulary as the colored Status badge below, but this is a historical note recording the status as of the 'Last Active Status Date'."
       - { label: Member Countries, name: memberCountries, widget: countryList, hint: "Pick country names from the dropdown (e.g. Poland, Germany). These draw the map, the globe arcs, and the flag tags. Picking from the list guarantees correct spelling; typing a value not on the list is allowed but may not render." }
@@ -160,7 +160,7 @@ collections:
       - label: Status
         name: status
         widget: select
-        options: [active, dormant, ended, unknown]
+        options: [active, suspended, ended, unknown]
         hint: "Current status. Sets the colored badge on the page and list."
       - label: Chairs
         name: chairs

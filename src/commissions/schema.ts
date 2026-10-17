@@ -2,7 +2,7 @@ import { z } from "astro/zod";
 
 export const CommissionStatusSchema = z.enum([
   "active",
-  "dormant",
+  "suspended",
   "ended",
   "unknown",
 ]);

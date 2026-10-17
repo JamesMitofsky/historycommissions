@@ -16,7 +16,7 @@
   "proposedDate": null,
   "startDate": "1997-01-01",
   "lastActiveStatusDate": "2022-01-01",
-  "lastActiveStatus": "dormant",
+  "lastActiveStatus": "suspended",
   "memberCountries": [
     "Germany",
     "Russia"
@@ -50,7 +50,7 @@
     "Unterrichtsmaterialien zur deutsch-russischen Geschichte (Teaching materials on German-Russian history)",
     "Dekonstruktion russischer Geschichtsnarrative (Deconstruction of Russian Historical Narratives – pilot project)"
   ],
-  "status": "dormant",
+  "status": "suspended",
   "chairs": [
     {
       "name": "Jörg Baberowski",
