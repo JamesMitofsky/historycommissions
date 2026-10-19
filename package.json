@@ -3,6 +3,10 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "predev": "tsx scripts/vendor-cms.ts",
     "dev": "astro dev",
@@ -19,8 +23,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@astrojs/netlify": "^8.2.1",
     "@astrojs/svelte": "^9.0.1",
+    "@astrojs/vercel": "^11.0.15",
     "@lucide/svelte": "^1.27.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.3.3",

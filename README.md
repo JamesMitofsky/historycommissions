@@ -55,7 +55,9 @@ To cut off access, delete the token on the same GitHub page.
 
 ## Deploy
 
-Deploys to **Netlify** via the `@astrojs/netlify` adapter. Pushes to `main` trigger a production build automatically.
+Deploys to **Vercel** via the `@astrojs/vercel` adapter. Pushes to `main` trigger a production build, and every other branch and pull request gets a preview deployment.
+
+The build settings live in the repo, not the Vercel dashboard: `vercel.json` sets the framework and build command, and `package.json` pins Node (`engines.node`) and pnpm (`packageManager`). Vercel only honours the pnpm pin with Corepack switched on, so the project needs the environment variable `ENABLE_EXPERIMENTAL_COREPACK=1`. Without it, Vercel picks a pnpm version from the lockfile format, which may not match the one CI uses.
 
 ## Portability
 
