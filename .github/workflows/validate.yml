@@ -14,12 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Both versions come from package.json (`packageManager` and
+      # `engines.node`), the same pins Vercel builds with, so CI cannot pass on
+      # a toolchain the deploy does not use.
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version-file: package.json
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Validate commission content against the Zod schema

@@ -10,7 +10,7 @@ The guiding principle: **the data is the repo.** There is no external database, 
 
 | Concern | Vendor | What speaks to it | Lock-in |
 |---|---|---|---|
-| Hosting + CD | **Netlify** | `@astrojs/netlify` adapter | Low |
+| Hosting + CD | **Vercel** | `@astrojs/vercel` adapter | Low |
 | Content editor (CMS) | **Sveltia CMS** (self-hosted lib) | `public/admin/config.yml` | None (lib) |
 | CMS auth + commits | **GitHub** (personal access tokens) | `github` backend | Low |
 | Content storage | **Git** (this repo) | files in `content/` + `public/` | None |
@@ -19,19 +19,22 @@ The content is not behind any API — it is Markdown and JSON in the tree. Swapp
 
 ---
 
-## 1. Netlify — Hosting and CD
+## 1. Vercel — Hosting and CD
 
-**What it does.** Builds the site on every push to `main` (CD is Git-driven) and serves it.
+**What it does.** Builds the site on every push (CD is Git-driven): `main` goes to production, every other branch to a preview URL. It serves the result.
 
 **Where the coupling lives.**
-- `astro.config.mjs` → the `@astrojs/netlify` adapter. It writes Netlify's own config — redirects, headers, and a function bundle under `.netlify/v1/` — at the end of the build. The adapter lives in this repo and is maintained by the Astro team, so the Netlify-shaped output is produced here rather than by a plugin running on Netlify's side.
-- `netlify.toml` → build command and `publish = "dist"`. Netlify would auto-detect both; they are pinned so the build does not depend on detection.
+- `astro.config.mjs` → the `@astrojs/vercel` adapter. At the end of the build it writes the site in Vercel's Build Output API format under `.vercel/output/`: the static files plus a `config.json` holding the redirects and cache headers. The adapter lives in this repo and is maintained by the Astro team, so the Vercel-shaped output is produced here rather than by Vercel guessing at it.
+- `astro.config.mjs` → `site` is read from `VERCEL_PROJECT_PRODUCTION_URL`, so canonical URLs, OG cards and RSS links point at the production domain on every deploy. `SITE_URL` overrides it on any host.
+- `vercel.json` → framework and build command. Vercel would auto-detect both; they are pinned so the build does not depend on detection or on dashboard settings.
+- `package.json` → `engines.node` and `packageManager` pin the toolchain. Vercel honours the pnpm pin only when the project has `ENABLE_EXPERIMENTAL_COREPACK=1` set; that variable is the one piece of build config that lives in the dashboard.
 - No secrets are required to build or serve the site — the content is static files in the repo, and CMS sign-in (§3) happens in the editor's browser, not on the host.
 
 **Getting off safely.**
-1. Every page is prerendered, so `dist/` is a plain static site. Point any static host — Cloudflare Pages, Vercel, S3, nginx — at the repo with `pnpm build`.
-2. Delete the `adapter:` line from `astro.config.mjs` (and the dependency, if you like). Nothing else in the codebase imports it.
-3. Because there are no runtime env vars for the app itself, there is no "silently-broken-boot" risk here — unlike a DB-backed app. Nothing about the CMS follows the host either: `/admin` is just static files in `dist/`.
+1. Every page is prerendered, so `dist/` is a plain static site. Point any static host — Cloudflare Pages, Netlify, S3, nginx — at the repo with `pnpm build`.
+2. Swap the `adapter:` in `astro.config.mjs` for the new host's, or delete it (and the dependency). Nothing else in the codebase imports it. Without an adapter, the one entry in `redirects` becomes a meta-refresh page instead of an HTTP redirect, and `site` needs `SITE_URL` set, since `VERCEL_PROJECT_PRODUCTION_URL` will not exist.
+3. Delete `vercel.json`.
+4. Because there are no runtime env vars for the app itself, there is no "silently-broken-boot" risk here — unlike a DB-backed app. Nothing about the CMS follows the host either: `/admin` is just static files in `dist/`.
 
 **Lock-in verdict:** Low. One adapter, removable in one line, and the content is already portable.
 
@@ -67,7 +70,7 @@ backend:
   auth_methods: [token]
 ```
 
-OAuth sign-in is deliberately off: without a self-hosted OAuth endpoint (`base_url`), Sveltia would route it through Netlify's OAuth service, reintroducing the dependency this setup exists to avoid. If token sign-in becomes a burden, the [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth) is a small open-source OAuth handler you can deploy anywhere and point `base_url` at.
+OAuth sign-in is deliberately off: without a self-hosted OAuth endpoint (`base_url`), Sveltia would route it through Netlify's OAuth service, adding a vendor the site otherwise does not use. If token sign-in becomes a burden, the [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth) is a small open-source OAuth handler you can deploy anywhere and point `base_url` at.
 
 **Getting off safely.** GitHub is already where the repo lives, so this adds no new vendor. Moving the repo elsewhere means changing `backend.name` to `gitlab` or `gitea` (both supported) and issuing editors tokens there. Local editing ("Work with Local Repository" on `localhost`) needs no backend at all.
 
@@ -93,8 +96,8 @@ OAuth sign-in is deliberately off: without a self-hosted OAuth endpoint (`base_u
 
 Ordered so the site never goes dark:
 
-1. **Back up first.** The repo *is* the backup — mirror it (`git clone --mirror`) somewhere off Netlify.
-2. **Host:** point the new host at the repo, build with `pnpm build`, serve `dist/`, and drop the `adapter:` line from `astro.config.mjs`.
+1. **Back up first.** The repo *is* the backup — mirror it (`git clone --mirror`) somewhere off Vercel.
+2. **Host:** point the new host at the repo, build with `pnpm build`, serve `dist/`, swap or drop the `adapter:` line in `astro.config.mjs`, and set `SITE_URL`.
 3. **CMS auth:** nothing to move for a host change — editors sign in to GitHub from their browser. Only a move *off GitHub* touches the CMS: change `backend` in `public/admin/config.yml` and issue editors tokens on the new Git host.
 4. **DNS:** point the domain's records at the new host.
 5. **Verify:** site renders (it is static content, so this is low-risk), `/admin` sign-in works, editor saves land on `main`, `validate-commissions` CI still runs on them.
