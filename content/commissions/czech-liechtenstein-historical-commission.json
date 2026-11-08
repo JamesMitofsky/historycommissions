@@ -1,6 +1,7 @@
 {
   "isPublished": true,
   "name": {
+    "englishName": "Czech-Liechtenstein Historical Commission",
     "translations": [
       {
         "language": "cs",
@@ -10,17 +11,11 @@
         "language": "de",
         "name": "Tschechisch-liechtensteinische Historikerkommission"
       }
-    ],
-    "englishName": "Czech-Liechtenstein Historical Commission"
+    ]
   },
   "proposedDate": "2009-01-01",
   "startDate": "2009-01-01",
-  "lastActiveStatusDate": null,
-  "lastActiveStatus": "unknown",
-  "memberCountries": [
-    "Czech Republic",
-    "Liechtenstein"
-  ],
+  "lastActiveStatus": "active",
   "sponsoringInstitutions": [
     "Matice moravská (Moravia Foundation), Brno",
     "Ministry of Foreign Affairs of the Czech Republic"
@@ -36,17 +31,14 @@
     {
       "title": "Místa Lichtenštejnské paměti / Liechtensteinische Erinnerungsorte in den böhmischen Ländern (Liechtenstein Memory Sites in the Bohemian Lands)",
       "year": 2012,
-      "url": null,
       "format": "proceedings"
     },
     {
       "title": "Lichtenštejnové: kontinuity – diskontinuity (Liechtensteiners: Continuities – Discontinuities), Časopis Matice moravské",
       "year": 2013,
-      "url": null,
       "format": "proceedings"
     }
   ],
-  "workingGroups": [],
   "status": "unknown",
   "chairs": [
     {
@@ -62,5 +54,8 @@
   ],
   "url": "http://www.flcz-historikerkommission.li/",
   "linkStatus": "archived",
-  "archivableDocuments": []
+  "memberCountries": [
+    "Czech Republic",
+    "Liechtenstein"
+  ]
 }
