@@ -1,0 +1,28 @@
+{
+  "isPublished": false,
+  "name": {
+    "englishName": "Czech-Slovak Commission of Historians",
+    "translations": [
+      {
+        "language": "cs",
+        "name": "Česko-slovenská komisia historikov"
+      }
+    ]
+  },
+  "lastActiveStatus": "active",
+  "memberCountries": [
+    "Czechia",
+    "Slovakia"
+  ],
+  "keyTopics": [
+    "The Czecho-Slovak Commission of Historians is a bilateral commission established in 1994. Its members are appointed by the Slovak National Committee of Historians at the Slovak Historical Society and the Czech National Committee of Historians. The commission is dedicated to the promotion of Czech and Slovak history, cooperation between Czech and Slovak historiography, organizes scientific seminars, and publishes the Czecho-Slovak Historical Yearbook."
+  ],
+  "publications": [
+    {
+      "title": "Czecho-Slovak Historical Yearbook."
+    }
+  ],
+  "status": "active",
+  "url": "https://www.cskh.sk/",
+  "linkStatus": "live"
+}
