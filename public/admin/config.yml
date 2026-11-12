@@ -133,12 +133,12 @@ collections:
       - { label: Proposed Date, name: proposedDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "When the commission was first proposed. Shown in the details table as 'Proposed'. Use Jan 1 if only the year is known." }
       - { label: Start Date, name: startDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "When the commission actually began. Shown as 'Founded' and used when sorting the list by date. Use Jan 1 if only the year is known." }
       - { label: Last Active Status Date, name: lastActiveStatusDate, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true, hint: "Most recent date its activity was confirmed. Shown as 'Last active'. Use Jan 1 if only the year is known." }
-      - label: Last Active Status
+      - label: Status as of Last Active Date
         name: lastActiveStatus
         widget: select
         options: [active, suspended, ended, unknown]
         required: false
-        hint: "Last known activity, shown as plain text in the details table. Same vocabulary as the colored Status badge below, but this is a historical note recording the status as of the 'Last Active Status Date'."
+        hint: "A historical note: what the commission's status was on the 'Last Active Status Date' above, shown as plain text in the details table. This does NOT change the colored badge — to change what visitors see as the current status, use 'Current Status (badge)' further down."
       - { label: Member Countries, name: memberCountries, widget: countryList, hint: "Pick country names from the dropdown (e.g. Poland, Germany). These draw the map, the globe arcs, and the flag tags. Picking from the list guarantees correct spelling; typing a value not on the list is allowed but may not render." }
       - { label: Sponsoring Institutions, name: sponsoringInstitutions, widget: list, required: false, hint: "Organizations that established or fund the commission. Shown in the details." }
       - { label: Key Topics, name: keyTopics, widget: list, required: false, hint: "Main research areas. Shown as a bulleted 'Key Topics' list on the page." }
@@ -157,11 +157,11 @@ collections:
             required: false
             hint: "Document type. Note: this is NOT shown anywhere on the public site yet — for internal categorization only."
       - { label: Working Groups, name: workingGroups, widget: list, required: false, hint: "Names of sub-committees or working groups within the commission." }
-      - label: Status
+      - label: Current Status (badge)
         name: status
         widget: select
         options: [active, suspended, ended, unknown]
-        hint: "Current status. Sets the colored badge on the page and list."
+        hint: "The commission's status today. Sets the colored badge on the commission page and in the list, and which status filter it falls under. This is the field to change when a commission becomes active, suspended or ended."
       - label: Chairs
         name: chairs
         widget: list

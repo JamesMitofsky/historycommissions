@@ -7,6 +7,26 @@ export const CommissionStatusSchema = z.enum([
   "unknown",
 ]);
 
+/**
+ * Status values that were renamed, mapped to what they became. A CMS tab opened
+ * before a rename keeps offering the old option and will save it, and one
+ * unrecognised value fails the whole build, freezing the site on its last good
+ * deploy until someone reads the CI log. Stored files are mapped forward instead,
+ * and `pnpm validate:commissions` warns so the file still gets cleaned up.
+ */
+export const LEGACY_STATUSES: Readonly<Record<string, CommissionStatus>> = {
+  dormant: "suspended",
+};
+
+/** A status as read from a stored file: the current enum, plus legacy values. */
+export const StoredStatusSchema = z.preprocess(
+  (value) =>
+    typeof value === "string" && Object.hasOwn(LEGACY_STATUSES, value)
+      ? LEGACY_STATUSES[value]
+      : value,
+  CommissionStatusSchema,
+);
+
 export const LinkStatusSchema = z.enum([
   "live",
   "archived",
@@ -45,7 +65,7 @@ export const CommissionSchema = z.object({
   proposedDate: z.string().nullable().default(null),
   startDate: z.string().nullable().default(null),
   lastActiveStatusDate: z.string().nullable().default(null),
-  lastActiveStatus: CommissionStatusSchema.nullable().default(null),
+  lastActiveStatus: StoredStatusSchema.nullable().default(null),
   memberCountries: z.array(z.string()).default([]),
   sponsoringInstitutions: z.array(z.string()).default([]),
   keyTopics: z.array(z.string()).default([]),
@@ -60,7 +80,7 @@ export const CommissionSchema = z.object({
     )
     .default([]),
   workingGroups: z.array(z.string()).default([]),
-  status: CommissionStatusSchema.default("unknown"),
+  status: StoredStatusSchema.default("unknown"),
   chairs: z
     .array(
       z.object({

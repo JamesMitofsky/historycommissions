@@ -7,7 +7,7 @@
  */
 import fs from "fs";
 import path from "path";
-import { CommissionSchema } from "../src/commissions/schema";
+import { CommissionSchema, LEGACY_STATUSES } from "../src/commissions/schema";
 
 const COMMISSIONS_DIR = path.join(process.cwd(), "content/commissions");
 
@@ -26,6 +26,17 @@ for (const file of files) {
     failures++;
     console.error(`✗ ${file}\n    not valid JSON — ${(e as Error).message}`);
     continue;
+  }
+
+  // Legacy values still parse (see LEGACY_STATUSES), so they cannot break the
+  // build, but name them so the file is re-saved with the current value.
+  for (const field of ["status", "lastActiveStatus"] as const) {
+    const value = (data as Record<string, unknown>)[field];
+    if (typeof value === "string" && Object.hasOwn(LEGACY_STATUSES, value)) {
+      console.warn(
+        `! ${file}\n    ${field} — "${value}" is a retired value, read as "${LEGACY_STATUSES[value]}". Re-save it with the current value.`,
+      );
+    }
   }
 
   const result = CommissionSchema.safeParse({ ...(data as object), slug });
