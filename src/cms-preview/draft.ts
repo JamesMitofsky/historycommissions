@@ -1,8 +1,8 @@
 import type { Commission } from "@/commissions/types";
 import {
-  CommissionStatusSchema,
   LinkStatusSchema,
   PublicationFormatSchema,
+  StoredStatusSchema,
 } from "@/commissions/schema";
 
 /**
@@ -79,7 +79,7 @@ export function toCommission(data: unknown): Commission {
     proposedDate: text(d.proposedDate),
     startDate: text(d.startDate),
     lastActiveStatusDate: text(d.lastActiveStatusDate),
-    lastActiveStatus: oneOf(CommissionStatusSchema, d.lastActiveStatus),
+    lastActiveStatus: oneOf(StoredStatusSchema, d.lastActiveStatus),
     memberCountries: texts(d.memberCountries),
     sponsoringInstitutions: texts(d.sponsoringInstitutions),
     keyTopics: texts(d.keyTopics),
@@ -98,7 +98,7 @@ export function toCommission(data: unknown): Commission {
       ];
     }),
     workingGroups: texts(d.workingGroups),
-    status: oneOf(CommissionStatusSchema, d.status) ?? "unknown",
+    status: oneOf(StoredStatusSchema, d.status) ?? "unknown",
     chairs: list(d.chairs).flatMap((c) => {
       const row = record(c);
       const chairName = text(row.name);

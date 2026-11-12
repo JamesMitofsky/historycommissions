@@ -7,14 +7,14 @@ import globals from "globals";
 import svelteConfig from "./svelte.config.js";
 
 export default defineConfig([
-  // Build output and vendored files. `.netlify/**` is the adapter's bundled SSR
-  // function — generated, minified, and not ours to lint; without it a `pnpm
-  // lint` run after any `pnpm build` drowns in several hundred errors from
-  // Astro's own bundle and the real findings scroll off the top.
+  // Build output and vendored files. `.vercel/**` is the adapter's Build Output
+  // API directory — generated, minified, and not ours to lint; without it a
+  // `pnpm lint` run after any `pnpm build` drowns in errors from Astro's own
+  // bundle and the real findings scroll off the top.
   globalIgnores([
     "dist/**",
     ".astro/**",
-    ".netlify/**",
+    ".vercel/**",
     "node_modules/**",
     "public/admin/**",
   ]),
