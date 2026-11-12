@@ -1,30 +1,38 @@
 // @ts-check
 import { defineConfig, fontProviders } from "astro/config";
-import netlify from "@astrojs/netlify";
 import svelte from "@astrojs/svelte";
+import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 
-// Netlify exposes the deploy URL as URL; SITE_URL overrides it locally.
+// The canonical origin, used for canonical links, OG image URLs and the feeds.
+// SITE_URL overrides it (locally, or to force a domain). On Vercel,
+// VERCEL_PROJECT_PRODUCTION_URL is the project's production domain — the
+// shortest custom domain, else its vercel.app one — set at build time on
+// preview deployments too, so a preview never advertises its own throwaway URL
+// as canonical. It carries no scheme, hence the prefix.
 const site =
-  process.env.SITE_URL ?? process.env.URL ?? "http://localhost:4321";
+  process.env.SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:4321");
 
 export default defineConfig({
   site,
 
   // Every page here is prerendered, so the adapter is not what makes the site
-  // render — it is what makes Netlify's own primitives available to it:
-  // redirects and headers are emitted through the Netlify Frameworks API
-  // (`.netlify/v1/`) instead of having to be hand-maintained in netlify.toml,
-  // and `astro dev` can emulate the platform. `netlify.toml` still points the
-  // deploy at `dist/`, which is where the static output lands either way.
-  adapter: netlify({
-    // The site's images are local assets, and the build already optimizes them
-    // with sharp — including the blur placeholders FadeImage inlines, which are
-    // generated from the same pipeline. Routing them through the Netlify Image
-    // CDN instead would move that work to request time and split image handling
-    // across two systems for no gain on a fully static build.
-    imageCDN: false,
-  }),
+  // render — it is what makes Vercel's own primitives available to it: it
+  // writes the deploy as Vercel's Build Output API (`.vercel/output/`), with
+  // the redirects below and an immutable cache header on hashed `/_astro/`
+  // assets as routing config, instead of those being hand-maintained in
+  // vercel.json.
+  //
+  // `imageService` stays off (the default). The site's images are local
+  // assets, and the build already optimizes them with sharp — including the
+  // blur placeholders FadeImage inlines, which are generated from the same
+  // pipeline. Routing them through Vercel Image Optimization instead would move
+  // that work to request time and split image handling across two systems for
+  // no gain on a fully static build.
+  adapter: vercel(),
 
   // `<ClientRouter />` already switches prefetching on, but only for links that
   // opt in with `data-astro-prefetch`. Every internal link here goes to another
@@ -55,8 +63,8 @@ export default defineConfig({
   // split across both. The tags are normalised now; this keeps the URL the
   // abbreviated spelling produced from going dark.
   //
-  // Emitted through the Netlify adapter's Frameworks API output rather than
-  // netlify.toml — same reason the adapter is here at all.
+  // Emitted through the adapter's Build Output API config rather than
+  // vercel.json — same reason the adapter is here at all.
   redirects: {
     "/countries/n-macedonia": "/countries/north-macedonia",
   },

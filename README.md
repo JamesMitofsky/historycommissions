@@ -55,7 +55,9 @@ To cut off access, delete the token on the same GitHub page.
 
 ## Deploy
 
-Deploys to **Netlify** via the `@astrojs/netlify` adapter. Pushes to `main` trigger a production build automatically.
+Deploys to **Vercel** via the `@astrojs/vercel` adapter, which writes the build as Vercel's Build Output API (`.vercel/output/`). Pushes to `main` trigger a production build automatically; `vercel.json` pins the build command, and `engines.node` in `package.json` pins the Node.js major to the one CI tests on.
+
+The canonical URL comes from `VERCEL_PROJECT_PRODUCTION_URL`, which Vercel sets at build time to the project's production domain. Set `SITE_URL` to override it.
 
 ## Portability
 

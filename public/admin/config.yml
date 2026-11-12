@@ -4,7 +4,8 @@
 #
 # Editors sign in with a GitHub personal access token that can write to this
 # repo. OAuth is switched off because, without a self-hosted auth endpoint
-# (`base_url`), Sveltia would send it through Netlify's OAuth service.
+# (`base_url`), Sveltia would send it through its default hosted OAuth
+# endpoint, a third-party service outside this project.
 #
 # Local editing needs no proxy: on localhost, choose "Work with Local
 # Repository" and pick the repo folder; saves write straight to disk.

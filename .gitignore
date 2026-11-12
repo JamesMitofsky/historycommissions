@@ -22,9 +22,6 @@
 /public/admin/chunks/
 /public/admin/vendor/
 
-# netlify adapter build output (Frameworks API config + bundled SSR function)
-/.netlify/
-
 # production
 /build
 
@@ -41,8 +38,8 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# vercel
-.vercel
+# vercel adapter build output (Build Output API) and `vercel link` state
+/.vercel/
 
 # typescript
 *.tsbuildinfo
